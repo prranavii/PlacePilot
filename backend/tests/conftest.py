@@ -13,14 +13,15 @@ TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engin
 
 @pytest.fixture(scope="session", autouse=True)
 def init_test_db():
-    # Make sure pgvector exists
-    with engine.connect() as conn:
-        conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector;"))
-        conn.commit()
+    # Make sure pgvector exists (only for PostgreSQL)
+    if not settings.DATABASE_URL.startswith("sqlite"):
+        with engine.connect() as conn:
+            conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector;"))
+            conn.commit()
     # Create tables
     Base.metadata.create_all(bind=engine)
     yield
-    # We can clean up tables here if we want, but keeping them is fine for dev
+
 
 @pytest.fixture
 def db():

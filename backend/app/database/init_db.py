@@ -1,7 +1,9 @@
 import logging
 from sqlalchemy import text
 from app.database.session import engine, Base
+from app.core.config import settings
 import app.models # Import all models to register them on Base
+
 
 logger = logging.getLogger(__name__)
 

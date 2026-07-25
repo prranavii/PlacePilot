@@ -2,6 +2,7 @@ import uuid
 from datetime import datetime, timedelta, date, timezone
 from sqlalchemy.orm import Session
 from sqlalchemy import text
+from app.core.config import settings
 
 from app.database.session import SessionLocal, engine
 from app.core.security import get_password_hash
@@ -22,10 +23,12 @@ def seed_db():
     try:
         # Create extension and tables
         print("Ensuring pgvector is enabled and creating tables...")
-        with engine.connect() as conn:
-            conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector;"))
-            conn.commit()
+        if not settings.DATABASE_URL.startswith("sqlite"):
+            with engine.connect() as conn:
+                conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector;"))
+                conn.commit()
         Base.metadata.create_all(bind=engine)
+
 
         # Clear existing data
         print("Cleaning existing database...")

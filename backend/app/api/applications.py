@@ -10,6 +10,16 @@ from app.schemas.application import ApplicationCreate, ApplicationUpdate, Applic
 from app.schemas.event import ApplicationEventOut
 from app.api.deps import get_current_user
 from app.models.user import User
+from app.services.groq_service import groq_service
+from app.models.topic_performance import TopicPerformance
+from app.models.interview import Interview
+from app.models.assessment import Assessment
+from app.models.study_plan import StudyPlan
+from app.models.study_task import StudyTask
+from app.schemas.study import StudyPlanOut
+from pydantic import BaseModel
+from typing import Dict
+
 
 router = APIRouter(prefix="/applications", tags=["applications"])
 
@@ -144,4 +154,93 @@ def read_application_events(
         
     events = db.query(ApplicationEvent).filter(ApplicationEvent.application_id == id).order_by(ApplicationEvent.event_date.asc()).all()
     return events
+
+class PrepareMeStrategyOut(BaseModel):
+    estimated_days_remaining: int
+    overall_readiness: float
+    topic_readiness: Dict[str, float]
+    high_priority_topics: List[str]
+    today_mission: List[str]
+    ai_insight: str
+
+@router.post("/{id}/prepare", response_model=StudyPlanOut)
+def prepare_application_strategy(
+    id: uuid.UUID,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    app = db.query(Application).filter(Application.id == id).first()
+    if not app:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Application not found")
+    if app.user_id != current_user.id:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not authorized")
+
+    # 1. Retrieve Candidate Placement History Context
+    topics = db.query(TopicPerformance).filter(TopicPerformance.user_id == current_user.id).all()
+    # 3. Execute the Multi-Agent State Machine Graph Orchestration (Weakness Analyzer -> Planner -> Validator)
+    from app.rag.agent_graph import prepare_agent_graph
+    strategy = prepare_agent_graph.run(db=db, user_id=current_user.id, application_id=id)
+
+
+    # 4. Deactivate old plans
+    db.query(StudyPlan).filter(StudyPlan.application_id == id).update({"active": False})
+    db.commit()
+
+    # 5. Save Study Plan to database
+    db_plan = StudyPlan(
+        application_id=app.id,
+        user_id=current_user.id,
+        title=f"Strategy for {app.company_name}",
+        target_date=app.deadline,
+        readiness_at_generation=strategy.overall_readiness,
+        weak_areas=strategy.high_priority_topics,
+        today_mission=strategy.today_mission,
+        ai_insight=strategy.ai_insight,
+        active=True
+    )
+    db.add(db_plan)
+    db.commit()
+    db.refresh(db_plan)
+
+    # 6. Save Study Tasks to database
+    for idx, task_title in enumerate(strategy.today_mission):
+        # Extract a topic from task title if possible
+        topic_match = "DSA"
+        for t in topics:
+            if t.topic_name.lower() in task_title.lower():
+                topic_match = t.topic_name
+                break
+                
+        db_task = StudyTask(
+            user_id=current_user.id,
+            study_plan_id=db_plan.id,
+            application_id=app.id,
+            title=task_title,
+            topic=topic_match,
+            company_name=app.company_name,
+            priority="High" if idx == 0 else "Medium",
+            status="Todo",
+            source_reason=f"AI recommended for {app.company_name} prep",
+            ai_generated=True
+        )
+        db.add(db_task)
+        
+    db.commit()
+    
+    # Reload study plan to fetch relationships (tasks)
+    db.refresh(db_plan)
+    
+    # Log stage event
+    event = ApplicationEvent(
+        application_id=app.id,
+        event_type="Prep Strategy Generated",
+        event_date=db_plan.created_at,
+        status="Completed",
+        details=f"AI Copilot generated a strategy plan with {len(strategy.today_mission)} today tasks. Readiness estimated at {strategy.overall_readiness}%."
+    )
+    db.add(event)
+    db.commit()
+    
+    return db_plan
+
 
