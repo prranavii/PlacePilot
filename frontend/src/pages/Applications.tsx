@@ -4,7 +4,7 @@ import {
   Plus, 
   Search, 
   MapPin, 
-  DollarSign, 
+  IndianRupee, 
   Calendar, 
   Sparkles,
   ChevronRight,
@@ -360,7 +360,7 @@ export const Applications: React.FC = () => {
                   )}
                   {app.package_ctc && (
                     <div className="flex items-center gap-1.5 text-[10px] text-slate-400 font-medium">
-                      <DollarSign className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                      <IndianRupee className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                       {app.package_ctc}
                     </div>
                   )}
@@ -615,7 +615,7 @@ export const Applications: React.FC = () => {
                   <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Package (CTC / Wage)</label>
                   <input
                     type="text"
-                    placeholder="e.g. $120,000 / yr"
+                    placeholder="e.g. ₹12,00,000 / yr"
                     value={ctc}
                     onChange={(e) => setCtc(e.target.value)}
                     className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"

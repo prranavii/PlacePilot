@@ -99,7 +99,7 @@ def seed_db():
             company_name="Meta",
             role="Software Engineer (Backend)",
             job_description="Looking for high-caliber backend engineers. Core skills: Systems design, C++, Java or Python, Algorithms, OS, DBMS.",
-            package_ctc="$180,000",
+            package_ctc="₹24,00,000",
             location="Menlo Park, CA (Hybrid)",
             job_type="Full-time",
             application_source="Referral",
@@ -121,7 +121,7 @@ def seed_db():
             company_name="Stripe",
             role="Software Engineer Intern",
             job_description="Join our core API platform team. Requirements: robust programming, concurrency, systems understanding, APIs design.",
-            package_ctc="$45 / hr",
+            package_ctc="₹1,200 / hr",
             location="Seattle, WA",
             job_type="Internship",
             application_source="LinkedIn",
@@ -136,14 +136,14 @@ def seed_db():
             personal_readiness=90
         )
         db.add(stripe)
-
+        
         # Google - Online Assessment stage
         google = Application(
             user_id=student.id,
             company_name="Google",
             role="Associate Software Engineer",
             job_description="Seeking graduates with strong foundation in DSA, Trees, Graphs, Complexity Analysis, OS, Networking concepts.",
-            package_ctc="$140,000",
+            package_ctc="₹32,00,000",
             location="New York, NY",
             job_type="Full-time",
             application_source="On-campus",
@@ -157,14 +157,14 @@ def seed_db():
             personal_readiness=60
         )
         db.add(google)
-
+        
         # Amazon - Wishlist
         amazon = Application(
             user_id=student.id,
             company_name="Amazon",
             role="Software Development Engineer (SDE-1)",
             job_description="Build distributed storage systems. Java, OOP, Multithreading, SQL, Linux administration details.",
-            package_ctc="$130,000",
+            package_ctc="₹28,00,000",
             location="Austin, TX",
             job_type="Full-time",
             application_source="Direct Portal",

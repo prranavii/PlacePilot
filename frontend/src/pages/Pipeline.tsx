@@ -3,7 +3,7 @@ import { api } from '../services/api';
 import { 
   MapPin, 
   Sparkles,
-  DollarSign
+  IndianRupee
 } from 'lucide-react';
 
 const STAGES = [
@@ -147,7 +147,7 @@ export const Pipeline: React.FC = () => {
                         )}
                         {app.package_ctc && (
                           <div className="flex items-center gap-1.5 text-[9px] text-slate-400 font-medium">
-                            <DollarSign className="w-3 h-3 text-slate-400 shrink-0" />
+                            <IndianRupee className="w-3 h-3 text-slate-400 shrink-0" />
                             {app.package_ctc}
                           </div>
                         )}
