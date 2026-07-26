@@ -73,19 +73,31 @@ const MainLayout: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col text-zinc-900 dark:text-zinc-100 transition-colors duration-200">
-      {/* Sidebar Panel */}
-      <Sidebar 
-        currentTab={currentTab} 
-        setCurrentTab={setCurrentTab} 
-        darkMode={darkMode} 
-        setDarkMode={setDarkMode} 
-      />
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col text-zinc-900 dark:text-zinc-100 transition-colors duration-200 relative overflow-hidden">
+      {/* 3D Dissolving Ambient Blobs Background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        {/* Blob 1: Sage Green */}
+        <div className="absolute top-[10%] left-[5%] w-[450px] h-[450px] rounded-full bg-brand-500/10 dark:bg-brand-500/5 blur-[120px] animate-blob" />
+        {/* Blob 2: Amber Gold */}
+        <div className="absolute top-[40%] right-[5%] w-[550px] h-[550px] rounded-full bg-amber-500/10 dark:bg-amber-500/5 blur-[150px] animate-blob animation-delay-2000" />
+        {/* Blob 3: Teal */}
+        <div className="absolute bottom-[10%] left-[25%] w-[400px] h-[400px] rounded-full bg-teal-500/10 dark:bg-teal-500/5 blur-[130px] animate-blob animation-delay-4000" />
+      </div>
 
-      {/* Main Panel Content Area */}
-      <main className="flex-1 w-full max-w-6xl mx-auto px-6 py-8 pb-32 min-h-screen">
-        {renderContent()}
-      </main>
+      <div className="relative z-10 flex flex-col min-h-screen">
+        {/* Sidebar Panel */}
+        <Sidebar 
+          currentTab={currentTab} 
+          setCurrentTab={setCurrentTab} 
+          darkMode={darkMode} 
+          setDarkMode={setDarkMode} 
+        />
+
+        {/* Main Panel Content Area */}
+        <main className="flex-1 w-full max-w-6xl mx-auto px-6 py-8 pb-32 min-h-screen">
+          {renderContent()}
+        </main>
+      </div>
     </div>
   );
 };
