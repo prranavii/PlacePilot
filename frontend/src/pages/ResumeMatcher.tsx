@@ -18,10 +18,46 @@ export const ResumeMatcher: React.FC = () => {
   const [selectedAppId, setSelectedAppId] = useState('');
   const [jdText, setJdText] = useState('');
   const [resumeText, setResumeText] = useState('');
+  const [parsing, setParsing] = useState(false);
   
   // Status
   const [matching, setMatching] = useState(false);
   const [result, setResult] = useState<any | null>(null);
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setParsing(true);
+    const token = localStorage.getItem('token');
+    const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const res = await fetch(`${BASE_URL}/resume/parse`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setResumeText(data.text);
+      } else {
+        const errorData = await res.json().catch(() => ({}));
+        alert(errorData.detail || 'Failed to parse resume file');
+      }
+    } catch (err) {
+      alert('Error connecting to resume parse API');
+    } finally {
+      setParsing(false);
+      e.target.value = '';
+    }
+  };
 
   useEffect(() => {
     const loadApps = async () => {
@@ -148,13 +184,37 @@ export const ResumeMatcher: React.FC = () => {
 
             {/* Candidate Resume Textarea */}
             <div>
-              <label className="block text-[10px] font-bold text-slate-400 mb-1.5 uppercase">
-                Paste Resume Text *
-              </label>
+              <div className="flex items-center justify-between mb-1.5">
+                <label className="block text-[10px] font-bold text-slate-400 uppercase">
+                  Resume Content *
+                </label>
+                <div className="relative">
+                  <label className="cursor-pointer text-[10px] font-semibold text-brand-500 hover:text-brand-600 flex items-center gap-1 transition-all">
+                    {parsing ? (
+                      <>
+                        <span className="h-3 w-3 border-2 border-brand-500 border-t-transparent rounded-full animate-spin" />
+                        <span>Extracting text...</span>
+                      </>
+                    ) : (
+                      <>
+                        <FileText className="w-3.5 h-3.5 text-brand-500" />
+                        <span>Upload PDF/Word/Text</span>
+                      </>
+                    )}
+                    <input
+                      type="file"
+                      accept=".pdf,.docx,.txt"
+                      onChange={handleFileChange}
+                      disabled={parsing}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+              </div>
               <textarea
                 required
                 rows={7}
-                placeholder="Paste the text from your resume..."
+                placeholder="Upload your resume or paste the text content here..."
                 value={resumeText}
                 onChange={(e) => setResumeText(e.target.value)}
                 className="w-full bg-slate-50 dark:bg-slate-800/60 text-xs border border-slate-200 dark:border-slate-850 rounded-xl px-3 py-2.5 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-brand-500 placeholder-slate-400"

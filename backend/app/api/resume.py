@@ -1,12 +1,21 @@
 from typing import List
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File
+import io
+import zipfile
+import xml.etree.ElementTree as ET
+from pypdf import PdfReader
 from pydantic import BaseModel, Field
+
 
 from app.services.groq_service import groq_service
 from app.api.deps import get_current_user
 from app.models.user import User
 
 router = APIRouter(prefix="/resume", tags=["resume"])
+
+class ParsedResumeOut(BaseModel):
+    text: str
+
 
 class ResumeJDMatchIn(BaseModel):
     resume_text: str
@@ -52,3 +61,69 @@ def calculate_resume_jd_match(
     )
 
     return match_result
+
+@router.post("/parse", response_model=ParsedResumeOut)
+async def parse_resume_file(
+    file: UploadFile = File(...),
+    current_user: User = Depends(get_current_user)
+):
+    contents = await file.read()
+    filename = file.filename.lower()
+    extracted_text = ""
+
+    if filename.endswith(".pdf"):
+        try:
+            pdf_file = io.BytesIO(contents)
+            reader = PdfReader(pdf_file)
+            text_list = []
+            for page in reader.pages:
+                t = page.extract_text()
+                if t:
+                    text_list.append(t)
+            extracted_text = "\n".join(text_list)
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Failed to parse PDF file: {str(e)}"
+            )
+    elif filename.endswith(".docx"):
+        try:
+            docx_file = io.BytesIO(contents)
+            with zipfile.ZipFile(docx_file) as docx:
+                xml_content = docx.read('word/document.xml')
+                root = ET.fromstring(xml_content)
+                text_list = []
+                for elem in root.iter():
+                    if elem.tag.endswith('t') and elem.text:
+                        text_list.append(elem.text)
+                extracted_text = " ".join(text_list)
+        except Exception as e:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Failed to parse Word Document: {str(e)}"
+            )
+    elif filename.endswith((".txt", ".md")):
+        try:
+            extracted_text = contents.decode("utf-8")
+        except UnicodeDecodeError:
+            try:
+                extracted_text = contents.decode("latin-1")
+            except Exception as e:
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
+                    detail=f"Failed to decode text file: {str(e)}"
+                )
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Unsupported file format. Please upload .pdf, .docx, or .txt files."
+        )
+
+    if not extracted_text.strip():
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Parsed file content is empty."
+        )
+
+    return ParsedResumeOut(text=extracted_text)
+
