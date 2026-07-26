@@ -135,15 +135,28 @@ export const Applications: React.FC = () => {
     try {
       const data = await api.applications.list();
       setApplications(data);
+      return data;
     } catch (err) {
       console.error('Failed to load applications:', err);
+      return [];
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    loadApplications();
+    const initApps = async () => {
+      const data = await loadApplications();
+      const autoSelectCompany = localStorage.getItem('autoSelectCompany');
+      if (autoSelectCompany && data.length > 0) {
+        const matched = data.find((a: any) => a.company_name.toLowerCase() === autoSelectCompany.toLowerCase());
+        if (matched) {
+          handleSelectApp(matched);
+        }
+        localStorage.removeItem('autoSelectCompany');
+      }
+    };
+    initApps();
   }, []);
 
   const handleSelectApp = async (app: any) => {

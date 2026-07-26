@@ -52,7 +52,7 @@ const MainLayout: React.FC = () => {
   const renderContent = () => {
     switch (currentTab) {
       case 'dashboard':
-        return <Dashboard />;
+        return <Dashboard setCurrentTab={setCurrentTab} />;
       case 'applications':
         return <Applications />;
       case 'pipeline':
@@ -68,7 +68,7 @@ const MainLayout: React.FC = () => {
       case 'reports':
         return <WeeklyReports />;
       default:
-        return <Dashboard />;
+        return <Dashboard setCurrentTab={setCurrentTab} />;
     }
   };
 

@@ -24,7 +24,11 @@ import {
   Bar
 } from 'recharts';
 
-export const Dashboard: React.FC = () => {
+interface DashboardProps {
+  setCurrentTab: (tab: string) => void;
+}
+
+export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
   const [applications, setApplications] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [recentEvents, setRecentEvents] = useState<any[]>([]);
@@ -142,7 +146,13 @@ export const Dashboard: React.FC = () => {
             <span className="font-bold text-zinc-700 dark:text-zinc-300 block">Upcoming Meta Interview</span>
             <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-medium">Scheduled in 5 days</span>
           </div>
-          <button className="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 ml-4 flex items-center gap-1">
+          <button 
+            onClick={() => {
+              localStorage.setItem('autoSelectCompany', 'Meta');
+              setCurrentTab('applications');
+            }}
+            className="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 ml-4 flex items-center gap-1"
+          >
             Prepare <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
