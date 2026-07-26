@@ -124,25 +124,25 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="space-y-6">
       
-      {/* Top Welcome Title & Pitch banner */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      {/* Top Welcome Title & Premium Glass Banner */}
+      <div className="glass-banner flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div>
-          <h2 className="text-2xl font-bold font-sans tracking-tight text-slate-800 dark:text-slate-100">
+          <h2 className="text-2xl font-bold font-sans tracking-tight text-zinc-800 dark:text-zinc-100 flex items-center gap-2">
             Command Center Dashboard
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
-            Real-time insights and task allocation for your placement sprint.
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 max-w-lg">
+            Welcome back! Real-time telemetry, personalized study task allocations, and cognitive metrics mapped to your active placement pipeline.
           </p>
         </div>
         
         {/* Quick prepare shortcut banner */}
-        <div className="bg-brand-50 dark:bg-brand-950/20 border border-brand-100 dark:border-brand-900/50 rounded-xl px-4 py-2.5 flex items-center gap-3">
-          <Sparkles className="w-4 h-4 text-brand-500 animate-pulse" />
+        <div className="bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-850/60 rounded-2xl px-5 py-3 flex items-center gap-3 shadow-sm hover:shadow-md transition-all">
+          <Sparkles className="w-5 h-5 text-amber-500 animate-pulse" />
           <div className="text-xs">
-            <span className="font-semibold text-brand-700 dark:text-brand-400 block">Upcoming Meta Interview</span>
-            <span className="text-slate-400 dark:text-slate-500">Scheduled in 5 days</span>
+            <span className="font-bold text-zinc-700 dark:text-zinc-300 block">Upcoming Meta Interview</span>
+            <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-medium">Scheduled in 5 days</span>
           </div>
-          <button className="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 ml-2 flex items-center gap-1">
+          <button className="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 ml-4 flex items-center gap-1">
             Prepare <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
@@ -151,77 +151,77 @@ export const Dashboard: React.FC = () => {
       {/* Metric Cards grid */}
       <div className="grid grid-cols-2 lg:grid-cols-6 gap-4">
         {/* Total applications */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-4 rounded-2xl flex flex-col justify-between shadow-sm">
+        <div className="bg-white dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/40 p-4 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-md hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-200">
           <div className="flex items-center justify-between">
-            <span className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Total</span>
-            <span className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500">
+            <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">Total</span>
+            <span className="p-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800/50 text-zinc-500">
               <Briefcase className="w-4 h-4" />
             </span>
           </div>
           <div className="mt-4">
-            <span className="text-2xl font-extrabold text-slate-800 dark:text-slate-100">{totalApps}</span>
-            <p className="text-[10px] text-slate-400 mt-0.5">Submitted jobs</p>
+            <span className="text-2xl font-extrabold text-zinc-800 dark:text-zinc-100">{totalApps}</span>
+            <p className="text-[10px] text-zinc-400 mt-0.5">Submitted jobs</p>
           </div>
         </div>
 
         {/* Active applications */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-4 rounded-2xl flex flex-col justify-between shadow-sm">
+        <div className="bg-white dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/40 p-4 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-md hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-200">
           <div className="flex items-center justify-between">
-            <span className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Active</span>
-            <span className="p-1.5 rounded-lg bg-amber-50 dark:bg-amber-950/20 text-amber-500">
+            <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">Active</span>
+            <span className="p-1.5 rounded-lg bg-amber-500/10 text-amber-500 dark:bg-amber-500/10">
               <Clock className="w-4 h-4" />
             </span>
           </div>
           <div className="mt-4">
-            <span className="text-2xl font-extrabold text-slate-800 dark:text-slate-100">{activeApps}</span>
-            <p className="text-[10px] text-slate-400 mt-0.5">Under evaluation</p>
+            <span className="text-2xl font-extrabold text-zinc-800 dark:text-zinc-100">{activeApps}</span>
+            <p className="text-[10px] text-zinc-400 mt-0.5">Under evaluation</p>
           </div>
         </div>
 
         {/* Online assessments */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-4 rounded-2xl flex flex-col justify-between shadow-sm">
+        <div className="bg-white dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/40 p-4 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-md hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-200">
           <div className="flex items-center justify-between">
-            <span className="text-xs text-slate-400 font-semibold uppercase tracking-wider">OAs</span>
-            <span className="p-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/20 text-indigo-500">
+            <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">OAs</span>
+            <span className="p-1.5 rounded-lg bg-teal-500/10 text-teal-600 dark:text-teal-400">
               <GraduationCap className="w-4 h-4" />
             </span>
           </div>
           <div className="mt-4">
-            <span className="text-2xl font-extrabold text-slate-800 dark:text-slate-100">{oaCount}</span>
-            <p className="text-[10px] text-slate-400 mt-0.5">Scheduled tests</p>
+            <span className="text-2xl font-extrabold text-zinc-800 dark:text-zinc-100">{oaCount}</span>
+            <p className="text-[10px] text-zinc-400 mt-0.5">Scheduled tests</p>
           </div>
         </div>
 
         {/* Interviews */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-4 rounded-2xl flex flex-col justify-between shadow-sm">
+        <div className="bg-white dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/40 p-4 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-md hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-200">
           <div className="flex items-center justify-between">
-            <span className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Interviews</span>
-            <span className="p-1.5 rounded-lg bg-brand-50 dark:bg-brand-950/20 text-brand-500">
+            <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">Interviews</span>
+            <span className="p-1.5 rounded-lg bg-brand-500/10 text-brand-600 dark:text-brand-400">
               <CalendarDays className="w-4 h-4" />
             </span>
           </div>
           <div className="mt-4">
-            <span className="text-2xl font-extrabold text-slate-800 dark:text-slate-100">{interviewCount}</span>
-            <p className="text-[10px] text-slate-400 mt-0.5">Live meetings</p>
+            <span className="text-2xl font-extrabold text-zinc-800 dark:text-zinc-100">{interviewCount}</span>
+            <p className="text-[10px] text-zinc-400 mt-0.5">Live meetings</p>
           </div>
         </div>
 
         {/* Offers */}
-        <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-4 rounded-2xl flex flex-col justify-between shadow-sm">
+        <div className="bg-white dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/40 p-4 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-md hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-200">
           <div className="flex items-center justify-between">
-            <span className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Offers</span>
-            <span className="p-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/20 text-emerald-500">
+            <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">Offers</span>
+            <span className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
               <CheckCircle className="w-4 h-4" />
             </span>
           </div>
           <div className="mt-4">
-            <span className="text-2xl font-extrabold text-slate-800 dark:text-slate-100">{offerCount}</span>
-            <p className="text-[10px] text-slate-400 mt-0.5">Offer letters</p>
+            <span className="text-2xl font-extrabold text-zinc-800 dark:text-slate-100">{offerCount}</span>
+            <p className="text-[10px] text-zinc-400 mt-0.5">Offer letters</p>
           </div>
         </div>
 
         {/* Average Readiness */}
-        <div className="bg-gradient-to-br from-brand-500 to-indigo-600 p-4 rounded-2xl flex flex-col justify-between text-white shadow-md shadow-brand-500/10">
+        <div className="bg-gradient-to-br from-brand-500 to-emerald-600 p-4 rounded-2xl flex flex-col justify-between text-white shadow-lg shadow-brand-500/15 hover:shadow-brand-500/25 hover:scale-[1.01] transition-all duration-200">
           <div className="flex items-center justify-between">
             <span className="text-xs text-brand-100 font-semibold uppercase tracking-wider">Readiness</span>
             <span className="p-1.5 rounded-lg bg-white/10 text-white">

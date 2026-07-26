@@ -69,11 +69,22 @@ export const Pipeline: React.FC = () => {
     }
   };
 
-  const getPriorityColor = (p: string) => {
+  const getStageBorderColor = (stage: string) => {
+    switch (stage) {
+      case 'Wishlist': return 'border-t-2 border-t-zinc-300 dark:border-t-zinc-800';
+      case 'Applied': return 'border-t-2 border-t-brand-500';
+      case 'Online Assessment': return 'border-t-2 border-t-teal-500';
+      case 'Technical Interview': return 'border-t-2 border-t-amber-500';
+      case 'Offer': return 'border-t-2 border-t-emerald-500';
+      default: return 'border-t-2 border-t-zinc-200 dark:border-t-zinc-800';
+    }
+  };
+
+  const getPriorityDot = (p: string) => {
     switch (p) {
-      case 'High': return 'border-l-4 border-rose-500';
-      case 'Medium': return 'border-l-4 border-amber-500';
-      default: return 'border-l-4 border-slate-300 dark:border-slate-700';
+      case 'High': return 'bg-rose-500';
+      case 'Medium': return 'bg-amber-500';
+      default: return 'bg-zinc-400';
     }
   };
 
@@ -107,14 +118,14 @@ export const Pipeline: React.FC = () => {
               key={stage}
               onDragOver={handleDragOver}
               onDrop={(e) => handleDrop(e, stage)}
-              className="bg-slate-50 dark:bg-slate-900/60 border border-slate-200/50 dark:border-slate-800/80 rounded-2xl p-4 min-h-[70vh] flex flex-col gap-3 transition-all"
+              className="bg-zinc-50/50 dark:bg-zinc-900/20 border border-zinc-200/40 dark:border-zinc-800/40 rounded-2xl p-4 min-h-[70vh] flex flex-col gap-3 transition-all"
             >
               {/* Column Header */}
-              <div className="flex items-center justify-between pb-2 border-b border-slate-200/60 dark:border-slate-800/60 mb-1">
-                <span className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider truncate">
+              <div className="flex items-center justify-between pb-2 border-b border-zinc-200/60 dark:border-zinc-800/60 mb-1">
+                <span className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider truncate">
                   {stage}
                 </span>
-                <span className="text-[10px] bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold px-2 py-0.5 rounded-full shrink-0">
+                <span className="text-[10px] bg-zinc-200/80 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-semibold px-2 py-0.5 rounded-full shrink-0">
                   {stageApps.length}
                 </span>
               </div>
@@ -127,27 +138,27 @@ export const Pipeline: React.FC = () => {
                       key={app.id}
                       draggable={true}
                       onDragStart={(e) => handleDragStart(e, app.id)}
-                      className={`bg-white dark:bg-slate-950 border border-slate-200/50 dark:border-slate-850 p-4 rounded-xl shadow-sm cursor-grab active:cursor-grabbing hover:shadow-md transition-all duration-150 relative overflow-hidden ${getPriorityColor(app.priority)} ${
+                      className={`bg-white dark:bg-zinc-900/40 border border-zinc-200/50 dark:border-zinc-850 p-4 rounded-2xl shadow-sm cursor-grab active:cursor-grabbing hover:shadow-md transition-all duration-150 relative overflow-hidden ${getStageBorderColor(stage)} ${
                         updatingId === app.id ? 'opacity-40 animate-pulse' : ''
                       }`}
                     >
-                      <h4 className="font-bold text-slate-800 dark:text-slate-200 text-xs tracking-tight truncate">
+                      <h4 className="font-bold text-zinc-800 dark:text-zinc-200 text-xs tracking-tight truncate">
                         {app.company_name}
                       </h4>
-                      <p className="text-[10px] text-slate-500 font-medium truncate mt-0.5">
+                      <p className="text-[10px] text-zinc-500 font-medium truncate mt-0.5">
                         {app.role}
                       </p>
 
-                      <div className="mt-3.5 space-y-1.5 border-t border-slate-100 dark:border-slate-850/60 pt-3">
+                      <div className="mt-3.5 space-y-1.5 border-t border-zinc-100 dark:border-zinc-850/60 pt-3">
                         {app.location && (
-                          <div className="flex items-center gap-1.5 text-[9px] text-slate-400 font-medium">
-                            <MapPin className="w-3 h-3 text-slate-400 shrink-0" />
+                          <div className="flex items-center gap-1.5 text-[9px] text-zinc-450 font-medium">
+                            <MapPin className="w-3 h-3 text-zinc-450 shrink-0" />
                             {app.location}
                           </div>
                         )}
                         {app.package_ctc && (
-                          <div className="flex items-center gap-1.5 text-[9px] text-slate-400 font-medium">
-                            <IndianRupee className="w-3 h-3 text-slate-400 shrink-0" />
+                          <div className="flex items-center gap-1.5 text-[9px] text-zinc-450 font-medium">
+                            <IndianRupee className="w-3 h-3 text-zinc-450 shrink-0" />
                             {app.package_ctc}
                           </div>
                         )}
@@ -155,8 +166,9 @@ export const Pipeline: React.FC = () => {
 
                       {/* AI Prepare Tag Indicator */}
                       <div className="mt-3 flex items-center justify-between">
-                        <span className="text-[8px] text-slate-400 uppercase tracking-widest font-semibold">
-                          Priority: {app.priority}
+                        <span className="text-[8px] text-zinc-400 uppercase tracking-widest font-semibold flex items-center gap-1.5">
+                          <span className={`w-1.5 h-1.5 rounded-full ${getPriorityDot(app.priority)}`} />
+                          {app.priority}
                         </span>
                         {app.personal_readiness < 65 && (
                           <span className="text-[8px] bg-amber-500/10 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded font-bold flex items-center gap-0.5 animate-pulse">
@@ -167,8 +179,8 @@ export const Pipeline: React.FC = () => {
                     </div>
                   ))
                 ) : (
-                  <div className="border border-dashed border-slate-200 dark:border-slate-800 rounded-xl py-8 text-center px-2">
-                    <span className="text-[10px] text-slate-400">Drag items here</span>
+                  <div className="border border-dashed border-zinc-200 dark:border-zinc-800 rounded-2xl py-8 text-center px-2">
+                    <span className="text-[10px] text-zinc-400">Drag items here</span>
                   </div>
                 )}
               </div>

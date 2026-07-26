@@ -245,22 +245,22 @@ export const ResumeMatcher: React.FC = () => {
         {/* Right Side: Scorecard Results */}
         <div className="space-y-6">
           {result ? (
-            <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 rounded-2xl shadow-sm space-y-6">
+            <div className="bg-white dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/40 p-6 rounded-2xl shadow-sm space-y-6 relative overflow-hidden">
               
               {/* Match Score Gauge */}
-              <div className="flex flex-col items-center pb-4 border-b border-slate-100 dark:border-slate-800/60">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+              <div className="flex flex-col items-center pb-4 border-b border-zinc-100 dark:border-zinc-800/60">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">
                   Calculated Score
                 </span>
                 <div className="text-3xl font-extrabold text-brand-600 dark:text-brand-400 mt-1">
                   {result.match_percentage}%
                 </div>
-                <div className="text-xs font-semibold text-slate-700 dark:text-slate-300 tracking-tight mt-1.5">
+                <div className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 tracking-tight mt-1.5">
                   Resume-Role Match
                 </div>
-                <div className="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full mt-3.5 overflow-hidden">
+                <div className="w-full bg-zinc-100 dark:bg-zinc-800 h-2 rounded-full mt-3.5 overflow-hidden">
                   <div 
-                    className="bg-brand-500 h-full rounded-full transition-all duration-500" 
+                    className="bg-gradient-to-r from-amber-500 to-brand-500 h-full rounded-full transition-all duration-500" 
                     style={{ width: `${result.match_percentage}%` }}
                   />
                 </div>
@@ -268,10 +268,10 @@ export const ResumeMatcher: React.FC = () => {
 
               {/* Explanation Card */}
               <div className="space-y-1.5">
-                <span className="text-[10px] text-slate-400 block font-bold uppercase">
+                <span className="text-[10px] text-zinc-400 block font-bold uppercase">
                   Match Explanation
                 </span>
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed bg-slate-50 dark:bg-slate-800/40 p-4 rounded-xl border border-slate-100 dark:border-slate-800/60">
+                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed bg-zinc-50/50 dark:bg-zinc-900/40 p-4 rounded-xl border border-zinc-100/50 dark:border-zinc-800/50">
                   {result.explanation}
                 </p>
               </div>
@@ -279,7 +279,7 @@ export const ResumeMatcher: React.FC = () => {
               {/* Matched Skills */}
               {result.matched_skills.length > 0 && (
                 <div className="space-y-2">
-                  <span className="text-[10px] text-slate-400 block font-bold uppercase flex items-center gap-1.5">
+                  <span className="text-[10px] text-zinc-400 block font-bold uppercase flex items-center gap-1.5">
                     <CheckCircle className="w-3.5 h-3.5 text-emerald-500" /> Matched Skills
                   </span>
                   <div className="flex flex-wrap gap-1.5">
@@ -295,7 +295,7 @@ export const ResumeMatcher: React.FC = () => {
               {/* Missing Skills */}
               {result.missing_skills.length > 0 && (
                 <div className="space-y-2">
-                  <span className="text-[10px] text-slate-400 block font-bold uppercase flex items-center gap-1.5">
+                  <span className="text-[10px] text-zinc-400 block font-bold uppercase flex items-center gap-1.5">
                     <AlertTriangle className="w-3.5 h-3.5 text-amber-500" /> Missing Skills / Gaps
                   </span>
                   <div className="flex flex-wrap gap-1.5">
@@ -311,7 +311,7 @@ export const ResumeMatcher: React.FC = () => {
               {/* Keyword Gaps */}
               {result.keyword_gaps.length > 0 && (
                 <div className="space-y-2">
-                  <span className="text-[10px] text-slate-400 block font-bold uppercase flex items-center gap-1.5">
+                  <span className="text-[10px] text-zinc-400 block font-bold uppercase flex items-center gap-1.5">
                     <Search className="w-3.5 h-3.5 text-rose-500" /> Keyword Gaps
                   </span>
                   <div className="flex flex-wrap gap-1.5">
@@ -327,10 +327,10 @@ export const ResumeMatcher: React.FC = () => {
               {/* Likely Interview Topics */}
               {result.likely_interview_areas.length > 0 && (
                 <div className="space-y-2">
-                  <span className="text-[10px] text-slate-400 block font-bold uppercase flex items-center gap-1.5">
+                  <span className="text-[10px] text-zinc-400 block font-bold uppercase flex items-center gap-1.5">
                     <Lightbulb className="w-3.5 h-3.5 text-brand-500" /> Likely Interview Topics
                   </span>
-                  <ul className="text-xs text-slate-600 dark:text-slate-400 list-disc list-inside space-y-1 bg-slate-50 dark:bg-slate-800/20 p-3 rounded-xl border border-slate-100 dark:border-slate-850">
+                  <ul className="text-xs text-zinc-600 dark:text-zinc-400 list-disc list-inside space-y-1 bg-zinc-50/55 dark:bg-zinc-900/40 p-3 rounded-xl border border-zinc-100/50 dark:border-zinc-800/50">
                     {result.likely_interview_areas.map((t: string, idx: number) => (
                       <li key={idx}>{t}</li>
                     ))}
@@ -340,11 +340,11 @@ export const ResumeMatcher: React.FC = () => {
 
             </div>
           ) : (
-            <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 text-center py-20 rounded-2xl flex flex-col items-center justify-center p-6 shadow-sm">
-              <FileText className="w-12 h-12 text-slate-300 dark:text-slate-700 mb-3" />
-              <h4 className="font-semibold text-slate-700 dark:text-slate-300 text-sm">No analysis generated</h4>
-              <p className="text-xs text-slate-400 max-w-xs mt-1">
-                Paste your resume text and target JD on the left panel, and click calculate to retrieve structured recruiter scorecard analytics.
+            <div className="bg-white dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/40 text-center py-20 rounded-2xl flex flex-col items-center justify-center p-6 shadow-sm">
+              <FileText className="w-12 h-12 text-zinc-300 dark:text-zinc-700 mb-3" />
+              <h4 className="font-semibold text-zinc-700 dark:text-zinc-300 text-sm">No analysis generated</h4>
+              <p className="text-xs text-zinc-400 max-w-xs mt-1 leading-relaxed">
+                Paste your resume text and target JD on the left panel, or upload a resume file, and click calculate to retrieve structured recruiter scorecard analytics.
               </p>
             </div>
           )}
