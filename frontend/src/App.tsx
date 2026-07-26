@@ -73,7 +73,7 @@ const MainLayout: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex text-slate-900 dark:text-slate-100 transition-colors duration-200">
+    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col text-zinc-900 dark:text-zinc-100 transition-colors duration-200">
       {/* Sidebar Panel */}
       <Sidebar 
         currentTab={currentTab} 
@@ -83,10 +83,8 @@ const MainLayout: React.FC = () => {
       />
 
       {/* Main Panel Content Area */}
-      <main className="flex-1 ml-64 p-8 min-h-screen">
-        <div className="max-w-6xl mx-auto">
-          {renderContent()}
-        </div>
+      <main className="flex-1 w-full max-w-6xl mx-auto px-6 py-8 pb-32 min-h-screen">
+        {renderContent()}
       </main>
     </div>
   );
