@@ -77,11 +77,11 @@ const MainLayout: React.FC = () => {
       {/* 3D Dissolving Ambient Blobs Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         {/* Blob 1: Sage Green */}
-        <div className="absolute top-[10%] left-[5%] w-[450px] h-[450px] rounded-full bg-brand-500/10 dark:bg-brand-500/5 blur-[120px] animate-blob" />
+        <div className="absolute top-[5%] left-[-5%] w-[550px] h-[550px] rounded-full bg-brand-500/25 dark:bg-brand-500/20 blur-[130px] animate-blob" />
         {/* Blob 2: Amber Gold */}
-        <div className="absolute top-[40%] right-[5%] w-[550px] h-[550px] rounded-full bg-amber-500/10 dark:bg-amber-500/5 blur-[150px] animate-blob animation-delay-2000" />
+        <div className="absolute top-[35%] right-[-5%] w-[650px] h-[650px] rounded-full bg-amber-500/30 dark:bg-amber-500/20 blur-[150px] animate-blob animation-delay-2000" />
         {/* Blob 3: Teal */}
-        <div className="absolute bottom-[10%] left-[25%] w-[400px] h-[400px] rounded-full bg-teal-500/10 dark:bg-teal-500/5 blur-[130px] animate-blob animation-delay-4000" />
+        <div className="absolute bottom-[-5%] left-[20%] w-[500px] h-[500px] rounded-full bg-teal-500/25 dark:bg-teal-500/20 blur-[120px] animate-blob animation-delay-4000" />
       </div>
 
       <div className="relative z-10 flex flex-col min-h-screen">
