@@ -94,7 +94,7 @@ const MainLayout: React.FC = () => {
         />
 
         {/* Main Panel Content Area */}
-        <main className="flex-1 w-full max-w-6xl mx-auto px-6 py-8 pb-32 min-h-screen">
+        <main className="flex-1 w-full max-w-[95%] xl:max-w-[92%] 2xl:max-w-[1700px] mx-auto px-6 py-8 pb-32 min-h-screen">
           {renderContent()}
         </main>
       </div>
