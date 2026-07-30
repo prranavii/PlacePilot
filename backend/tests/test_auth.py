@@ -91,3 +91,24 @@ def test_read_me_authenticated(client):
     )
     assert response.status_code == status.HTTP_200_OK
     assert response.json()["email"] == "me@placepilot.ai"
+
+def test_user_password_is_bcrypt_hashed(client, db):
+    email = "hashedcheck@placepilot.ai"
+    password = "secretpassword123"
+    
+    response = client.post(
+        "/api/v1/auth/register",
+        json={
+            "email": email,
+            "password": password,
+            "full_name": "Hash Check"
+        }
+    )
+    assert response.status_code == status.HTTP_201_CREATED
+    
+    # Query database directly
+    from app.models.user import User
+    user = db.query(User).filter(User.email == email).first()
+    assert user is not None
+    assert user.hashed_password != password
+    assert user.hashed_password.startswith("$2b$")

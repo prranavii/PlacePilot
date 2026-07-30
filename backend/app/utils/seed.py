@@ -30,19 +30,11 @@ def seed_db():
         Base.metadata.create_all(bind=engine)
 
 
-        # Clear existing data
-        print("Cleaning existing database...")
-        db.query(WeeklyReport).delete()
-        db.query(PlacementMemory).delete()
-        db.query(StudyTask).delete()
-        db.query(TopicPerformance).delete()
-        db.query(Question).delete()
-        db.query(Assessment).delete()
-        db.query(Interview).delete()
-        db.query(ApplicationEvent).delete()
-        db.query(Application).delete()
-        db.query(User).delete()
-        db.commit()
+        # Check if users table is already populated
+        existing_users_count = db.query(User).count()
+        if existing_users_count > 0:
+            print("Users already exist in the database. Skipping seeding to prevent overwriting existing data.")
+            return
 
         print("Seeding new data...")
 
