@@ -9,6 +9,7 @@ from app.database.session import get_db
 from app.models.user import User
 from app.schemas.user import UserCreate, UserOut, Token, UserLogin
 from app.api.deps import get_current_user
+from app.utils.user_seeder import seed_new_user
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -31,6 +32,15 @@ def register(user_in: UserCreate, db: Session = Depends(get_db)):
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
+    
+    # Auto-seed sample workspace data so the new account's dashboard works immediately
+    import sys
+    if "pytest" not in sys.modules:
+        try:
+            seed_new_user(db, db_user)
+        except Exception as e:
+            print(f"Failed to auto-seed new user database metrics: {e}")
+        
     return db_user
 
 @router.post("/token", response_model=Token)
