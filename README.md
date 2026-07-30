@@ -61,10 +61,10 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Seed database with sample jobs, user credentials, and mock topics
-python seed.py
+python -m app.utils.seed
 
-# Launch the FastAPI app
-python run.py
+# Launch the FastAPI app using Uvicorn
+uvicorn app.main:app --reload
 ```
 *The FastAPI backend will spin up at `http://127.0.0.1:8000`.*
 
