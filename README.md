@@ -1,33 +1,30 @@
-# 🚀 PlacePilot AI
+# PlacePilot
 
-> **AI-Powered Placement Tracker & Agentic Interview Preparation Copilot**
+> **A smart, minimalist placement tracker and mock interview practice companion.**
 
-PlacePilot AI is a premium, state-of-the-art web application designed for students and job seekers. It features a modern, warm minimalist **Sand, Cocoa & Electric Vermilion Orange** glassmorphic interface with a bottom macOS-style dock and floating 3D ambient background blobs. 
+Placement season is stressful. Between managing spreadsheets, keeping track of deadlines, tailoring resumes for ATS scanners, and preparing for technical rounds, it is easy to get overwhelmed. 
 
-The application tracks job applications across Kanban stages, parses resume uploads (PDF/Word/Text) against target Job Descriptions, generates recruiter scoring metrics, and conducts custom AI mock interviews based on the job requirements.
-
----
-
-## 🤖 Generative AI & Agentic AI Capabilities
-
-PlacePilot AI leverages advanced AI workflows to act as a personalized placement companion:
-
-* 🎙️ **Generative AI Mock Interview Studio:** Uses Large Language Models (LLMs) to dynamically synthesize and voice custom, job-specific technical and behavioral questions. It simulates active audio mock interviews, captures your responses, and provides comprehensive scoring metrics, communication feedback, and strengths/weaknesses scorecards.
-* 📋 **Agentic Study Planner:** Analyzes your job description requirements, resume match gaps, and recent mock interview performance to autonomously generate prioritized study checklist milestones and weekly study intensity recommendations.
-* 📄 **ATS Match Engine:** Automatically parses resume uploads (`.pdf`, `.docx`, `.txt`), maps them semantically against target job descriptions, identifies structural gaps (missing keywords/skills), and advises on critical revision topics.
-* 💾 **Semantic Preparation Memory (RAG):** Integrates a Retrieval-Augmented Generation (RAG) vector interface. PlacePilot stores preparation facts, DSA solution approaches, and projects in a local semantic vector database, allowing you to query, edit, and debug your placement memory vault.
-* 📊 **Recruiter Narrative Synthesizer:** Aggregates weekly attempt logs, confidence parameters, and mock scores to write a natural-language recruiter critique summarizing improvement paths.
+PlacePilot was built to bring all of these moving parts into one clean, warm-beige workspace. It helps you track your applications on a Kanban pipeline, matches your resume directly to job postings, and lets you practice mock interviews with an AI tutor that reviews your answers.
 
 ---
 
-## ✨ Core Features
+## 🤖 How the AI Features Work
 
-* 📊 **Command Center Dashboard:** Dynamic Bento UI layout showcasing application statistics, prep mission lists, weekly preparation intensity logs, and ambient dissolving background animations.
-* 📋 **Visual Pipeline (Kanban):** Drag-and-drop boards to track applications across stages (Wishlist, Applied, OA, Technical Interview, Offer) with priority indicators and active stage lights.
-* 🤖 **AI Mock Interview Simulator:** Chat-based audio/text interview simulator that grills you on target company specs and grades your answers with custom performance scorecards.
-* 📄 **Resume Matcher Pipeline:** Upload resumes to parse and match them against target Job Descriptions, returning recruiter scores, matched skills, keyword gaps, and interview topics.
-* 💾 **RAG Preparation Memory:** Built-in semantic RAG debugger for searching and editing cached placement preparation facts.
-* 🌓 **Responsive Aesthetics:** Floating glassmorphic headers and nav docks supporting fully customized high-contrast light and dark modes.
+Instead of just tracking dates, PlacePilot acts as an active preparation partner using practical AI features:
+
+* 🎙️ **Mock Interview Studio:** Practice live behavioral or technical loops tailored to specific companies. The AI generates relevant questions, simulates a voice round, and scores your answers on technical depth and communication style.
+* 📄 **ATS Resume Matcher:** Upload your resume (PDF/Word) and paste any job description. The parser identifies missing keyword tags and skill gaps, giving you a match score before you submit.
+* 💾 **Semantic Memory Vault (RAG):** Keep a personal vector vault of study notes, project details, and coding concepts. The AI mock interviewer queries this memory during practice rounds to reference your actual achievements.
+* 📋 **Personalized Study Planner:** Based on your resume matching results and past mock interviews, PlacePilot automatically generates a tailored study checklist with target tasks (like revising B+ Trees or practicing cycle detection).
+* 📊 **Weekly Recruiter Reviews:** Get a simple, natural-language review every week summarizing your progress, confidence trends, and what you should focus on next.
+
+---
+
+## ✨ Features
+
+* 📊 **Bento Dashboard:** A clean, centralized dashboard displaying application stats, streaks, weekly study times, and upcoming interviews.
+* 📋 **Kanban Pipeline:** A drag-and-drop board to track where each application stands (Wishlist, Applied, OA, Interview, or Offer).
+* 🌓 **Clean Sand Theme:** A responsive, warm-minimalist Sand, Cocoa, and Vermilion palette that supports both light and dark modes.
 
 ---
 
@@ -35,35 +32,35 @@ PlacePilot AI leverages advanced AI workflows to act as a personalized placement
 
 ### Frontend
 * **Core:** React.js 18 + TypeScript + Vite + Framer Motion
-* **Styling:** TailwindCSS + Custom CSS glassmorphism animations
+* **Styling:** TailwindCSS + Custom CSS animations
 * **Telemetry Charts:** Recharts
 * **Icons:** Lucide React
 
 ### Backend
 * **Core:** FastAPI (Python 3.13)
 * **Database:** SQLite + SQLAlchemy ORM
-* **Resume Parsers:** `pypdf` for binary PDF structures, built-in XML zip-decoders for Word documents
-* **Security:** JWT authentication tokens + salted bcrypt hashing
+* **Resume Parsers:** `pypdf` (for PDF structures) and built-in XML decoders (for Word docs)
+* **Security:** JWT authentication + salted bcrypt passwords
 
 ---
 
 ## 🛠️ Getting Started
 
 ### 1. Prerequisites
-* Python 3.10+ installed
-* Node.js v18+ installed
+* Python 3.10+
+* Node.js v18+
 
 ### 2. Backend Setup
-Navigate to the `backend` directory, initialize a virtual environment, install requirements, and seed the database:
+Navigate to the `backend` directory, set up a virtual environment, install dependencies, and run the server:
 
 ```bash
-# Navigate to backend folder
+# Go to the backend folder
 cd backend
 
-# Create virtual environment
+# Create a virtual environment
 python -m venv venv
 
-# Activate virtual environment
+# Activate the virtual environment
 # On Windows:
 venv\Scripts\activate
 # On Linux/macOS:
@@ -72,28 +69,28 @@ source venv/bin/activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Seed database with sample jobs, user credentials, and mock topics
+# Seed the database with default test accounts
 python -m app.utils.seed
 
-# Launch the FastAPI app using Uvicorn
+# Run the FastAPI server
 uvicorn app.main:app --reload
 ```
-*The FastAPI backend will spin up at `http://127.0.0.1:8000`.*
+*The backend API will run at `http://127.0.0.1:8000`.*
 
 ### 3. Frontend Setup
-Navigate to the `frontend` directory, install package dependencies, and launch the Vite development server:
+Navigate to the `frontend` directory, install package dependencies, and run the Vite dev server:
 
 ```bash
-# Navigate to frontend folder
+# Go to the frontend folder
 cd ../frontend
 
 # Install dependencies
 npm install
 
-# Run the development server
+# Start the Vite development server
 npm run dev
 ```
-*The client application will spin up at `http://localhost:5173`.*
+*The client app will open at `http://localhost:5173`.*
 
 ---
 
@@ -104,27 +101,27 @@ placement-tracker/
 ├── backend/
 │   ├── app/
 │   │   ├── api/             # API routes (Auth, Resume, Applications, Mock Interviews)
-│   │   ├── core/            # Configuration and database connection setup
-│   │   ├── models/          # SQLAlchemy Database schemas
-│   │   └── schemas/         # Pydantic validation schemas
+│   │   ├── core/            # Database and security configurations
+│   │   ├── models/          # SQLAlchemy schemas (users, applications, events)
+│   │   └── schemas/         # Pydantic validation structures
 │   ├── placepilot.db        # SQLite database
-│   ├── seed.py              # Sample database seeder script
-│   └── run.py               # Backend main launcher
+│   ├── seed.py              # Sample database seeder
+│   └── run.py               # Launcher script
 ├── frontend/
 │   ├── src/
-│   │   ├── components/      # Glassmorphic Sidebar (Header & Dock)
-│   │   ├── context/         # React Auth context provider
-│   │   ├── pages/           # Dashboard, Kanban, Applications, Resume Matcher views
-│   │   ├── App.tsx          # Main routing & layout controller
-│   │   └── index.css        # Core stylesheet & ambient animations
-│   ├── tailwind.config.js   # Custom HSL Sand, Cocoa & Vermilion configuration
+│   │   ├── components/      # Sidebar and floating dock navigation
+│   │   ├── context/         # Auth Context provider
+│   │   ├── pages/           # Dashboard, Kanban Pipeline, Resume Matcher, Journal, Memory Vault
+│   │   ├── App.tsx          # Router layout controller
+│   │   └── index.css        # Theme styles & custom wave animations
+│   ├── tailwind.config.js   # Sand, Cocoa, and Vermilion Tailwind color themes
 │   └── package.json
 └── README.md
 ```
 
 ---
 
-## 🔒 Default Test Credentials
-Use these seeded credentials to log in and preview placement tracking analytics immediately:
+## 🔒 Test Account Credentials
+To test out the analytics dashboard immediately without signing up, use these seeded credentials:
 * **Email:** `student@placepilot.ai`
 * **Password:** `password123`
