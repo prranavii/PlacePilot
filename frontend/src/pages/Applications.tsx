@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../services/api';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Plus, 
   Search, 
@@ -271,32 +272,36 @@ export const Applications: React.FC = () => {
 
   const getStageColor = (s: string) => {
     switch (s) {
-      case 'Wishlist': return 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300';
-      case 'Applied': return 'bg-blue-50 text-blue-700 dark:bg-blue-950/30 dark:text-blue-400';
-      case 'Online Assessment': return 'bg-indigo-50 text-indigo-700 dark:bg-indigo-950/30 dark:text-indigo-400';
-      case 'Technical Interview': return 'bg-amber-50 text-amber-700 dark:bg-amber-950/30 dark:text-amber-400';
-      case 'Offer': return 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-400';
-      case 'Rejected': return 'bg-rose-50 text-rose-700 dark:bg-rose-950/30 dark:text-rose-400';
-      default: return 'bg-slate-100 text-slate-700';
+      case 'Wishlist': return 'bg-life-cocoa/5 text-life-cocoa/70 border-life-cocoa/10 border';
+      case 'Applied': return 'bg-life-vermilion/10 text-life-vermilion border-life-vermilion/20 border';
+      case 'Online Assessment': return 'bg-teal-500/10 text-teal-600 border-teal-500/20 border';
+      case 'Technical Interview': return 'bg-amber-500/10 text-amber-600 border-amber-550/20 border';
+      case 'Offer': return 'bg-emerald-500/10 text-emerald-600 border-emerald-555/20 border';
+      case 'Rejected': return 'bg-rose-500/10 text-rose-500 border-rose-500/20 border';
+      default: return 'bg-life-cocoa/5 text-life-cocoa/50 border';
     }
   };
 
   return (
-    <div className="space-y-6 relative min-h-[85vh]">
-      
+    <motion.div 
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="space-y-8 pb-12 font-sans relative"
+    >
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100 tracking-tight">
+          <h2 className="text-2xl font-extrabold tracking-tight text-life-cocoa dark:text-white font-geom">
             Job Applications Tracker
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
-            Track stage pipelines and open dedicated AI company preparation workspaces.
+          <p className="text-sm text-life-cocoa/60 mt-1 max-w-lg leading-relaxed dark:text-zinc-400">
+            Manage stage pipelines, check match percentages, and open dedicated AI company preparation workspaces.
           </p>
         </div>
         <button
           onClick={() => setShowAddModal(true)}
-          className="bg-brand-500 hover:bg-brand-600 text-white font-medium text-xs px-4 py-2.5 rounded-xl shadow-lg shadow-brand-500/15 flex items-center gap-2 max-w-max transition-all"
+          className="bg-life-vermilion hover:bg-life-vermilion/90 text-white font-bold text-xs px-5 py-3 rounded-xl shadow-lg shadow-life-vermilion/15 flex items-center gap-2 max-w-max transition-all active:scale-95"
         >
           <Plus className="w-4 h-4" />
           Add Application
@@ -304,9 +309,9 @@ export const Applications: React.FC = () => {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col md:flex-row gap-3 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-3 rounded-2xl shadow-sm">
+      <div className="flex flex-col md:flex-row gap-4 bg-white/70 border border-life-cocoa/5 p-4 rounded-2xl shadow-md backdrop-blur-md dark:bg-zinc-900/35 dark:border-white/5">
         <div className="relative flex-1">
-          <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+          <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-life-cocoa/40">
             <Search className="w-4 h-4" />
           </span>
           <input
@@ -314,14 +319,14 @@ export const Applications: React.FC = () => {
             placeholder="Search company or role..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-slate-50 dark:bg-slate-800/40 text-sm pl-9 pr-4 py-2 rounded-xl outline-none focus:ring-1 focus:ring-brand-500 text-slate-800 dark:text-slate-100 placeholder-slate-400 transition-all"
+            className="w-full bg-life-sand/90 text-xs pl-10 pr-4 py-3 rounded-xl outline-none border border-life-cocoa/10 text-life-cocoa placeholder-life-cocoa/40 transition-all focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
           />
         </div>
         <div className="flex gap-2 shrink-0">
           <select
             value={stageFilter}
             onChange={(e) => setStageFilter(e.target.value)}
-            className="bg-slate-50 dark:bg-slate-800/40 text-xs px-3 py-2 rounded-xl outline-none border-none text-slate-700 dark:text-slate-300 focus:ring-1 focus:ring-brand-500 transition-all"
+            className="bg-life-sand/90 text-xs px-4 py-3 rounded-xl outline-none border border-life-cocoa/10 text-life-cocoa transition-all focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
           >
             <option value="">All Stages</option>
             <option value="Wishlist">Wishlist</option>
@@ -337,571 +342,618 @@ export const Applications: React.FC = () => {
       {/* Applications list */}
       {loading ? (
         <div className="flex items-center justify-center min-h-[40vh]">
-          <div className="animate-spin rounded-full h-8 w-8 border-3 border-brand-500 border-t-transparent" />
+          <div className="relative w-10 h-10">
+            <div className="absolute inset-0 rounded-full border-3 border-life-vermilion/25"></div>
+            <div className="absolute inset-0 rounded-full border-3 border-life-vermilion border-t-transparent animate-spin"></div>
+          </div>
         </div>
       ) : filteredApps.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {filteredApps.map((app) => (
-            <div
+            <motion.div
               key={app.id}
               onClick={() => handleSelectApp(app)}
-              className={`bg-white dark:bg-slate-900 border ${
+              whileHover={{ y: -4, borderColor: "rgba(46,26,22,0.15)" }}
+              className={`bg-white border p-5 rounded-2xl shadow-sm hover:shadow-md cursor-pointer transition-all duration-300 flex flex-col justify-between dark:bg-zinc-900/45 dark:border-white/5 ${
                 selectedApp?.id === app.id 
-                  ? 'border-brand-500 ring-1 ring-brand-500/20' 
-                  : 'border-slate-200/60 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
-              } p-5 rounded-2xl shadow-sm hover:shadow-md cursor-pointer transition-all duration-150 flex flex-col justify-between`}
+                  ? 'border-life-vermilion ring-1 ring-life-vermilion/20' 
+                  : 'border-life-cocoa/5'
+              }`}
             >
               <div>
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <h4 className="font-bold text-slate-800 dark:text-slate-200 text-sm tracking-tight">
+                    <h4 className="font-extrabold text-life-cocoa text-sm tracking-tight dark:text-zinc-200">
                       {app.company_name}
                     </h4>
-                    <p className="text-xs text-slate-500 font-medium mt-0.5">{app.role}</p>
+                    <p className="text-xs text-life-cocoa/60 font-medium mt-1 dark:text-zinc-400">{app.role}</p>
                   </div>
-                  <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full ${getStageColor(app.current_stage)}`}>
+                  <span className={`text-[9px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider ${getStageColor(app.current_stage)}`}>
                     {app.current_stage}
                   </span>
                 </div>
 
-                <div className="mt-4 space-y-2">
+                <div className="mt-5 space-y-2 border-t border-life-cocoa/5 pt-4 dark:border-white/5">
                   {app.location && (
-                    <div className="flex items-center gap-1.5 text-[10px] text-slate-400 font-medium">
-                      <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                    <div className="flex items-center gap-2 text-[10px] text-life-cocoa/50 font-semibold dark:text-zinc-500">
+                      <MapPin className="w-3.5 h-3.5 text-life-cocoa/40 shrink-0 dark:text-zinc-500" />
                       {app.location}
                     </div>
                   )}
                   {app.package_ctc && (
-                    <div className="flex items-center gap-1.5 text-[10px] text-slate-400 font-medium">
-                      <IndianRupee className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                    <div className="flex items-center gap-2 text-[10px] text-life-cocoa/50 font-semibold dark:text-zinc-500">
+                      <IndianRupee className="w-3.5 h-3.5 text-life-cocoa/40 shrink-0 dark:text-zinc-500" />
                       {app.package_ctc}
                     </div>
                   )}
                   {app.deadline && (
-                    <div className="flex items-center gap-1.5 text-[10px] text-slate-400 font-medium">
-                      <Calendar className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                    <div className="flex items-center gap-2 text-[10px] text-life-cocoa/50 font-semibold dark:text-zinc-500">
+                      <Calendar className="w-3.5 h-3.5 text-life-cocoa/40 shrink-0 dark:text-zinc-500" />
                       Deadline: {new Date(app.deadline).toLocaleDateString()}
                     </div>
                   )}
                 </div>
               </div>
 
-              <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800/60 flex items-center justify-between">
-                <span className="text-[10px] text-slate-400">
-                  Readiness: <strong className="text-slate-700 dark:text-slate-300 font-bold">{app.personal_readiness}%</strong>
+              <div className="mt-6 pt-4 border-t border-life-cocoa/5 flex items-center justify-between dark:border-white/5">
+                <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-400">
+                  Readiness: <strong className="text-life-vermilion font-extrabold text-xs ml-1 font-geom">{app.personal_readiness}%</strong>
                 </span>
-                <span className="text-brand-500 hover:text-brand-600 font-semibold text-xs flex items-center gap-1">
-                  Workspace <ChevronRight className="w-3.5 h-3.5" />
+                <span className="text-life-vermilion font-bold text-xs flex items-center gap-1 transition-all hover:translate-x-1">
+                  <span>Workspace</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
                 </span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       ) : (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 text-center py-16 rounded-2xl">
-          <Briefcase className="w-10 h-10 text-slate-300 mx-auto mb-3" />
-          <h4 className="font-semibold text-slate-700 dark:text-slate-300 text-sm">No applications found</h4>
-          <p className="text-xs text-slate-400 mt-1">Submit your first placement entry using the button above.</p>
+        <div className="bg-white/75 border border-life-cocoa/5 text-center py-16 rounded-2xl shadow-sm dark:bg-zinc-900/35 dark:border-white/5">
+          <Briefcase className="w-10 h-10 text-life-cocoa/30 mx-auto mb-3" />
+          <h4 className="font-bold text-life-cocoa/70 text-sm dark:text-zinc-300">No applications found</h4>
+          <p className="text-xs text-life-cocoa/50 mt-1">Submit your first placement entry using the button above.</p>
         </div>
       )}
 
       {/* Slide-over Company Workspace Drawer Panel */}
-      {selectedApp && (
-        <div className="fixed inset-y-0 right-0 w-full max-w-md bg-white dark:bg-slate-950 border-l border-slate-200 dark:border-slate-900 shadow-2xl z-20 flex flex-col justify-between transition-colors duration-200">
-          
-          {/* Workspace Header */}
-          <div className="p-6 border-b border-slate-100 dark:border-slate-900 flex items-start justify-between">
-            <div>
-              <span className="text-[9px] uppercase font-bold tracking-wider text-slate-400 block">Company Workspace</span>
-              <h3 className="font-extrabold text-slate-800 dark:text-slate-100 text-base mt-0.5">
-                {selectedApp.company_name}
-              </h3>
-              <p className="text-xs text-slate-500 font-medium">{selectedApp.role}</p>
+      <AnimatePresence>
+        {selectedApp && (
+          <motion.div 
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-y-0 right-0 w-full max-w-md bg-white border-l border-life-cocoa/10 shadow-2xl z-40 flex flex-col justify-between dark:bg-zinc-900 dark:border-white/5"
+          >
+            {/* Workspace Header */}
+            <div className="p-6 border-b border-life-cocoa/5 flex items-start justify-between bg-life-sand/90 dark:bg-zinc-950/20">
+              <div>
+                <span className="text-[9px] uppercase font-bold tracking-widest text-life-cocoa/50 block dark:text-zinc-500">Company Workspace</span>
+                <h3 className="font-extrabold text-life-cocoa text-base mt-1 dark:text-white font-geom">
+                  {selectedApp.company_name}
+                </h3>
+                <p className="text-xs text-life-cocoa/60 font-medium dark:text-zinc-400">{selectedApp.role}</p>
+              </div>
+              <div className="flex items-center gap-1">
+                <button 
+                  onClick={() => handleDeleteApplication(selectedApp.id)}
+                  className="p-2 rounded-lg text-life-cocoa/65 hover:text-rose-500 hover:bg-life-cocoa/5 dark:hover:text-rose-450 dark:hover:bg-zinc-800"
+                  title="Delete Application"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setSelectedApp(null)}
+                  className="p-2 rounded-lg text-life-cocoa/65 hover:bg-life-cocoa/5 dark:hover:bg-zinc-800"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <button 
-                onClick={() => handleDeleteApplication(selectedApp.id)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-slate-100 dark:hover:bg-slate-900"
-                title="Delete Application"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
+
+            {/* Workspace scrollable contents */}
+            <div className="flex-1 overflow-y-auto p-6 space-y-6">
+              
+              {/* Prepare Me Flags Button */}
+              <div className="bg-life-sand/50 border border-life-cocoa/5 p-5 rounded-2xl flex flex-col gap-3 shadow-inner dark:bg-zinc-950/40 dark:border-white/5">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-life-cocoa dark:text-zinc-200">Prepare Me AI Copilot</span>
+                  <span className="text-[9px] text-life-vermilion bg-life-vermilion/10 border border-life-vermilion/20 px-2 py-0.5 rounded-full font-bold flex items-center gap-0.5 uppercase tracking-wider">
+                    <Sparkles className="w-3 h-3 fill-life-vermilion/10" /> Active
+                  </span>
+                </div>
+                <p className="text-[11px] text-life-cocoa/60 leading-relaxed dark:text-zinc-500">
+                  Let the AI Copilot analyze the job description, check your DSA topic weaknesses, and compile today's study priorities.
+                </p>
+                <button
+                  onClick={handlePrepareMe}
+                  disabled={preparing}
+                  className="w-full bg-life-vermilion hover:bg-life-vermilion/90 text-white font-bold text-xs py-3 rounded-xl shadow-lg shadow-life-vermilion/15 flex items-center justify-center gap-2 mt-1.5 transition-all disabled:opacity-50 active:scale-95"
+                >
+                  {preparing ? (
+                    <>
+                      <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <span>Analyzing history...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>✨ Generate Prep Strategy</span>
+                    </>
+                  )}
+                </button>
+                
+                <button
+                  onClick={handleStartMock}
+                  className="w-full bg-life-cocoa/5 hover:bg-life-cocoa/10 text-life-cocoa border border-life-cocoa/10 font-bold text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-2 mt-1 transition-all active:scale-95 dark:bg-zinc-800 dark:hover:bg-zinc-800 dark:text-zinc-200 dark:border-white/5"
+                >
+                  <span>🎙️ Start AI Mock Interview</span>
+                </button>
+
+                {/* Prep tasks display if generated */}
+                {prepTasks.length > 0 && (
+                  <div className="mt-4 pt-4 border-t border-life-cocoa/5 space-y-3 dark:border-white/5">
+                    <h4 className="text-xs font-bold text-life-cocoa/50 uppercase tracking-widest text-[9px] dark:text-zinc-400">Generated Study Plan</h4>
+                    {prepTasks.map((t, i) => (
+                      <div key={i} className="p-3 bg-white border border-life-cocoa/5 rounded-xl dark:bg-zinc-900 dark:border-white/5">
+                        <span className="text-[9px] font-bold text-life-vermilion block uppercase tracking-wider">{t.type}</span>
+                        <p className="text-xs text-life-cocoa font-bold mt-1 leading-normal dark:text-zinc-100">{t.title}</p>
+                        <span className="text-[9px] text-life-cocoa/40 mt-2 block">Estimate: {t.duration}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Stage Info and Readiness */}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="p-3 bg-life-sand border border-life-cocoa/5 rounded-xl text-center dark:bg-zinc-900/20 dark:border-white/5">
+                  <span className="text-[9px] text-life-cocoa/50 font-bold block uppercase tracking-wider dark:text-zinc-500">Stage</span>
+                  <span className="text-xs font-extrabold text-life-cocoa mt-1 block dark:text-zinc-200">
+                    {selectedApp.current_stage}
+                  </span>
+                </div>
+                <div className="p-3 bg-life-sand border border-life-cocoa/5 rounded-xl text-center dark:bg-zinc-900/20 dark:border-white/5">
+                  <span className="text-[9px] text-life-cocoa/50 font-bold block uppercase tracking-wider dark:text-zinc-500">Readiness</span>
+                  <span className="text-xs font-extrabold text-life-cocoa mt-1 block dark:text-zinc-200">
+                    {selectedApp.personal_readiness}%
+                  </span>
+                </div>
+              </div>
+
+              {/* Notes Section */}
+              {selectedApp.notes && (
+                <div className="space-y-2">
+                  <h4 className="text-[9px] font-bold text-life-cocoa/50 uppercase tracking-widest dark:text-zinc-400">Notes</h4>
+                  <div className="bg-life-sand/40 border border-life-cocoa/5 rounded-xl p-4 text-xs text-life-cocoa/80 whitespace-pre-wrap leading-relaxed dark:bg-zinc-900/20 dark:border-white/5 dark:text-zinc-400">
+                    {selectedApp.notes}
+                  </div>
+                </div>
+              )}
+
+              {/* Job Description */}
+              {selectedApp.job_description && (
+                <div className="space-y-2">
+                  <h4 className="text-[9px] font-bold text-life-cocoa/50 uppercase tracking-widest dark:text-zinc-400">Job Description</h4>
+                  <div className="bg-life-sand/40 border border-life-cocoa/5 rounded-xl p-4 text-xs text-life-cocoa/80 whitespace-pre-wrap leading-relaxed max-h-48 overflow-y-auto dark:bg-zinc-900/20 dark:border-white/5 dark:text-zinc-400">
+                    {selectedApp.job_description}
+                  </div>
+                </div>
+              )}
+
+              {/* Activity Timeline */}
+              <div className="space-y-4">
+                <h4 className="text-[9px] font-bold text-life-cocoa/50 uppercase tracking-widest dark:text-zinc-400">Hiring Timeline</h4>
+                
+                {loadingEvents ? (
+                  <div className="py-4 text-center">
+                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-life-vermilion border-t-transparent mx-auto" />
+                  </div>
+                ) : appEvents.length > 0 ? (
+                  <div className="border-l border-life-cocoa/10 ml-2.5 pl-4 space-y-5 dark:border-white/5">
+                    {appEvents.map((evt) => (
+                      <div key={evt.id} className="relative">
+                        {/* Timeline dot marker */}
+                        <span className="absolute -left-[22px] top-1 w-2.5 h-2.5 rounded-full bg-life-vermilion border border-life-sand ring-4 ring-life-vermilion/10 dark:border-zinc-900" />
+                        
+                        <div className="text-xs">
+                          <span className="font-extrabold text-life-cocoa block dark:text-zinc-200">
+                            {evt.event_type}
+                          </span>
+                          <span className="text-[9px] text-life-cocoa/50 mt-0.5 block dark:text-zinc-500">
+                            {new Date(evt.event_date).toLocaleDateString()}
+                          </span>
+                          {evt.details && (
+                            <p className="text-[11px] text-life-cocoa/80 mt-2 bg-life-sand/40 border border-life-cocoa/5 p-3 rounded-lg leading-relaxed dark:bg-zinc-900/40 dark:border-white/5 dark:text-zinc-400">
+                              {evt.details}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-xs text-life-cocoa/40">No events logged yet.</p>
+                )}
+              </div>
+
+            </div>
+            
+            {/* Footer action */}
+            <div className="p-6 border-t border-life-cocoa/5 flex justify-end gap-3 bg-life-sand/90 dark:border-white/5 dark:bg-zinc-950/20 shrink-0">
               <button
                 onClick={() => setSelectedApp(null)}
-                className="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900"
+                className="px-4 py-2 border border-life-cocoa/10 bg-life-sand text-xs font-bold text-life-cocoa/80 rounded-xl hover:bg-life-cocoa/5 dark:border-white/5 dark:bg-zinc-950/40 dark:hover:bg-zinc-800 dark:text-zinc-400 transition-all"
               >
-                <X className="w-4 h-4" />
+                Close Workspace
               </button>
             </div>
-          </div>
-
-          {/* Workspace scrollable contents */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-6">
-            
-            {/* Prepare Me Flags Button */}
-            <div className="bg-slate-50 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800 p-4 rounded-2xl flex flex-col gap-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">Prepare Me AI Copilot</span>
-                <span className="text-[10px] text-brand-500 font-bold flex items-center gap-0.5">
-                  <Sparkles className="w-3.5 h-3.5 fill-current" /> Active
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-400">
-                Let the AI Copilot analyze the job description, check your graph / database performance weaknesses, and compile today's study priorities.
-              </p>
-              <button
-                onClick={handlePrepareMe}
-                disabled={preparing}
-                className="w-full bg-brand-500 hover:bg-brand-600 text-white font-semibold text-xs py-2.5 rounded-xl shadow-md flex items-center justify-center gap-2 mt-1.5 transition-all disabled:opacity-50"
-              >
-                {preparing ? (
-                  <>
-                    <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    <span>Analyzing history...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>✨ Prepare Me</span>
-                  </>
-                )}
-              </button>
-              
-              <button
-                onClick={handleStartMock}
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs py-2.5 rounded-xl shadow-md flex items-center justify-center gap-2 mt-1 transition-all"
-              >
-                <span>🎙️ Start AI Mock Interview</span>
-              </button>
-
-
-              {/* Prep tasks display if generated */}
-              {prepTasks.length > 0 && (
-                <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-800/80 space-y-2.5">
-                  <h4 className="text-xs font-bold text-slate-700 dark:text-slate-300">Generated Study Plan</h4>
-                  {prepTasks.map((t, i) => (
-                    <div key={i} className="p-2.5 bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800/50 rounded-xl">
-                      <span className="text-[10px] font-bold text-brand-500 block uppercase tracking-wider">{t.type}</span>
-                      <p className="text-xs text-slate-700 dark:text-slate-200 font-medium mt-0.5">{t.title}</p>
-                      <span className="text-[9px] text-slate-400 mt-1 block">Estimate: {t.duration}</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Stage Info and Readiness */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="p-3 bg-slate-50 dark:bg-slate-900/40 border border-slate-100 dark:border-slate-800/60 rounded-xl">
-                <span className="text-[10px] text-slate-400 font-semibold block uppercase">Stage</span>
-                <span className="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1 block">
-                  {selectedApp.current_stage}
-                </span>
-              </div>
-              <div className="p-3 bg-slate-50 dark:bg-slate-900/40 border border-slate-100 dark:border-slate-800/60 rounded-xl">
-                <span className="text-[10px] text-slate-400 font-semibold block uppercase">Readiness</span>
-                <span className="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1 block">
-                  {selectedApp.personal_readiness}%
-                </span>
-              </div>
-            </div>
-
-            {/* Notes Section */}
-            {selectedApp.notes && (
-              <div className="space-y-2">
-                <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">Notes</h4>
-                <div className="bg-slate-50 dark:bg-slate-900/20 border border-slate-100 dark:border-slate-800/60 rounded-xl p-3.5 text-xs text-slate-600 dark:text-slate-400 whitespace-pre-wrap">
-                  {selectedApp.notes}
-                </div>
-              </div>
-            )}
-
-            {/* Job Description */}
-            {selectedApp.job_description && (
-              <div className="space-y-2">
-                <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">Job Description</h4>
-                <div className="bg-slate-50 dark:bg-slate-900/20 border border-slate-100 dark:border-slate-800/60 rounded-xl p-3.5 text-xs text-slate-600 dark:text-slate-400 whitespace-pre-wrap max-h-48 overflow-y-auto">
-                  {selectedApp.job_description}
-                </div>
-              </div>
-            )}
-
-            {/* Activity Timeline */}
-            <div className="space-y-3">
-              <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">Hiring Timeline</h4>
-              
-              {loadingEvents ? (
-                <div className="py-4 text-center">
-                  <div className="animate-spin rounded-full h-4 w-4 border-2 border-brand-500 border-t-transparent mx-auto" />
-                </div>
-              ) : appEvents.length > 0 ? (
-                <div className="border-l border-slate-200 dark:border-slate-800 ml-2.5 pl-4 space-y-4">
-                  {appEvents.map((evt) => (
-                    <div key={evt.id} className="relative">
-                      {/* Timeline dot marker */}
-                      <span className="absolute -left-[22px] top-1 w-2.5 h-2.5 rounded-full bg-brand-500 border border-white dark:border-slate-900 ring-2 ring-brand-500/10" />
-                      
-                      <div className="text-xs">
-                        <span className="font-bold text-slate-800 dark:text-slate-200 block">
-                          {evt.event_type}
-                        </span>
-                        <span className="text-[10px] text-slate-400 mt-0.5 block">
-                          {new Date(evt.event_date).toLocaleDateString()}
-                        </span>
-                        {evt.details && (
-                          <p className="text-[11px] text-slate-500 mt-1 bg-slate-50 dark:bg-slate-900/40 p-2 rounded-lg">
-                            {evt.details}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-xs text-slate-400">No events logged yet.</p>
-              )}
-            </div>
-
-          </div>
-          
-          {/* Footer action */}
-          <div className="p-6 border-t border-slate-100 dark:border-slate-900 flex justify-end gap-3 bg-slate-50 dark:bg-slate-900/20">
-            <button
-              onClick={() => setSelectedApp(null)}
-              className="px-4 py-2 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all"
-            >
-              Close Workspace
-            </button>
-          </div>
-
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Add Application Modal Backdrop */}
-      {showAddModal && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 flex items-center justify-center p-4 transition-all duration-200">
-          
-          {/* Modal Container */}
-          <div className="w-full max-w-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative font-sans">
-            
-            {/* Modal Header */}
-            <div className="p-6 border-b border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
-              <h3 className="font-bold text-slate-800 dark:text-slate-100 text-sm uppercase tracking-wider">
-                Add Job Application
-              </h3>
-              <button 
-                onClick={() => setShowAddModal(false)}
-                className="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
-              >
-                <X className="w-4.5 h-4.5" />
-              </button>
-            </div>
-
-            {/* Modal Form */}
-            <form onSubmit={handleCreateApplication} className="p-6 space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Company *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Google"
-                    value={companyName}
-                    onChange={(e) => setCompanyName(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Role / Job Title *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Frontend Intern"
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Package (CTC / Wage)</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. ₹12,00,000 / yr"
-                    value={ctc}
-                    onChange={(e) => setCtc(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Location</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Seattle, WA"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-3">
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Job Type</label>
-                  <select
-                    value={jobType}
-                    onChange={(e) => setJobType(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                  >
-                    <option value="Full-time">Full-time</option>
-                    <option value="Internship">Internship</option>
-                    <option value="Contract">Contract</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Source</label>
-                  <select
-                    value={source}
-                    onChange={(e) => setSource(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                  >
-                    <option value="LinkedIn">LinkedIn</option>
-                    <option value="Referral">Referral</option>
-                    <option value="On-campus">On-campus</option>
-                    <option value="Company Portal">Portal</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Deadline</label>
-                  <input
-                    type="date"
-                    value={deadline}
-                    onChange={(e) => setDeadline(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-2 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-3">
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Stage</label>
-                  <select
-                    value={stage}
-                    onChange={(e) => setStage(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                  >
-                    <option value="Wishlist">Wishlist</option>
-                    <option value="Applied">Applied</option>
-                    <option value="Online Assessment">Online Assessment</option>
-                    <option value="Technical Interview">Technical Interview</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Priority</label>
-                  <select
-                    value={priority}
-                    onChange={(e) => setPriority(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                  >
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Readiness ({readiness}%)</label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    value={readiness}
-                    onChange={(e) => setReadiness(parseInt(e.target.value))}
-                    className="w-full mt-2 accent-brand-500"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Job Description</label>
-                <textarea
-                  placeholder="Paste job requirements..."
-                  rows={3}
-                  value={jd}
-                  onChange={(e) => setJd(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Personal Notes</label>
-                <textarea
-                  placeholder="Enter custom interview details..."
-                  rows={2}
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                />
-              </div>
-
-              <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-850">
-                <button
-                  type="button"
-                  onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2 border border-slate-200 dark:border-slate-850 rounded-xl text-xs font-semibold text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-brand-500 hover:bg-brand-600 text-white rounded-xl text-xs font-semibold shadow-lg shadow-brand-500/15"
-                >
-                  Save Entry
-                </button>
-              </div>
-            </form>
-
-          </div>
-        </div>
-      )}
-      {/* AI Mock Interview Modal */}
-
-      {showMockModal && (
-        <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-30 flex items-center justify-center p-4">
-          <div className="w-full max-w-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col relative font-sans">
-            
-            <div className="p-6 border-b border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
-              <h3 className="font-bold text-slate-800 dark:text-slate-100 text-sm uppercase tracking-wider flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-brand-500 fill-brand-500/10 animate-pulse" />
-                AI Mock Session: {selectedApp?.company_name}
-              </h3>
-              {!mockSubmittingAnswer && !mockLoadingStart && (
+      <AnimatePresence>
+        {showAddModal && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          >
+            {/* Modal Container */}
+            <motion.div
+              initial={{ scale: 0.95, y: 15 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 15 }}
+              className="w-full max-w-lg bg-white border border-life-cocoa/10 rounded-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative font-sans dark:bg-zinc-900 dark:border-white/5"
+            >
+              {/* Modal Header */}
+              <div className="p-6 border-b border-life-cocoa/5 flex items-center justify-between bg-life-sand/90 dark:bg-zinc-950/20 dark:border-white/5">
+                <h3 className="font-extrabold text-life-cocoa text-sm uppercase tracking-widest dark:text-white font-geom">
+                  Add Job Application
+                </h3>
                 <button 
-                  onClick={() => setShowMockModal(false)}
-                  className="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                  onClick={() => setShowAddModal(false)}
+                  className="p-1.5 rounded-lg text-life-cocoa/60 hover:bg-life-cocoa/5 dark:text-zinc-400 dark:hover:bg-zinc-800"
                 >
                   <X className="w-4.5 h-4.5" />
                 </button>
-              )}
-            </div>
+              </div>
 
-            <div className="p-6 flex-1 overflow-y-auto space-y-6">
-              {mockLoadingStart ? (
-                <div className="py-16 text-center space-y-3">
-                  <div className="animate-spin rounded-full h-8 w-8 border-3 border-brand-500 border-t-transparent mx-auto" />
-                  <p className="text-xs text-slate-400">Assembling adaptive mock interview context...</p>
-                </div>
-              ) : mockScorecard ? (
-                // Evaluation Scorecard Display
-                <div className="space-y-6">
-                  <div className="text-center pb-4 border-b border-slate-100 dark:border-slate-800/80">
-                    <span className="text-[10px] font-bold text-brand-500 uppercase tracking-widest block">Session Completed</span>
-                    <h4 className="font-extrabold text-slate-800 dark:text-slate-100 text-lg mt-1">Scorecard Assessment</h4>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="p-4 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800/60 rounded-2xl text-center">
-                      <span className="text-[10px] text-slate-400 font-bold uppercase block">Technical Depth</span>
-                      <span className="text-2xl font-black text-brand-600 dark:text-brand-400 block mt-1">{mockScorecard.technical_score}/10</span>
-                    </div>
-                    <div className="p-4 bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800/60 rounded-2xl text-center">
-                      <span className="text-[10px] text-slate-400 font-bold uppercase block">Communication</span>
-                      <span className="text-2xl font-black text-indigo-600 dark:text-indigo-400 block mt-1">{mockScorecard.communication_score}/10</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <span className="text-[10px] text-slate-400 font-bold uppercase block">Recruiter Recommendations</span>
-                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed bg-slate-50 dark:bg-slate-900/40 p-4 rounded-xl border border-slate-150 dark:border-slate-850">
-                      {mockScorecard.recommendations}
-                    </p>
-                  </div>
-
-                  <div className="space-y-2">
-                    <span className="text-[10px] text-slate-400 font-bold uppercase block">Strengths Demonstrated</span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {mockScorecard.strengths.map((s: string, i: number) => (
-                        <span key={i} className="text-[10px] font-medium bg-emerald-550/10 text-emerald-650 dark:text-emerald-400 px-2.5 py-0.5 rounded-full">{s}</span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <span className="text-[10px] text-slate-400 font-bold uppercase block">Identified Gaps</span>
-                    <div className="flex flex-wrap gap-1.5">
-                      {mockScorecard.weaknesses.map((w: string, i: number) => (
-                        <span key={i} className="text-[10px] font-medium bg-rose-500/10 text-rose-600 dark:text-rose-400 px-2.5 py-0.5 rounded-full">{w}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                // Active Interview Question flow
-                <form onSubmit={handleSubmitMockAnswer} className="space-y-6">
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[9px] bg-slate-100 dark:bg-slate-800 text-slate-500 font-bold px-2 py-0.5 rounded uppercase tracking-wider">
-                        Question {mockQuestionNumber} of {mockTotalQuestions}
-                      </span>
-                      <span className="text-[9px] text-brand-500 font-bold uppercase tracking-wider animate-pulse">🎙️ Recording Session</span>
-                    </div>
-                    
-                    <p className="text-sm font-semibold text-slate-800 dark:text-slate-100 leading-relaxed bg-slate-50 dark:bg-slate-900/40 p-5 border border-slate-100 dark:border-slate-800 rounded-2xl shadow-sm">
-                      {mockQuestion}
-                    </p>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="block text-[10px] font-bold text-slate-400 uppercase">Your Response *</label>
-                    <textarea
+              {/* Modal Form */}
+              <form onSubmit={handleCreateApplication} className="p-6 space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Company *</label>
+                    <input
+                      type="text"
                       required
-                      rows={5}
-                      placeholder="Type your structured response details (mention caching, algorithms, complexity where relevant)..."
-                      value={mockAnswerText}
-                      onChange={(e) => setMockAnswerText(e.target.value)}
-                      className="w-full bg-slate-50 dark:bg-slate-800/60 text-xs border border-slate-200 dark:border-slate-850 rounded-xl px-3.5 py-3 text-slate-700 dark:text-slate-350 focus:outline-none focus:border-brand-500 placeholder-slate-400"
+                      placeholder="e.g. Google"
+                      value={companyName}
+                      onChange={(e) => setCompanyName(e.target.value)}
+                      className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3.5 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
                     />
                   </div>
-
-                  <div className="flex justify-end pt-4 border-t border-slate-100 dark:border-slate-850">
-                    <button
-                      type="submit"
-                      disabled={mockSubmittingAnswer || !mockAnswerText.trim()}
-                      className="bg-brand-500 hover:bg-brand-600 text-white font-semibold text-xs px-5 py-2.5 rounded-xl shadow-lg shadow-brand-500/10 flex items-center gap-1.5 disabled:opacity-50"
-                    >
-                      {mockSubmittingAnswer ? (
-                        <>
-                          <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          <span>Evaluating response...</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>Submit Answer</span>
-                          <ChevronRight className="w-4 h-4" />
-                        </>
-                      )}
-                    </button>
+                  <div>
+                    <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Role / Job Title *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Frontend Intern"
+                      value={role}
+                      onChange={(e) => setRole(e.target.value)}
+                      className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3.5 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                    />
                   </div>
-                </form>
-              )}
-            </div>
+                </div>
 
-            {mockScorecard && (
-              <div className="p-6 border-t border-slate-100 dark:border-slate-850 bg-slate-50/50 dark:bg-slate-900/20 flex justify-end">
-                <button
-                  onClick={() => setShowMockModal(false)}
-                  className="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white font-bold text-xs rounded-xl shadow-lg shadow-brand-500/10"
-                >
-                  Close Session
-                </button>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Package (CTC / Wage)</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. ₹12,00,000 / yr"
+                      value={ctc}
+                      onChange={(e) => setCtc(e.target.value)}
+                      className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3.5 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Location</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Seattle, WA"
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
+                      className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3.5 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Job Type</label>
+                    <select
+                      value={jobType}
+                      onChange={(e) => setJobType(e.target.value)}
+                      className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5 dark:focus:border-indigo-500"
+                    >
+                      <option value="Full-time">Full-time</option>
+                      <option value="Internship">Internship</option>
+                      <option value="Contract">Contract</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Source</label>
+                    <select
+                      value={source}
+                      onChange={(e) => setSource(e.target.value)}
+                      className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5 dark:focus:border-indigo-500"
+                    >
+                      <option value="LinkedIn">LinkedIn</option>
+                      <option value="Referral">Referral</option>
+                      <option value="On-campus">On-campus</option>
+                      <option value="Company Portal">Portal</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Deadline</label>
+                    <input
+                      type="date"
+                      value={deadline}
+                      onChange={(e) => setDeadline(e.target.value)}
+                      className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-2 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5 dark:focus:border-indigo-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Stage</label>
+                    <select
+                      value={stage}
+                      onChange={(e) => setStage(e.target.value)}
+                      className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5 dark:focus:border-indigo-500"
+                    >
+                      <option value="Wishlist">Wishlist</option>
+                      <option value="Applied">Applied</option>
+                      <option value="Online Assessment">Online Assessment</option>
+                      <option value="Technical Interview">Technical Interview</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Priority</label>
+                    <select
+                      value={priority}
+                      onChange={(e) => setPriority(e.target.value)}
+                      className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5 dark:focus:border-indigo-500"
+                    >
+                      <option value="Low">Low</option>
+                      <option value="Medium">Medium</option>
+                      <option value="High">High</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Readiness ({readiness}%)</label>
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={readiness}
+                      onChange={(e) => setReadiness(parseInt(e.target.value))}
+                      className="w-full mt-3 accent-life-vermilion"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Job Description</label>
+                  <textarea
+                    placeholder="Paste job requirements..."
+                    rows={3}
+                    value={jd}
+                    onChange={(e) => setJd(e.target.value)}
+                    className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3.5 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Personal Notes</label>
+                  <textarea
+                    placeholder="Enter custom interview details..."
+                    rows={2}
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                    className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3.5 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                  />
+                </div>
+
+                <div className="flex justify-end gap-3 pt-5 border-t border-life-cocoa/5 dark:border-white/5">
+                  <button
+                    type="button"
+                    onClick={() => setShowAddModal(false)}
+                    className="px-5 py-2.5 border border-life-cocoa/10 bg-life-sand text-xs font-bold text-life-cocoa/60 rounded-xl hover:bg-life-cocoa/5 dark:border-white/5 dark:bg-zinc-950/40 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-5 py-2.5 bg-life-vermilion hover:bg-life-vermilion/90 text-white rounded-xl text-xs font-bold shadow-lg shadow-life-vermilion/15"
+                  >
+                    Save Entry
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* AI Mock Interview Modal */}
+      <AnimatePresence>
+        {showMockModal && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 15 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 15 }}
+              className="w-full max-w-xl bg-white border border-life-cocoa/10 rounded-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col font-sans dark:bg-zinc-900 dark:border-white/5"
+            >
+              <div className="p-6 border-b border-life-cocoa/5 flex items-center justify-between bg-life-sand/90 shrink-0 dark:bg-zinc-950/20 dark:border-white/5">
+                <h3 className="font-extrabold text-life-cocoa text-xs uppercase tracking-widest flex items-center gap-2 dark:text-white font-geom">
+                  <Sparkles className="w-4 h-4 text-life-vermilion fill-life-vermilion/10 animate-pulse" />
+                  AI Interview Studio: {selectedApp?.company_name}
+                </h3>
+                {!mockSubmittingAnswer && !mockLoadingStart && (
+                  <button 
+                    onClick={() => setShowMockModal(false)}
+                    className="p-1.5 rounded-lg text-life-cocoa/60 hover:bg-life-cocoa/5 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                  >
+                    <X className="w-4.5 h-4.5" />
+                  </button>
+                )}
               </div>
-            )}
 
-          </div>
-        </div>
-      )}
+              <div className="p-6 flex-1 overflow-y-auto space-y-6">
+                {mockLoadingStart ? (
+                  <div className="py-16 text-center space-y-4">
+                    <div className="relative w-10 h-10 mx-auto">
+                      <div className="absolute inset-0 rounded-full border-3 border-life-vermilion/25 animate-pulse"></div>
+                      <div className="absolute inset-0 rounded-full border-3 border-life-vermilion border-t-transparent animate-spin"></div>
+                    </div>
+                    <p className="text-xs text-life-cocoa/50 font-bold uppercase tracking-wider">Assembling Adaptive Studio Context...</p>
+                  </div>
+                ) : mockScorecard ? (
+                  // Evaluation Scorecard Display
+                  <div className="space-y-6">
+                    <div className="text-center pb-4 border-b border-life-cocoa/5 dark:border-white/5">
+                      <span className="text-[9px] font-bold text-emerald-700 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full uppercase tracking-wider">Session Evaluation Completed</span>
+                      <h4 className="font-extrabold text-life-cocoa text-lg mt-2 dark:text-white font-geom">Scorecard Report</h4>
+                    </div>
 
-    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="p-4 bg-life-sand border border-life-cocoa/5 rounded-2xl text-center shadow-inner dark:bg-zinc-950/40 dark:border-white/5">
+                        <span className="text-[10px] text-life-cocoa/50 font-bold uppercase block dark:text-zinc-500">Technical Depth</span>
+                        <span className="text-2xl font-black text-life-vermilion block mt-1 font-geom">{mockScorecard.technical_score}/10</span>
+                      </div>
+                      <div className="p-4 bg-life-sand border border-life-cocoa/5 rounded-2xl text-center shadow-inner dark:bg-zinc-900/40 dark:border-white/5">
+                        <span className="text-[10px] text-life-cocoa/50 font-bold uppercase block dark:text-zinc-500">Communication</span>
+                        <span className="text-2xl font-black text-emerald-600 block mt-1 font-geom">{mockScorecard.communication_score}/10</span>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <span className="text-[9px] text-life-cocoa/50 font-bold uppercase tracking-wider block dark:text-zinc-500">Recruiter Recommendations</span>
+                      <p className="text-xs text-life-cocoa/80 leading-relaxed bg-life-sand/40 p-4 rounded-xl border border-life-cocoa/5 dark:bg-zinc-950/30 dark:border-white/5 dark:text-zinc-400">
+                        {mockScorecard.recommendations}
+                      </p>
+                    </div>
+
+                    <div className="space-y-2.5">
+                      <span className="text-[9px] text-life-cocoa/50 font-bold uppercase tracking-wider block dark:text-zinc-500">Strengths Demonstrated</span>
+                      <div className="flex flex-wrap gap-2">
+                        {mockScorecard.strengths.map((s: string, i: number) => (
+                          <span key={i} className="text-[10px] font-bold bg-emerald-500/10 text-emerald-700 px-3 py-1 rounded-full border border-emerald-500/20 dark:text-emerald-450">{s}</span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="space-y-2.5">
+                      <span className="text-[9px] text-life-cocoa/50 font-bold uppercase tracking-wider block dark:text-zinc-500">Identified Gaps</span>
+                      <div className="flex flex-wrap gap-2">
+                        {mockScorecard.weaknesses.map((w: string, i: number) => (
+                          <span key={i} className="text-[10px] font-bold bg-life-vermilion/10 text-life-vermilion px-3 py-1 rounded-full border border-life-vermilion/20">{w}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  // Active Interview Question flow
+                  <form onSubmit={handleSubmitMockAnswer} className="space-y-6">
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[9px] bg-life-sand border border-life-cocoa/10 text-life-cocoa/70 font-bold px-2.5 py-1 rounded-lg uppercase tracking-wider dark:bg-zinc-950/60 dark:border-white/5 dark:text-zinc-400">
+                          Question {mockQuestionNumber} of {mockTotalQuestions}
+                        </span>
+                        <span className="text-[9px] text-life-vermilion font-bold uppercase tracking-widest flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-life-vermilion animate-ping" />
+                          🎙️ Active Session
+                        </span>
+                      </div>
+                      
+                      <div className="bg-life-sand/40 p-5 border border-life-cocoa/5 rounded-2xl shadow-inner relative overflow-hidden dark:bg-zinc-950/40 dark:border-white/5">
+                        <p className="text-sm font-semibold text-life-cocoa leading-relaxed relative z-10 dark:text-zinc-100">
+                          {mockQuestion}
+                        </p>
+                        
+                        {/* Audio Waveform Decoration */}
+                        <div className="flex items-center gap-1 justify-center h-16 py-2">
+                          <span className="w-1.5 bg-life-vermilion rounded-full h-8 waveform-bar"></span>
+                          <span className="w-1.5 bg-life-vermilion rounded-full h-12 waveform-bar"></span>
+                          <span className="w-1.5 bg-life-vermilion rounded-full h-6 waveform-bar"></span>
+                          <span className="w-1.5 bg-life-vermilion rounded-full h-10 waveform-bar"></span>
+                          <span className="w-1.5 bg-life-vermilion rounded-full h-14 waveform-bar"></span>
+                          <span className="w-1.5 bg-life-vermilion rounded-full h-8 waveform-bar"></span>
+                          <span className="w-1.5 bg-life-vermilion rounded-full h-12 waveform-bar"></span>
+                          <span className="w-1.5 bg-life-vermilion rounded-full h-5 waveform-bar"></span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="block text-[9px] font-bold text-life-cocoa/50 uppercase tracking-wider dark:text-zinc-400">Your Response *</label>
+                      <textarea
+                        required
+                        rows={5}
+                        placeholder="Type your structured response details (mention caching, algorithms, complexity where relevant)..."
+                        value={mockAnswerText}
+                        onChange={(e) => setMockAnswerText(e.target.value)}
+                        className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-4 py-3 text-life-cocoa focus:outline-none focus:border-life-vermilion placeholder-life-cocoa/30 leading-relaxed dark:bg-zinc-950/60 dark:text-zinc-300 dark:border-white/5"
+                      />
+                    </div>
+
+                    <div className="flex justify-end pt-5 border-t border-life-cocoa/5 dark:border-white/5">
+                      <button
+                        type="submit"
+                        disabled={mockSubmittingAnswer || !mockAnswerText.trim()}
+                        className="bg-life-vermilion hover:bg-life-vermilion/90 text-white font-bold text-xs px-5 py-3 rounded-xl shadow-lg shadow-life-vermilion/20 flex items-center gap-1.5 disabled:opacity-50 transition-all active:scale-95"
+                      >
+                        {mockSubmittingAnswer ? (
+                          <>
+                            <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                            <span>Evaluating response...</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>Submit Answer</span>
+                            <ChevronRight className="w-4 h-4" />
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </form>
+                )}
+              </div>
+
+              {mockScorecard && (
+                <div className="p-6 border-t border-life-cocoa/5 bg-life-sand/90 flex justify-end shrink-0 dark:border-white/5 dark:bg-zinc-950/20">
+                  <button
+                    onClick={() => setShowMockModal(false)}
+                    className="px-5 py-2.5 bg-life-vermilion hover:bg-life-vermilion/90 text-white font-bold text-xs rounded-xl shadow-lg shadow-life-vermilion/10 active:scale-95 transition-all"
+                  >
+                    Close Session
+                  </button>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 };
-

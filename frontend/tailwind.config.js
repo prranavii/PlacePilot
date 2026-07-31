@@ -23,10 +23,16 @@ export default {
           800: '#18633f',
           900: '#155235',
           950: '#0b2e1d',
+        },
+        life: {
+          sand: '#FAF6F0',
+          cocoa: '#2E1A16',
+          vermilion: '#FF5B37',
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Open Sans', 'Helvetica Neue', 'sans-serif'],
+        sans: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
+        geom: ['Chacra Petch', 'Space Grotesk', 'sans-serif'],
       }
     },
   },

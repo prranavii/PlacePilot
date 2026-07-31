@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import { 
   Plus, 
@@ -162,21 +163,23 @@ export const Questions: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 min-h-[80vh]">
-      
+    <div className="space-y-8 pb-12 font-sans relative min-h-[80vh]">
+      {/* 3D Ambient backdrop Blob */}
+      <div className="absolute -top-12 right-1/4 w-96 h-96 bg-life-vermilion/5 rounded-full blur-3xl pointer-events-none animate-blob"></div>
+
       {/* Header section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100 tracking-tight">
+          <h2 className="text-2xl font-extrabold tracking-tight text-life-cocoa dark:text-white font-geom">
             Personal Question Bank
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-sm text-life-cocoa/60 mt-1 max-w-lg leading-relaxed dark:text-zinc-400">
             Log, categorize, and revise coding questions and system design scenarios encountered in interviews.
           </p>
         </div>
         <button
           onClick={() => setShowAddModal(true)}
-          className="bg-brand-500 hover:bg-brand-600 text-white font-medium text-xs px-4 py-2.5 rounded-xl shadow-lg shadow-brand-500/15 flex items-center gap-2 max-w-max transition-all"
+          className="bg-life-vermilion hover:bg-life-vermilion/90 text-white font-bold text-xs px-5 py-3 rounded-xl shadow-lg shadow-life-vermilion/15 flex items-center gap-2 max-w-max transition-all active:scale-95"
         >
           <Plus className="w-4 h-4" />
           Log Question
@@ -184,9 +187,9 @@ export const Questions: React.FC = () => {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col md:flex-row gap-3 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-3 rounded-2xl shadow-sm">
+      <div className="flex flex-col md:flex-row gap-4 bg-white/70 border border-life-cocoa/5 p-4 rounded-2xl shadow-md backdrop-blur-md dark:bg-zinc-900/35 dark:border-white/5">
         <div className="relative flex-1">
-          <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+          <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-life-cocoa/40">
             <Search className="w-4 h-4" />
           </span>
           <input
@@ -194,14 +197,14 @@ export const Questions: React.FC = () => {
             placeholder="Search questions by topic, text, or company..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-slate-50 dark:bg-slate-800/40 text-sm pl-9 pr-4 py-2 rounded-xl outline-none focus:ring-1 focus:ring-brand-500 text-slate-800 dark:text-slate-100 placeholder-slate-400 transition-all"
+            className="w-full bg-life-sand/90 text-xs pl-10 pr-4 py-3 rounded-xl outline-none border border-life-cocoa/10 text-life-cocoa placeholder-life-cocoa/40 transition-all focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
           />
         </div>
         <div className="flex gap-2 shrink-0">
           <select
             value={difficultyFilter}
             onChange={(e) => setDifficultyFilter(e.target.value)}
-            className="bg-slate-50 dark:bg-slate-800/40 text-xs px-3 py-2 rounded-xl outline-none border-none text-slate-700 dark:text-slate-300 focus:ring-1 focus:ring-brand-500 transition-all"
+            className="bg-life-sand/90 text-xs px-4 py-3 rounded-xl outline-none border border-life-cocoa/10 text-life-cocoa transition-all focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
           >
             <option value="">All Difficulties</option>
             <option value="Easy">Easy</option>
@@ -211,7 +214,7 @@ export const Questions: React.FC = () => {
           <select
             value={solvedFilter}
             onChange={(e) => setSolvedFilter(e.target.value)}
-            className="bg-slate-50 dark:bg-slate-800/40 text-xs px-3 py-2 rounded-xl outline-none border-none text-slate-700 dark:text-slate-300 focus:ring-1 focus:ring-brand-500 transition-all"
+            className="bg-life-sand/90 text-xs px-4 py-3 rounded-xl outline-none border border-life-cocoa/10 text-life-cocoa transition-all focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
           >
             <option value="">All Statuses</option>
             <option value="Solved">Solved</option>
@@ -223,40 +226,43 @@ export const Questions: React.FC = () => {
       {/* Questions list Table */}
       {loading ? (
         <div className="flex items-center justify-center min-h-[40vh]">
-          <div className="animate-spin rounded-full h-8 w-8 border-3 border-brand-500 border-t-transparent" />
+          <div className="relative w-8 h-8">
+            <div className="absolute inset-0 rounded-full border-3 border-life-vermilion/25 animate-pulse"></div>
+            <div className="absolute inset-0 rounded-full border-3 border-life-vermilion border-t-transparent animate-spin"></div>
+          </div>
         </div>
       ) : filteredQuestions.length > 0 ? (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm">
+        <div className="bg-white border border-life-cocoa/5 rounded-2xl overflow-hidden shadow-sm dark:bg-zinc-900/40 dark:border-white/5">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800">
-                  <th className="p-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Question Description</th>
-                  <th className="p-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Company</th>
-                  <th className="p-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Topic</th>
-                  <th className="p-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Difficulty</th>
-                  <th className="p-4 text-xs font-bold text-slate-400 uppercase tracking-wider">State</th>
+                <tr className="bg-life-sand text-life-cocoa/50 border-b border-life-cocoa/10 dark:bg-zinc-800/50 dark:border-zinc-800">
+                  <th className="p-4 text-xs font-bold uppercase tracking-wider">Question Description</th>
+                  <th className="p-4 text-xs font-bold uppercase tracking-wider">Company</th>
+                  <th className="p-4 text-xs font-bold uppercase tracking-wider">Topic</th>
+                  <th className="p-4 text-xs font-bold uppercase tracking-wider">Difficulty</th>
+                  <th className="p-4 text-xs font-bold uppercase tracking-wider">State</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
+              <tbody className="divide-y divide-life-cocoa/5 dark:divide-slate-800/60">
                 {filteredQuestions.map((q) => (
                   <tr
                     key={q.id}
                     onClick={() => setSelectedQuestion(q)}
-                    className="hover:bg-slate-50/50 dark:hover:bg-slate-800/20 cursor-pointer transition-colors"
+                    className="hover:bg-life-sand/40 dark:hover:bg-zinc-800/20 cursor-pointer transition-colors"
                   >
                     <td className="p-4">
-                      <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 block truncate max-w-sm">
+                      <span className="text-xs font-semibold text-life-cocoa dark:text-slate-200 block truncate max-w-sm">
                         {q.question_text}
                       </span>
                       {q.subtopic && (
-                        <span className="text-[10px] text-slate-400 font-medium block mt-0.5">{q.subtopic}</span>
+                        <span className="text-[10px] text-life-cocoa/40 font-medium block mt-0.5">{q.subtopic}</span>
                       )}
                     </td>
-                    <td className="p-4 text-xs font-bold text-slate-700 dark:text-slate-300">
+                    <td className="p-4 text-xs font-bold text-life-cocoa dark:text-slate-300">
                       {q.company_name || 'General'}
                     </td>
-                    <td className="p-4 text-xs font-medium text-slate-500 dark:text-slate-400">
+                    <td className="p-4 text-xs font-medium text-life-cocoa/60 dark:text-slate-400">
                       {q.topic}
                     </td>
                     <td className="p-4">
@@ -266,11 +272,11 @@ export const Questions: React.FC = () => {
                     </td>
                     <td className="p-4">
                       {q.solved ? (
-                        <span className="p-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 inline-block">
+                        <span className="p-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-450 inline-block">
                           <Check className="w-3.5 h-3.5" />
                         </span>
                       ) : (
-                        <span className="p-1 rounded-full bg-rose-500/10 text-rose-600 dark:text-rose-400 inline-block">
+                        <span className="p-1 rounded-full bg-life-vermilion/10 text-life-vermilion inline-block">
                           <AlertCircle className="w-3.5 h-3.5" />
                         </span>
                       )}
@@ -282,276 +288,286 @@ export const Questions: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 text-center py-16 rounded-2xl">
-          <BookOpen className="w-10 h-10 text-slate-300 mx-auto mb-3" />
-          <h4 className="font-semibold text-slate-700 dark:text-slate-300 text-sm">No questions logged</h4>
-          <p className="text-xs text-slate-400 mt-1">Start building your placement bank by logging a question.</p>
+        <div className="bg-white/70 border border-life-cocoa/5 text-center py-16 rounded-2xl dark:bg-zinc-900/35 dark:border-white/5">
+          <BookOpen className="w-10 h-10 text-life-cocoa/30 mx-auto mb-3" />
+          <h4 className="font-bold text-life-cocoa/70 text-sm dark:text-slate-300">No questions logged</h4>
+          <p className="text-xs text-life-cocoa/50 mt-1">Start building your placement bank by logging a question.</p>
         </div>
       )}
 
       {/* Selected Question Detail Drawer */}
-      {selectedQuestion && (
-        <div className="fixed inset-y-0 right-0 w-full max-w-md bg-white dark:bg-slate-950 border-l border-slate-200 dark:border-slate-900 shadow-2xl z-20 flex flex-col justify-between transition-colors duration-200">
-          
-          <div className="p-6 border-b border-slate-100 dark:border-slate-900 flex items-start justify-between">
-            <div>
-              <span className="text-[9px] uppercase font-bold tracking-wider text-slate-400 block">Question Details</span>
-              <h3 className="font-extrabold text-slate-800 dark:text-slate-100 text-base mt-0.5">
-                {selectedQuestion.company_name || 'General'} | {selectedQuestion.topic}
-              </h3>
-            </div>
-            <button
-              onClick={() => setSelectedQuestion(null)}
-              className="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-
-          <div className="flex-1 overflow-y-auto p-6 space-y-6">
+      <AnimatePresence>
+        {selectedQuestion && (
+          <motion.div 
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-y-0 right-0 w-full max-w-md bg-white border-l border-life-cocoa/10 shadow-2xl z-45 flex flex-col justify-between dark:bg-zinc-900 dark:border-white/5"
+          >
             
-            {/* Question Text */}
-            <div className="space-y-1.5">
-              <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                <HelpCircle className="w-4 h-4 text-brand-500" /> Question Statement
-              </h4>
-              <p className="text-xs text-slate-700 dark:text-slate-300 font-medium whitespace-pre-wrap bg-slate-50 dark:bg-slate-900/40 p-4 border border-slate-100 dark:border-slate-800 rounded-2xl">
-                {selectedQuestion.question_text}
-              </p>
-            </div>
-
-            {/* Revision metadata */}
-            <div className="grid grid-cols-3 gap-3">
-              <div className="p-3 bg-slate-50 dark:bg-slate-900/20 border border-slate-100 dark:border-slate-800/60 rounded-xl text-center">
-                <span className="text-[9px] text-slate-400 block font-semibold uppercase">Difficulty</span>
-                <span className="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1 block">
-                  {selectedQuestion.difficulty}
-                </span>
+            <div className="p-6 bg-life-sand/90 border-b border-life-cocoa/5 flex items-start justify-between dark:bg-zinc-950/20 dark:border-white/5">
+              <div>
+                <span className="text-[9px] uppercase font-bold tracking-wider text-life-cocoa/50 block">Question Details</span>
+                <h3 className="font-extrabold text-life-cocoa dark:text-slate-100 text-base mt-0.5 font-geom">
+                  {selectedQuestion.company_name || 'General'} | {selectedQuestion.topic}
+                </h3>
               </div>
-              <div className="p-3 bg-slate-50 dark:bg-slate-900/20 border border-slate-100 dark:border-slate-800/60 rounded-xl text-center">
-                <span className="text-[9px] text-slate-400 block font-semibold uppercase">Solved?</span>
-                <span className="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1 block">
-                  {selectedQuestion.solved ? 'Yes' : 'No'}
-                </span>
-              </div>
-              <div className="p-3 bg-slate-50 dark:bg-slate-900/20 border border-slate-100 dark:border-slate-800/60 rounded-xl text-center">
-                <span className="text-[9px] text-slate-400 block font-semibold uppercase">Confidence</span>
-                <span className="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1 block">
-                  {selectedQuestion.confidence_level}/5
-                </span>
-              </div>
-            </div>
-
-            {/* User Notes */}
-            {selectedQuestion.user_notes && (
-              <div className="space-y-1.5">
-                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <FileText className="w-4 h-4 text-indigo-500" /> Student Notes
-                </h4>
-                <div className="bg-slate-50 dark:bg-slate-900/20 border border-slate-100 dark:border-slate-800/60 rounded-xl p-3.5 text-xs text-slate-600 dark:text-slate-400 whitespace-pre-wrap">
-                  {selectedQuestion.user_notes}
-                </div>
-              </div>
-            )}
-
-            {/* AI Explanation */}
-            {selectedQuestion.ai_explanation && (
-              <div className="space-y-2">
-                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <Sparkles className="w-4 h-4 text-amber-500 fill-current" /> AI Explanation & Optimal Derivation
-                </h4>
-                <div className="bg-brand-50/20 dark:bg-slate-900 border border-brand-100/30 dark:border-slate-800 rounded-xl p-3.5 text-xs text-slate-700 dark:text-slate-300 whitespace-pre-wrap">
-                  {selectedQuestion.ai_explanation}
-                </div>
-              </div>
-            )}
-
-          </div>
-
-          <div className="p-6 border-t border-slate-100 dark:border-slate-900 flex justify-end bg-slate-50 dark:bg-slate-900/20">
-            <button
-              onClick={() => setSelectedQuestion(null)}
-              className="px-4 py-2 border border-slate-200 dark:border-slate-800 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900"
-            >
-              Close Panel
-            </button>
-          </div>
-
-        </div>
-      )}
-
-      {/* Add Question Modal */}
-      {showAddModal && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 flex items-center justify-center p-4">
-          <div className="w-full max-w-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative font-sans">
-            
-            <div className="p-6 border-b border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
-              <h3 className="font-bold text-slate-800 dark:text-slate-100 text-sm uppercase tracking-wider">
-                Log New Placement Question
-              </h3>
-              <button 
-                onClick={() => setShowAddModal(false)}
-                className="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+              <button
+                onClick={() => setSelectedQuestion(null)}
+                className="p-1.5 rounded-lg text-life-cocoa/60 hover:bg-life-cocoa/5 dark:hover:bg-zinc-800"
               >
-                <X className="w-4.5 h-4.5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
 
-            <form onSubmit={handleAddQuestion} className="p-6 space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Company name</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Meta (Optional)"
-                    value={company}
-                    onChange={(e) => setCompany(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                  />
+            <div className="flex-1 overflow-y-auto p-6 space-y-6">
+              
+              {/* Question Text */}
+              <div className="space-y-1.5">
+                <h4 className="text-xs font-bold text-life-cocoa/50 uppercase tracking-wider flex items-center gap-1.5">
+                  <HelpCircle className="w-4 h-4 text-life-vermilion" /> Question Statement
+                </h4>
+                <p className="text-xs text-life-cocoa/80 font-medium whitespace-pre-wrap bg-life-sand/40 p-4 border border-life-cocoa/5 rounded-2xl dark:bg-zinc-900/40 dark:border-white/5">
+                  {selectedQuestion.question_text}
+                </p>
+              </div>
+
+              {/* Revision metadata */}
+              <div className="grid grid-cols-3 gap-3">
+                <div className="p-3 bg-life-sand border border-life-cocoa/5 rounded-xl text-center dark:bg-zinc-950/20 dark:border-white/5">
+                  <span className="text-[9px] text-life-cocoa/50 block font-semibold uppercase">Difficulty</span>
+                  <span className="text-xs font-bold text-life-cocoa mt-1 block dark:text-zinc-200">
+                    {selectedQuestion.difficulty}
+                  </span>
                 </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Role / Job Title</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. SDE Backend"
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                  />
+                <div className="p-3 bg-life-sand border border-life-cocoa/5 rounded-xl text-center dark:bg-zinc-900/20 dark:border-white/5">
+                  <span className="text-[9px] text-life-cocoa/50 block font-semibold uppercase">Solved?</span>
+                  <span className="text-xs font-bold text-life-cocoa mt-1 block dark:text-zinc-200">
+                    {selectedQuestion.solved ? 'Yes' : 'No'}
+                  </span>
+                </div>
+                <div className="p-3 bg-life-sand border border-life-cocoa/5 rounded-xl text-center dark:bg-zinc-900/20 dark:border-white/5">
+                  <span className="text-[9px] text-life-cocoa/50 block font-semibold uppercase">Confidence</span>
+                  <span className="text-xs font-bold text-life-cocoa mt-1 block dark:text-zinc-200">
+                    {selectedQuestion.confidence_level}/5
+                  </span>
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-3">
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Topic *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Graphs"
-                    value={topic}
-                    onChange={(e) => setTopic(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Subtopic</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. DFS Cycle"
-                    value={subtopic}
-                    onChange={(e) => setSubtopic(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Round</label>
-                  <select
-                    value={roundType}
-                    onChange={(e) => setRoundType(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                  >
-                    <option value="OA">Online Assessment</option>
-                    <option value="Technical">Technical Round</option>
-                    <option value="HR">HR Interview</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-3">
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Difficulty</label>
-                  <select
-                    value={difficulty}
-                    onChange={(e) => setDifficulty(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                  >
-                    <option value="Easy">Easy</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Hard">Hard</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Confidence ({confidence}/5)</label>
-                  <select
-                    value={confidence}
-                    onChange={(e) => setConfidence(parseInt(e.target.value))}
-                    className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                  >
-                    <option value="1">1 - Extremely Weak</option>
-                    <option value="2">2 - Weak</option>
-                    <option value="3">3 - Average</option>
-                    <option value="4">4 - Good</option>
-                    <option value="5">5 - Excellent</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Solved?</label>
-                  <div className="flex gap-4 mt-2">
-                    <label className="inline-flex items-center gap-1.5 text-xs text-slate-700 dark:text-slate-300">
-                      <input
-                        type="radio"
-                        checked={solved === true}
-                        onChange={() => setSolved(true)}
-                        className="accent-brand-500"
-                      />
-                      Yes
-                    </label>
-                    <label className="inline-flex items-center gap-1.5 text-xs text-slate-700 dark:text-slate-300">
-                      <input
-                        type="radio"
-                        checked={solved === false}
-                        onChange={() => setSolved(false)}
-                        className="accent-brand-500"
-                      />
-                      No
-                    </label>
+              {/* User Notes */}
+              {selectedQuestion.user_notes && (
+                <div className="space-y-1.5">
+                  <h4 className="text-xs font-bold text-life-cocoa/50 uppercase tracking-wider flex items-center gap-1.5">
+                    <FileText className="w-4 h-4 text-life-vermilion" /> Student Notes
+                  </h4>
+                  <div className="bg-life-sand/40 border border-life-cocoa/5 rounded-xl p-3.5 text-xs text-life-cocoa/80 dark:bg-zinc-950/20 dark:border-white/5 dark:text-zinc-400 whitespace-pre-wrap">
+                    {selectedQuestion.user_notes}
                   </div>
                 </div>
-              </div>
+              )}
 
-              <div>
-                <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Question Statement *</label>
-                <textarea
-                  required
-                  placeholder="Paste question statement text details..."
-                  rows={4}
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                />
-              </div>
+              {/* AI Explanation */}
+              {selectedQuestion.ai_explanation && (
+                <div className="space-y-2">
+                  <h4 className="text-xs font-bold text-life-cocoa/50 uppercase tracking-wider flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4 text-life-vermilion fill-life-vermilion/10" /> AI Explanation & Optimal Derivation
+                  </h4>
+                  <div className="bg-life-vermilion/5 border border-life-vermilion/10 rounded-xl p-3.5 text-xs text-life-cocoa dark:bg-zinc-900 dark:border-white/5 dark:text-zinc-300 whitespace-pre-wrap">
+                    {selectedQuestion.ai_explanation}
+                  </div>
+                </div>
+              )}
 
-              <div>
-                <label className="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Personal Notes</label>
-                <textarea
-                  placeholder="Add your notes or code snippet link..."
-                  rows={2}
-                  value={userNotes}
-                  onChange={(e) => setUserNotes(e.target.value)}
-                  className="w-full bg-slate-50 dark:bg-slate-800/50 text-xs border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-100 focus:outline-none focus:border-brand-500"
-                />
-              </div>
+            </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-850">
-                <button
-                  type="button"
+            <div className="p-6 border-t border-life-cocoa/5 flex justify-end bg-life-sand/90 dark:bg-zinc-905/20 dark:border-white/5">
+              <button
+                onClick={() => setSelectedQuestion(null)}
+                className="px-4 py-2 border border-life-cocoa/10 bg-life-sand text-xs font-bold text-life-cocoa/80 rounded-xl hover:bg-life-cocoa/5 dark:border-white/5 dark:bg-zinc-950/40 dark:text-zinc-400 dark:hover:bg-zinc-900 transition-all"
+              >
+                Close Panel
+              </button>
+            </div>
+
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Add Question Modal */}
+      <AnimatePresence>
+        {showAddModal && (
+          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="w-full max-w-lg bg-white border border-life-cocoa/10 rounded-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative font-sans dark:bg-zinc-900 dark:border-white/5">
+              
+              <div className="p-6 bg-life-sand/90 text-life-cocoa border-b border-life-cocoa/5 flex items-center justify-between dark:bg-zinc-950/20 dark:border-white/5">
+                <h3 className="font-extrabold text-life-cocoa text-sm uppercase tracking-wider dark:text-white font-geom">
+                  Log New Placement Question
+                </h3>
+                <button 
                   onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2 border border-slate-200 dark:border-slate-850 rounded-xl text-xs font-semibold text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800"
+                  className="p-1.5 rounded-lg text-life-cocoa/60 hover:bg-life-cocoa/5 dark:text-zinc-400 dark:hover:bg-zinc-800"
                 >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-brand-500 hover:bg-brand-600 text-white rounded-xl text-xs font-semibold shadow-lg shadow-brand-500/15"
-                >
-                  Log Entry
+                  <X className="w-4.5 h-4.5" />
                 </button>
               </div>
-            </form>
 
+              <form onSubmit={handleAddQuestion} className="p-6 space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[10px] font-bold text-life-cocoa/50 mb-1 uppercase dark:text-zinc-400">Company name</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Meta (Optional)"
+                      value={company}
+                      onChange={(e) => setCompany(e.target.value)}
+                      className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3.5 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-life-cocoa/50 mb-1 uppercase dark:text-zinc-400">Role / Job Title</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. SDE Backend"
+                      value={role}
+                      onChange={(e) => setRole(e.target.value)}
+                      className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3.5 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-[10px] font-bold text-life-cocoa/50 mb-1 uppercase dark:text-zinc-400">Topic *</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Graphs"
+                      value={topic}
+                      onChange={(e) => setTopic(e.target.value)}
+                      className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3.5 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-life-cocoa/50 mb-1 uppercase dark:text-zinc-400">Subtopic</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. DFS Cycle"
+                      value={subtopic}
+                      onChange={(e) => setSubtopic(e.target.value)}
+                      className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3.5 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-life-cocoa/50 mb-1 uppercase dark:text-zinc-400">Round</label>
+                    <select
+                      value={roundType}
+                      onChange={(e) => setRoundType(e.target.value)}
+                      className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-400 dark:border-white/5 dark:focus:border-indigo-500"
+                    >
+                      <option value="OA">Online Assessment</option>
+                      <option value="Technical">Technical Round</option>
+                      <option value="HR">HR Interview</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-[10px] font-bold text-life-cocoa/50 mb-1 uppercase dark:text-zinc-400">Difficulty</label>
+                    <select
+                      value={difficulty}
+                      onChange={(e) => setDifficulty(e.target.value)}
+                      className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-400 dark:border-white/5 dark:focus:border-indigo-500"
+                    >
+                      <option value="Easy">Easy</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Hard">Hard</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-life-cocoa/50 mb-1 uppercase dark:text-zinc-400">Confidence ({confidence}/5)</label>
+                    <select
+                      value={confidence}
+                      onChange={(e) => setConfidence(parseInt(e.target.value))}
+                      className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5 dark:focus:border-indigo-500"
+                    >
+                      <option value="1">1 - Extremely Weak</option>
+                      <option value="2">2 - Weak</option>
+                      <option value="3">3 - Average</option>
+                      <option value="4">4 - Good</option>
+                      <option value="5">5 - Excellent</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-life-cocoa/50 mb-1 uppercase dark:text-zinc-400">Solved?</label>
+                    <div className="flex gap-4 mt-2">
+                      <label className="inline-flex items-center gap-1.5 text-xs text-life-cocoa dark:text-slate-300">
+                        <input
+                          type="radio"
+                          checked={solved === true}
+                          onChange={() => setSolved(true)}
+                          className="accent-life-vermilion"
+                        />
+                        Yes
+                      </label>
+                      <label className="inline-flex items-center gap-1.5 text-xs text-life-cocoa dark:text-slate-300">
+                        <input
+                          type="radio"
+                          checked={solved === false}
+                          onChange={() => setSolved(false)}
+                          className="accent-life-vermilion"
+                        />
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold text-life-cocoa/50 mb-1 uppercase dark:text-zinc-400">Question Statement *</label>
+                  <textarea
+                    required
+                    placeholder="Paste question statement text details..."
+                    rows={4}
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3.5 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold text-life-cocoa/50 mb-1 uppercase dark:text-zinc-400">Personal Notes</label>
+                  <textarea
+                    placeholder="Add your notes or code snippet link..."
+                    rows={2}
+                    value={userNotes}
+                    onChange={(e) => setUserNotes(e.target.value)}
+                    className="w-full bg-life-sand text-xs border border-life-cocoa/10 rounded-xl px-3.5 py-2.5 text-life-cocoa focus:outline-none focus:border-life-vermilion placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                  />
+                </div>
+
+                <div className="flex justify-end gap-3 pt-4 border-t border-life-cocoa/5 dark:border-slate-850">
+                  <button
+                    type="button"
+                    onClick={() => setShowAddModal(false)}
+                    className="px-4 py-2 border border-life-cocoa/10 bg-life-sand text-xs font-bold text-life-cocoa/60 rounded-xl hover:bg-life-cocoa/5 dark:border-white/5 dark:bg-zinc-950/40 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-life-vermilion hover:bg-life-vermilion/90 text-white rounded-xl text-xs font-bold shadow-lg shadow-life-vermilion/15"
+                  >
+                    Log Entry
+                  </button>
+                </div>
+              </form>
+
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
 
     </div>
   );

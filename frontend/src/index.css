@@ -1,14 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Chacra+Petch:wght@400;600;700&family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply bg-zinc-50 text-zinc-900 font-sans antialiased selection:bg-brand-500 selection:text-white transition-colors duration-200;
-  }
-  
-  body.dark {
-    @apply bg-zinc-950 text-zinc-100;
+    @apply bg-life-sand text-life-cocoa font-sans antialiased selection:bg-life-vermilion selection:text-white transition-colors duration-200;
   }
 }
 
@@ -23,7 +21,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-zinc-300 dark:bg-zinc-800 rounded-full hover:bg-zinc-400 dark:hover:bg-zinc-700;
+  @apply bg-life-cocoa/25 rounded-full hover:bg-life-cocoa/40;
 }
 
 /* Custom animations */
@@ -38,11 +36,11 @@
 
 /* Premium Visual Elements */
 .glass-panel {
-  @apply bg-white/70 dark:bg-zinc-900/60 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-800/40;
+  @apply bg-white/70 backdrop-blur-md border border-life-cocoa/10 shadow-xl;
 }
 
 .glass-banner {
-  @apply relative overflow-hidden bg-gradient-to-br from-emerald-500/10 via-amber-500/5 to-transparent border border-emerald-500/20 dark:border-emerald-950/20 rounded-3xl p-6 md:p-8;
+  @apply relative overflow-hidden bg-life-vermilion/5 border border-life-cocoa/10 rounded-3xl p-6 md:p-8;
 }
 
 .glass-banner::after {
@@ -52,7 +50,7 @@
   right: -10%;
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(16,185,129,0.15) 0%, rgba(245,158,11,0.05) 50%, transparent 100%);
+  background: radial-gradient(circle, rgba(255,91,55,0.1) 0%, rgba(46,26,22,0.02) 70%, transparent 100%);
   filter: blur(40px);
   pointer-events: none;
 }
@@ -60,8 +58,8 @@
 /* Ambient 3D Blob floating animation */
 @keyframes blob-float {
   0% { transform: translate(0px, 0px) scale(1); }
-  33% { transform: translate(40px, -60px) scale(1.15); }
-  66% { transform: translate(-30px, 30px) scale(0.9); }
+  33% { transform: translate(40px, -60px) scale(1.1); }
+  66% { transform: translate(-30px, 30px) scale(0.95); }
   100% { transform: translate(0px, 0px) scale(1); }
 }
 
@@ -76,5 +74,25 @@
 .animation-delay-4000 {
   animation-delay: 6s;
 }
+
+/* Voice waveform animation for mock interview */
+@keyframes wave-bounce {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+
+.waveform-bar {
+  animation: wave-bounce 1.2s ease-in-out infinite;
+  transform-origin: bottom;
+}
+
+.waveform-bar:nth-child(2) { animation-delay: 0.15s; }
+.waveform-bar:nth-child(3) { animation-delay: 0.3s; }
+.waveform-bar:nth-child(4) { animation-delay: 0.45s; }
+.waveform-bar:nth-child(5) { animation-delay: 0.6s; }
+.waveform-bar:nth-child(6) { animation-delay: 0.75s; }
+.waveform-bar:nth-child(7) { animation-delay: 0.9s; }
+.waveform-bar:nth-child(8) { animation-delay: 1.05s; }
+
 
 

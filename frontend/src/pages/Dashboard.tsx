@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../services/api';
+import { motion } from 'framer-motion';
 import { 
   Briefcase, 
   Clock, 
@@ -10,7 +11,8 @@ import {
   ArrowRight,
   ShieldAlert,
   CalendarDays,
-  Target
+  Target,
+  Flame
 } from 'lucide-react';
 import { 
   AreaChart, 
@@ -112,198 +114,269 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
   ];
 
   const missionTasks = [
-    { id: 1, title: 'Solve 2 Graph traversal cycle detection questions', duration: '45m', priority: 'High' },
-    { id: 2, title: 'Revise B+ Tree index layouts', duration: '30m', priority: 'Medium' },
-    { id: 3, title: 'Mock Interview practice (Meta backend focus)', duration: '20m', priority: 'High' }
+    { id: 1, title: 'Solve 2 Graph traversal cycle detection questions', duration: '45m', priority: 'High', completed: false },
+    { id: 2, title: 'Revise B+ Tree index layouts', duration: '30m', priority: 'Medium', completed: false },
+    { id: 3, title: 'Mock Interview practice (Meta backend focus)', duration: '20m', priority: 'High', completed: false }
   ];
+
+  const [tasks, setTasks] = useState(missionTasks);
+
+  const toggleTask = (id: number) => {
+    setTasks(tasks.map(t => t.id === id ? { ...t, completed: !t.completed } : t));
+  };
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[80vh]">
-        <div className="animate-spin rounded-full h-10 w-10 border-4 border-brand-500 border-t-transparent" />
+      <div className="flex items-center justify-center min-h-[70vh]">
+        <div className="relative w-12 h-12">
+          <div className="absolute inset-0 rounded-full border-4 border-life-vermilion/25"></div>
+          <div className="absolute inset-0 rounded-full border-4 border-life-vermilion border-t-transparent animate-spin"></div>
+        </div>
       </div>
     );
   }
 
+  const nextInterview = recentEvents[0];
+  const nextInterviewCompany = nextInterview ? nextInterview.company_name : '';
+
+  const getDaysRemainingText = (dateStr: string) => {
+    const eventDate = new Date(dateStr);
+    const today = new Date();
+    eventDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+    const diffTime = eventDate.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    if (diffDays < 0) return 'Scheduled in past';
+    if (diffDays === 0) return 'Scheduled for today';
+    if (diffDays === 1) return 'Scheduled for tomorrow';
+    return `Scheduled in ${diffDays} days`;
+  };
+
   return (
-    <div className="space-y-6">
-      
+    <motion.div 
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="space-y-8 pb-12 font-sans relative"
+    >
+      {/* 3D Ambient Glowing backdrop Blobs */}
+      <div className="absolute -top-12 -left-12 w-96 h-96 bg-life-vermilion/5 rounded-full blur-3xl pointer-events-none animate-blob"></div>
+      <div className="absolute top-1/2 right-12 w-80 h-80 bg-life-cocoa/5 rounded-full blur-3xl pointer-events-none animate-blob animation-delay-2000"></div>
+
       {/* Top Welcome Title & Premium Glass Banner */}
-      <div className="glass-banner flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-        <div>
-          <h2 className="text-2xl font-bold font-sans tracking-tight text-zinc-800 dark:text-zinc-100 flex items-center gap-2">
+      <div className="relative glass-banner p-8 rounded-3xl border border-life-cocoa/10 bg-white/70 backdrop-blur-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 overflow-hidden dark:bg-zinc-900/40 dark:border-white/5">
+        <div className="relative z-10 flex-1">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-[10px] font-bold text-life-vermilion uppercase tracking-widest bg-life-vermilion/10 px-2.5 py-1 rounded-full">
+              AI Workspace
+            </span>
+            <span className="text-[10px] font-bold text-life-cocoa dark:text-zinc-300 uppercase tracking-widest bg-life-cocoa/10 dark:bg-zinc-800/60 px-2.5 py-1 rounded-full flex items-center gap-1">
+              <Flame className="w-3 h-3 fill-life-cocoa dark:fill-zinc-300" /> 5 Day Streak
+            </span>
+          </div>
+          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-life-cocoa dark:text-white font-geom">
             Command Center Dashboard
           </h2>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 max-w-lg">
-            Welcome back! Real-time telemetry, personalized study task allocations, and cognitive metrics mapped to your active placement pipeline.
+          <p className="text-sm text-life-cocoa/60 dark:text-zinc-400 mt-2 max-w-xl leading-relaxed">
+            Welcome back! Monitor real-time placement pipeline progress, review automated study schedules, and access personalized AI interview guides.
           </p>
         </div>
         
         {/* Quick prepare shortcut banner */}
-        <div className="bg-white/60 dark:bg-zinc-900/60 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-850/60 rounded-2xl px-5 py-3 flex items-center gap-3 shadow-sm hover:shadow-md transition-all">
-          <Sparkles className="w-5 h-5 text-amber-500 animate-pulse" />
-          <div className="text-xs">
-            <span className="font-bold text-zinc-700 dark:text-zinc-300 block">Upcoming Meta Interview</span>
-            <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-medium">Scheduled in 5 days</span>
+        {nextInterview && (
+          <div className="relative z-10 w-full lg:w-auto bg-white dark:bg-zinc-900 border border-life-cocoa/10 dark:border-white/5 rounded-2xl px-6 py-4 flex items-center justify-between lg:justify-start gap-4 shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-life-vermilion/10 flex items-center justify-center text-life-vermilion">
+                <Sparkles className="w-5 h-5 fill-life-vermilion/20 animate-pulse" />
+              </div>
+              <div>
+                <span className="font-bold text-sm text-life-cocoa dark:text-white block">Upcoming {nextInterviewCompany} Interview</span>
+                <span className="text-xs text-life-cocoa/50 dark:text-zinc-400 font-medium">
+                  {nextInterview.event_date ? getDaysRemainingText(nextInterview.event_date) : 'Scheduled'}
+                </span>
+              </div>
+            </div>
+            <button 
+              onClick={() => {
+                localStorage.setItem('autoSelectCompany', nextInterviewCompany);
+                setCurrentTab('applications');
+              }}
+              className="h-10 px-4 bg-life-vermilion hover:bg-life-vermilion/90 text-white font-bold text-xs rounded-xl shadow-md flex items-center gap-1.5 transition-all active:scale-95 animate-pulse-subtle"
+            >
+              <span>Prepare</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
           </div>
-          <button 
-            onClick={() => {
-              localStorage.setItem('autoSelectCompany', 'Meta');
-              setCurrentTab('applications');
-            }}
-            className="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 ml-4 flex items-center gap-1"
-          >
-            Prepare <ArrowRight className="w-3.5 h-3.5" />
-          </button>
-        </div>
+        )}
       </div>
 
       {/* Metric Cards grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {/* Total applications */}
-        <div className="bg-white dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/40 p-4 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-md hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-200">
+        <motion.div 
+          whileHover={{ y: -4, borderColor: "rgba(46,26,22,0.15)" }}
+          className="bg-white border border-life-cocoa/5 p-5 rounded-2xl flex flex-col justify-between shadow-md transition-all duration-300 dark:bg-zinc-900/40 dark:border-white/5"
+        >
           <div className="flex items-center justify-between">
-            <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">Total</span>
-            <span className="p-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800/50 text-zinc-500">
+            <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-400">Total Apps</span>
+            <span className="p-2 rounded-xl bg-life-cocoa/5 text-life-cocoa dark:bg-zinc-800/60 dark:text-zinc-300">
               <Briefcase className="w-4 h-4" />
             </span>
           </div>
-          <div className="mt-4">
-            <span className="text-2xl font-extrabold text-zinc-800 dark:text-zinc-100">{totalApps}</span>
-            <p className="text-[10px] text-zinc-400 mt-0.5">Submitted jobs</p>
+          <div className="mt-6">
+            <span className="text-3xl font-extrabold text-life-cocoa dark:text-white">{totalApps}</span>
+            <p className="text-[10px] text-life-cocoa/40 mt-1 dark:text-zinc-500">Submitted roles</p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Active applications */}
-        <div className="bg-white dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/40 p-4 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-md hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-200">
+        <motion.div 
+          whileHover={{ y: -4, borderColor: "rgba(46,26,22,0.15)" }}
+          className="bg-white border border-life-cocoa/5 p-5 rounded-2xl flex flex-col justify-between shadow-md transition-all duration-300 dark:bg-zinc-900/40 dark:border-white/5"
+        >
           <div className="flex items-center justify-between">
-            <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">Active</span>
-            <span className="p-1.5 rounded-lg bg-amber-500/10 text-amber-500 dark:bg-amber-500/10">
+            <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-400">Active</span>
+            <span className="p-2 rounded-xl bg-life-vermilion/10 text-life-vermilion">
               <Clock className="w-4 h-4" />
             </span>
           </div>
-          <div className="mt-4">
-            <span className="text-2xl font-extrabold text-zinc-800 dark:text-zinc-100">{activeApps}</span>
-            <p className="text-[10px] text-zinc-400 mt-0.5">Under evaluation</p>
+          <div className="mt-6">
+            <span className="text-3xl font-extrabold text-life-cocoa dark:text-white">{activeApps}</span>
+            <p className="text-[10px] text-life-cocoa/40 mt-1 dark:text-zinc-500">In progress</p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Online assessments */}
-        <div className="bg-white dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/40 p-4 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-md hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-200">
+        <motion.div 
+          whileHover={{ y: -4, borderColor: "rgba(46,26,22,0.15)" }}
+          className="bg-white border border-life-cocoa/5 p-5 rounded-2xl flex flex-col justify-between shadow-md transition-all duration-300 dark:bg-zinc-900/40 dark:border-white/5"
+        >
           <div className="flex items-center justify-between">
-            <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">OAs</span>
-            <span className="p-1.5 rounded-lg bg-teal-500/10 text-teal-600 dark:text-teal-400">
+            <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-400">Assessments</span>
+            <span className="p-2 rounded-xl bg-teal-500/10 text-teal-650 dark:text-teal-400">
               <GraduationCap className="w-4 h-4" />
             </span>
           </div>
-          <div className="mt-4">
-            <span className="text-2xl font-extrabold text-zinc-800 dark:text-zinc-100">{oaCount}</span>
-            <p className="text-[10px] text-zinc-400 mt-0.5">Scheduled tests</p>
+          <div className="mt-6">
+            <span className="text-3xl font-extrabold text-life-cocoa dark:text-white">{oaCount}</span>
+            <p className="text-[10px] text-life-cocoa/40 mt-1 dark:text-zinc-500">Active tests</p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Interviews */}
-        <div className="bg-white dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/40 p-4 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-md hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-200">
+        <motion.div 
+          whileHover={{ y: -4, borderColor: "rgba(46,26,22,0.15)" }}
+          className="bg-white border border-life-cocoa/5 p-5 rounded-2xl flex flex-col justify-between shadow-md transition-all duration-300 dark:bg-zinc-900/40 dark:border-white/5"
+        >
           <div className="flex items-center justify-between">
-            <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">Interviews</span>
-            <span className="p-1.5 rounded-lg bg-brand-500/10 text-brand-600 dark:text-brand-400">
+            <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-400">Interviews</span>
+            <span className="p-2 rounded-xl bg-life-vermilion/10 text-life-vermilion">
               <CalendarDays className="w-4 h-4" />
             </span>
           </div>
-          <div className="mt-4">
-            <span className="text-2xl font-extrabold text-zinc-800 dark:text-zinc-100">{interviewCount}</span>
-            <p className="text-[10px] text-zinc-400 mt-0.5">Live meetings</p>
+          <div className="mt-6">
+            <span className="text-3xl font-extrabold text-life-cocoa dark:text-white">{interviewCount}</span>
+            <p className="text-[10px] text-life-cocoa/40 mt-1 dark:text-zinc-500">Live rounds</p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Offers */}
-        <div className="bg-white dark:bg-zinc-900/60 border border-zinc-200/50 dark:border-zinc-800/40 p-4 rounded-2xl flex flex-col justify-between shadow-sm hover:shadow-md hover:border-zinc-300 dark:hover:border-zinc-700 transition-all duration-200">
+        <motion.div 
+          whileHover={{ y: -4, borderColor: "rgba(46,26,22,0.15)" }}
+          className="bg-white border border-life-cocoa/5 p-5 rounded-2xl flex flex-col justify-between shadow-md transition-all duration-300 dark:bg-zinc-900/40 dark:border-white/5"
+        >
           <div className="flex items-center justify-between">
-            <span className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">Offers</span>
-            <span className="p-1.5 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+            <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-400">Offers</span>
+            <span className="p-2 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-450">
               <CheckCircle className="w-4 h-4" />
             </span>
           </div>
-          <div className="mt-4">
-            <span className="text-2xl font-extrabold text-zinc-800 dark:text-slate-100">{offerCount}</span>
-            <p className="text-[10px] text-zinc-400 mt-0.5">Offer letters</p>
+          <div className="mt-6">
+            <span className="text-3xl font-extrabold text-life-cocoa dark:text-white">{offerCount}</span>
+            <p className="text-[10px] text-life-cocoa/40 mt-1 dark:text-zinc-500">Job letters</p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Average Readiness */}
-        <div className="bg-gradient-to-br from-brand-500 to-emerald-600 p-4 rounded-2xl flex flex-col justify-between text-white shadow-lg shadow-brand-500/15 hover:shadow-brand-500/25 hover:scale-[1.01] transition-all duration-200">
+        <motion.div 
+          whileHover={{ y: -4, scale: 1.02 }}
+          className="bg-gradient-to-br from-life-cocoa to-[#452721] p-5 rounded-2xl flex flex-col justify-between text-white shadow-lg shadow-life-cocoa/15 transition-all duration-300 border border-white/5"
+        >
           <div className="flex items-center justify-between">
-            <span className="text-xs text-brand-100 font-semibold uppercase tracking-wider">Readiness</span>
-            <span className="p-1.5 rounded-lg bg-white/10 text-white">
+            <span className="text-[10px] text-life-sand/70 font-bold uppercase tracking-wider">Readiness</span>
+            <span className="p-2 rounded-xl bg-white/10 text-white">
               <TrendingUp className="w-4 h-4" />
             </span>
           </div>
-          <div className="mt-4">
-            <span className="text-2xl font-extrabold">{avgReadiness}%</span>
-            <p className="text-[10px] text-brand-100 mt-0.5">Overall confidence</p>
+          <div className="mt-6">
+            <span className="text-3xl font-black font-geom">{avgReadiness}%</span>
+            <p className="text-[10px] text-life-sand/70 mt-1">ATS & interview score</p>
           </div>
-        </div>
+        </motion.div>
       </div>
 
-      {/* Main Charts & Pipelines sections */}
+      {/* Main Charts & Bento grids */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Left Columns - Performance & Funnel chart */}
         <div className="lg:col-span-2 space-y-6">
           
           {/* Active Prep timeline */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
-            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
-              <Target className="w-4 h-4 text-brand-500" />
-              Placement Prep Intensity (Weekly)
+          <div className="bg-white border border-life-cocoa/5 rounded-2xl p-6 shadow-md dark:bg-zinc-900/30 dark:border-white/5">
+            <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-6 flex items-center gap-2 dark:text-white">
+              <Target className="w-4 h-4 text-life-vermilion" />
+              Preparation Intensity (Minutes Revision)
             </h3>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                   <defs>
                     <linearGradient id="colorPrep" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.2}/>
-                      <stop offset="95%" stopColor="#0ea5e9" stopOpacity={0}/>
+                      <stop offset="5%" stopColor="#FF5B37" stopOpacity={0.25}/>
+                      <stop offset="95%" stopColor="#FF5B37" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" className="dark:stroke-slate-800" />
-                  <XAxis dataKey="name" tick={{ fontSize: 10 }} stroke="#94a3b8" />
-                  <YAxis tick={{ fontSize: 10 }} stroke="#94a3b8" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(46,26,22,0.05)" />
+                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#2E1A16', opacity: 0.6 }} stroke="rgba(46,26,22,0.05)" />
+                  <YAxis tick={{ fontSize: 10, fill: '#2E1A16', opacity: 0.6 }} stroke="rgba(46,26,22,0.05)" />
                   <Tooltip 
                     contentStyle={{ 
-                      backgroundColor: 'rgba(15, 23, 42, 0.9)', 
-                      borderColor: '#1e293b', 
-                      color: '#fff',
-                      borderRadius: '12px'
+                      backgroundColor: '#2E1A16', 
+                      borderColor: '#FF5B37', 
+                      color: '#FAF6F0',
+                      borderRadius: '12px',
+                      fontSize: '11px',
+                      fontFamily: 'sans-serif'
                     }} 
                   />
-                  <Area type="monotone" dataKey="prepMinutes" name="Revision (Mins)" stroke="#0ea5e9" strokeWidth={2} fillOpacity={1} fill="url(#colorPrep)" />
+                  <Area type="monotone" dataKey="prepMinutes" name="Revision (Mins)" stroke="#FF5B37" strokeWidth={2} fillOpacity={1} fill="url(#colorPrep)" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
           </div>
 
           {/* Funnel distribution bar chart */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
-            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
-              <Briefcase className="w-4 h-4 text-indigo-500" />
-              Application Stages Funnel
+          <div className="bg-white border border-life-cocoa/5 rounded-2xl p-6 shadow-md dark:bg-zinc-900/30 dark:border-white/5">
+            <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-6 flex items-center gap-2 dark:text-white">
+              <Briefcase className="w-4 h-4 text-life-vermilion" />
+              Pipeline Distribution Stages
             </h3>
-            <div className="h-48">
+            <div className="h-56">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={stageStats} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" className="dark:stroke-slate-800" />
-                  <XAxis dataKey="name" tick={{ fontSize: 10 }} stroke="#94a3b8" />
-                  <YAxis allowDecimals={false} tick={{ fontSize: 10 }} stroke="#94a3b8" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(46,26,22,0.05)" />
+                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#2E1A16', opacity: 0.6 }} stroke="rgba(46,26,22,0.05)" />
+                  <YAxis allowDecimals={false} tick={{ fontSize: 10, fill: '#2E1A16', opacity: 0.6 }} stroke="rgba(46,26,22,0.05)" />
                   <Tooltip 
                     contentStyle={{ 
-                      backgroundColor: 'rgba(15, 23, 42, 0.9)', 
-                      borderColor: '#1e293b', 
-                      color: '#fff',
-                      borderRadius: '12px'
+                      backgroundColor: '#2E1A16', 
+                      borderColor: '#FF5B37', 
+                      color: '#FAF6F0',
+                      borderRadius: '12px',
+                      fontSize: '11px'
                     }} 
                   />
-                  <Bar dataKey="value" name="Applications" fill="#6366f1" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="value" name="Applications" fill="#FF5B37" radius={[6, 6, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -311,59 +384,78 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
 
         </div>
 
-        {/* Right Column - Mission & Upcoming Events */}
+        {/* Right Column - Mission & Weaknesses */}
         <div className="space-y-6">
           
           {/* Today's Prep Mission */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
-            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100 mb-3.5 flex items-center justify-between">
+          <div className="bg-white border border-life-cocoa/5 rounded-2xl p-6 shadow-md dark:bg-zinc-900/30 dark:border-white/5">
+            <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-5 flex items-center justify-between dark:text-white">
               <span className="flex items-center gap-2">
-                <Target className="w-4 h-4 text-brand-500" />
-                Today's Prep Mission
+                <Target className="w-4 h-4 text-life-vermilion" />
+                Today's Focus
               </span>
-              <span className="text-[10px] bg-brand-500/10 text-brand-600 dark:text-brand-400 font-semibold px-2 py-0.5 rounded-full">
-                AI Suggested
+              <span className="text-[9px] bg-life-vermilion/10 text-life-vermilion font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                Copilot Suggestions
               </span>
             </h3>
             
             <div className="space-y-3">
-              {missionTasks.map((t) => (
-                <div key={t.id} className="p-3 bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800/50 rounded-xl flex items-start justify-between gap-3">
-                  <div>
-                    <span className="font-semibold text-xs text-slate-700 dark:text-slate-200 block">
+              {tasks.map((t) => (
+                <div 
+                  key={t.id} 
+                  onClick={() => toggleTask(t.id)}
+                  className={`p-3.5 border transition-all rounded-xl flex items-start gap-3 cursor-pointer ${
+                    t.completed 
+                      ? 'bg-life-sand/20 border-life-cocoa/5 opacity-55' 
+                      : 'bg-life-sand/65 border-life-cocoa/5 hover:border-life-cocoa/15 hover:bg-life-sand/90 dark:bg-zinc-950/40 dark:border-white/5'
+                  }`}
+                >
+                  <div className="mt-0.5">
+                    <div className={`w-3.5 h-3.5 rounded-md border flex items-center justify-center transition-all ${
+                      t.completed ? 'bg-life-vermilion border-life-vermilion' : 'border-life-cocoa/20'
+                    }`}>
+                      {t.completed && <CheckCircle className="w-2.5 h-2.5 text-white" />}
+                    </div>
+                  </div>
+                  <div className="flex-1">
+                    <span className={`font-semibold text-xs leading-tight block ${
+                      t.completed ? 'line-through text-life-cocoa/40' : 'text-life-cocoa dark:text-zinc-200'
+                    }`}>
                       {t.title}
                     </span>
-                    <span className="text-[10px] text-slate-400 mt-1 block">Est. Duration: {t.duration}</span>
+                    <div className="flex items-center gap-2 mt-2">
+                      <span className="text-[9px] text-life-cocoa/40">Duration: {t.duration}</span>
+                      <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded ${
+                        t.priority === 'High' 
+                          ? 'bg-rose-500/10 text-rose-500' 
+                          : 'bg-amber-500/10 text-amber-600'
+                      }`}>
+                        {t.priority}
+                      </span>
+                    </div>
                   </div>
-                  <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-md ${
-                    t.priority === 'High' 
-                      ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400' 
-                      : 'bg-amber-500/10 text-amber-600 dark:text-amber-400'
-                  }`}>
-                    {t.priority}
-                  </span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Weak Topics */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
-            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100 mb-3.5 flex items-center gap-2">
-              <ShieldAlert className="w-4 h-4 text-rose-500" />
-              Struggling Topics (Alerts)
+          <div className="bg-white border border-life-cocoa/5 rounded-2xl p-6 shadow-md dark:bg-zinc-900/30 dark:border-white/5">
+            <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-5 flex items-center gap-2 dark:text-white">
+              <ShieldAlert className="w-4 h-4 text-rose-550" />
+              Struggling Topics (Gaps)
             </h3>
             
-            <div className="space-y-3.5">
+            <div className="space-y-4">
               {weakTopics.map((item, idx) => (
-                <div key={idx} className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800/50 pb-3 last:border-b-0 last:pb-0">
+                <div key={idx} className="flex items-center justify-between border-b border-life-cocoa/5 pb-3.5 last:border-b-0 last:pb-0">
                   <div>
-                    <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 block">{item.topic}</span>
-                    <span className="text-[10px] text-slate-400 block mt-0.5">{item.status}</span>
+                    <span className="text-xs font-semibold text-life-cocoa block dark:text-zinc-200">{item.topic}</span>
+                    <span className="text-[10px] text-life-cocoa/55 block mt-1">{item.status}</span>
                   </div>
                   <div className="text-right">
                     <span className="text-xs font-bold text-rose-500 block">{item.score}%</span>
-                    <span className="text-[8px] text-slate-400 uppercase tracking-wider block">Readiness</span>
+                    <span className="text-[8px] text-life-cocoa/45 uppercase tracking-wider block">Readiness</span>
                   </div>
                 </div>
               ))}
@@ -371,26 +463,26 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
           </div>
 
           {/* Upcoming Event Schedule */}
-          <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
-            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100 mb-3.5 flex items-center gap-2">
-              <CalendarDays className="w-4 h-4 text-indigo-500" />
+          <div className="bg-white border border-life-cocoa/5 rounded-2xl p-6 shadow-md dark:bg-zinc-900/30 dark:border-white/5">
+            <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-5 flex items-center gap-2 dark:text-white">
+              <CalendarDays className="w-4 h-4 text-life-vermilion" />
               Upcoming Schedules
             </h3>
 
             {recentEvents.length > 0 ? (
-              <div className="space-y-3">
+              <div className="space-y-3.5">
                 {recentEvents.map((evt) => (
-                  <div key={evt.id} className="p-3 border border-slate-100 dark:border-slate-800/60 bg-slate-50 dark:bg-slate-800/20 rounded-xl">
+                  <div key={evt.id} className="p-3.5 border border-life-cocoa/5 bg-life-sand/40 rounded-xl hover:border-life-cocoa/15 transition-all dark:bg-zinc-950/40">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
+                      <span className="text-xs font-bold text-life-cocoa dark:text-zinc-200">
                         {evt.company_name}
                       </span>
-                      <span className="text-[9px] bg-brand-500 text-white font-semibold px-2 py-0.5 rounded-full">
+                      <span className="text-[9px] bg-life-vermilion/10 text-life-vermilion font-bold px-2 py-0.5 rounded-full uppercase">
                         {evt.event_type}
                       </span>
                     </div>
-                    <p className="text-[10px] text-slate-400 mt-1">{evt.role}</p>
-                    <div className="text-[10px] text-brand-600 dark:text-brand-400 font-semibold mt-2.5 flex items-center gap-1">
+                    <p className="text-[10px] text-life-cocoa/50 mt-1">{evt.role}</p>
+                    <div className="text-[10px] text-life-vermilion font-bold mt-3 flex items-center gap-1.5">
                       <Clock className="w-3.5 h-3.5" />
                       {new Date(evt.event_date).toLocaleDateString(undefined, { 
                         weekday: 'short', 
@@ -404,7 +496,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
                 ))}
               </div>
             ) : (
-              <p className="text-xs text-slate-400 py-4 text-center">No upcoming assessments or interviews scheduled.</p>
+              <p className="text-xs text-life-cocoa/50 py-4 text-center">No upcoming assessments or interviews scheduled.</p>
             )}
           </div>
 
@@ -412,6 +504,6 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
 
       </div>
 
-    </div>
+    </motion.div>
   );
 };

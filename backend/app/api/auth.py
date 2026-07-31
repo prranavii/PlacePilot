@@ -33,13 +33,13 @@ def register(user_in: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_user)
     
-    # Auto-seed sample workspace data so the new account's dashboard works immediately
-    import sys
-    if "pytest" not in sys.modules:
-        try:
-            seed_new_user(db, db_user)
-        except Exception as e:
-            print(f"Failed to auto-seed new user database metrics: {e}")
+    # Auto-seed mock data disabled so new accounts start with a clean slate (0 applications)
+    # import sys
+    # if "pytest" not in sys.modules:
+    #     try:
+    #         seed_new_user(db, db_user)
+    #     except Exception as e:
+    #         print(f"Failed to auto-seed new user database metrics: {e}")
         
     return db_user
 

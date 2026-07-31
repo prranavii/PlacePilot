@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { api } from '../services/api';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Sparkles, 
   BookOpen, 
-  FileText
+  FileText,
+  Clock
 } from 'lucide-react';
 
 export const Journal: React.FC = () => {
@@ -92,15 +94,22 @@ export const Journal: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 min-h-[80vh] font-sans">
-      
+    <motion.div 
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="space-y-8 pb-12 font-sans relative"
+    >
+      {/* 3D Ambient backdrop Blob */}
+      <div className="absolute -top-12 right-1/4 w-96 h-96 bg-life-vermilion/5 rounded-full blur-3xl pointer-events-none animate-blob"></div>
+
       {/* Header */}
       <div>
-        <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100 tracking-tight">
+        <h2 className="text-2xl font-extrabold tracking-tight text-life-cocoa dark:text-white font-geom">
           Interview & OA Journal
         </h2>
-        <p className="text-xs text-slate-400 mt-1">
-          Paste raw, messy interview logs, questions, or assessment feedback. Let the Feedback Agent convert it into structured progress metrics.
+        <p className="text-sm text-life-cocoa/60 mt-1 max-w-lg leading-relaxed dark:text-zinc-400">
+          Paste raw, messy interview logs, questions, or assessment feedback. Let the Feedback Agent convert it into structured DSA progress metrics.
         </p>
       </div>
 
@@ -108,39 +117,39 @@ export const Journal: React.FC = () => {
         
         {/* Left Column - Log Messy Feedback form */}
         <div className="lg:col-span-1 space-y-6">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 rounded-2xl shadow-sm">
-            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-brand-500 fill-current" />
+          <div className="bg-white/70 border border-life-cocoa/5 p-6 rounded-2xl shadow-md backdrop-blur-md dark:bg-zinc-900/35 dark:border-white/5">
+            <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-5 flex items-center gap-2 dark:text-white">
+              <Sparkles className="w-4 h-4 text-life-vermilion fill-life-vermilion/10 animate-pulse" />
               Analyze Messy Feedback
             </h3>
 
             {applications.length > 0 ? (
               <form onSubmit={handleAnalyzeFeedback} className="space-y-4">
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1.5 uppercase">
+                  <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">
                     Select Application
                   </label>
                   <select
                     value={selectedAppId}
                     onChange={(e) => setSelectedAppId(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/60 text-xs border border-slate-200 dark:border-slate-850 rounded-xl px-3 py-2.5 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-brand-500"
+                    className="w-full bg-life-sand/90 text-xs border border-life-cocoa/10 rounded-xl px-3.5 py-3 text-life-cocoa focus:outline-none focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
                   >
                     {applications.map((app) => (
                       <option key={app.id} value={app.id}>
-                        {app.company_name} - {app.role}
+                        {app.company_name} — {app.role}
                       </option>
                     ))}
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1.5 uppercase">
+                  <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-455">
                     Round Type
                   </label>
                   <select
                     value={roundType}
                     onChange={(e) => setRoundType(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/60 text-xs border border-slate-200 dark:border-slate-850 rounded-xl px-3 py-2.5 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-brand-500"
+                    className="w-full bg-life-sand/90 text-xs border border-life-cocoa/10 rounded-xl px-3.5 py-3 text-life-cocoa focus:outline-none focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
                   >
                     <option value="Online Assessment">Online Assessment (OA)</option>
                     <option value="Technical">Technical Round</option>
@@ -149,7 +158,7 @@ export const Journal: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold text-slate-400 mb-1.5 uppercase">
+                  <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">
                     Messy Log Notes *
                   </label>
                   <textarea
@@ -158,14 +167,14 @@ export const Journal: React.FC = () => {
                     placeholder="Paste anything. E.g. 'They asked two graph questions. I solved DFS but stumbled on B+ Trees. Communication went well, but need indexing practice...'"
                     value={messyText}
                     onChange={(e) => setMessyText(e.target.value)}
-                    className="w-full bg-slate-50 dark:bg-slate-800/60 text-xs border border-slate-200 dark:border-slate-850 rounded-xl px-3 py-2.5 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-brand-500 placeholder-slate-400"
+                    className="w-full bg-life-sand/90 text-xs border border-life-cocoa/10 rounded-xl px-4 py-3 text-life-cocoa focus:outline-none focus:border-life-vermilion placeholder-life-cocoa/30 leading-relaxed dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={analyzing}
-                  className="w-full bg-brand-500 hover:bg-brand-600 text-white text-xs font-semibold py-3 rounded-xl shadow-lg shadow-brand-500/10 flex items-center justify-center gap-2 mt-4 disabled:opacity-50"
+                  className="w-full bg-life-vermilion hover:bg-life-vermilion/90 text-white text-xs font-bold py-3.5 rounded-xl shadow-lg shadow-life-vermilion/10 flex items-center justify-center gap-2 mt-4 disabled:opacity-50 transition-all active:scale-[0.98]"
                 >
                   {analyzing ? (
                     <>
@@ -181,105 +190,119 @@ export const Journal: React.FC = () => {
                 </button>
               </form>
             ) : (
-              <p className="text-xs text-slate-400 py-4 text-center">Please submit a job application first before logging journals.</p>
+              <p className="text-xs text-life-cocoa/50 py-4 text-center">Please submit a job application first before logging journals.</p>
             )}
           </div>
 
           {/* Show parsed result immediately after parsing */}
-          {parsedResult && (
-            <div className="bg-brand-50/20 dark:bg-slate-900 border border-brand-200/20 dark:border-slate-800 p-6 rounded-2xl space-y-4">
-              <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-widest flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-amber-500 fill-current" />
-                Latest AI Structured Analysis
-              </h4>
-              
-              <div className="grid grid-cols-2 gap-3">
-                <div className="p-2.5 bg-white dark:bg-slate-950 border border-slate-100 dark:border-slate-800/60 rounded-xl text-center">
-                  <span className="text-[9px] text-slate-400 block font-semibold uppercase">Tech Score</span>
-                  <span className="text-xs font-bold text-slate-800 dark:text-slate-200 mt-0.5 block">{parsedResult.technical_score}/10</span>
+          <AnimatePresence>
+            {parsedResult && (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                className="bg-life-vermilion/5 border border-life-vermilion/20 p-6 rounded-2xl space-y-5"
+              >
+                <h4 className="text-xs font-bold text-life-cocoa uppercase tracking-widest flex items-center gap-2 dark:text-white">
+                  <Sparkles className="w-4 h-4 text-life-vermilion fill-life-vermilion/10 animate-pulse" />
+                  Latest AI Analysis
+                </h4>
+                
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="p-3 bg-life-sand border border-life-cocoa/10 rounded-xl text-center dark:bg-zinc-900/40 dark:border-white/5">
+                    <span className="text-[9px] text-life-cocoa/50 block font-bold uppercase tracking-wider dark:text-zinc-500">Tech Score</span>
+                    <span className="text-xs font-extrabold text-life-vermilion mt-1 block font-geom">{parsedResult.technical_score}/10</span>
+                  </div>
+                  <div className="p-3 bg-life-sand border border-life-cocoa/10 rounded-xl text-center dark:bg-zinc-900/40 dark:border-white/5">
+                    <span className="text-[9px] text-life-cocoa/50 block font-bold uppercase tracking-wider dark:text-zinc-500">Comm Score</span>
+                    <span className="text-xs font-extrabold text-emerald-600 mt-1 block font-geom">{parsedResult.communication_score}/10</span>
+                  </div>
                 </div>
-                <div className="p-2.5 bg-white dark:bg-slate-950 border border-slate-100 dark:border-slate-800/60 rounded-xl text-center">
-                  <span className="text-[9px] text-slate-400 block font-semibold uppercase">Comm Score</span>
-                  <span className="text-xs font-bold text-slate-800 dark:text-slate-200 mt-0.5 block">{parsedResult.communication_score}/10</span>
-                </div>
-              </div>
 
-              <div className="space-y-2">
-                <span className="text-[10px] text-slate-400 block font-semibold uppercase">Strengths</span>
-                <div className="flex flex-wrap gap-1.5">
-                  {parsedResult.strengths.map((s: string, i: number) => (
-                    <span key={i} className="text-[10px] font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-md">{s}</span>
-                  ))}
+                <div className="space-y-2">
+                  <span className="text-[9px] text-life-cocoa/50 block font-bold uppercase tracking-wider dark:text-zinc-500">Strengths</span>
+                  <div className="flex flex-wrap gap-2">
+                    {parsedResult.strengths.map((s: string, i: number) => (
+                      <span key={i} className="text-[10px] font-bold bg-emerald-500/10 text-emerald-700 px-2.5 py-1 rounded-md border border-emerald-500/20 dark:bg-emerald-550/10 dark:text-emerald-450">{s}</span>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              <div className="space-y-2">
-                <span className="text-[10px] text-slate-400 block font-semibold uppercase">Weaknesses</span>
-                <div className="flex flex-wrap gap-1.5">
-                  {parsedResult.weaknesses.map((w: string, i: number) => (
-                    <span key={i} className="text-[10px] font-medium bg-rose-500/10 text-rose-600 dark:text-rose-400 px-2 py-0.5 rounded-md">{w}</span>
-                  ))}
+                <div className="space-y-2">
+                  <span className="text-[9px] text-life-cocoa/50 block font-bold uppercase tracking-wider dark:text-zinc-500">Weaknesses</span>
+                  <div className="flex flex-wrap gap-2">
+                    {parsedResult.weaknesses.map((w: string, i: number) => (
+                      <span key={i} className="text-[10px] font-bold bg-life-vermilion/10 text-life-vermilion px-2.5 py-1 rounded-md border border-life-vermilion/20">{w}</span>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              <div className="space-y-1 pt-1">
-                <span className="text-[10px] text-slate-400 block font-semibold uppercase">Recommendations</span>
-                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed bg-white dark:bg-slate-950 p-3 rounded-xl border border-slate-100 dark:border-slate-800/50">
-                  {parsedResult.recommendations}
-                </p>
-              </div>
-            </div>
-          )}
+                <div className="space-y-2 pt-1">
+                  <span className="text-[9px] text-life-cocoa/50 block font-bold uppercase tracking-wider dark:text-zinc-500">Recommendations</span>
+                  <p className="text-xs text-life-cocoa/80 leading-relaxed bg-life-sand/40 p-4 rounded-xl border border-life-cocoa/5 dark:bg-zinc-900/45 dark:text-zinc-400 dark:border-white/5">
+                    {parsedResult.recommendations}
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Right Columns - Journal History List */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 p-6 rounded-2xl shadow-sm">
-            <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
-              <FileText className="w-4 h-4 text-indigo-500" />
+          <div className="bg-white/70 border border-life-cocoa/5 p-6 rounded-2xl shadow-md backdrop-blur-md dark:bg-zinc-900/35 dark:border-white/5">
+            <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-5 flex items-center gap-2 dark:text-white">
+              <FileText className="w-4 h-4 text-life-vermilion" />
               Journal History
             </h3>
 
             {loading ? (
-              <div className="py-8 text-center">
-                <div className="animate-spin rounded-full h-6 w-6 border-2 border-brand-500 border-t-transparent mx-auto" />
+              <div className="py-12 text-center">
+                <div className="relative w-10 h-10 mx-auto">
+                  <div className="absolute inset-0 rounded-full border-3 border-life-vermilion/25"></div>
+                  <div className="absolute inset-0 rounded-full border-3 border-life-vermilion border-t-transparent animate-spin"></div>
+                </div>
               </div>
             ) : journals.length > 0 ? (
-              <div className="space-y-4">
+              <div className="space-y-5">
                 {journals.map((item) => (
-                  <div key={item.id} className="p-4 border border-slate-150 dark:border-slate-850 bg-slate-50/50 dark:bg-slate-900/40 rounded-xl space-y-3.5">
-                    
+                  <motion.div 
+                    key={item.id} 
+                    whileHover={{ borderColor: "rgba(46,26,22,0.15)" }}
+                    className="p-5 border border-life-cocoa/5 bg-white rounded-2xl space-y-4 shadow-sm transition-all duration-300 dark:bg-zinc-900/60 dark:border-white/5"
+                  >
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <span className="text-[9px] font-bold text-brand-500 uppercase tracking-widest block">
+                        <span className="text-[9px] font-bold text-life-vermilion bg-life-vermilion/10 border border-life-vermilion/20 px-2 py-0.5 rounded-full uppercase tracking-wider">
                           {item.round_type} Round
                         </span>
-                        <h4 className="font-bold text-slate-800 dark:text-slate-200 text-xs mt-0.5">
+                        <h4 className="font-extrabold text-life-cocoa text-xs mt-2.5 dark:text-zinc-200">
                           {getCompanyLabel(item.application_id)}
                         </h4>
                       </div>
-                      <span className="text-[9px] text-slate-400">
+                      <span className="text-[10px] text-life-cocoa/50 font-semibold flex items-center gap-1 dark:text-zinc-500">
+                        <Clock className="w-3.5 h-3.5" />
                         {new Date(item.created_at).toLocaleDateString()}
                       </span>
                     </div>
 
-                    <div className="text-[11px] text-slate-500 whitespace-pre-wrap bg-white dark:bg-slate-950 p-3 border border-slate-100 dark:border-slate-850 rounded-xl max-h-24 overflow-y-auto">
+                    <div className="text-xs text-life-cocoa/80 whitespace-pre-wrap bg-life-sand/40 p-4 border border-life-cocoa/5 rounded-xl max-h-24 overflow-y-auto leading-relaxed dark:bg-zinc-950/20 dark:text-zinc-400 dark:border-white/5">
                       {item.feedback}
                     </div>
 
-                    <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 dark:border-slate-800/60 pt-3.5">
+                    <div className="flex flex-wrap items-center justify-between gap-4 border-t border-life-cocoa/5 pt-4 dark:border-white/5">
                       <div className="flex items-center gap-4">
-                        <span className="text-[10px] text-slate-400">
-                          Tech: <strong className="text-slate-700 dark:text-slate-300 font-bold">{item.technical_score || 0}/10</strong>
+                        <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-500">
+                          Tech Depth: <strong className="text-life-vermilion font-extrabold ml-1 font-geom">{item.technical_score || 0}/10</strong>
                         </span>
-                        <span className="text-[10px] text-slate-400">
-                          Comm: <strong className="text-slate-700 dark:text-slate-300 font-bold">{item.communication_score || 0}/10</strong>
+                        <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-500">
+                          Comm Flow: <strong className="text-emerald-600 font-extrabold ml-1 font-geom">{item.communication_score || 0}/10</strong>
                         </span>
                       </div>
                       {item.strengths && item.strengths.length > 0 && (
                         <div className="flex gap-1.5">
                           {item.strengths.slice(0, 2).map((s: string, idx: number) => (
-                            <span key={idx} className="text-[8px] font-bold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-1.5 py-0.5 rounded">
+                            <span key={idx} className="text-[9px] font-bold bg-emerald-500/10 text-emerald-700 px-2.5 py-0.5 rounded border border-emerald-500/20 dark:text-emerald-450">
                               {s}
                             </span>
                           ))}
@@ -287,13 +310,14 @@ export const Journal: React.FC = () => {
                       )}
                     </div>
 
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             ) : (
-              <div className="py-12 text-center text-slate-400 text-xs">
-                <BookOpen className="w-8 h-8 text-slate-300 mx-auto mb-2" />
-                No past feedback logs found. Paste logs in the left panel to populate history.
+              <div className="py-16 text-center text-life-cocoa/50 text-xs flex flex-col items-center justify-center p-6 border border-dashed border-life-cocoa/10 rounded-2xl dark:border-white/5">
+                <BookOpen className="w-8 h-8 text-life-cocoa/30 mb-3" />
+                <h4 className="font-bold text-life-cocoa/60 uppercase tracking-wider text-[10px] mb-1 dark:text-zinc-400">Journal Empty</h4>
+                <p className="text-life-cocoa/40 max-w-xs mt-0.5 dark:text-zinc-600">No past feedback logs found. Paste logs in the left panel to populate history.</p>
               </div>
             )}
           </div>
@@ -301,6 +325,7 @@ export const Journal: React.FC = () => {
 
       </div>
 
-    </div>
+    </motion.div>
   );
 };
+
