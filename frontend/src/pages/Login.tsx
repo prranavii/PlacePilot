@@ -48,14 +48,17 @@ export const Login: React.FC<LoginProps> = ({ onClose, initialIsRegister = false
 
       {/* Brand Header */}
       <div className="flex flex-col items-center mb-8">
-        <div className="w-12 h-12 rounded-xl bg-life-vermilion flex items-center justify-center text-white shadow-lg shadow-life-vermilion/20 mb-3 animate-pulse-subtle">
-          <svg viewBox="0 0 24 24" className="w-6.5 h-6.5 fill-current" xmlns="http://www.w3.org/2000/svg">
-            <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" />
-            <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" transform="rotate(60 12 12)" />
-            <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" transform="rotate(120 12 12)" />
-            <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" transform="rotate(180 12 12)" />
-            <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" transform="rotate(240 12 12)" />
-            <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" transform="rotate(300 12 12)" />
+        <div className="w-12 h-12 rounded-xl bg-life-cocoa dark:bg-zinc-950 flex items-center justify-center text-white shadow-lg shadow-life-cocoa/25 mb-3 animate-pulse-subtle">
+          <svg viewBox="0 0 24 24" className="w-6.5 h-6.5 fill-none" xmlns="http://www.w3.org/2000/svg">
+            {/* Upward Trajectory Arrow Stem */}
+            <path d="M 8.5,21 L 11.5,14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+            <path d="M 12,13 L 15.5,5 L 17,7" stroke="#FF5B37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M 15.5,5 L 18.5,8" stroke="#FF5B37" stroke-width="2.5" stroke-linecap="round" />
+            {/* Loop Compass Sweep */}
+            <path d="M 12,13 C 14.8,13 17,10.8 17,8 C 17,5.2 14.8,3 12,3" stroke="currentColor" strokeWidth="2" strokeDasharray="0.5 2.5" strokeLinecap="round" />
+            <path d="M 12,3 C 9.2,3 7,5.2 7,8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+            {/* AI Node Center */}
+            <circle cx="12" cy="8" r="1.5" fill="#FF5B37" />
           </svg>
         </div>
         <h2 className="text-2xl font-extrabold text-life-cocoa dark:text-white tracking-tight text-center font-geom">

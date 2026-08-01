@@ -47,22 +47,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <header className="sticky top-0 w-full z-45 bg-life-sand/85 backdrop-blur-md border-b border-life-cocoa/5 px-8 py-4 flex items-center justify-between transition-colors dark:bg-[#18110F]/80 dark:border-white/5">
         {/* Brand Logo */}
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-life-vermilion flex items-center justify-center text-white shadow-md shadow-life-vermilion/25">
-            <svg viewBox="0 0 24 24" className="w-4.5 h-4.5 fill-current" xmlns="http://www.w3.org/2000/svg">
-              <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" />
-              <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" transform="rotate(60 12 12)" />
-              <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" transform="rotate(120 12 12)" />
-              <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" transform="rotate(180 12 12)" />
-              <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" transform="rotate(240 12 12)" />
-              <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" transform="rotate(300 12 12)" />
+          <div className="w-8 h-8 rounded-lg bg-life-cocoa dark:bg-zinc-950 flex items-center justify-center text-white shadow-md shadow-life-cocoa/20">
+            <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none" xmlns="http://www.w3.org/2000/svg">
+              {/* Upward Trajectory Arrow Stem */}
+              <path d="M 8.5,21 L 11.5,14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+              <path d="M 12,13 L 15.5,5 L 17,7" stroke="#FF5B37" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M 15.5,5 L 18.5,8" stroke="#FF5B37" stroke-width="2.5" stroke-linecap="round" />
+              {/* Loop Compass Sweep */}
+              <path d="M 12,13 C 14.8,13 17,10.8 17,8 C 17,5.2 14.8,3 12,3" stroke="currentColor" strokeWidth="2" strokeDasharray="0.5 2.5" strokeLinecap="round" />
+              <path d="M 12,3 C 9.2,3 7,5.2 7,8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+              {/* AI Node Center */}
+              <circle cx="12" cy="8" r="1.5" fill="#FF5B37" />
             </svg>
           </div>
           <div>
-            <h1 className="font-extrabold text-life-cocoa tracking-tight text-sm font-geom flex items-center gap-1 dark:text-zinc-100">
-              PlacePilot <span className="text-life-vermilion font-bold text-[10px] bg-life-vermilion/10 px-1.5 py-0.5 rounded">AI</span>
+            <h1 className="font-extrabold text-life-cocoa tracking-tight text-sm font-geom dark:text-zinc-100 uppercase">
+              PLACEPILOT
             </h1>
-            <span className="text-[9px] text-life-cocoa/50 font-medium tracking-wider uppercase block dark:text-zinc-400">
-              Placement Tracker & Copilot
+            <span className="text-[9px] text-life-cocoa/50 font-bold tracking-wider uppercase block dark:text-zinc-400">
+              Placement OS
             </span>
           </div>
         </div>
