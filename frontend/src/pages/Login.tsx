@@ -48,8 +48,15 @@ export const Login: React.FC<LoginProps> = ({ onClose, initialIsRegister = false
 
       {/* Brand Header */}
       <div className="flex flex-col items-center mb-8">
-        <div className="w-12 h-12 rounded-xl bg-life-vermilion flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-life-vermilion/20 mb-3 animate-pulse-subtle font-geom">
-          P
+        <div className="w-12 h-12 rounded-xl bg-life-vermilion flex items-center justify-center text-white shadow-lg shadow-life-vermilion/20 mb-3 animate-pulse-subtle">
+          <svg viewBox="0 0 24 24" className="w-6.5 h-6.5 fill-current" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" />
+            <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" transform="rotate(60 12 12)" />
+            <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" transform="rotate(120 12 12)" />
+            <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" transform="rotate(180 12 12)" />
+            <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" transform="rotate(240 12 12)" />
+            <path d="M 12,12 C 11.2,10 9.5,6.5 9.5,4.5 C 9.5,3.1 10.6,2 12,2 C 13.4,2 14.5,3.1 14.5,4.5 C 14.5,6.5 12.8,10 12,12 Z" transform="rotate(300 12 12)" />
+          </svg>
         </div>
         <h2 className="text-2xl font-extrabold text-life-cocoa dark:text-white tracking-tight text-center font-geom">
           Welcome to PlacePilot AI
