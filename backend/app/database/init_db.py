@@ -23,6 +23,26 @@ def init_db():
         Base.metadata.create_all(bind=engine)
         logger.info("Database tables created successfully.")
 
+        # Seed default student user if database is empty
+        from app.models.user import User
+        from app.core import security
+        from sqlalchemy.orm import Session
+        
+        try:
+            with Session(engine) as session:
+                student_exists = session.query(User).filter(User.email == "student@placepilot.ai").first()
+                if not student_exists:
+                    default_student = User(
+                        email="student@placepilot.ai",
+                        hashed_password=security.get_password_hash("password123"),
+                        full_name="Student Pilot"
+                    )
+                    session.add(default_student)
+                    session.commit()
+                    logger.info("Seeded default student user: student@placepilot.ai")
+        except Exception as seed_err:
+            logger.error(f"Could not auto-seed default user: {seed_err}")
+
         # Ensure study_plan column exists in SQLite database
         if settings.DATABASE_URL.startswith("sqlite"):
             with engine.connect() as conn:
