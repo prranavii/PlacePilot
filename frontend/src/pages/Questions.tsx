@@ -232,7 +232,7 @@ export const Questions: React.FC = () => {
           </div>
         </div>
       ) : filteredQuestions.length > 0 ? (
-        <div className="bg-white border border-white/5 rounded-2xl overflow-hidden shadow-sm dark:bg-zinc-900/40 dark:border-white/5">
+        <div className="bg-zinc-950/60 border border-white/5 rounded-2xl overflow-hidden shadow-lg">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
@@ -303,7 +303,7 @@ export const Questions: React.FC = () => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-y-0 right-0 w-full max-w-md bg-white border-l border-white/5 shadow-2xl z-45 flex flex-col justify-between dark:bg-zinc-900 dark:border-white/5"
+            className="fixed inset-y-0 right-0 w-full max-w-md bg-zinc-950 border-l border-white/5 shadow-2xl z-45 flex flex-col justify-between"
           >
             
             <div className="p-6 bg-zinc-900 border-b border-white/5 flex items-start justify-between dark:bg-zinc-950/20 dark:border-white/5">
@@ -398,7 +398,7 @@ export const Questions: React.FC = () => {
       <AnimatePresence>
         {showAddModal && (
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="w-full max-w-lg bg-white border border-white/5 rounded-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative font-sans dark:bg-zinc-900 dark:border-white/5">
+            <div className="w-full max-w-lg bg-zinc-950 border border-white/5 rounded-3xl max-h-[90vh] overflow-y-auto shadow-2xl relative font-sans">
               
               <div className="p-6 bg-zinc-900 text-white border-b border-white/5 flex items-center justify-between dark:bg-zinc-950/20 dark:border-white/5">
                 <h3 className="font-extrabold text-white text-sm uppercase tracking-wider dark:text-white font-geom">
@@ -421,7 +421,7 @@ export const Questions: React.FC = () => {
                       placeholder="e.g. Meta (Optional)"
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
                     />
                   </div>
                   <div>
@@ -431,7 +431,7 @@ export const Questions: React.FC = () => {
                       placeholder="e.g. SDE Backend"
                       value={role}
                       onChange={(e) => setRole(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
                     />
                   </div>
                 </div>
@@ -445,7 +445,7 @@ export const Questions: React.FC = () => {
                       placeholder="e.g. Graphs"
                       value={topic}
                       onChange={(e) => setTopic(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
                     />
                   </div>
                   <div>
@@ -455,7 +455,7 @@ export const Questions: React.FC = () => {
                       placeholder="e.g. DFS Cycle"
                       value={subtopic}
                       onChange={(e) => setSubtopic(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
                     />
                   </div>
                   <div>
@@ -507,7 +507,7 @@ export const Questions: React.FC = () => {
                           type="radio"
                           checked={solved === true}
                           onChange={() => setSolved(true)}
-                          className="accent-life-vermilion"
+                          className="accent-crimson"
                         />
                         Yes
                       </label>
@@ -516,7 +516,7 @@ export const Questions: React.FC = () => {
                           type="radio"
                           checked={solved === false}
                           onChange={() => setSolved(false)}
-                          className="accent-life-vermilion"
+                          className="accent-crimson"
                         />
                         No
                       </label>
@@ -532,7 +532,7 @@ export const Questions: React.FC = () => {
                     rows={4}
                     value={text}
                     onChange={(e) => setText(e.target.value)}
-                    className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                    className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
                   />
                 </div>
 
@@ -543,7 +543,7 @@ export const Questions: React.FC = () => {
                     rows={2}
                     value={userNotes}
                     onChange={(e) => setUserNotes(e.target.value)}
-                    className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                    className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
                   />
                 </div>
 

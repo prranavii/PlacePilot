@@ -167,7 +167,7 @@ export const Journal: React.FC = () => {
                     placeholder="Paste anything. E.g. 'They asked two graph questions. I solved DFS but stumbled on B+ Trees. Communication went well, but need indexing practice...'"
                     value={messyText}
                     onChange={(e) => setMessyText(e.target.value)}
-                    className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 leading-relaxed dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
+                    className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-crimson placeholder-white/20 leading-relaxed dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
                   />
                 </div>
 
@@ -269,7 +269,7 @@ export const Journal: React.FC = () => {
                   <motion.div 
                     key={item.id} 
                     whileHover={{ borderColor: "rgba(46,26,22,0.15)" }}
-                    className="p-5 border border-white/5 bg-white rounded-2xl space-y-4 shadow-sm transition-all duration-300 dark:bg-zinc-900/60 dark:border-white/5"
+                    className="bg-zinc-900/40 border border-white/5 rounded-2xl p-5 space-y-4 shadow-sm"
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div>

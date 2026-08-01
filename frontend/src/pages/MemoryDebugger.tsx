@@ -171,7 +171,7 @@ export const MemoryDebugger: React.FC = () => {
           {memories.map((mem) => (
             <div
               key={mem.id}
-              className="bg-white border border-white/5 p-5 rounded-2xl shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md transition-shadow relative overflow-hidden group dark:bg-zinc-900/45 dark:border-white/5"
+              className="bg-zinc-900/40 border border-white/5 rounded-2xl p-5 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md transition-shadow relative overflow-hidden group"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between gap-3">

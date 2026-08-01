@@ -452,7 +452,7 @@ export const Applications: React.FC = () => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-y-0 right-0 w-full max-w-md bg-white border-l border-white/5 shadow-2xl z-40 flex flex-col justify-between dark:bg-zinc-900 dark:border-white/5"
+            className="fixed inset-y-0 right-0 w-full max-w-md bg-zinc-950 border-l border-white/5 shadow-2xl z-40 flex flex-col justify-between"
           >
             {/* Workspace Header */}
             <div className="p-6 border-b border-white/5 flex items-start justify-between bg-zinc-900 dark:bg-zinc-950/20">
@@ -530,9 +530,9 @@ export const Applications: React.FC = () => {
                       {studyPlan.map((phase: any, pIdx: number) => (
                         <div key={pIdx} className="relative space-y-2">
                           {/* Chronological bullet dot */}
-                          <div className="absolute -left-[17.5px] top-1.5 w-2 h-2 rounded-full bg-crimson border-2 border-life-sand dark:border-[#18110F]" />
+                          <div className="absolute -left-[17.5px] top-1.5 w-2 h-2 rounded-full bg-crimson border-2 border-zinc-950" />
                           
-                          <div className="bg-white border border-white/5 rounded-xl p-4 shadow-sm dark:bg-zinc-900/60 dark:border-white/5">
+                          <div className="bg-zinc-900/60 border border-white/5 rounded-xl p-4 shadow-sm">
                             <div className="flex items-center justify-between">
                               <span className="text-xs font-extrabold text-zinc-200 block">
                                 {phase.phase_name}
@@ -574,7 +574,7 @@ export const Applications: React.FC = () => {
                   <div className="mt-4 pt-4 border-t border-white/5 space-y-3 dark:border-white/5">
                     <h4 className="text-xs font-bold text-zinc-450 uppercase tracking-widest text-[9px] dark:text-zinc-400">Generated Study Plan</h4>
                     {prepTasks.map((t, i) => (
-                      <div key={i} className="p-3 bg-white border border-white/5 rounded-xl dark:bg-zinc-900 dark:border-white/5">
+                      <div key={i} className="p-3 bg-zinc-900/60 border border-white/5 rounded-xl">
                         <span className="text-[9px] font-bold text-crimson block uppercase tracking-wider">{t.type}</span>
                         <p className="text-xs text-white font-bold mt-1 leading-normal dark:text-zinc-100">{t.title}</p>
                         <span className="text-[9px] text-zinc-500 mt-2 block">Estimate: {t.duration}</span>
@@ -633,7 +633,7 @@ export const Applications: React.FC = () => {
                     {appEvents.map((evt) => (
                       <div key={evt.id} className="relative">
                         {/* Timeline dot marker */}
-                        <span className="absolute -left-[22px] top-1 w-2.5 h-2.5 rounded-full bg-crimson border border-life-sand ring-4 ring-life-vermilion/10 dark:border-zinc-900" />
+                        <span className="absolute -left-[22px] top-1 w-2.5 h-2.5 rounded-full bg-crimson border border-zinc-950 ring-4 ring-crimson/10" />
                         
                         <div className="text-xs">
                           <span className="font-extrabold text-white block dark:text-zinc-200">
@@ -685,7 +685,7 @@ export const Applications: React.FC = () => {
               initial={{ scale: 0.95, y: 15 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 15 }}
-              className="w-full max-w-lg bg-white border border-white/5 rounded-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative font-sans dark:bg-zinc-900 dark:border-white/5"
+              className="w-full max-w-lg bg-zinc-950 border border-white/5 rounded-3xl max-h-[90vh] overflow-y-auto shadow-2xl relative font-sans"
             >
               {/* Modal Header */}
               <div className="p-6 border-b border-white/5 flex items-center justify-between bg-zinc-900 dark:bg-zinc-950/20 dark:border-white/5">
@@ -711,7 +711,7 @@ export const Applications: React.FC = () => {
                       placeholder="e.g. Google"
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
                     />
                   </div>
                   <div>
@@ -722,7 +722,7 @@ export const Applications: React.FC = () => {
                       placeholder="e.g. Frontend Intern"
                       value={role}
                       onChange={(e) => setRole(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
                     />
                   </div>
                 </div>
@@ -735,7 +735,7 @@ export const Applications: React.FC = () => {
                       placeholder="e.g. ₹12,00,000 / yr"
                       value={ctc}
                       onChange={(e) => setCtc(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
                     />
                   </div>
                   <div>
@@ -745,7 +745,7 @@ export const Applications: React.FC = () => {
                       placeholder="e.g. Seattle, WA"
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
                     />
                   </div>
                 </div>
@@ -821,7 +821,7 @@ export const Applications: React.FC = () => {
                       max="100"
                       value={readiness}
                       onChange={(e) => setReadiness(parseInt(e.target.value))}
-                      className="w-full mt-3 accent-life-vermilion"
+                      className="w-full mt-3 accent-crimson"
                     />
                   </div>
                 </div>
@@ -833,7 +833,7 @@ export const Applications: React.FC = () => {
                     rows={3}
                     value={jd}
                     onChange={(e) => setJd(e.target.value)}
-                    className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                    className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
                   />
                 </div>
 
@@ -844,7 +844,7 @@ export const Applications: React.FC = () => {
                     rows={2}
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                    className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
                   />
                 </div>
 
@@ -882,7 +882,7 @@ export const Applications: React.FC = () => {
               initial={{ scale: 0.95, y: 15 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 15 }}
-              className="w-full max-w-xl bg-white border border-white/5 rounded-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col font-sans dark:bg-zinc-900 dark:border-white/5"
+              className="w-full max-w-xl bg-zinc-950 border border-white/5 rounded-3xl max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col font-sans"
             >
               <div className="p-6 border-b border-white/5 flex items-center justify-between bg-zinc-900 shrink-0 dark:bg-zinc-950/20 dark:border-white/5">
                 <h3 className="font-extrabold text-white text-xs uppercase tracking-widest flex items-center gap-2 dark:text-white font-geom">
@@ -993,7 +993,7 @@ export const Applications: React.FC = () => {
                         placeholder="Type your structured response details (mention caching, algorithms, complexity where relevant)..."
                         value={mockAnswerText}
                         onChange={(e) => setMockAnswerText(e.target.value)}
-                        className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 leading-relaxed dark:bg-zinc-950/60 dark:text-zinc-300 dark:border-white/5"
+                        className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-crimson placeholder-white/20 leading-relaxed dark:bg-zinc-950/60 dark:text-zinc-300 dark:border-white/5"
                       />
                     </div>
 

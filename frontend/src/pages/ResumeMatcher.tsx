@@ -190,7 +190,7 @@ export const ResumeMatcher: React.FC = () => {
                 placeholder="Paste the target role description and requirements..."
                 value={jdText}
                 onChange={(e) => setJdText(e.target.value)}
-                className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 leading-relaxed dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
+                className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-crimson placeholder-white/20 leading-relaxed dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
               />
             </div>
 
@@ -229,7 +229,7 @@ export const ResumeMatcher: React.FC = () => {
                 placeholder="Upload your resume file above or paste the text content here..."
                 value={resumeText}
                 onChange={(e) => setResumeText(e.target.value)}
-                className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 leading-relaxed dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
+                className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-crimson placeholder-white/20 leading-relaxed dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
               />
             </div>
 
