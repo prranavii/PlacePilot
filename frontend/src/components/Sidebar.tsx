@@ -65,7 +65,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               PLACEPILOT
             </h1>
             <span className="text-[9px] text-life-cocoa/50 font-bold tracking-wider uppercase block dark:text-zinc-400">
-              Placement OS
+              Placement AI
             </span>
           </div>
         </div>
