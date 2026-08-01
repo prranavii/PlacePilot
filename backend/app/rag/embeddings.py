@@ -11,6 +11,11 @@ class EmbeddingService:
 
     @property
     def model(self):
+        if not settings.USE_LOCAL_EMBEDDINGS:
+            logger.info("Local embeddings disabled via configuration. Using deterministic numpy fallback.")
+            self._model = "fallback"
+            return self._model
+
         if self._model is None:
             try:
                 # Lazy import to speed up initial server startup

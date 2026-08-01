@@ -23,6 +23,7 @@ class Settings(BaseSettings):
     GROQ_TEMPERATURE: float = 0.7
     
     EMBEDDING_MODEL: str = "all-MiniLM-L6-v2"
+    USE_LOCAL_EMBEDDINGS: bool = True
 
     def __init__(self, **values):
         super().__init__(**values)
