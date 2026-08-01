@@ -61,7 +61,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </svg>
           </div>
           <div>
-            <h1 className="font-extrabold text-white tracking-widest text-sm font-geom uppercase">
+            <h1 className="font-extrabold text-white tracking-widest text-sm font-wide uppercase">
               PLACEPILOT
             </h1>
             <span className="text-[8px] text-crimson font-bold tracking-widest uppercase block mt-0.5">

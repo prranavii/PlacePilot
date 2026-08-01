@@ -101,14 +101,14 @@ export const Journal: React.FC = () => {
       className="space-y-8 pb-12 font-sans relative"
     >
       {/* 3D Ambient backdrop Blob */}
-      <div className="absolute -top-12 right-1/4 w-96 h-96 bg-life-vermilion/5 rounded-full blur-3xl pointer-events-none animate-blob"></div>
+      <div className="absolute -top-12 right-1/4 w-96 h-96 bg-crimson/5 rounded-full blur-3xl pointer-events-none animate-blob"></div>
 
       {/* Header */}
       <div>
-        <h2 className="text-2xl font-extrabold tracking-tight text-life-cocoa dark:text-white font-geom">
+        <h2 className="text-xl font-bold tracking-widest text-white font-geom uppercase">
           Interview & OA Journal
         </h2>
-        <p className="text-sm text-life-cocoa/60 mt-1 max-w-lg leading-relaxed dark:text-zinc-400">
+        <p className="text-xs text-zinc-400 mt-2 max-w-lg leading-relaxed font-semibold uppercase tracking-wider">
           Paste raw, messy interview logs, questions, or assessment feedback. Let the Feedback Agent convert it into structured DSA progress metrics.
         </p>
       </div>
@@ -117,22 +117,22 @@ export const Journal: React.FC = () => {
         
         {/* Left Column - Log Messy Feedback form */}
         <div className="lg:col-span-1 space-y-6">
-          <div className="bg-white/70 border border-life-cocoa/5 p-6 rounded-2xl shadow-md backdrop-blur-md dark:bg-zinc-900/35 dark:border-white/5">
-            <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-5 flex items-center gap-2 dark:text-white">
-              <Sparkles className="w-4 h-4 text-life-vermilion fill-life-vermilion/10 animate-pulse" />
+          <div className="bg-zinc-950/60 border border-white/5 p-6 rounded-2xl shadow-md backdrop-blur-md">
+            <h3 className="text-xs font-bold text-white uppercase tracking-widest mb-5 flex items-center gap-2 dark:text-white">
+              <Sparkles className="w-4 h-4 text-crimson fill-crimson/10 animate-pulse" />
               Analyze Messy Feedback
             </h3>
 
             {applications.length > 0 ? (
               <form onSubmit={handleAnalyzeFeedback} className="space-y-4">
                 <div>
-                  <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">
+                  <label className="block text-[9px] font-bold text-zinc-450 mb-1.5 uppercase tracking-wider dark:text-zinc-400">
                     Select Application
                   </label>
                   <select
                     value={selectedAppId}
                     onChange={(e) => setSelectedAppId(e.target.value)}
-                    className="w-full bg-life-sand/90 text-xs border border-life-cocoa/10 rounded-xl px-3.5 py-3 text-life-cocoa focus:outline-none focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
+                    className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-3 text-white focus:outline-none focus:border-crimson dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
                   >
                     {applications.map((app) => (
                       <option key={app.id} value={app.id}>
@@ -143,13 +143,13 @@ export const Journal: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-455">
+                  <label className="block text-[9px] font-bold text-zinc-450 mb-1.5 uppercase tracking-wider dark:text-zinc-455">
                     Round Type
                   </label>
                   <select
                     value={roundType}
                     onChange={(e) => setRoundType(e.target.value)}
-                    className="w-full bg-life-sand/90 text-xs border border-life-cocoa/10 rounded-xl px-3.5 py-3 text-life-cocoa focus:outline-none focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
+                    className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-3 text-white focus:outline-none focus:border-crimson dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
                   >
                     <option value="Online Assessment">Online Assessment (OA)</option>
                     <option value="Technical">Technical Round</option>
@@ -158,7 +158,7 @@ export const Journal: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">
+                  <label className="block text-[9px] font-bold text-zinc-450 mb-1.5 uppercase tracking-wider dark:text-zinc-400">
                     Messy Log Notes *
                   </label>
                   <textarea
@@ -167,14 +167,14 @@ export const Journal: React.FC = () => {
                     placeholder="Paste anything. E.g. 'They asked two graph questions. I solved DFS but stumbled on B+ Trees. Communication went well, but need indexing practice...'"
                     value={messyText}
                     onChange={(e) => setMessyText(e.target.value)}
-                    className="w-full bg-life-sand/90 text-xs border border-life-cocoa/10 rounded-xl px-4 py-3 text-life-cocoa focus:outline-none focus:border-life-vermilion placeholder-life-cocoa/30 leading-relaxed dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
+                    className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 leading-relaxed dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={analyzing}
-                  className="w-full bg-life-vermilion hover:bg-life-vermilion/90 text-white text-xs font-bold py-3.5 rounded-xl shadow-lg shadow-life-vermilion/10 flex items-center justify-center gap-2 mt-4 disabled:opacity-50 transition-all active:scale-[0.98]"
+                  className="w-full bg-crimson hover:bg-crimson/90 text-white text-xs font-bold py-3.5 rounded-xl shadow-lg shadow-crimson/10 flex items-center justify-center gap-2 mt-4 disabled:opacity-50 transition-all active:scale-[0.98]"
                 >
                   {analyzing ? (
                     <>
@@ -190,7 +190,7 @@ export const Journal: React.FC = () => {
                 </button>
               </form>
             ) : (
-              <p className="text-xs text-life-cocoa/50 py-4 text-center">Please submit a job application first before logging journals.</p>
+              <p className="text-xs text-zinc-450 py-4 text-center">Please submit a job application first before logging journals.</p>
             )}
           </div>
 
@@ -201,26 +201,26 @@ export const Journal: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
-                className="bg-life-vermilion/5 border border-life-vermilion/20 p-6 rounded-2xl space-y-5"
+                className="bg-crimson/5 border border-crimson/20 p-6 rounded-2xl space-y-5"
               >
-                <h4 className="text-xs font-bold text-life-cocoa uppercase tracking-widest flex items-center gap-2 dark:text-white">
-                  <Sparkles className="w-4 h-4 text-life-vermilion fill-life-vermilion/10 animate-pulse" />
+                <h4 className="text-xs font-bold text-white uppercase tracking-widest flex items-center gap-2 dark:text-white">
+                  <Sparkles className="w-4 h-4 text-crimson fill-crimson/10 animate-pulse" />
                   Latest AI Analysis
                 </h4>
                 
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="p-3 bg-life-sand border border-life-cocoa/10 rounded-xl text-center dark:bg-zinc-900/40 dark:border-white/5">
-                    <span className="text-[9px] text-life-cocoa/50 block font-bold uppercase tracking-wider dark:text-zinc-500">Tech Score</span>
-                    <span className="text-xs font-extrabold text-life-vermilion mt-1 block font-geom">{parsedResult.technical_score}/10</span>
+                  <div className="p-3 bg-zinc-900 border border-white/5 rounded-xl text-center dark:bg-zinc-900/40 dark:border-white/5">
+                    <span className="text-[9px] text-zinc-450 block font-bold uppercase tracking-wider dark:text-zinc-500">Tech Score</span>
+                    <span className="text-xs font-extrabold text-crimson mt-1 block font-geom">{parsedResult.technical_score}/10</span>
                   </div>
-                  <div className="p-3 bg-life-sand border border-life-cocoa/10 rounded-xl text-center dark:bg-zinc-900/40 dark:border-white/5">
-                    <span className="text-[9px] text-life-cocoa/50 block font-bold uppercase tracking-wider dark:text-zinc-500">Comm Score</span>
+                  <div className="p-3 bg-zinc-900 border border-white/5 rounded-xl text-center dark:bg-zinc-900/40 dark:border-white/5">
+                    <span className="text-[9px] text-zinc-450 block font-bold uppercase tracking-wider dark:text-zinc-500">Comm Score</span>
                     <span className="text-xs font-extrabold text-emerald-600 mt-1 block font-geom">{parsedResult.communication_score}/10</span>
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <span className="text-[9px] text-life-cocoa/50 block font-bold uppercase tracking-wider dark:text-zinc-500">Strengths</span>
+                  <span className="text-[9px] text-zinc-450 block font-bold uppercase tracking-wider dark:text-zinc-500">Strengths</span>
                   <div className="flex flex-wrap gap-2">
                     {parsedResult.strengths.map((s: string, i: number) => (
                       <span key={i} className="text-[10px] font-bold bg-emerald-500/10 text-emerald-700 px-2.5 py-1 rounded-md border border-emerald-500/20 dark:bg-emerald-550/10 dark:text-emerald-450">{s}</span>
@@ -229,17 +229,17 @@ export const Journal: React.FC = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <span className="text-[9px] text-life-cocoa/50 block font-bold uppercase tracking-wider dark:text-zinc-500">Weaknesses</span>
+                  <span className="text-[9px] text-zinc-450 block font-bold uppercase tracking-wider dark:text-zinc-500">Weaknesses</span>
                   <div className="flex flex-wrap gap-2">
                     {parsedResult.weaknesses.map((w: string, i: number) => (
-                      <span key={i} className="text-[10px] font-bold bg-life-vermilion/10 text-life-vermilion px-2.5 py-1 rounded-md border border-life-vermilion/20">{w}</span>
+                      <span key={i} className="text-[10px] font-bold bg-crimson/10 text-crimson px-2.5 py-1 rounded-md border border-crimson/20">{w}</span>
                     ))}
                   </div>
                 </div>
 
                 <div className="space-y-2 pt-1">
-                  <span className="text-[9px] text-life-cocoa/50 block font-bold uppercase tracking-wider dark:text-zinc-500">Recommendations</span>
-                  <p className="text-xs text-life-cocoa/80 leading-relaxed bg-life-sand/40 p-4 rounded-xl border border-life-cocoa/5 dark:bg-zinc-900/45 dark:text-zinc-400 dark:border-white/5">
+                  <span className="text-[9px] text-zinc-450 block font-bold uppercase tracking-wider dark:text-zinc-500">Recommendations</span>
+                  <p className="text-xs text-zinc-350 leading-relaxed bg-zinc-900/40 p-4 rounded-xl border border-white/5 dark:bg-zinc-900/45 dark:text-zinc-400 dark:border-white/5">
                     {parsedResult.recommendations}
                   </p>
                 </div>
@@ -250,17 +250,17 @@ export const Journal: React.FC = () => {
 
         {/* Right Columns - Journal History List */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="bg-white/70 border border-life-cocoa/5 p-6 rounded-2xl shadow-md backdrop-blur-md dark:bg-zinc-900/35 dark:border-white/5">
-            <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-5 flex items-center gap-2 dark:text-white">
-              <FileText className="w-4 h-4 text-life-vermilion" />
+          <div className="bg-zinc-950/60 border border-white/5 p-6 rounded-2xl shadow-md backdrop-blur-md">
+            <h3 className="text-xs font-bold text-white uppercase tracking-widest mb-5 flex items-center gap-2 dark:text-white">
+              <FileText className="w-4 h-4 text-crimson" />
               Journal History
             </h3>
 
             {loading ? (
               <div className="py-12 text-center">
                 <div className="relative w-10 h-10 mx-auto">
-                  <div className="absolute inset-0 rounded-full border-3 border-life-vermilion/25"></div>
-                  <div className="absolute inset-0 rounded-full border-3 border-life-vermilion border-t-transparent animate-spin"></div>
+                  <div className="absolute inset-0 rounded-full border-3 border-crimson/25"></div>
+                  <div className="absolute inset-0 rounded-full border-3 border-crimson border-t-transparent animate-spin"></div>
                 </div>
               </div>
             ) : journals.length > 0 ? (
@@ -269,33 +269,33 @@ export const Journal: React.FC = () => {
                   <motion.div 
                     key={item.id} 
                     whileHover={{ borderColor: "rgba(46,26,22,0.15)" }}
-                    className="p-5 border border-life-cocoa/5 bg-white rounded-2xl space-y-4 shadow-sm transition-all duration-300 dark:bg-zinc-900/60 dark:border-white/5"
+                    className="p-5 border border-white/5 bg-white rounded-2xl space-y-4 shadow-sm transition-all duration-300 dark:bg-zinc-900/60 dark:border-white/5"
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div>
-                        <span className="text-[9px] font-bold text-life-vermilion bg-life-vermilion/10 border border-life-vermilion/20 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                        <span className="text-[9px] font-bold text-crimson bg-crimson/10 border border-crimson/20 px-2 py-0.5 rounded-full uppercase tracking-wider">
                           {item.round_type} Round
                         </span>
-                        <h4 className="font-extrabold text-life-cocoa text-xs mt-2.5 dark:text-zinc-200">
+                        <h4 className="font-extrabold text-white text-xs mt-2.5 dark:text-zinc-200">
                           {getCompanyLabel(item.application_id)}
                         </h4>
                       </div>
-                      <span className="text-[10px] text-life-cocoa/50 font-semibold flex items-center gap-1 dark:text-zinc-500">
+                      <span className="text-[10px] text-zinc-450 font-semibold flex items-center gap-1 dark:text-zinc-500">
                         <Clock className="w-3.5 h-3.5" />
                         {new Date(item.created_at).toLocaleDateString()}
                       </span>
                     </div>
 
-                    <div className="text-xs text-life-cocoa/80 whitespace-pre-wrap bg-life-sand/40 p-4 border border-life-cocoa/5 rounded-xl max-h-24 overflow-y-auto leading-relaxed dark:bg-zinc-950/20 dark:text-zinc-400 dark:border-white/5">
+                    <div className="text-xs text-zinc-350 whitespace-pre-wrap bg-zinc-900/40 p-4 border border-white/5 rounded-xl max-h-24 overflow-y-auto leading-relaxed dark:bg-zinc-950/20 dark:text-zinc-400 dark:border-white/5">
                       {item.feedback}
                     </div>
 
-                    <div className="flex flex-wrap items-center justify-between gap-4 border-t border-life-cocoa/5 pt-4 dark:border-white/5">
+                    <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/5 pt-4 dark:border-white/5">
                       <div className="flex items-center gap-4">
-                        <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-500">
-                          Tech Depth: <strong className="text-life-vermilion font-extrabold ml-1 font-geom">{item.technical_score || 0}/10</strong>
+                        <span className="text-[10px] text-zinc-450 font-bold uppercase tracking-wider dark:text-zinc-500">
+                          Tech Depth: <strong className="text-crimson font-extrabold ml-1 font-geom">{item.technical_score || 0}/10</strong>
                         </span>
-                        <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-500">
+                        <span className="text-[10px] text-zinc-450 font-bold uppercase tracking-wider dark:text-zinc-500">
                           Comm Flow: <strong className="text-emerald-600 font-extrabold ml-1 font-geom">{item.communication_score || 0}/10</strong>
                         </span>
                       </div>
@@ -314,10 +314,10 @@ export const Journal: React.FC = () => {
                 ))}
               </div>
             ) : (
-              <div className="py-16 text-center text-life-cocoa/50 text-xs flex flex-col items-center justify-center p-6 border border-dashed border-life-cocoa/10 rounded-2xl dark:border-white/5">
-                <BookOpen className="w-8 h-8 text-life-cocoa/30 mb-3" />
-                <h4 className="font-bold text-life-cocoa/60 uppercase tracking-wider text-[10px] mb-1 dark:text-zinc-400">Journal Empty</h4>
-                <p className="text-life-cocoa/40 max-w-xs mt-0.5 dark:text-zinc-600">No past feedback logs found. Paste logs in the left panel to populate history.</p>
+              <div className="py-16 text-center text-zinc-450 text-xs flex flex-col items-center justify-center p-6 border border-dashed border-white/5 rounded-2xl dark:border-white/5">
+                <BookOpen className="w-8 h-8 text-zinc-650 mb-3" />
+                <h4 className="font-bold text-zinc-400 uppercase tracking-wider text-[10px] mb-1 dark:text-zinc-400">Journal Empty</h4>
+                <p className="text-zinc-500 max-w-xs mt-0.5 dark:text-zinc-600">No past feedback logs found. Paste logs in the left panel to populate history.</p>
               </div>
             )}
           </div>

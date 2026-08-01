@@ -129,8 +129,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
     return (
       <div className="flex items-center justify-center min-h-[70vh]">
         <div className="relative w-12 h-12">
-          <div className="absolute inset-0 rounded-full border-4 border-life-vermilion/25"></div>
-          <div className="absolute inset-0 rounded-full border-4 border-life-vermilion border-t-transparent animate-spin"></div>
+          <div className="absolute inset-0 rounded-full border-4 border-crimson/25"></div>
+          <div className="absolute inset-0 rounded-full border-4 border-crimson border-t-transparent animate-spin"></div>
         </div>
       </div>
     );
@@ -218,14 +218,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
           className="premium-card flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-400">Total Apps</span>
-            <span className="p-2 rounded-xl bg-life-cocoa/5 text-life-cocoa dark:bg-zinc-800/60 dark:text-zinc-300">
+            <span className="text-[10px] text-zinc-450 font-bold uppercase tracking-wider dark:text-zinc-400">Total Apps</span>
+            <span className="p-2 rounded-xl bg-white/5 text-white dark:bg-zinc-800/60 dark:text-zinc-300">
               <Briefcase className="w-4 h-4" />
             </span>
           </div>
           <div className="mt-6">
-            <span className="text-3xl font-extrabold text-life-cocoa dark:text-white">{totalApps}</span>
-            <p className="text-[10px] text-life-cocoa/40 mt-1 dark:text-zinc-500">Submitted roles</p>
+            <span className="text-3xl font-extrabold text-white">{totalApps}</span>
+            <p className="text-[10px] text-zinc-500 mt-1 dark:text-zinc-500">Submitted roles</p>
           </div>
         </motion.div>
 
@@ -235,14 +235,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
           className="premium-card flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-400">Active</span>
-            <span className="p-2 rounded-xl bg-life-vermilion/10 text-life-vermilion">
+            <span className="text-[10px] text-zinc-450 font-bold uppercase tracking-wider dark:text-zinc-400">Active</span>
+            <span className="p-2 rounded-xl bg-crimson/10 text-crimson">
               <Clock className="w-4 h-4" />
             </span>
           </div>
           <div className="mt-6">
-            <span className="text-3xl font-extrabold text-life-cocoa dark:text-white">{activeApps}</span>
-            <p className="text-[10px] text-life-cocoa/40 mt-1 dark:text-zinc-500">In progress</p>
+            <span className="text-3xl font-extrabold text-white">{activeApps}</span>
+            <p className="text-[10px] text-zinc-500 mt-1 dark:text-zinc-500">In progress</p>
           </div>
         </motion.div>
 
@@ -252,14 +252,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
           className="premium-card flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-400">Assessments</span>
+            <span className="text-[10px] text-zinc-450 font-bold uppercase tracking-wider dark:text-zinc-400">Assessments</span>
             <span className="p-2 rounded-xl bg-teal-500/10 text-teal-650 dark:text-teal-400">
               <GraduationCap className="w-4 h-4" />
             </span>
           </div>
           <div className="mt-6">
-            <span className="text-3xl font-extrabold text-life-cocoa dark:text-white">{oaCount}</span>
-            <p className="text-[10px] text-life-cocoa/40 mt-1 dark:text-zinc-500">Active tests</p>
+            <span className="text-3xl font-extrabold text-white">{oaCount}</span>
+            <p className="text-[10px] text-zinc-500 mt-1 dark:text-zinc-500">Active tests</p>
           </div>
         </motion.div>
 
@@ -269,14 +269,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
           className="premium-card flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-400">Interviews</span>
-            <span className="p-2 rounded-xl bg-life-vermilion/10 text-life-vermilion">
+            <span className="text-[10px] text-zinc-450 font-bold uppercase tracking-wider dark:text-zinc-400">Interviews</span>
+            <span className="p-2 rounded-xl bg-crimson/10 text-crimson">
               <CalendarDays className="w-4 h-4" />
             </span>
           </div>
           <div className="mt-6">
-            <span className="text-3xl font-extrabold text-life-cocoa dark:text-white">{interviewCount}</span>
-            <p className="text-[10px] text-life-cocoa/40 mt-1 dark:text-zinc-500">Live rounds</p>
+            <span className="text-3xl font-extrabold text-white">{interviewCount}</span>
+            <p className="text-[10px] text-zinc-500 mt-1 dark:text-zinc-500">Live rounds</p>
           </div>
         </motion.div>
 
@@ -286,21 +286,21 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
           className="premium-card flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-400">Offers</span>
+            <span className="text-[10px] text-zinc-450 font-bold uppercase tracking-wider dark:text-zinc-400">Offers</span>
             <span className="p-2 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-450">
               <CheckCircle className="w-4 h-4" />
             </span>
           </div>
           <div className="mt-6">
-            <span className="text-3xl font-extrabold text-life-cocoa dark:text-white">{offerCount}</span>
-            <p className="text-[10px] text-life-cocoa/40 mt-1 dark:text-zinc-500">Job letters</p>
+            <span className="text-3xl font-extrabold text-white">{offerCount}</span>
+            <p className="text-[10px] text-zinc-500 mt-1 dark:text-zinc-500">Job letters</p>
           </div>
         </motion.div>
 
         {/* Average Readiness */}
         <motion.div 
           whileHover={{ y: -4, scale: 1.02 }}
-          className="bg-gradient-to-br from-life-cocoa to-[#452721] p-5 rounded-2xl flex flex-col justify-between text-white shadow-lg shadow-life-cocoa/15 transition-all duration-300 border border-white/5"
+          className="bg-gradient-to-br from-life-cocoa to-[#452721] p-5 rounded-2xl flex flex-col justify-between text-white shadow-lg shadow-crimson/10 transition-all duration-300 border border-white/5"
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] text-life-sand/70 font-bold uppercase tracking-wider">Readiness</span>
@@ -389,12 +389,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
           
           {/* Today's Prep Mission */}
           <div className="premium-card p-6">
-            <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-5 flex items-center justify-between dark:text-white">
+            <h3 className="text-xs font-bold text-white uppercase tracking-widest mb-5 flex items-center justify-between dark:text-white">
               <span className="flex items-center gap-2">
-                <Target className="w-4 h-4 text-life-vermilion" />
+                <Target className="w-4 h-4 text-crimson" />
                 Today's Focus
               </span>
-              <span className="text-[9px] bg-life-vermilion/10 text-life-vermilion font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+              <span className="text-[9px] bg-crimson/10 text-crimson font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
                 Copilot Suggestions
               </span>
             </h3>
@@ -406,25 +406,25 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
                   onClick={() => toggleTask(t.id)}
                   className={`p-3.5 border transition-all rounded-xl flex items-start gap-3 cursor-pointer ${
                     t.completed 
-                      ? 'bg-life-sand/20 border-life-cocoa/5 opacity-55' 
-                      : 'bg-life-sand/65 border-life-cocoa/5 hover:border-life-cocoa/15 hover:bg-life-sand/90 dark:bg-zinc-950/40 dark:border-white/5'
+                      ? 'bg-zinc-900/20 border-white/5 opacity-55' 
+                      : 'bg-zinc-900/65 border-white/5 hover:border-white/10 hover:bg-zinc-900 dark:bg-zinc-950/40 dark:border-white/5'
                   }`}
                 >
                   <div className="mt-0.5">
                     <div className={`w-3.5 h-3.5 rounded-md border flex items-center justify-center transition-all ${
-                      t.completed ? 'bg-life-vermilion border-life-vermilion' : 'border-life-cocoa/20'
+                      t.completed ? 'bg-crimson border-crimson' : 'border-life-cocoa/20'
                     }`}>
                       {t.completed && <CheckCircle className="w-2.5 h-2.5 text-white" />}
                     </div>
                   </div>
                   <div className="flex-1">
                     <span className={`font-semibold text-xs leading-tight block ${
-                      t.completed ? 'line-through text-life-cocoa/40' : 'text-life-cocoa dark:text-zinc-200'
+                      t.completed ? 'line-through text-zinc-500' : 'text-zinc-200'
                     }`}>
                       {t.title}
                     </span>
                     <div className="flex items-center gap-2 mt-2">
-                      <span className="text-[9px] text-life-cocoa/40">Duration: {t.duration}</span>
+                      <span className="text-[9px] text-zinc-500">Duration: {t.duration}</span>
                       <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded ${
                         t.priority === 'High' 
                           ? 'bg-rose-500/10 text-rose-500' 
@@ -441,21 +441,21 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
 
           {/* Weak Topics */}
           <div className="premium-card p-6">
-            <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-5 flex items-center gap-2 dark:text-white">
+            <h3 className="text-xs font-bold text-white uppercase tracking-widest mb-5 flex items-center gap-2 dark:text-white">
               <ShieldAlert className="w-4 h-4 text-rose-550" />
               Struggling Topics (Gaps)
             </h3>
             
             <div className="space-y-4">
               {weakTopics.map((item, idx) => (
-                <div key={idx} className="flex items-center justify-between border-b border-life-cocoa/5 pb-3.5 last:border-b-0 last:pb-0">
+                <div key={idx} className="flex items-center justify-between border-b border-white/5 pb-3.5 last:border-b-0 last:pb-0">
                   <div>
-                    <span className="text-xs font-semibold text-life-cocoa block dark:text-zinc-200">{item.topic}</span>
-                    <span className="text-[10px] text-life-cocoa/55 block mt-1">{item.status}</span>
+                    <span className="text-xs font-semibold text-white block dark:text-zinc-200">{item.topic}</span>
+                    <span className="text-[10px] text-zinc-400 block mt-1">{item.status}</span>
                   </div>
                   <div className="text-right">
                     <span className="text-xs font-bold text-rose-500 block">{item.score}%</span>
-                    <span className="text-[8px] text-life-cocoa/45 uppercase tracking-wider block">Readiness</span>
+                    <span className="text-[8px] text-zinc-500 uppercase tracking-wider block">Readiness</span>
                   </div>
                 </div>
               ))}
@@ -464,25 +464,25 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
 
           {/* Upcoming Event Schedule */}
           <div className="premium-card p-6">
-            <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-5 flex items-center gap-2 dark:text-white">
-              <CalendarDays className="w-4 h-4 text-life-vermilion" />
+            <h3 className="text-xs font-bold text-white uppercase tracking-widest mb-5 flex items-center gap-2 dark:text-white">
+              <CalendarDays className="w-4 h-4 text-crimson" />
               Upcoming Schedules
             </h3>
 
             {recentEvents.length > 0 ? (
               <div className="space-y-3.5">
                 {recentEvents.map((evt) => (
-                  <div key={evt.id} className="p-3.5 border border-life-cocoa/5 bg-life-sand/40 rounded-xl hover:border-life-cocoa/15 transition-all dark:bg-zinc-950/40">
+                  <div key={evt.id} className="p-3.5 border border-white/5 bg-zinc-900/40 rounded-xl hover:border-white/10 transition-all dark:bg-zinc-950/40">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-life-cocoa dark:text-zinc-200">
+                      <span className="text-xs font-bold text-zinc-200">
                         {evt.company_name}
                       </span>
-                      <span className="text-[9px] bg-life-vermilion/10 text-life-vermilion font-bold px-2 py-0.5 rounded-full uppercase">
+                      <span className="text-[9px] bg-crimson/10 text-crimson font-bold px-2 py-0.5 rounded-full uppercase">
                         {evt.event_type}
                       </span>
                     </div>
-                    <p className="text-[10px] text-life-cocoa/50 mt-1">{evt.role}</p>
-                    <div className="text-[10px] text-life-vermilion font-bold mt-3 flex items-center gap-1.5">
+                    <p className="text-[10px] text-zinc-450 mt-1">{evt.role}</p>
+                    <div className="text-[10px] text-crimson font-bold mt-3 flex items-center gap-1.5">
                       <Clock className="w-3.5 h-3.5" />
                       {new Date(evt.event_date).toLocaleDateString(undefined, { 
                         weekday: 'short', 
@@ -496,7 +496,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
                 ))}
               </div>
             ) : (
-              <p className="text-xs text-life-cocoa/50 py-4 text-center">No upcoming assessments or interviews scheduled.</p>
+              <p className="text-xs text-zinc-450 py-4 text-center">No upcoming assessments or interviews scheduled.</p>
             )}
           </div>
 

@@ -44,8 +44,8 @@ const MainLayout: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-life-sand dark:bg-[#18110F] flex items-center justify-center transition-colors">
-        <div className="animate-spin rounded-full h-8 w-8 border-3 border-life-vermilion border-t-transparent" />
+      <div className="min-h-screen bg-zinc-900 dark:bg-[#18110F] flex items-center justify-center transition-colors">
+        <div className="animate-spin rounded-full h-8 w-8 border-3 border-crimson border-t-transparent" />
       </div>
     );
   }

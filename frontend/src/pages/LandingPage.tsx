@@ -45,7 +45,7 @@ export const LandingPage: React.FC = () => {
               </svg>
             </div>
             <div>
-              <span className="font-bold text-sm tracking-widest uppercase block font-geom text-white">PLACEPILOT</span>
+              <span className="font-bold text-sm tracking-widest uppercase block font-wide text-white">PLACEPILOT</span>
               <span className="text-[8px] text-crimson font-bold tracking-widest block uppercase mt-0.5">Placement AI</span>
             </div>
           </div>

@@ -34,7 +34,8 @@ export default {
       },
       fontFamily: {
         sans: ['Onest', 'Outfit', 'Inter', 'system-ui', 'sans-serif'],
-        geom: ['Syncopate', 'Chacra Petch', 'Space Grotesk', 'sans-serif'],
+        geom: ['Space Grotesk', 'Chacra Petch', 'sans-serif'],
+        wide: ['Syncopate', 'sans-serif'],
       }
     },
   },

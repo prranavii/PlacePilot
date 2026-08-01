@@ -126,8 +126,8 @@ export const ResumeMatcher: React.FC = () => {
     return (
       <div className="flex items-center justify-center min-h-[70vh]">
         <div className="relative w-12 h-12">
-          <div className="absolute inset-0 rounded-full border-4 border-life-vermilion/25"></div>
-          <div className="absolute inset-0 rounded-full border-4 border-life-vermilion border-t-transparent animate-spin"></div>
+          <div className="absolute inset-0 rounded-full border-4 border-crimson/25"></div>
+          <div className="absolute inset-0 rounded-full border-4 border-crimson border-t-transparent animate-spin"></div>
         </div>
       </div>
     );
@@ -141,14 +141,14 @@ export const ResumeMatcher: React.FC = () => {
       className="space-y-8 pb-12 font-sans relative"
     >
       {/* 3D Ambient backdrop Blob */}
-      <div className="absolute -top-12 -left-12 w-96 h-96 bg-life-vermilion/5 rounded-full blur-3xl pointer-events-none animate-blob"></div>
+      <div className="absolute -top-12 -left-12 w-96 h-96 bg-crimson/5 rounded-full blur-3xl pointer-events-none animate-blob"></div>
 
       {/* Header */}
       <div>
-        <h2 className="text-2xl font-extrabold tracking-tight text-life-cocoa dark:text-white font-geom">
+        <h2 className="text-xl font-bold tracking-widest text-white font-geom uppercase">
           Resume-Role Match Agent
         </h2>
-        <p className="text-sm text-life-cocoa/60 mt-1 max-w-lg leading-relaxed dark:text-zinc-400">
+        <p className="text-xs text-zinc-400 mt-2 max-w-lg leading-relaxed font-semibold uppercase tracking-wider">
           Evaluate how well your resume matches a target job description. Identify missing skills, critical keyword gaps, and likely interview focus areas.
         </p>
       </div>
@@ -156,19 +156,19 @@ export const ResumeMatcher: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
         
         {/* Left Side: Input Form */}
-        <div className="bg-white/70 border border-life-cocoa/5 p-6 rounded-2xl shadow-md backdrop-blur-md space-y-5 dark:bg-zinc-900/35 dark:border-white/5">
+        <div className="bg-zinc-950/60 border border-white/5 p-6 rounded-2xl shadow-md backdrop-blur-md space-y-5">
           <form onSubmit={handleMatch} className="space-y-5">
             
             {/* Select Job application */}
             {applications.length > 0 && (
               <div>
-                <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">
+                <label className="block text-[9px] font-bold text-zinc-450 mb-1.5 uppercase tracking-wider dark:text-zinc-400">
                   Prefill JD from Application
                 </label>
                 <select
                   value={selectedAppId}
                   onChange={(e) => handleAppChange(e.target.value)}
-                  className="w-full bg-life-sand/90 text-xs border border-life-cocoa/10 rounded-xl px-3.5 py-3 text-life-cocoa focus:outline-none focus:border-life-vermilion dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
+                  className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-3 text-white focus:outline-none focus:border-crimson dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
                 >
                   {applications.map((app) => (
                     <option key={app.id} value={app.id}>
@@ -181,7 +181,7 @@ export const ResumeMatcher: React.FC = () => {
 
             {/* Job Description Textarea */}
             <div>
-              <label className="block text-[9px] font-bold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-455">
+              <label className="block text-[9px] font-bold text-zinc-450 mb-1.5 uppercase tracking-wider dark:text-zinc-455">
                 Job Description (JD) *
               </label>
               <textarea
@@ -190,21 +190,21 @@ export const ResumeMatcher: React.FC = () => {
                 placeholder="Paste the target role description and requirements..."
                 value={jdText}
                 onChange={(e) => setJdText(e.target.value)}
-                className="w-full bg-life-sand/90 text-xs border border-life-cocoa/10 rounded-xl px-4 py-3 text-life-cocoa focus:outline-none focus:border-life-vermilion placeholder-life-cocoa/30 leading-relaxed dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
+                className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 leading-relaxed dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
               />
             </div>
 
             {/* Candidate Resume Textarea */}
             <div>
               <div className="flex items-center justify-between mb-2">
-                <label className="block text-[9px] font-bold text-life-cocoa/50 uppercase tracking-wider dark:text-zinc-455">
+                <label className="block text-[9px] font-bold text-zinc-450 uppercase tracking-wider dark:text-zinc-455">
                   Resume Content *
                 </label>
                 <div className="relative">
-                  <label className="cursor-pointer text-[10px] font-bold text-life-vermilion hover:text-life-vermilion/85 flex items-center gap-1.5 transition-all">
+                  <label className="cursor-pointer text-[10px] font-bold text-crimson hover:text-crimson/85 flex items-center gap-1.5 transition-all">
                     {parsing ? (
                       <>
-                        <span className="h-3.5 w-3.5 border-2 border-life-vermilion border-t-transparent rounded-full animate-spin" />
+                        <span className="h-3.5 w-3.5 border-2 border-crimson border-t-transparent rounded-full animate-spin" />
                         <span>Extracting text...</span>
                       </>
                     ) : (
@@ -229,7 +229,7 @@ export const ResumeMatcher: React.FC = () => {
                 placeholder="Upload your resume file above or paste the text content here..."
                 value={resumeText}
                 onChange={(e) => setResumeText(e.target.value)}
-                className="w-full bg-life-sand/90 text-xs border border-life-cocoa/10 rounded-xl px-4 py-3 text-life-cocoa focus:outline-none focus:border-life-vermilion placeholder-life-cocoa/30 leading-relaxed dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
+                className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-crimson placeholder-life-cocoa/30 leading-relaxed dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
               />
             </div>
 
@@ -237,7 +237,7 @@ export const ResumeMatcher: React.FC = () => {
             <button
               type="submit"
               disabled={matching || !resumeText.trim() || !jdText.trim()}
-              className="w-full bg-life-vermilion hover:bg-life-vermilion/90 text-white text-xs font-bold py-3.5 rounded-xl shadow-lg shadow-life-vermilion/10 flex items-center justify-center gap-2 mt-4 disabled:opacity-50 transition-all active:scale-[0.98]"
+              className="w-full bg-crimson hover:bg-crimson/90 text-white text-xs font-bold py-3.5 rounded-xl shadow-lg shadow-crimson/10 flex items-center justify-center gap-2 mt-4 disabled:opacity-50 transition-all active:scale-[0.98]"
             >
               {matching ? (
                 <>
@@ -262,36 +262,36 @@ export const ResumeMatcher: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
-                className="bg-white/70 border border-life-cocoa/5 p-6 rounded-2xl shadow-md backdrop-blur-md space-y-6 relative overflow-hidden dark:bg-zinc-900/35 dark:border-white/5"
+                className="bg-white/70 border border-white/5 p-6 rounded-2xl shadow-md backdrop-blur-md space-y-6 relative overflow-hidden dark:bg-zinc-900/35 dark:border-white/5"
               >
                 
                 {/* Match Score Gauge */}
-                <div className="flex flex-col items-center pb-5 border-b border-life-cocoa/5">
-                  <span className="text-[9px] font-bold uppercase tracking-widest text-life-cocoa/50 dark:text-zinc-500">
+                <div className="flex flex-col items-center pb-5 border-b border-white/5">
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-zinc-500">
                     Calculated Score
                   </span>
-                  <div className="text-3xl font-black text-life-vermilion mt-2 font-geom">
+                  <div className="text-3xl font-black text-crimson mt-2 font-geom">
                     {result.match_percentage}%
                   </div>
-                  <div className="text-xs font-semibold text-life-cocoa/80 tracking-tight mt-1 dark:text-zinc-300">
+                  <div className="text-xs font-semibold text-zinc-350 tracking-tight mt-1 dark:text-zinc-300">
                     Resume-Role Alignment
                   </div>
-                  <div className="w-full bg-life-sand border border-life-cocoa/10 h-3 rounded-full mt-4 overflow-hidden p-0.5 dark:bg-zinc-950 dark:border-white/5">
+                  <div className="w-full bg-zinc-900 border border-white/5 h-3 rounded-full mt-4 overflow-hidden p-0.5 dark:bg-zinc-950 dark:border-white/5">
                     <motion.div 
                       initial={{ width: 0 }}
                       animate={{ width: `${result.match_percentage}%` }}
                       transition={{ duration: 0.8, ease: "easeOut" }}
-                      className="bg-life-vermilion h-full rounded-full" 
+                      className="bg-crimson h-full rounded-full" 
                     />
                   </div>
                 </div>
 
                 {/* Explanation Card */}
                 <div className="space-y-2">
-                  <span className="text-[9px] text-life-cocoa/50 block font-bold uppercase tracking-wider dark:text-zinc-500">
+                  <span className="text-[9px] text-zinc-450 block font-bold uppercase tracking-wider dark:text-zinc-500">
                     Match Explanation
                   </span>
-                  <p className="text-xs text-life-cocoa/80 leading-relaxed bg-life-sand/40 p-4 rounded-xl border border-life-cocoa/5 dark:bg-zinc-950/20 dark:text-zinc-400 dark:border-white/5">
+                  <p className="text-xs text-zinc-350 leading-relaxed bg-zinc-900/40 p-4 rounded-xl border border-white/5 dark:bg-zinc-950/20 dark:text-zinc-400 dark:border-white/5">
                     {result.explanation}
                   </p>
                 </div>
@@ -299,7 +299,7 @@ export const ResumeMatcher: React.FC = () => {
                 {/* Matched Skills */}
                 {result.matched_skills.length > 0 && (
                   <div className="space-y-2.5">
-                    <span className="text-[9px] text-life-cocoa/50 block font-bold uppercase tracking-wider flex items-center gap-1.5 dark:text-zinc-500">
+                    <span className="text-[9px] text-zinc-450 block font-bold uppercase tracking-wider flex items-center gap-1.5 dark:text-zinc-500">
                       <CheckCircle className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-450" /> Matched Skills
                     </span>
                     <div className="flex flex-wrap gap-2">
@@ -315,12 +315,12 @@ export const ResumeMatcher: React.FC = () => {
                 {/* Missing Skills */}
                 {result.missing_skills.length > 0 && (
                   <div className="space-y-2.5">
-                    <span className="text-[9px] text-life-cocoa/50 block font-bold uppercase tracking-wider flex items-center gap-1.5 dark:text-zinc-500">
-                      <AlertTriangle className="w-3.5 h-3.5 text-life-vermilion" /> Missing Skills / Gaps
+                    <span className="text-[9px] text-zinc-450 block font-bold uppercase tracking-wider flex items-center gap-1.5 dark:text-zinc-500">
+                      <AlertTriangle className="w-3.5 h-3.5 text-crimson" /> Missing Skills / Gaps
                     </span>
                     <div className="flex flex-wrap gap-2">
                       {result.missing_skills.map((s: string, idx: number) => (
-                        <span key={idx} className="text-[10px] font-bold bg-life-vermilion/10 text-life-vermilion px-3 py-1 rounded-full border border-life-vermilion/20">
+                        <span key={idx} className="text-[10px] font-bold bg-crimson/10 text-crimson px-3 py-1 rounded-full border border-crimson/20">
                           {s}
                         </span>
                       ))}
@@ -331,12 +331,12 @@ export const ResumeMatcher: React.FC = () => {
                 {/* Keyword Gaps */}
                 {result.keyword_gaps.length > 0 && (
                   <div className="space-y-2.5">
-                    <span className="text-[9px] text-life-cocoa/50 block font-bold uppercase tracking-wider flex items-center gap-1.5 dark:text-zinc-500">
-                      <Search className="w-3.5 h-3.5 text-life-vermilion" /> Keyword Gaps
+                    <span className="text-[9px] text-zinc-450 block font-bold uppercase tracking-wider flex items-center gap-1.5 dark:text-zinc-500">
+                      <Search className="w-3.5 h-3.5 text-crimson" /> Keyword Gaps
                     </span>
                     <div className="flex flex-wrap gap-2">
                       {result.keyword_gaps.map((k: string, idx: number) => (
-                        <span key={idx} className="text-[10px] font-bold bg-life-vermilion/10 text-life-vermilion px-3 py-1 rounded-full border border-life-vermilion/20">
+                        <span key={idx} className="text-[10px] font-bold bg-crimson/10 text-crimson px-3 py-1 rounded-full border border-crimson/20">
                           {k}
                         </span>
                       ))}
@@ -347,12 +347,12 @@ export const ResumeMatcher: React.FC = () => {
                 {/* Likely Interview Topics */}
                 {result.likely_interview_areas.length > 0 && (
                   <div className="space-y-3">
-                    <span className="text-[9px] text-life-cocoa/50 block font-bold uppercase tracking-wider flex items-center gap-1.5 dark:text-zinc-500">
-                      <Lightbulb className="w-3.5 h-3.5 text-life-vermilion" /> Likely Interview Topics
+                    <span className="text-[9px] text-zinc-450 block font-bold uppercase tracking-wider flex items-center gap-1.5 dark:text-zinc-500">
+                      <Lightbulb className="w-3.5 h-3.5 text-crimson" /> Likely Interview Topics
                     </span>
-                    <ul className="text-xs text-life-cocoa/85 list-disc list-inside space-y-2 bg-life-sand/40 p-4 rounded-xl border border-life-cocoa/5 leading-relaxed dark:bg-zinc-950/20 dark:text-zinc-400 dark:border-white/5">
+                    <ul className="text-xs text-white/85 list-disc list-inside space-y-2 bg-zinc-900/40 p-4 rounded-xl border border-white/5 leading-relaxed dark:bg-zinc-950/20 dark:text-zinc-400 dark:border-white/5">
                       {result.likely_interview_areas.map((t: string, idx: number) => (
-                        <li key={idx} className="marker:text-life-vermilion">{t}</li>
+                        <li key={idx} className="marker:text-crimson">{t}</li>
                       ))}
                     </ul>
                   </div>
@@ -360,10 +360,10 @@ export const ResumeMatcher: React.FC = () => {
 
               </motion.div>
             ) : (
-              <div className="bg-white/70 border border-life-cocoa/5 text-center py-20 rounded-2xl flex flex-col items-center justify-center p-6 shadow-md dark:bg-zinc-900/35 dark:border-white/5">
-                <FileText className="w-12 h-12 text-life-cocoa/30 mb-4" />
-                <h4 className="font-bold text-life-cocoa/75 text-sm dark:text-zinc-300">No analysis generated</h4>
-                <p className="text-xs text-life-cocoa/50 max-w-xs mt-1.5 leading-relaxed dark:text-zinc-500">
+              <div className="bg-white/70 border border-white/5 text-center py-20 rounded-2xl flex flex-col items-center justify-center p-6 shadow-md dark:bg-zinc-900/35 dark:border-white/5">
+                <FileText className="w-12 h-12 text-zinc-650 mb-4" />
+                <h4 className="font-bold text-white/75 text-sm dark:text-zinc-300">No analysis generated</h4>
+                <p className="text-xs text-zinc-450 max-w-xs mt-1.5 leading-relaxed dark:text-zinc-500">
                   Paste your resume text and target JD on the left panel, or upload a resume file, and click calculate to retrieve structured recruiter scorecard analytics.
                 </p>
               </div>
