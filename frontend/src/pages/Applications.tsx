@@ -26,6 +26,7 @@ export const Applications: React.FC = () => {
   const [loadingEvents, setLoadingEvents] = useState(false);
   const [preparing, setPreparing] = useState(false);
   const [prepTasks, setPrepTasks] = useState<any[]>([]);
+  const [studyPlan, setStudyPlan] = useState<any[]>([]);
 
   // Create Application Modal State
   const [showAddModal, setShowAddModal] = useState(false);
@@ -164,6 +165,7 @@ export const Applications: React.FC = () => {
     setSelectedApp(app);
     setLoadingEvents(true);
     setPrepTasks([]);
+    setStudyPlan([]);
     try {
       const evts = await api.applications.events(app.id);
       setAppEvents(evts);
@@ -224,6 +226,7 @@ export const Applications: React.FC = () => {
     if (!selectedApp) return;
     setPreparing(true);
     setPrepTasks([]);
+    setStudyPlan([]);
     
     const token = localStorage.getItem('token');
     const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
@@ -243,6 +246,10 @@ export const Applications: React.FC = () => {
           duration: `${t.estimated_duration_mins || 30} mins`,
           type: t.topic || 'DSA'
         })));
+        
+        // Load structured study plan
+        setStudyPlan(data.study_plan || []);
+
         // Dynamically append AI Insight to workspace notes
         if (data.ai_insight) {
           setSelectedApp((prev: any) => ({
@@ -489,8 +496,59 @@ export const Applications: React.FC = () => {
                   <span>🎙️ Start AI Mock Interview</span>
                 </button>
 
-                {/* Prep tasks display if generated */}
-                {prepTasks.length > 0 && (
+                {/* Structured Multi-Phase Study Plan display */}
+                {studyPlan.length > 0 && (
+                  <div className="mt-5 pt-5 border-t border-life-cocoa/5 space-y-4 dark:border-white/5">
+                    <h4 className="text-[10px] font-bold text-life-cocoa/50 uppercase tracking-widest flex items-center gap-1.5 dark:text-zinc-400">
+                      <Sparkles className="w-3.5 h-3.5 text-life-vermilion animate-pulse" />
+                      Structured Prep Strategy
+                    </h4>
+                    
+                    <div className="space-y-4 relative pl-3.5 before:absolute before:inset-y-1.5 before:left-1 before:w-[1px] before:bg-life-vermilion/20 dark:before:bg-white/10">
+                      {studyPlan.map((phase: any, pIdx: number) => (
+                        <div key={pIdx} className="relative space-y-2">
+                          {/* Chronological bullet dot */}
+                          <div className="absolute -left-[17.5px] top-1.5 w-2 h-2 rounded-full bg-life-vermilion border-2 border-life-sand dark:border-[#18110F]" />
+                          
+                          <div className="bg-white border border-life-cocoa/5 rounded-xl p-4 shadow-sm dark:bg-zinc-900/60 dark:border-white/5">
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs font-extrabold text-life-cocoa dark:text-zinc-200 block">
+                                {phase.phase_name}
+                              </span>
+                              <span className="text-[9px] bg-life-vermilion/10 text-life-vermilion font-bold px-2 py-0.5 rounded-full">
+                                {phase.duration_days} {phase.duration_days === 1 ? 'day' : 'days'}
+                              </span>
+                            </div>
+
+                            {/* Focus Areas Tags */}
+                            {phase.focus_areas && phase.focus_areas.length > 0 && (
+                              <div className="flex flex-wrap gap-1 mt-2">
+                                {phase.focus_areas.map((tag: string, tIdx: number) => (
+                                  <span key={tIdx} className="text-[9px] bg-life-cocoa/5 text-life-cocoa/60 font-semibold px-2 py-0.5 rounded dark:bg-zinc-800 dark:text-zinc-400">
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+
+                            {/* Concrete Tasks checklist */}
+                            <ul className="mt-3 space-y-2 border-t border-life-cocoa/5 pt-3 dark:border-white/5">
+                              {phase.concrete_tasks.map((task: string, tIdx: number) => (
+                                <li key={tIdx} className="text-xs text-life-cocoa/70 flex items-start gap-2 dark:text-zinc-300">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-life-vermilion/55 mt-1.5 shrink-0" />
+                                  <span className="leading-relaxed">{task}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Flat fallback tasks display if old plan schema is returned */}
+                {studyPlan.length === 0 && prepTasks.length > 0 && (
                   <div className="mt-4 pt-4 border-t border-life-cocoa/5 space-y-3 dark:border-white/5">
                     <h4 className="text-xs font-bold text-life-cocoa/50 uppercase tracking-widest text-[9px] dark:text-zinc-400">Generated Study Plan</h4>
                     {prepTasks.map((t, i) => (

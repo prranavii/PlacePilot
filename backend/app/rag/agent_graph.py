@@ -18,9 +18,15 @@ class WeaknessAnalysisOut(BaseModel):
     weaknesses: List[str] = Field(..., description="List of specific technical, conceptual, or behavioral gaps identified")
     reasoning: str = Field(..., description="Explanation of why these weaknesses were highlighted")
 
+class StudyPhase(BaseModel):
+    phase_name: str = Field(..., description="Name of the preparation phase, e.g. Phase 1: Core Concept Revision")
+    duration_days: int = Field(..., description="Number of days allocated to this phase")
+    focus_areas: List[str] = Field(..., description="Focus skills, topics, or languages for this phase")
+    concrete_tasks: List[str] = Field(..., description="Actionable tasks to complete during this phase")
+
 class DraftStrategyOut(BaseModel):
     estimated_days_remaining: int
-    raw_tasks: List[str] = Field(..., description="Initial list of planned preparation tasks")
+    study_plan: List[StudyPhase] = Field(..., description="Initial multi-phase study plan draft")
     readiness_estimation: float = Field(..., description="Initial readiness percentage draft")
 
 class FinalStrategyPlanOut(BaseModel):
@@ -28,7 +34,7 @@ class FinalStrategyPlanOut(BaseModel):
     overall_readiness: float
     topic_readiness: Dict[str, float]
     high_priority_topics: List[str]
-    today_mission: List[str] = Field(..., description="Pruned, high-yield tasks that are realistic for the timeline")
+    study_plan: List[StudyPhase] = Field(..., description="Polished, multi-phase timeline study plan")
     ai_insight: str = Field(..., description="Recruiter-style insight explaining the structured plan")
 
 # --- Agent Graph Orchestrator ---
@@ -76,7 +82,7 @@ class PrepareMeAgentGraph:
         # NODE 2: Strategy Planner Agent
         # ----------------------------------------------------
         draft_state = self._node_strategy_planner(app, weakness_state.weaknesses, days_remaining)
-        logger.info(f"Node 2 (Strategy Planner) output: {len(draft_state.raw_tasks)} drafted tasks")
+        logger.info(f"Node 2 (Strategy Planner) output: {len(draft_state.study_plan)} drafted phases")
 
         # ----------------------------------------------------
         # NODE 3: Validator/Reviewer Agent
@@ -124,18 +130,19 @@ class PrepareMeAgentGraph:
         Synthesizes target JD and identified weaknesses to draft initial study tasks.
         """
         prompt = (
-            f"You are the Strategy Planner Agent. Draft an initial list of preparation tasks "
+            f"You are the Strategy Planner Agent. Draft a complete, structured, multi-phase preparation plan "
             f"for a candidate applying for the '{app.role}' role at '{app.company_name}'.\n\n"
             f"Target Job Description:\n{app.job_description or 'No JD text.'}\n\n"
             f"Timeline: {days_remaining} days remaining.\n"
             f"Student Core Weaknesses to Target:\n" + "\n".join([f"- {w}" for w in weaknesses]) + "\n\n"
-            f"Propose a list of coding, system design, or behavioral tasks. Be concrete."
+            f"Partition the preparation timeline into logical, sequential preparation phases (e.g. Phase 1: Core Concept Revision, Phase 2: Implementation & Time-boxing, Phase 3: Mock practice & Final checks). "
+            f"For each phase, specify the phase_name, duration_days, focus_areas, and a list of detailed, concrete_tasks to complete."
         )
 
         return groq_service.structured_generate(
             prompt=prompt,
             response_model=DraftStrategyOut,
-            system_prompt="You are an Expert Placement Strategist. Build high-yield, specific interview preparation lists."
+            system_prompt="You are an Expert Placement Strategist. Build detailed, structured multi-phase preparation plans."
         )
 
     def _node_reviewer_validator(
@@ -148,22 +155,27 @@ class PrepareMeAgentGraph:
         """
         Reviews draft strategy against the timeline constraint. Prunes excessive tasks to ensure feasibility.
         """
+        draft_phases_text = ""
+        for p in draft.study_plan:
+            draft_phases_text += f"\n- {p.phase_name} ({p.duration_days} days):\n"
+            draft_phases_text += "  Focus: " + ", ".join(p.focus_areas) + "\n"
+            draft_phases_text += "  Tasks:\n" + "\n".join([f"    * {t}" for t in p.concrete_tasks]) + "\n"
+
         prompt = (
-            f"You are the Reviewer/Validator Agent. Review the initial draft preparation plan "
+            f"You are the Reviewer/Validator Agent. Review the initial draft multi-phase preparation plan "
             f"for a '{app.role}' role at '{app.company_name}'. Make sure the daily tasks are feasible "
             f"given the timeline constraint of {days_remaining} days remaining. "
-            f"If the timeline is short (e.g. less than 3 days), restrict today's mission to a maximum of 2 highly impactful, high-priority tasks. "
-            f"Provide constructive developer insights explaining the reasoning.\n\n"
+            f"Refine the phases and task details so they are realistic, actionable, and focus heavily on key developer readiness topics.\n\n"
             f"Core Weaknesses Targeted:\n" + "\n".join([f"- {w}" for w in weaknesses]) + "\n\n"
-            f"Proposed Draft Tasks:\n" + "\n".join([f"- {t}" for t in draft.raw_tasks]) + "\n\n"
+            f"Proposed Draft Phases Plan:\n{draft_phases_text}\n"
             f"Initial Readiness Draft: {draft.readiness_estimation}%\n\n"
-            f"Output the final, polished, timeline-feasible study strategy."
+            f"Output the final, polished, timeline-feasible structured study strategy containing all phases."
         )
 
         return groq_service.structured_generate(
             prompt=prompt,
             response_model=FinalStrategyPlanOut,
-            system_prompt="You are a Technical Placement Mentor. Refine preparation strategies to be realistic, high-yielding, and actionable."
+            system_prompt="You are a Technical Placement Mentor. Refine preparation plans to be realistic, structured, and highly actionable."
         )
 
 prepare_agent_graph = PrepareMeAgentGraph()

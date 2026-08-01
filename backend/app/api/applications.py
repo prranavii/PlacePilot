@@ -160,7 +160,7 @@ class PrepareMeStrategyOut(BaseModel):
     overall_readiness: float
     topic_readiness: Dict[str, float]
     high_priority_topics: List[str]
-    today_mission: List[str]
+    study_plan: List[dict]
     ai_insight: str
 
 @router.post("/{id}/prepare", response_model=StudyPlanOut)
@@ -187,6 +187,7 @@ def prepare_application_strategy(
     db.commit()
 
     # 5. Save Study Plan to database
+    flat_today_mission = [t for phase in strategy.study_plan for t in phase.concrete_tasks][:4]
     db_plan = StudyPlan(
         application_id=app.id,
         user_id=current_user.id,
@@ -194,7 +195,8 @@ def prepare_application_strategy(
         target_date=app.deadline,
         readiness_at_generation=strategy.overall_readiness,
         weak_areas=strategy.high_priority_topics,
-        today_mission=strategy.today_mission,
+        today_mission=flat_today_mission,
+        study_plan=[phase.model_dump() for phase in strategy.study_plan],
         ai_insight=strategy.ai_insight,
         active=True
     )
@@ -203,7 +205,8 @@ def prepare_application_strategy(
     db.refresh(db_plan)
 
     # 6. Save Study Tasks to database
-    for idx, task_title in enumerate(strategy.today_mission):
+    all_tasks = [t for phase in strategy.study_plan for t in phase.concrete_tasks]
+    for idx, task_title in enumerate(all_tasks):
         # Extract a topic from task title if possible
         topic_match = "DSA"
         for t in topics:
@@ -218,7 +221,7 @@ def prepare_application_strategy(
             title=task_title,
             topic=topic_match,
             company_name=app.company_name,
-            priority="High" if idx == 0 else "Medium",
+            priority="High" if idx < 2 else "Medium",
             status="Todo",
             source_reason=f"AI recommended for {app.company_name} prep",
             ai_generated=True
@@ -236,7 +239,7 @@ def prepare_application_strategy(
         event_type="Prep Strategy Generated",
         event_date=db_plan.created_at,
         status="Completed",
-        details=f"AI Copilot generated a strategy plan with {len(strategy.today_mission)} today tasks. Readiness estimated at {strategy.overall_readiness}%."
+        details=f"AI Copilot generated a multi-phase strategy plan with {len(strategy.study_plan)} phases. Readiness estimated at {strategy.overall_readiness}%."
     )
     db.add(event)
     db.commit()

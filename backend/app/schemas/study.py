@@ -47,6 +47,7 @@ class StudyPlanBase(BaseModel):
     readiness_at_generation: float = 50.0
     weak_areas: Optional[List[str]] = None
     today_mission: Optional[List[str]] = None
+    study_plan: Optional[List[dict]] = None
     ai_insight: Optional[str] = None
     active: bool = True
 
@@ -59,6 +60,7 @@ class StudyPlanUpdate(BaseModel):
     readiness_at_generation: Optional[float] = None
     weak_areas: Optional[List[str]] = None
     today_mission: Optional[List[str]] = None
+    study_plan: Optional[List[dict]] = None
     ai_insight: Optional[str] = None
     active: Optional[bool] = None
 

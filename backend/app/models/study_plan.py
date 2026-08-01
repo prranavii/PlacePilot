@@ -17,6 +17,7 @@ class StudyPlan(Base):
     
     weak_areas: Mapped[Optional[List[str]]] = mapped_column(JSON, nullable=True) # e.g. ["Graph BFS", "DBMS Indexing"]
     today_mission: Mapped[Optional[List[str]]] = mapped_column(JSON, nullable=True) # e.g. ["Solve 2 Graph problems", "Revise Indexing"]
+    study_plan: Mapped[Optional[List[dict]]] = mapped_column(JSON, nullable=True)
     ai_insight: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     active: Mapped[bool] = mapped_column(Boolean, default=True)
     

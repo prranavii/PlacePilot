@@ -150,6 +150,7 @@ class GroqService:
 
         # 3. Fallback for Prepare Me Study Plan
         if "PrepareMeStrategyOut" in model_name or "FinalStrategyPlanOut" in model_name:
+            from app.rag.agent_graph import StudyPhase
             return model(
                 estimated_days_remaining=5,
                 overall_readiness=72.0,
@@ -160,10 +161,35 @@ class GroqService:
                     "Computer Networks": 70.0
                 },
                 high_priority_topics=["Graph Cycle Detection", "B+ Tree Indexing", "TCP vs UDP"],
-                today_mission=[
-                    "Implement BFS cycle detection under 30 minutes",
-                    "Draw the physical disk layout of a B+ Tree index page",
-                    "Complete a 20-minute mock interview focus on networking"
+                study_plan=[
+                    StudyPhase(
+                        phase_name="Phase 1: Foundation & Conceptual Core",
+                        duration_days=2,
+                        focus_areas=["Graph Algorithms", "DBMS Storage Engine Design"],
+                        concrete_tasks=[
+                            "Implement BFS/DFS cycle detection algorithms under 30 minutes",
+                            "Review B+ Tree disk indexing structure and node page layout details",
+                            "Review TCP 3-way handshake and UDP differences"
+                        ]
+                    ),
+                    StudyPhase(
+                        phase_name="Phase 2: Mock Scenarios & Time Boxing",
+                        duration_days=2,
+                        focus_areas=["Networking Protocols", "Graph Path Finding"],
+                        concrete_tasks=[
+                            "Conduct a 20-minute simulated networking mock interview",
+                            "Solve 3 Dijkstra's algorithm traversal optimization tasks"
+                        ]
+                    ),
+                    StudyPhase(
+                        phase_name="Phase 3: Final Checks & Verification",
+                        duration_days=1,
+                        focus_areas=["System Design", "Behavioral Alignment"],
+                        concrete_tasks=[
+                            "Design a high-volume chat server RAG index strategy",
+                            "Run a mock behavioral simulation for the target role"
+                        ]
+                    )
                 ],
                 ai_insight="Your past mock interviews show a strong understanding of database indexing concepts, but you struggle to implement graphs under time constraints. Prioritize graphs."
             )
@@ -177,12 +203,38 @@ class GroqService:
 
         # 5. Fallback for Node 2: Strategy Planner
         if "DraftStrategyOut" in model_name:
+            from app.rag.agent_graph import StudyPhase
             return model(
                 estimated_days_remaining=5,
-                raw_tasks=[
-                    "Implement BFS/DFS cycle detection algorithms under 30 minutes",
-                    "Read B+ Tree physical file layout specifications",
-                    "Simulate 20-minute mock focused on graphs under pressure"
+                study_plan=[
+                    StudyPhase(
+                        phase_name="Phase 1: Foundation & Conceptual Core",
+                        duration_days=2,
+                        focus_areas=["Graph Algorithms", "DBMS Storage Engine Design"],
+                        concrete_tasks=[
+                            "Implement BFS/DFS cycle detection algorithms under 30 minutes",
+                            "Review B+ Tree disk indexing structure and node page layout details",
+                            "Review TCP 3-way handshake and UDP differences"
+                        ]
+                    ),
+                    StudyPhase(
+                        phase_name="Phase 2: Mock Scenarios & Time Boxing",
+                        duration_days=2,
+                        focus_areas=["Networking Protocols", "Graph Path Finding"],
+                        concrete_tasks=[
+                            "Conduct a 20-minute simulated networking mock interview",
+                            "Solve 3 Dijkstra's algorithm traversal optimization tasks"
+                        ]
+                    ),
+                    StudyPhase(
+                        phase_name="Phase 3: Final Checks & Verification",
+                        duration_days=1,
+                        focus_areas=["System Design", "Behavioral Alignment"],
+                        concrete_tasks=[
+                            "Design a high-volume chat server RAG index strategy",
+                            "Run a mock behavioral simulation for the target role"
+                        ]
+                    )
                 ],
                 readiness_estimation=68.0
             )
