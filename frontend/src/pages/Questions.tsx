@@ -288,10 +288,10 @@ export const Questions: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="bg-white/70 border border-white/5 text-center py-16 rounded-2xl dark:bg-zinc-900/35 dark:border-white/5">
-          <BookOpen className="w-10 h-10 text-zinc-650 mx-auto mb-3" />
-          <h4 className="font-bold text-zinc-300 text-sm dark:text-slate-300">No questions logged</h4>
-          <p className="text-xs text-zinc-450 mt-1">Start building your placement bank by logging a question.</p>
+        <div className="bg-zinc-950/60 border border-white/5 text-center py-20 rounded-2xl shadow-lg">
+          <BookOpen className="w-10 h-10 text-zinc-650 mx-auto mb-4" />
+          <h4 className="font-bold text-white text-sm uppercase tracking-wider font-geom">No questions logged</h4>
+          <p className="text-[11px] text-zinc-450 mt-2 font-semibold uppercase tracking-wider">Start building your placement bank by logging a question.</p>
         </div>
       )}
 

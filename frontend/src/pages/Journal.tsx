@@ -314,10 +314,10 @@ export const Journal: React.FC = () => {
                 ))}
               </div>
             ) : (
-              <div className="py-16 text-center text-zinc-450 text-xs flex flex-col items-center justify-center p-6 border border-dashed border-white/5 rounded-2xl dark:border-white/5">
-                <BookOpen className="w-8 h-8 text-zinc-650 mb-3" />
-                <h4 className="font-bold text-zinc-400 uppercase tracking-wider text-[10px] mb-1 dark:text-zinc-400">Journal Empty</h4>
-                <p className="text-zinc-500 max-w-xs mt-0.5 dark:text-zinc-600">No past feedback logs found. Paste logs in the left panel to populate history.</p>
+              <div className="bg-zinc-950/60 border border-white/5 text-center py-20 rounded-2xl flex flex-col items-center justify-center p-8 shadow-lg">
+                <BookOpen className="w-10 h-10 text-zinc-650 mb-4" />
+                <h4 className="font-bold text-white text-sm uppercase tracking-wider font-geom">Journal Empty</h4>
+                <p className="text-[11px] text-zinc-455 max-w-xs mt-2.5 leading-relaxed font-semibold uppercase tracking-wider">No past feedback logs found. Paste logs in the left panel to populate history.</p>
               </div>
             )}
           </div>

@@ -110,8 +110,8 @@ export const WeeklyReports: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
         
         {/* Left Column: Report List Sidebar */}
-        <div className="lg:col-span-1 bg-white/70 border border-white/5 p-4 rounded-2xl shadow-md backdrop-blur-md space-y-4 dark:bg-zinc-900/35 dark:border-white/5">
-          <h3 className="text-[10px] font-bold text-zinc-450 uppercase tracking-widest px-2 mb-1 dark:text-zinc-500">Historical Reviews</h3>
+        <div className="lg:col-span-1 bg-zinc-950/60 border border-white/5 p-4 rounded-2xl shadow-md backdrop-blur-md space-y-4">
+          <h3 className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest px-2 mb-1">Historical Reviews</h3>
           
           {loading ? (
             <div className="py-8 text-center">
@@ -159,7 +159,7 @@ export const WeeklyReports: React.FC = () => {
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
-                className="bg-white/70 border border-white/5 p-6 rounded-2xl shadow-md backdrop-blur-md space-y-6 dark:bg-zinc-900/35 dark:border-white/5"
+                className="bg-zinc-950/60 border border-white/5 p-6 rounded-2xl shadow-md backdrop-blur-md space-y-6"
               >
                 
                 {/* Report Title & Metadata */}
@@ -260,10 +260,10 @@ export const WeeklyReports: React.FC = () => {
 
               </motion.div>
             ) : (
-              <div className="bg-white/70 border border-white/5 text-center py-24 rounded-2xl flex flex-col items-center justify-center p-6 shadow-md dark:bg-zinc-900/35 dark:border-white/5">
+              <div className="bg-zinc-950/60 border border-white/5 text-center py-24 rounded-2xl flex flex-col items-center justify-center p-8 shadow-lg">
                 <FileText className="w-12 h-12 text-zinc-650 mb-4" />
-                <h4 className="font-bold text-zinc-450 uppercase tracking-wider text-[10px] mb-1 dark:text-zinc-400">No review selected</h4>
-                <p className="text-xs text-zinc-500 max-w-xs mt-1.5 leading-relaxed dark:text-zinc-500">
+                <h4 className="font-bold text-white text-sm uppercase tracking-wider font-geom">No review selected</h4>
+                <p className="text-[11px] text-zinc-455 max-w-xs mt-2.5 leading-relaxed font-semibold uppercase tracking-wider">
                   Compile a new review period report to view evaluation metrics and recruiter critiques.
                 </p>
               </div>

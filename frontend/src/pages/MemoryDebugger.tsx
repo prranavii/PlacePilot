@@ -217,10 +217,10 @@ export const MemoryDebugger: React.FC = () => {
           ))}
         </div>
       ) : (
-        <div className="bg-white/70 border border-white/5 text-center py-20 rounded-2xl shadow-sm dark:bg-zinc-900/35 dark:border-white/5">
-          <Database className="w-12 h-12 text-zinc-650 mx-auto mb-3" />
-          <h4 className="font-bold text-white/75 text-sm dark:text-slate-350">Memory vault empty</h4>
-          <p className="text-xs text-zinc-450 mt-1 max-w-xs mx-auto">
+        <div className="bg-zinc-950/60 border border-white/5 text-center py-20 rounded-2xl shadow-lg">
+          <Database className="w-12 h-12 text-zinc-650 mx-auto mb-4" />
+          <h4 className="font-bold text-white text-sm uppercase tracking-wider font-geom">Memory vault empty</h4>
+          <p className="text-[11px] text-zinc-455 mt-2.5 max-w-xs mx-auto font-semibold uppercase tracking-wider">
             {isSearchResult 
               ? 'No semantic matches found for this query in the vector database.' 
               : 'Add applications, log interview journals, or paste resumes to populate memories.'

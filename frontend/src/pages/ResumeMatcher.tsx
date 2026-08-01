@@ -360,10 +360,10 @@ export const ResumeMatcher: React.FC = () => {
 
               </motion.div>
             ) : (
-              <div className="bg-white/70 border border-white/5 text-center py-20 rounded-2xl flex flex-col items-center justify-center p-6 shadow-md dark:bg-zinc-900/35 dark:border-white/5">
+              <div className="bg-zinc-950/60 border border-white/5 text-center py-20 rounded-2xl flex flex-col items-center justify-center p-8 shadow-lg">
                 <FileText className="w-12 h-12 text-zinc-650 mb-4" />
-                <h4 className="font-bold text-white/75 text-sm dark:text-zinc-300">No analysis generated</h4>
-                <p className="text-xs text-zinc-450 max-w-xs mt-1.5 leading-relaxed dark:text-zinc-500">
+                <h4 className="font-bold text-white text-sm uppercase tracking-wider font-geom">No analysis generated</h4>
+                <p className="text-[11px] text-zinc-455 max-w-xs mt-2.5 leading-relaxed font-semibold uppercase tracking-wider">
                   Paste your resume text and target JD on the left panel, or upload a resume file, and click calculate to retrieve structured recruiter scorecard analytics.
                 </p>
               </div>
