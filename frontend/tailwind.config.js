@@ -28,11 +28,13 @@ export default {
           sand: '#FAF6F0',
           cocoa: '#2E1A16',
           vermilion: '#FF5B37',
-        }
+        },
+        obsidian: '#050507',
+        crimson: '#FF1E27',
       },
       fontFamily: {
-        sans: ['Outfit', 'Inter', 'system-ui', 'sans-serif'],
-        geom: ['Chacra Petch', 'Space Grotesk', 'sans-serif'],
+        sans: ['Onest', 'Outfit', 'Inter', 'system-ui', 'sans-serif'],
+        geom: ['Syncopate', 'Chacra Petch', 'Space Grotesk', 'sans-serif'],
       }
     },
   },

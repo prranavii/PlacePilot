@@ -80,15 +80,15 @@ const MainLayout: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-life-sand bg-dot-grid-light dark:bg-[#18110F] dark:bg-dot-grid-dark flex flex-col text-life-cocoa dark:text-zinc-100 transition-colors duration-200 relative overflow-hidden">
+    <div className="min-h-screen bg-obsidian bg-dot-grid-dark flex flex-col text-white transition-colors duration-200 relative overflow-hidden">
       {/* 3D Dissolving Ambient Blobs Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        {/* Blob 1: Vermilion Accent */}
-        <div className="absolute top-[5%] left-[-5%] w-[550px] h-[550px] rounded-full bg-life-vermilion/5 dark:bg-life-vermilion/5 blur-[130px] animate-blob" />
-        {/* Blob 2: Cocoa */}
-        <div className="absolute top-[35%] right-[-5%] w-[650px] h-[650px] rounded-full bg-life-cocoa/5 dark:bg-life-cocoa/5 blur-[150px] animate-blob animation-delay-2000" />
-        {/* Blob 3: Vermilion Accent */}
-        <div className="absolute bottom-[-5%] left-[20%] w-[500px] h-[500px] rounded-full bg-life-vermilion/5 dark:bg-life-vermilion/5 blur-[120px] animate-blob animation-delay-4000" />
+        {/* Blob 1: Crimson Accent */}
+        <div className="absolute top-[5%] left-[-5%] w-[550px] h-[550px] rounded-full bg-crimson/5 dark:bg-crimson/5 blur-[130px] animate-blob" />
+        {/* Blob 2: Ambient Dark glow */}
+        <div className="absolute top-[35%] right-[-5%] w-[650px] h-[650px] rounded-full bg-crimson/3 dark:bg-crimson/3 blur-[150px] animate-blob animation-delay-2000" />
+        {/* Blob 3: Crimson Accent */}
+        <div className="absolute bottom-[-5%] left-[20%] w-[500px] h-[500px] rounded-full bg-crimson/4 dark:bg-crimson/4 blur-[120px] animate-blob animation-delay-4000" />
       </div>
 
       <div className="relative z-10 flex flex-col min-h-screen">

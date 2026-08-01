@@ -35,12 +35,12 @@ export const Login: React.FC<LoginProps> = ({ onClose, initialIsRegister = false
   };
 
   const cardContent = (
-    <div className="w-full max-w-md bg-white/70 border border-life-cocoa/5 rounded-2xl p-8 shadow-xl backdrop-blur-md relative z-10 dark:bg-zinc-900/85 dark:border-white/5">
+    <div className="w-full max-w-md bg-zinc-950/90 border border-white/5 rounded-3xl p-8 shadow-2xl backdrop-blur-xl relative z-10">
       {onClose && (
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-xl text-life-cocoa/40 hover:bg-life-cocoa/5 dark:text-zinc-400 dark:hover:bg-zinc-800 transition-colors"
+          className="absolute top-5 right-5 p-2 rounded-xl text-zinc-400 hover:bg-white/5 hover:text-white transition-colors"
         >
           <X className="w-4 h-4" />
         </button>
@@ -48,46 +48,41 @@ export const Login: React.FC<LoginProps> = ({ onClose, initialIsRegister = false
 
       {/* Brand Header */}
       <div className="flex flex-col items-center mb-8">
-        <div className="w-12 h-12 rounded-xl bg-life-cocoa dark:bg-zinc-950 flex items-center justify-center text-white shadow-lg shadow-life-cocoa/25 mb-3 animate-pulse-subtle">
+        <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center text-white shadow-lg shadow-crimson/15 mb-4 animate-pulse-subtle">
           <svg viewBox="0 0 24 24" className="w-6.5 h-6.5 fill-none" xmlns="http://www.w3.org/2000/svg">
-            {/* Upward Trajectory Arrow Stem */}
             <path d="M 8.5,21 L 11.5,14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-            <path d="M 12,13 L 15.5,5 L 17,7" stroke="#FF5B37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M 15.5,5 L 18.5,8" stroke="#FF5B37" stroke-width="2.5" stroke-linecap="round" />
-            {/* Loop Compass Sweep */}
+            <path d="M 12,13 L 15.5,5 L 17,7" stroke="#FF1E27" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M 15.5,5 L 18.5,8" stroke="#FF1E27" strokeWidth="2.5" strokeLinecap="round" />
             <path d="M 12,13 C 14.8,13 17,10.8 17,8 C 17,5.2 14.8,3 12,3" stroke="currentColor" strokeWidth="2" strokeDasharray="0.5 2.5" strokeLinecap="round" />
             <path d="M 12,3 C 9.2,3 7,5.2 7,8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-            {/* AI Node Center */}
-            <circle cx="12" cy="8" r="1.5" fill="#FF5B37" />
+            <circle cx="12" cy="8" r="1.5" fill="#FF1E27" />
           </svg>
         </div>
-        <h2 className="text-2xl font-extrabold text-life-cocoa dark:text-white tracking-tight text-center font-geom">
-          Welcome to PlacePilot AI
+        <h2 className="text-lg font-bold text-white tracking-widest text-center font-geom uppercase">
+          {isRegister ? 'Create Account' : 'Sign In'}
         </h2>
-        <p className="text-xs text-life-cocoa/50 mt-1.5 text-center dark:text-zinc-400">
-          {isRegister 
-            ? 'Create an account to begin managing your placement lifecycle' 
-            : 'Log in to access your placement intelligence command center'}
-        </p>
+        <span className="text-[8px] text-crimson font-bold tracking-widest uppercase block mt-1.5 text-center">
+          PlacePilot AI
+        </span>
       </div>
 
       {/* Error Alert */}
       {error && (
-        <div className="mb-6 bg-life-vermilion/5 border border-life-vermilion/15 text-life-vermilion text-xs rounded-xl p-3 flex items-start gap-2.5">
-          <AlertCircle className="w-4 h-4 text-life-vermilion shrink-0 mt-0.5" />
-          <span>{error}</span>
+        <div className="mb-6 bg-crimson/5 border border-crimson/15 text-crimson text-xs rounded-xl p-3.5 flex items-start gap-2.5">
+          <AlertCircle className="w-4 h-4 text-crimson shrink-0 mt-0.5" />
+          <span className="font-semibold">{error}</span>
         </div>
       )}
 
       {/* Input Form */}
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-5">
         {isRegister && (
           <div>
-            <label className="block text-xs font-semibold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">
+            <label className="block text-[9px] font-bold text-zinc-400 mb-1.5 uppercase tracking-widest">
               Full Name
             </label>
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-life-cocoa/40">
+              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-zinc-550">
                 <User className="w-4 h-4" />
               </span>
               <input
@@ -96,18 +91,18 @@ export const Login: React.FC<LoginProps> = ({ onClose, initialIsRegister = false
                 placeholder="Enter your name"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                className="w-full bg-life-sand border border-life-cocoa/10 text-life-cocoa placeholder-life-cocoa/30 text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-life-vermilion focus:ring-1 focus:ring-life-vermilion outline-none transition-all dark:bg-zinc-900 dark:border-white/5 dark:text-white"
+                className="w-full bg-zinc-900 border border-white/5 text-white placeholder-white/20 text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-crimson focus:ring-1 focus:ring-crimson outline-none transition-all"
               />
             </div>
           </div>
         )}
 
         <div>
-          <label className="block text-xs font-semibold text-life-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-zinc-400">
+          <label className="block text-[9px] font-bold text-zinc-400 mb-1.5 uppercase tracking-widest">
             Email Address
           </label>
           <div className="relative">
-            <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-life-cocoa/40">
+            <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-zinc-550">
               <Mail className="w-4 h-4" />
             </span>
             <input
@@ -116,19 +111,17 @@ export const Login: React.FC<LoginProps> = ({ onClose, initialIsRegister = false
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-life-sand border border-life-cocoa/10 text-life-cocoa placeholder-life-cocoa/30 text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-life-vermilion focus:ring-1 focus:ring-life-vermilion outline-none transition-all dark:bg-zinc-900 dark:border-white/5 dark:text-white"
+              className="w-full bg-zinc-900 border border-white/5 text-white placeholder-white/20 text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-crimson focus:ring-1 focus:ring-crimson outline-none transition-all"
             />
           </div>
         </div>
 
         <div>
-          <div className="flex items-center justify-between mb-1.5">
-            <label className="block text-xs font-semibold text-life-cocoa/50 uppercase tracking-wider dark:text-zinc-400">
-              Password
-            </label>
-          </div>
+          <label className="block text-[9px] font-bold text-zinc-400 mb-1.5 uppercase tracking-widest">
+            Password
+          </label>
           <div className="relative">
-            <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-life-cocoa/40">
+            <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-zinc-550">
               <Lock className="w-4 h-4" />
             </span>
             <input
@@ -137,7 +130,7 @@ export const Login: React.FC<LoginProps> = ({ onClose, initialIsRegister = false
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-life-sand border border-life-cocoa/10 text-life-cocoa placeholder-life-cocoa/30 text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-life-vermilion focus:ring-1 focus:ring-life-vermilion outline-none transition-all dark:bg-zinc-900 dark:border-white/5 dark:text-white"
+              className="w-full bg-zinc-900 border border-white/5 text-white placeholder-white/20 text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-crimson focus:ring-1 focus:ring-crimson outline-none transition-all"
             />
           </div>
         </div>
@@ -145,28 +138,28 @@ export const Login: React.FC<LoginProps> = ({ onClose, initialIsRegister = false
         <button
           type="submit"
           disabled={submitting}
-          className="w-full bg-life-vermilion hover:bg-life-vermilion/90 text-white font-bold text-sm py-3 rounded-xl shadow-lg shadow-life-vermilion/15 hover:shadow-life-vermilion/20 transition-all flex items-center justify-center gap-2 mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-crimson hover:bg-crimson/90 text-white font-bold text-xs py-3.5 rounded-xl shadow-lg shadow-crimson/15 hover:shadow-crimson/25 transition-all flex items-center justify-center gap-2 mt-6 disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest"
         >
           {submitting ? (
             <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
           ) : (
             <>
               <span>{isRegister ? 'Create Account' : 'Sign In'}</span>
-              <Sparkles className="w-4 h-4 text-white" />
+              <Sparkles className="w-3.5 h-3.5 text-white" />
             </>
           )}
         </button>
       </form>
 
       {/* Toggle Mode Footer */}
-      <div className="text-center mt-6 pt-6 border-t border-life-cocoa/10 dark:border-slate-800/60">
+      <div className="text-center mt-6 pt-6 border-t border-white/5">
         <button
           type="button"
           onClick={() => {
             setIsRegister(!isRegister);
             setError(null);
           }}
-          className="text-xs text-life-vermilion hover:text-life-vermilion/90 font-bold"
+          className="text-xs text-crimson hover:text-crimson/80 font-bold tracking-wider"
         >
           {isRegister 
             ? 'Already have an account? Sign in' 
@@ -181,10 +174,9 @@ export const Login: React.FC<LoginProps> = ({ onClose, initialIsRegister = false
   }
 
   return (
-    <div className="min-h-screen bg-life-sand dark:bg-[#18110F] flex items-center justify-center p-4 relative overflow-hidden font-sans">
-      {/* Decorative blurry background circles */}
-      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-life-vermilion/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-life-cocoa/5 rounded-full blur-[120px] pointer-events-none" />
+    <div className="min-h-screen bg-obsidian bg-dot-grid-dark flex items-center justify-center p-4 relative overflow-hidden font-sans">
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-crimson/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-crimson/3 rounded-full blur-[120px] pointer-events-none" />
       {cardContent}
     </div>
   );

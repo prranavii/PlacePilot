@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Chacra+Petch:wght@400;600;700&family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chacra+Petch:wght@400;600;700&family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;600;700&family=Syncopate:wght@400;700&family=Onest:wght@300;400;600;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,14 +6,14 @@
 
 @layer base {
   body {
-    @apply bg-life-sand text-life-cocoa font-sans antialiased selection:bg-life-vermilion selection:text-white transition-colors duration-200;
+    @apply bg-obsidian text-white font-sans antialiased selection:bg-crimson selection:text-white transition-colors duration-200;
   }
 }
 
 /* Custom scrollbars for a premium dashboard look */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -21,7 +21,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-life-cocoa/25 rounded-full hover:bg-life-cocoa/40;
+  @apply bg-white/10 rounded-full hover:bg-crimson/30 transition-all;
 }
 
 /* Custom animations */
@@ -34,13 +34,17 @@
   animation: pulse-subtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Premium Visual Elements */
+/* Glass Panels with Crimson highlights */
 .glass-panel {
-  @apply bg-white/70 backdrop-blur-md border border-life-cocoa/10 shadow-xl;
+  @apply bg-zinc-950/60 backdrop-blur-xl border border-white/5 shadow-2xl;
+}
+
+.glass-panel-heavy {
+  @apply bg-zinc-950 backdrop-blur-xl border border-white/5 shadow-2xl;
 }
 
 .glass-banner {
-  @apply relative overflow-hidden bg-life-vermilion/5 border border-life-cocoa/10 rounded-3xl p-6 md:p-8;
+  @apply relative overflow-hidden bg-crimson/5 border border-white/5 rounded-3xl p-6 md:p-8;
 }
 
 .glass-banner::after {
@@ -50,34 +54,34 @@
   right: -10%;
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(255,91,55,0.1) 0%, rgba(46,26,22,0.02) 70%, transparent 100%);
-  filter: blur(40px);
+  background: radial-gradient(circle, rgba(255, 30, 39, 0.15) 0%, transparent 70%);
+  filter: blur(50px);
   pointer-events: none;
 }
 
-/* Ambient 3D Blob floating animation */
+/* Ambient Crimson Glowing Blob Animation */
 @keyframes blob-float {
   0% { transform: translate(0px, 0px) scale(1); }
-  33% { transform: translate(40px, -60px) scale(1.1); }
-  66% { transform: translate(-30px, 30px) scale(0.95); }
+  33% { transform: translate(30px, -50px) scale(1.08); }
+  66% { transform: translate(-20px, 20px) scale(0.96); }
   100% { transform: translate(0px, 0px) scale(1); }
 }
 
 .animate-blob {
-  animation: blob-float 20s infinite ease-in-out;
+  animation: blob-float 15s infinite ease-in-out;
 }
 
 .animation-delay-2000 {
-  animation-delay: 3s;
+  animation-delay: 2.5s;
 }
 
 .animation-delay-4000 {
-  animation-delay: 6s;
+  animation-delay: 5s;
 }
 
 /* Voice waveform animation for mock interview */
 @keyframes wave-bounce {
-  0%, 100% { transform: scaleY(0.3); }
+  0%, 100% { transform: scaleY(0.25); }
   50% { transform: scaleY(1); }
 }
 
@@ -96,18 +100,18 @@
 
 /* Dot grid backgrounds for premium SaaS blueprint aesthetic */
 .bg-dot-grid-light {
-  background-image: radial-gradient(rgba(46, 26, 22, 0.04) 1.2px, transparent 1.2px);
-  background-size: 20px 20px;
+  background-image: radial-gradient(rgba(255, 30, 39, 0.04) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
 }
 
 .bg-dot-grid-dark {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1.2px, transparent 1.2px);
-  background-size: 20px 20px;
+  background-image: radial-gradient(rgba(255, 30, 39, 0.05) 1.2px, transparent 1.2px);
+  background-size: 24px 24px;
 }
 
 /* Premium card with Linear-style ambient glowing hover border */
 .premium-card {
-  @apply relative overflow-hidden bg-white/70 border border-life-cocoa/5 rounded-2xl p-5 shadow-sm transition-all duration-300 dark:bg-zinc-900/40 dark:border-white/5 backdrop-blur-sm;
+  @apply relative overflow-hidden bg-zinc-950/45 border border-white/5 rounded-2xl p-5 shadow-sm transition-all duration-300 backdrop-blur-sm;
 }
 
 .premium-card::before {
@@ -116,7 +120,7 @@
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, rgba(255, 91, 55, 0.15) 0%, transparent 60%, rgba(46, 26, 22, 0.03) 100%);
+  background: linear-gradient(135deg, rgba(255, 30, 39, 0.25) 0%, transparent 50%, rgba(255, 255, 255, 0.02) 100%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -125,18 +129,10 @@
   transition: opacity 0.3s ease;
 }
 
-.dark .premium-card::before {
-  background: linear-gradient(135deg, rgba(255, 91, 55, 0.25) 0%, transparent 50%, rgba(255, 255, 255, 0.02) 100%);
-}
-
 .premium-card:hover {
-  @apply shadow-md border-life-cocoa/10 dark:border-white/10 -translate-y-0.5;
+  @apply shadow-lg border-white/10 -translate-y-0.5;
 }
 
 .premium-card:hover::before {
-  background: linear-gradient(135deg, rgba(255, 91, 55, 0.35) 0%, transparent 40%, rgba(255, 91, 55, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(255, 30, 39, 0.45) 0%, transparent 40%, rgba(255, 30, 39, 0.15) 100%);
 }
-
-
-
-

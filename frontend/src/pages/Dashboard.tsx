@@ -160,38 +160,38 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
       className="space-y-8 pb-12 font-sans relative"
     >
       {/* 3D Ambient Glowing backdrop Blobs */}
-      <div className="absolute -top-12 -left-12 w-96 h-96 bg-life-vermilion/5 rounded-full blur-3xl pointer-events-none animate-blob"></div>
-      <div className="absolute top-1/2 right-12 w-80 h-80 bg-life-cocoa/5 rounded-full blur-3xl pointer-events-none animate-blob animation-delay-2000"></div>
+      <div className="absolute -top-12 -left-12 w-96 h-96 bg-crimson/5 rounded-full blur-3xl pointer-events-none animate-blob"></div>
+      <div className="absolute top-1/2 right-12 w-80 h-80 bg-crimson/3 rounded-full blur-3xl pointer-events-none animate-blob animation-delay-2000"></div>
 
       {/* Top Welcome Title & Premium Glass Banner */}
-      <div className="relative glass-banner p-8 rounded-3xl border border-life-cocoa/10 bg-white/70 backdrop-blur-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 overflow-hidden dark:bg-zinc-900/40 dark:border-white/5">
+      <div className="relative glass-banner p-8 rounded-3xl border border-white/5 bg-zinc-950/60 backdrop-blur-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 overflow-hidden">
         <div className="relative z-10 flex-1">
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-[10px] font-bold text-life-vermilion uppercase tracking-widest bg-life-vermilion/10 px-2.5 py-1 rounded-full">
+            <span className="text-[9px] font-bold text-crimson uppercase tracking-widest bg-crimson/10 px-2.5 py-1 rounded-full">
               AI Workspace
             </span>
-            <span className="text-[10px] font-bold text-life-cocoa dark:text-zinc-300 uppercase tracking-widest bg-life-cocoa/10 dark:bg-zinc-800/60 px-2.5 py-1 rounded-full flex items-center gap-1">
-              <Flame className="w-3 h-3 fill-life-cocoa dark:fill-zinc-300" /> 5 Day Streak
+            <span className="text-[9px] font-bold text-zinc-300 uppercase tracking-widest bg-white/5 px-2.5 py-1 rounded-full flex items-center gap-1">
+              <Flame className="w-3 h-3 fill-zinc-300 text-crimson" /> 5 Day Streak
             </span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-life-cocoa dark:text-white font-geom">
+          <h2 className="text-xl md:text-2xl font-bold tracking-widest text-white font-geom uppercase">
             Command Center Dashboard
           </h2>
-          <p className="text-sm text-life-cocoa/60 dark:text-zinc-400 mt-2 max-w-xl leading-relaxed">
+          <p className="text-xs text-zinc-400 mt-2 max-w-xl leading-relaxed font-semibold uppercase tracking-wider">
             Welcome back! Monitor real-time placement pipeline progress, review automated study schedules, and access personalized AI interview guides.
           </p>
         </div>
         
         {/* Quick prepare shortcut banner */}
         {nextInterview && (
-          <div className="relative z-10 w-full lg:w-auto bg-white dark:bg-zinc-900 border border-life-cocoa/10 dark:border-white/5 rounded-2xl px-6 py-4 flex items-center justify-between lg:justify-start gap-4 shadow-sm">
+          <div className="relative z-10 w-full lg:w-auto bg-zinc-950 border border-white/5 rounded-2xl px-6 py-4 flex items-center justify-between lg:justify-start gap-4 shadow-sm">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-life-vermilion/10 flex items-center justify-center text-life-vermilion">
-                <Sparkles className="w-5 h-5 fill-life-vermilion/20 animate-pulse" />
+              <div className="w-10 h-10 rounded-xl bg-crimson/10 flex items-center justify-center text-crimson">
+                <Sparkles className="w-5 h-5 fill-crimson/20 animate-pulse" />
               </div>
               <div>
-                <span className="font-bold text-sm text-life-cocoa dark:text-white block">Upcoming {nextInterviewCompany} Interview</span>
-                <span className="text-xs text-life-cocoa/50 dark:text-zinc-400 font-medium">
+                <span className="font-bold text-xs text-white block uppercase tracking-wide">Upcoming {nextInterviewCompany} Interview</span>
+                <span className="text-[10px] text-zinc-400 font-medium">
                   {nextInterview.event_date ? getDaysRemainingText(nextInterview.event_date) : 'Scheduled'}
                 </span>
               </div>
@@ -201,7 +201,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
                 localStorage.setItem('autoSelectCompany', nextInterviewCompany);
                 setCurrentTab('applications');
               }}
-              className="h-10 px-4 bg-life-vermilion hover:bg-life-vermilion/90 text-white font-bold text-xs rounded-xl shadow-md flex items-center gap-1.5 transition-all active:scale-95 animate-pulse-subtle"
+              className="h-10 px-4 bg-crimson hover:bg-crimson/90 text-white font-bold text-[10px] rounded-xl shadow-md flex items-center gap-1.5 transition-all active:scale-95 animate-pulse-subtle uppercase tracking-wider"
             >
               <span>Prepare</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -323,8 +323,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
           
           {/* Active Prep timeline */}
           <div className="premium-card p-6">
-            <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-6 flex items-center gap-2 dark:text-white">
-              <Target className="w-4 h-4 text-life-vermilion" />
+            <h3 className="text-[10px] font-bold text-white uppercase tracking-widest mb-6 flex items-center gap-2">
+              <Target className="w-4 h-4 text-crimson" />
               Preparation Intensity (Minutes Revision)
             </h3>
             <div className="h-64">
@@ -332,24 +332,24 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
                 <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                   <defs>
                     <linearGradient id="colorPrep" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#FF5B37" stopOpacity={0.25}/>
-                      <stop offset="95%" stopColor="#FF5B37" stopOpacity={0}/>
+                      <stop offset="5%" stopColor="#FF1E27" stopOpacity={0.25}/>
+                      <stop offset="95%" stopColor="#FF1E27" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(46,26,22,0.05)" />
-                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#2E1A16', opacity: 0.6 }} stroke="rgba(46,26,22,0.05)" />
-                  <YAxis tick={{ fontSize: 10, fill: '#2E1A16', opacity: 0.6 }} stroke="rgba(46,26,22,0.05)" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.05)" />
+                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#9CA3AF', opacity: 0.6 }} stroke="rgba(255,255,255,0.05)" />
+                  <YAxis tick={{ fontSize: 10, fill: '#9CA3AF', opacity: 0.6 }} stroke="rgba(255,255,255,0.05)" />
                   <Tooltip 
                     contentStyle={{ 
-                      backgroundColor: '#2E1A16', 
-                      borderColor: '#FF5B37', 
-                      color: '#FAF6F0',
+                      backgroundColor: '#09090b', 
+                      borderColor: '#FF1E27', 
+                      color: '#ffffff',
                       borderRadius: '12px',
                       fontSize: '11px',
                       fontFamily: 'sans-serif'
                     }} 
                   />
-                  <Area type="monotone" dataKey="prepMinutes" name="Revision (Mins)" stroke="#FF5B37" strokeWidth={2} fillOpacity={1} fill="url(#colorPrep)" />
+                  <Area type="monotone" dataKey="prepMinutes" name="Revision (Mins)" stroke="#FF1E27" strokeWidth={2} fillOpacity={1} fill="url(#colorPrep)" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
@@ -357,26 +357,26 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
 
           {/* Funnel distribution bar chart */}
           <div className="premium-card p-6">
-            <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-6 flex items-center gap-2 dark:text-white">
-              <Briefcase className="w-4 h-4 text-life-vermilion" />
+            <h3 className="text-[10px] font-bold text-white uppercase tracking-widest mb-6 flex items-center gap-2">
+              <Briefcase className="w-4 h-4 text-crimson" />
               Pipeline Distribution Stages
             </h3>
             <div className="h-56">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={stageStats} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(46,26,22,0.05)" />
-                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#2E1A16', opacity: 0.6 }} stroke="rgba(46,26,22,0.05)" />
-                  <YAxis allowDecimals={false} tick={{ fontSize: 10, fill: '#2E1A16', opacity: 0.6 }} stroke="rgba(46,26,22,0.05)" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.05)" />
+                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#9CA3AF', opacity: 0.6 }} stroke="rgba(255,255,255,0.05)" />
+                  <YAxis allowDecimals={false} tick={{ fontSize: 10, fill: '#9CA3AF', opacity: 0.6 }} stroke="rgba(255,255,255,0.05)" />
                   <Tooltip 
                     contentStyle={{ 
-                      backgroundColor: '#2E1A16', 
-                      borderColor: '#FF5B37', 
-                      color: '#FAF6F0',
+                      backgroundColor: '#09090b', 
+                      borderColor: '#FF1E27', 
+                      color: '#ffffff',
                       borderRadius: '12px',
                       fontSize: '11px'
                     }} 
                   />
-                  <Bar dataKey="value" name="Applications" fill="#FF5B37" radius={[6, 6, 0, 0]} />
+                  <Bar dataKey="value" name="Applications" fill="#FF1E27" radius={[6, 6, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
