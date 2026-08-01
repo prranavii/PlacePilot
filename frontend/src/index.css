@@ -94,5 +94,49 @@
 .waveform-bar:nth-child(7) { animation-delay: 0.9s; }
 .waveform-bar:nth-child(8) { animation-delay: 1.05s; }
 
+/* Dot grid backgrounds for premium SaaS blueprint aesthetic */
+.bg-dot-grid-light {
+  background-image: radial-gradient(rgba(46, 26, 22, 0.04) 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+}
+
+.bg-dot-grid-dark {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+}
+
+/* Premium card with Linear-style ambient glowing hover border */
+.premium-card {
+  @apply relative overflow-hidden bg-white/70 border border-life-cocoa/5 rounded-2xl p-5 shadow-sm transition-all duration-300 dark:bg-zinc-900/40 dark:border-white/5 backdrop-blur-sm;
+}
+
+.premium-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255, 91, 55, 0.15) 0%, transparent 60%, rgba(46, 26, 22, 0.03) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.dark .premium-card::before {
+  background: linear-gradient(135deg, rgba(255, 91, 55, 0.25) 0%, transparent 50%, rgba(255, 255, 255, 0.02) 100%);
+}
+
+.premium-card:hover {
+  @apply shadow-md border-life-cocoa/10 dark:border-white/10 -translate-y-0.5;
+}
+
+.premium-card:hover::before {
+  background: linear-gradient(135deg, rgba(255, 91, 55, 0.35) 0%, transparent 40%, rgba(255, 91, 55, 0.1) 100%);
+}
+
+
 
 

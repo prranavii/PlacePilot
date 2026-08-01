@@ -170,9 +170,9 @@ export const Pipeline: React.FC = () => {
                         onDragStart={(e: any) => handleDragStart(e, app.id)}
                         whileHover={{ y: -3, scale: 1.02 }}
                         whileTap={{ cursor: 'grabbing' }}
-                        className={`bg-white border border-life-cocoa/5 p-4 rounded-2xl shadow-sm cursor-grab hover:shadow-md transition-all duration-300 relative overflow-hidden ${getStageBorderColor(stage)} ${
+                        className={`premium-card cursor-grab p-4 relative overflow-hidden ${getStageBorderColor(stage)} ${
                           updatingId === app.id ? 'opacity-40 animate-pulse' : ''
-                        } dark:bg-zinc-900/60 dark:border-white/5`}
+                        }`}
                       >
                         <h4 className="font-extrabold text-life-cocoa text-sm tracking-tight truncate dark:text-zinc-200">
                           {app.company_name}

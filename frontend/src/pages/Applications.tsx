@@ -360,11 +360,11 @@ export const Applications: React.FC = () => {
             <motion.div
               key={app.id}
               onClick={() => handleSelectApp(app)}
-              whileHover={{ y: -4, borderColor: "rgba(46,26,22,0.15)" }}
-              className={`bg-white border p-5 rounded-2xl shadow-sm hover:shadow-md cursor-pointer transition-all duration-300 flex flex-col justify-between dark:bg-zinc-900/45 dark:border-white/5 ${
+              whileHover={{ y: -4 }}
+              className={`premium-card cursor-pointer flex flex-col justify-between ${
                 selectedApp?.id === app.id 
-                  ? 'border-life-vermilion ring-1 ring-life-vermilion/20' 
-                  : 'border-life-cocoa/5'
+                  ? 'border-life-vermilion/50 ring-1 ring-life-vermilion/25' 
+                  : ''
               }`}
             >
               <div>

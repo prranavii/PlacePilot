@@ -214,8 +214,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {/* Total applications */}
         <motion.div 
-          whileHover={{ y: -4, borderColor: "rgba(46,26,22,0.15)" }}
-          className="bg-white border border-life-cocoa/5 p-5 rounded-2xl flex flex-col justify-between shadow-md transition-all duration-300 dark:bg-zinc-900/40 dark:border-white/5"
+          whileHover={{ y: -4 }}
+          className="premium-card flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-400">Total Apps</span>
@@ -231,8 +231,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
 
         {/* Active applications */}
         <motion.div 
-          whileHover={{ y: -4, borderColor: "rgba(46,26,22,0.15)" }}
-          className="bg-white border border-life-cocoa/5 p-5 rounded-2xl flex flex-col justify-between shadow-md transition-all duration-300 dark:bg-zinc-900/40 dark:border-white/5"
+          whileHover={{ y: -4 }}
+          className="premium-card flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-400">Active</span>
@@ -248,8 +248,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
 
         {/* Online assessments */}
         <motion.div 
-          whileHover={{ y: -4, borderColor: "rgba(46,26,22,0.15)" }}
-          className="bg-white border border-life-cocoa/5 p-5 rounded-2xl flex flex-col justify-between shadow-md transition-all duration-300 dark:bg-zinc-900/40 dark:border-white/5"
+          whileHover={{ y: -4 }}
+          className="premium-card flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-400">Assessments</span>
@@ -265,8 +265,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
 
         {/* Interviews */}
         <motion.div 
-          whileHover={{ y: -4, borderColor: "rgba(46,26,22,0.15)" }}
-          className="bg-white border border-life-cocoa/5 p-5 rounded-2xl flex flex-col justify-between shadow-md transition-all duration-300 dark:bg-zinc-900/40 dark:border-white/5"
+          whileHover={{ y: -4 }}
+          className="premium-card flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-400">Interviews</span>
@@ -282,8 +282,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
 
         {/* Offers */}
         <motion.div 
-          whileHover={{ y: -4, borderColor: "rgba(46,26,22,0.15)" }}
-          className="bg-white border border-life-cocoa/5 p-5 rounded-2xl flex flex-col justify-between shadow-md transition-all duration-300 dark:bg-zinc-900/40 dark:border-white/5"
+          whileHover={{ y: -4 }}
+          className="premium-card flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
             <span className="text-[10px] text-life-cocoa/50 font-bold uppercase tracking-wider dark:text-zinc-400">Offers</span>
@@ -322,7 +322,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
         <div className="lg:col-span-2 space-y-6">
           
           {/* Active Prep timeline */}
-          <div className="bg-white border border-life-cocoa/5 rounded-2xl p-6 shadow-md dark:bg-zinc-900/30 dark:border-white/5">
+          <div className="premium-card p-6">
             <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-6 flex items-center gap-2 dark:text-white">
               <Target className="w-4 h-4 text-life-vermilion" />
               Preparation Intensity (Minutes Revision)
@@ -356,7 +356,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
           </div>
 
           {/* Funnel distribution bar chart */}
-          <div className="bg-white border border-life-cocoa/5 rounded-2xl p-6 shadow-md dark:bg-zinc-900/30 dark:border-white/5">
+          <div className="premium-card p-6">
             <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-6 flex items-center gap-2 dark:text-white">
               <Briefcase className="w-4 h-4 text-life-vermilion" />
               Pipeline Distribution Stages
@@ -388,7 +388,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
         <div className="space-y-6">
           
           {/* Today's Prep Mission */}
-          <div className="bg-white border border-life-cocoa/5 rounded-2xl p-6 shadow-md dark:bg-zinc-900/30 dark:border-white/5">
+          <div className="premium-card p-6">
             <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-5 flex items-center justify-between dark:text-white">
               <span className="flex items-center gap-2">
                 <Target className="w-4 h-4 text-life-vermilion" />
@@ -440,7 +440,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
           </div>
 
           {/* Weak Topics */}
-          <div className="bg-white border border-life-cocoa/5 rounded-2xl p-6 shadow-md dark:bg-zinc-900/30 dark:border-white/5">
+          <div className="premium-card p-6">
             <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-5 flex items-center gap-2 dark:text-white">
               <ShieldAlert className="w-4 h-4 text-rose-550" />
               Struggling Topics (Gaps)
@@ -463,7 +463,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
           </div>
 
           {/* Upcoming Event Schedule */}
-          <div className="bg-white border border-life-cocoa/5 rounded-2xl p-6 shadow-md dark:bg-zinc-900/30 dark:border-white/5">
+          <div className="premium-card p-6">
             <h3 className="text-xs font-bold text-life-cocoa uppercase tracking-widest mb-5 flex items-center gap-2 dark:text-white">
               <CalendarDays className="w-4 h-4 text-life-vermilion" />
               Upcoming Schedules

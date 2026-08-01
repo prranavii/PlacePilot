@@ -80,7 +80,7 @@ const MainLayout: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-life-sand dark:bg-[#18110F] flex flex-col text-life-cocoa dark:text-zinc-100 transition-colors duration-200 relative overflow-hidden">
+    <div className="min-h-screen bg-life-sand bg-dot-grid-light dark:bg-[#18110F] dark:bg-dot-grid-dark flex flex-col text-life-cocoa dark:text-zinc-100 transition-colors duration-200 relative overflow-hidden">
       {/* 3D Dissolving Ambient Blobs Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         {/* Blob 1: Vermilion Accent */}
