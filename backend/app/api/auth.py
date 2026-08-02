@@ -124,7 +124,7 @@ def forgot_password(
     user = db.query(User).filter(User.email == payload.email).first()
     if user:
         reset_token = secrets.token_urlsafe(32)
-        reset_expires = datetime.now(timezone.utc) + timedelta(minutes=30)
+        reset_expires = (datetime.now(timezone.utc) + timedelta(minutes=30)).replace(tzinfo=None)
         
         user.reset_token = reset_token
         user.reset_expires = reset_expires
@@ -144,7 +144,7 @@ def reset_password(
     payload: ResetPasswordRequest,
     db: Session = Depends(get_db)
 ):
-    now = datetime.now(timezone.utc)
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
     user = db.query(User).filter(
         User.reset_token == payload.token,
         User.reset_expires > now
