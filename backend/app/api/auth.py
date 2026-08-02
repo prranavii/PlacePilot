@@ -166,3 +166,41 @@ def reset_password(
 @router.get("/me", response_model=UserOut)
 def read_users_me(current_user: User = Depends(get_current_user)):
     return current_user
+
+@router.get("/debug-db")
+def debug_db(db: Session = Depends(get_db)):
+    from sqlalchemy import inspect, text
+    from app.database.session import engine
+    import traceback
+    
+    try:
+        inspector = inspect(engine)
+        columns = [{"name": col["name"], "type": str(col["type"])} for col in inspector.get_columns("users")]
+        
+        # Test executing a migration inside the request to catch the traceback
+        migration_results = {}
+        for col_name, col_sql in [
+            ("is_verified", "ALTER TABLE users ADD COLUMN is_verified BOOLEAN DEFAULT TRUE;"),
+            ("verification_token", "ALTER TABLE users ADD COLUMN verification_token VARCHAR(255);"),
+            ("reset_token", "ALTER TABLE users ADD COLUMN reset_token VARCHAR(255);"),
+            ("reset_expires", "ALTER TABLE users ADD COLUMN reset_expires TIMESTAMP;")
+        ]:
+            if col_name not in [c["name"] for c in columns]:
+                try:
+                    with engine.begin() as conn:
+                        conn.execute(text(col_sql))
+                    migration_results[col_name] = "Success"
+                except Exception as ex:
+                    migration_results[col_name] = f"Failed: {str(ex)}\n{traceback.format_exc()}"
+                    
+        return {
+            "status": "success",
+            "columns": columns,
+            "migrations_attempted": migration_results
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "error": str(e),
+            "traceback": traceback.format_exc()
+        }
