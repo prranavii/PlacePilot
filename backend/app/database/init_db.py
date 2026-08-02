@@ -23,6 +23,53 @@ def init_db():
         Base.metadata.create_all(bind=engine)
         logger.info("Database tables created successfully.")
 
+        # Ensure users table columns exist for email verification and password resets
+        with engine.connect() as conn:
+            # 1. is_verified
+            try:
+                conn.execute(text("SELECT is_verified FROM users LIMIT 1;"))
+            except Exception:
+                try:
+                    # Default to true for existing users so they don't get locked out
+                    conn.execute(text("ALTER TABLE users ADD COLUMN is_verified BOOLEAN DEFAULT TRUE;"))
+                    conn.commit()
+                    logger.info("Migrated: Added is_verified column to users table.")
+                except Exception as e:
+                    logger.error(f"Failed to add is_verified: {e}")
+
+            # 2. verification_token
+            try:
+                conn.execute(text("SELECT verification_token FROM users LIMIT 1;"))
+            except Exception:
+                try:
+                    conn.execute(text("ALTER TABLE users ADD COLUMN verification_token VARCHAR(255);"))
+                    conn.commit()
+                    logger.info("Migrated: Added verification_token column to users table.")
+                except Exception as e:
+                    logger.error(f"Failed to add verification_token: {e}")
+
+            # 3. reset_token
+            try:
+                conn.execute(text("SELECT reset_token FROM users LIMIT 1;"))
+            except Exception:
+                try:
+                    conn.execute(text("ALTER TABLE users ADD COLUMN reset_token VARCHAR(255);"))
+                    conn.commit()
+                    logger.info("Migrated: Added reset_token column to users table.")
+                except Exception as e:
+                    logger.error(f"Failed to add reset_token: {e}")
+
+            # 4. reset_expires
+            try:
+                conn.execute(text("SELECT reset_expires FROM users LIMIT 1;"))
+            except Exception:
+                try:
+                    conn.execute(text("ALTER TABLE users ADD COLUMN reset_expires TIMESTAMP;"))
+                    conn.commit()
+                    logger.info("Migrated: Added reset_expires column to users table.")
+                except Exception as e:
+                    logger.error(f"Failed to add reset_expires: {e}")
+
         # Seed default student user if database is empty
         from app.models.user import User
         from app.core import security
