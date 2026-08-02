@@ -25,6 +25,14 @@ class Settings(BaseSettings):
     EMBEDDING_MODEL: str = "all-MiniLM-L6-v2"
     USE_LOCAL_EMBEDDINGS: bool = True
 
+    # SMTP and Email Configuration
+    SMTP_HOST: str = "smtp.resend.com"
+    SMTP_PORT: int = 465
+    SMTP_USER: str = "resend"
+    SMTP_PASSWORD: str = ""
+    EMAIL_FROM: str = "onboarding@resend.dev"
+    FRONTEND_URL: str = "https://place-pilot-xi.vercel.app"
+
     def __init__(self, **values):
         super().__init__(**values)
         # Resolve relative SQLite path to absolute path inside backend directory

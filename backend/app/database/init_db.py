@@ -35,7 +35,8 @@ def init_db():
                     default_student = User(
                         email="student@placepilot.ai",
                         hashed_password=security.get_password_hash("password123"),
-                        full_name="Student Pilot"
+                        full_name="Student Pilot",
+                        is_verified=True
                     )
                     session.add(default_student)
                     session.commit()

@@ -2,7 +2,7 @@ import uuid
 import logging
 from datetime import datetime, date, timedelta, timezone
 from typing import List, Optional, Dict, Any
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, BackgroundTasks
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
@@ -15,6 +15,7 @@ from app.models.question import Question
 from app.api.deps import get_current_user
 from app.models.user import User
 from app.services.groq_service import groq_service
+from app.services.email import email_service
 
 router = APIRouter(prefix="/analytics", tags=["analytics"])
 logger = logging.getLogger(__name__)
@@ -100,6 +101,7 @@ def read_weekly_reports(
 
 @router.post("/report", response_model=WeeklyReportOut)
 def generate_weekly_report(
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
@@ -159,5 +161,13 @@ def generate_weekly_report(
     db.add(db_report)
     db.commit()
     db.refresh(db_report)
+
+    # Send report email in background
+    background_tasks.add_task(
+        email_service.send_weekly_report_email,
+        current_user.email,
+        current_user.full_name,
+        db_report
+    )
 
     return db_report

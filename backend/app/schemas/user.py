@@ -28,3 +28,10 @@ class UserLogin(BaseModel):
 
 class TokenData(BaseModel):
     user_id: Optional[str] = None
+
+class ForgotPasswordRequest(BaseModel):
+    email: EmailStr
+
+class ResetPasswordRequest(BaseModel):
+    token: str
+    new_password: str = Field(..., min_length=6)

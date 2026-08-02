@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { api } from '../services/api';
 import { Sparkles, Mail, Lock, User, AlertCircle, X } from 'lucide-react';
 
 interface LoginProps {
@@ -10,20 +11,27 @@ interface LoginProps {
 export const Login: React.FC<LoginProps> = ({ onClose, initialIsRegister = false }) => {
   const { login, register } = useAuth();
   const [isRegister, setIsRegister] = useState(initialIsRegister);
+  const [isForgot, setIsForgot] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setSuccessMessage(null);
     setSubmitting(true);
 
     try {
-      if (isRegister) {
+      if (isForgot) {
+        await api.auth.forgotPassword(email);
+        setSuccessMessage('If this email is registered, a password reset link has been sent. Please check your inbox.');
+      } else if (isRegister) {
         await register({ email, password, full_name: fullName });
+        setSuccessMessage('Account created successfully! A verification link has been sent to your email address.');
       } else {
         await login({ email, password });
       }
@@ -59,12 +67,20 @@ export const Login: React.FC<LoginProps> = ({ onClose, initialIsRegister = false
           </svg>
         </div>
         <h2 className="text-lg font-bold text-white tracking-widest text-center font-geom uppercase">
-          {isRegister ? 'Create Account' : 'Sign In'}
+          {isForgot ? 'Reset Password' : (isRegister ? 'Create Account' : 'Sign In')}
         </h2>
         <span className="text-[8px] text-crimson font-bold tracking-widest uppercase block mt-1.5 text-center">
           PlacePilot AI
         </span>
       </div>
+
+      {/* Success Alert */}
+      {successMessage && (
+        <div className="mb-6 bg-emerald-500/5 border border-emerald-500/15 text-emerald-400 text-xs rounded-xl p-3.5 flex items-start gap-2.5">
+          <Sparkles className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+          <span className="font-semibold">{successMessage}</span>
+        </div>
+      )}
 
       {/* Error Alert */}
       {error && (
@@ -76,7 +92,7 @@ export const Login: React.FC<LoginProps> = ({ onClose, initialIsRegister = false
 
       {/* Input Form */}
       <form onSubmit={handleSubmit} className="space-y-5">
-        {isRegister && (
+        {isRegister && !isForgot && (
           <div>
             <label className="block text-[9px] font-bold text-zinc-400 mb-1.5 uppercase tracking-widest">
               Full Name
@@ -116,24 +132,41 @@ export const Login: React.FC<LoginProps> = ({ onClose, initialIsRegister = false
           </div>
         </div>
 
-        <div>
-          <label className="block text-[9px] font-bold text-zinc-400 mb-1.5 uppercase tracking-widest">
-            Password
-          </label>
-          <div className="relative">
-            <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-zinc-550">
-              <Lock className="w-4 h-4" />
-            </span>
-            <input
-              type="password"
-              required
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-zinc-900 border border-white/5 text-white placeholder-white/20 text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-crimson focus:ring-1 focus:ring-crimson outline-none transition-all"
-            />
+        {!isForgot && (
+          <div>
+            <div className="flex justify-between items-center mb-1.5">
+              <label className="block text-[9px] font-bold text-zinc-400 uppercase tracking-widest">
+                Password
+              </label>
+              {!isRegister && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsForgot(true);
+                    setError(null);
+                    setSuccessMessage(null);
+                  }}
+                  className="text-[9px] text-zinc-450 hover:text-crimson transition-colors font-bold uppercase tracking-widest outline-none"
+                >
+                  Forgot?
+                </button>
+              )}
+            </div>
+            <div className="relative">
+              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-zinc-550">
+                <Lock className="w-4 h-4" />
+              </span>
+              <input
+                type="password"
+                required
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full bg-zinc-900 border border-white/5 text-white placeholder-white/20 text-sm rounded-xl pl-10 pr-4 py-2.5 focus:border-crimson focus:ring-1 focus:ring-crimson outline-none transition-all"
+              />
+            </div>
           </div>
-        </div>
+        )}
 
         <button
           type="submit"
@@ -144,7 +177,7 @@ export const Login: React.FC<LoginProps> = ({ onClose, initialIsRegister = false
             <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
           ) : (
             <>
-              <span>{isRegister ? 'Create Account' : 'Sign In'}</span>
+              <span>{isForgot ? 'Send Reset Link' : (isRegister ? 'Create Account' : 'Sign In')}</span>
               <Sparkles className="w-3.5 h-3.5 text-white" />
             </>
           )}
@@ -156,14 +189,21 @@ export const Login: React.FC<LoginProps> = ({ onClose, initialIsRegister = false
         <button
           type="button"
           onClick={() => {
-            setIsRegister(!isRegister);
+            if (isForgot) {
+              setIsForgot(false);
+            } else {
+              setIsRegister(!isRegister);
+            }
             setError(null);
+            setSuccessMessage(null);
           }}
           className="text-xs text-crimson hover:text-crimson/80 font-bold tracking-wider"
         >
-          {isRegister 
-            ? 'Already have an account? Sign in' 
-            : "Don't have an account? Sign up"}
+          {isForgot 
+            ? 'Back to Sign In' 
+            : (isRegister 
+              ? 'Already have an account? Sign in' 
+              : "Don't have an account? Sign up")}
         </button>
       </div>
     </div>

@@ -13,6 +13,10 @@ class User(Base):
     full_name: Mapped[str] = mapped_column(String(255), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
+    is_verified: Mapped[bool] = mapped_column(default=False)
+    verification_token: Mapped[str] = mapped_column(String(255), nullable=True)
+    reset_token: Mapped[str] = mapped_column(String(255), nullable=True)
+    reset_expires: Mapped[datetime] = mapped_column(DateTime, nullable=True)
 
     # Relationships
     applications = relationship("Application", back_populates="user", cascade="all, delete-orphan")

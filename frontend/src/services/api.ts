@@ -47,6 +47,9 @@ export const api = {
     register: (data: any) => request('/auth/register', { method: 'POST', body: JSON.stringify(data) }),
     login: (data: any) => request('/auth/login', { method: 'POST', body: JSON.stringify(data) }),
     me: () => request('/auth/me', { method: 'GET' }),
+    verifyEmail: (token: string) => request(`/auth/verify?token=${token}`, { method: 'GET' }),
+    forgotPassword: (email: string) => request('/auth/forgot-password', { method: 'POST', body: JSON.stringify({ email }) }),
+    resetPassword: (data: any) => request('/auth/reset-password', { method: 'POST', body: JSON.stringify(data) }),
   },
   applications: {
     list: () => request('/applications'),
