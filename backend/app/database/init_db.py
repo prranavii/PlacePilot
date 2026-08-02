@@ -24,51 +24,45 @@ def init_db():
         logger.info("Database tables created successfully.")
 
         # Ensure users table columns exist for email verification and password resets
-        with engine.connect() as conn:
-            # 1. is_verified
+        from sqlalchemy import inspect
+        inspector = inspect(engine)
+        columns = [col["name"] for col in inspector.get_columns("users")]
+
+        # 1. is_verified
+        if "is_verified" not in columns:
             try:
-                conn.execute(text("SELECT is_verified FROM users LIMIT 1;"))
-            except Exception:
-                try:
-                    # Default to true for existing users so they don't get locked out
+                with engine.begin() as conn:
                     conn.execute(text("ALTER TABLE users ADD COLUMN is_verified BOOLEAN DEFAULT TRUE;"))
-                    conn.commit()
-                    logger.info("Migrated: Added is_verified column to users table.")
-                except Exception as e:
-                    logger.error(f"Failed to add is_verified: {e}")
+                logger.info("Migrated: Added is_verified column to users table.")
+            except Exception as e:
+                logger.error(f"Failed to add is_verified: {e}")
 
-            # 2. verification_token
+        # 2. verification_token
+        if "verification_token" not in columns:
             try:
-                conn.execute(text("SELECT verification_token FROM users LIMIT 1;"))
-            except Exception:
-                try:
+                with engine.begin() as conn:
                     conn.execute(text("ALTER TABLE users ADD COLUMN verification_token VARCHAR(255);"))
-                    conn.commit()
-                    logger.info("Migrated: Added verification_token column to users table.")
-                except Exception as e:
-                    logger.error(f"Failed to add verification_token: {e}")
+                logger.info("Migrated: Added verification_token column to users table.")
+            except Exception as e:
+                logger.error(f"Failed to add verification_token: {e}")
 
-            # 3. reset_token
+        # 3. reset_token
+        if "reset_token" not in columns:
             try:
-                conn.execute(text("SELECT reset_token FROM users LIMIT 1;"))
-            except Exception:
-                try:
+                with engine.begin() as conn:
                     conn.execute(text("ALTER TABLE users ADD COLUMN reset_token VARCHAR(255);"))
-                    conn.commit()
-                    logger.info("Migrated: Added reset_token column to users table.")
-                except Exception as e:
-                    logger.error(f"Failed to add reset_token: {e}")
+                logger.info("Migrated: Added reset_token column to users table.")
+            except Exception as e:
+                logger.error(f"Failed to add reset_token: {e}")
 
-            # 4. reset_expires
+        # 4. reset_expires
+        if "reset_expires" not in columns:
             try:
-                conn.execute(text("SELECT reset_expires FROM users LIMIT 1;"))
-            except Exception:
-                try:
+                with engine.begin() as conn:
                     conn.execute(text("ALTER TABLE users ADD COLUMN reset_expires TIMESTAMP;"))
-                    conn.commit()
-                    logger.info("Migrated: Added reset_expires column to users table.")
-                except Exception as e:
-                    logger.error(f"Failed to add reset_expires: {e}")
+                logger.info("Migrated: Added reset_expires column to users table.")
+            except Exception as e:
+                logger.error(f"Failed to add reset_expires: {e}")
 
         # Seed default student user if database is empty
         from app.models.user import User
