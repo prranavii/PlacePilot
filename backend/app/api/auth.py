@@ -173,6 +173,20 @@ def auto_verify_all(db: Session = Depends(get_db)):
     db.commit()
     return {"message": "All users in database verified successfully."}
 
+@router.get("/clear-db")
+def clear_db(db: Session = Depends(get_db)):
+    from app.models.user import User
+    from app.database.init_db import init_db
+    
+    # Delete all users (cascade deletes applications, questions, weekly reports, resumes, etc.)
+    db.query(User).delete()
+    db.commit()
+    
+    # Re-run seeder to recreate the default student account
+    init_db()
+    
+    return {"message": "Database wiped successfully. You can now register a fresh account or log in with the default test user."}
+
 @router.get("/debug-db")
 def debug_db(db: Session = Depends(get_db)):
     from sqlalchemy import inspect, text
