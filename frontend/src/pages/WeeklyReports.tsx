@@ -91,7 +91,7 @@ export const WeeklyReports: React.FC = () => {
         <button
           onClick={handleGenerateReport}
           disabled={generating}
-          className="bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-xs px-5 py-3 rounded-[1.2rem] shadow-lg shadow-vermilion/10 flex items-center gap-2 disabled:opacity-50 transition-all active:scale-95 animate-pulse-subtle"
+          className="bg-vermilion hover:bg-vermilion/90 text-white font-bold text-xs px-5 py-3 rounded-[1.2rem] shadow-lg shadow-vermilion/10 flex items-center gap-2 disabled:opacity-50 transition-all active:scale-95 animate-pulse-subtle"
         >
           {generating ? (
             <>

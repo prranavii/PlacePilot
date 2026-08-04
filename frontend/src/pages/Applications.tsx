@@ -323,7 +323,7 @@ export const Applications: React.FC = () => {
         </div>
         <button
           onClick={() => setShowAddModal(true)}
-          className="bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-[10px] px-5 py-3.5 rounded-full shadow-lg shadow-vermilion/15 flex items-center gap-2 max-w-max transition-all active:scale-95 uppercase tracking-wider"
+          className="bg-vermilion hover:bg-vermilion/90 text-white font-bold text-[10px] px-5 py-3.5 rounded-full shadow-lg shadow-vermilion/15 flex items-center gap-2 max-w-max transition-all active:scale-95 uppercase tracking-wider"
         >
           <Plus className="w-4 h-4" />
           Add Application
@@ -341,7 +341,7 @@ export const Applications: React.FC = () => {
             placeholder="Search company or role..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-sand text-xs pl-10 pr-4 py-3 rounded-[1.2rem] outline-none border border-cocoa/10 text-cocoa placeholder-white/20 transition-all focus:border-vermilion"
+            className="w-full bg-sand text-xs pl-10 pr-4 py-3 rounded-[1.2rem] outline-none border border-cocoa/10 text-cocoa placeholder-cocoa/30 transition-all focus:border-vermilion"
           />
         </div>
         <div className="flex gap-2 shrink-0">
@@ -452,7 +452,7 @@ export const Applications: React.FC = () => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-y-0 right-0 w-full max-w-md bg-cocoa border-l border-cocoa/10 shadow-2xl z-40 flex flex-col justify-between"
+            className="fixed inset-y-0 right-0 w-full max-w-md bg-white border-l border-cocoa/10 shadow-2xl z-40 flex flex-col justify-between"
           >
             {/* Workspace Header */}
             <div className="p-6 border-b border-cocoa/10 flex items-start justify-between bg-sand dark:bg-cocoa/20">
@@ -497,7 +497,7 @@ export const Applications: React.FC = () => {
                 <button
                   onClick={handlePrepareMe}
                   disabled={preparing}
-                  className="w-full bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-xs py-3 rounded-[1.2rem] shadow-lg shadow-vermilion/15 flex items-center justify-center gap-2 mt-1.5 transition-all disabled:opacity-50 active:scale-95"
+                  className="w-full bg-vermilion hover:bg-vermilion/90 text-white font-bold text-xs py-3 rounded-[1.2rem] shadow-lg shadow-vermilion/15 flex items-center justify-center gap-2 mt-1.5 transition-all disabled:opacity-50 active:scale-95"
                 >
                   {preparing ? (
                     <>
@@ -685,7 +685,7 @@ export const Applications: React.FC = () => {
               initial={{ scale: 0.95, y: 15 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 15 }}
-              className="w-full max-w-lg bg-cocoa border border-cocoa/10 rounded-[2rem] max-h-[90vh] overflow-y-auto shadow-2xl relative font-sans"
+              className="w-full max-w-lg bg-white border border-cocoa/10 rounded-[2rem] max-h-[90vh] overflow-y-auto shadow-2xl relative font-sans pb-6"
             >
               {/* Modal Header */}
               <div className="p-6 border-b border-cocoa/10 flex items-center justify-between bg-sand dark:bg-cocoa/20 dark:border-cocoa/10">
@@ -711,7 +711,7 @@ export const Applications: React.FC = () => {
                       placeholder="e.g. Google"
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
-                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-cocoa/30 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     />
                   </div>
                   <div>
@@ -722,7 +722,7 @@ export const Applications: React.FC = () => {
                       placeholder="e.g. Frontend Intern"
                       value={role}
                       onChange={(e) => setRole(e.target.value)}
-                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-cocoa/30 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     />
                   </div>
                 </div>
@@ -735,7 +735,7 @@ export const Applications: React.FC = () => {
                       placeholder="e.g. ₹12,00,000 / yr"
                       value={ctc}
                       onChange={(e) => setCtc(e.target.value)}
-                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-cocoa/30 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     />
                   </div>
                   <div>
@@ -745,7 +745,7 @@ export const Applications: React.FC = () => {
                       placeholder="e.g. Seattle, WA"
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
-                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-cocoa/30 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     />
                   </div>
                 </div>
@@ -821,7 +821,7 @@ export const Applications: React.FC = () => {
                       max="100"
                       value={readiness}
                       onChange={(e) => setReadiness(parseInt(e.target.value))}
-                      className="w-full mt-3 accent-crimson"
+                      className="w-full mt-3 accent-vermilion"
                     />
                   </div>
                 </div>
@@ -833,7 +833,7 @@ export const Applications: React.FC = () => {
                     rows={3}
                     value={jd}
                     onChange={(e) => setJd(e.target.value)}
-                    className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
+                    className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-cocoa/30 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                   />
                 </div>
 
@@ -844,7 +844,7 @@ export const Applications: React.FC = () => {
                     rows={2}
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
+                    className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-cocoa/30 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                   />
                 </div>
 
@@ -858,7 +858,7 @@ export const Applications: React.FC = () => {
                   </button>
                   <button
                     type="submit"
-                    className="px-5 py-2.5 bg-vermilion hover:bg-vermilion/90 text-cocoa rounded-[1.2rem] text-xs font-bold shadow-lg shadow-vermilion/15"
+                    className="px-5 py-2.5 bg-vermilion hover:bg-vermilion/90 text-white rounded-[1.2rem] text-xs font-bold shadow-lg shadow-vermilion/15"
                   >
                     Save Entry
                   </button>
@@ -882,7 +882,7 @@ export const Applications: React.FC = () => {
               initial={{ scale: 0.95, y: 15 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 15 }}
-              className="w-full max-w-xl bg-cocoa border border-cocoa/10 rounded-[2rem] max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col font-sans"
+              className="w-full max-w-xl bg-white border border-cocoa/10 rounded-[2rem] max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col font-sans pb-6"
             >
               <div className="p-6 border-b border-cocoa/10 flex items-center justify-between bg-sand shrink-0 dark:bg-cocoa/20 dark:border-cocoa/10">
                 <h3 className="font-bold text-cocoa text-xs uppercase tracking-widest flex items-center gap-2 dark:text-cocoa font-serif">
@@ -993,7 +993,7 @@ export const Applications: React.FC = () => {
                         placeholder="Type your structured response details (mention caching, algorithms, complexity where relevant)..."
                         value={mockAnswerText}
                         onChange={(e) => setMockAnswerText(e.target.value)}
-                        className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-4 py-3 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 leading-relaxed dark:bg-white dark:text-cocoa/80 dark:border-cocoa/10"
+                        className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-4 py-3 text-cocoa focus:outline-none focus:border-vermilion placeholder-cocoa/30 leading-relaxed dark:bg-white dark:text-cocoa/80 dark:border-cocoa/10"
                       />
                     </div>
 
@@ -1001,7 +1001,7 @@ export const Applications: React.FC = () => {
                       <button
                         type="submit"
                         disabled={mockSubmittingAnswer || !mockAnswerText.trim()}
-                        className="bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-xs px-5 py-3 rounded-[1.2rem] shadow-lg shadow-vermilion/20 flex items-center gap-1.5 disabled:opacity-50 transition-all active:scale-95"
+                        className="bg-vermilion hover:bg-vermilion/90 text-white font-bold text-xs px-5 py-3 rounded-[1.2rem] shadow-lg shadow-vermilion/20 flex items-center gap-1.5 disabled:opacity-50 transition-all active:scale-95"
                       >
                         {mockSubmittingAnswer ? (
                           <>
@@ -1024,7 +1024,7 @@ export const Applications: React.FC = () => {
                 <div className="p-6 border-t border-cocoa/10 bg-sand flex justify-end shrink-0 dark:border-cocoa/10 dark:bg-cocoa/20">
                   <button
                     onClick={() => setShowMockModal(false)}
-                    className="px-5 py-2.5 bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-xs rounded-[1.2rem] shadow-lg shadow-vermilion/10 active:scale-95 transition-all"
+                    className="px-5 py-2.5 bg-vermilion hover:bg-vermilion/90 text-white font-bold text-xs rounded-[1.2rem] shadow-lg shadow-vermilion/10 active:scale-95 transition-all"
                   >
                     Close Session
                   </button>

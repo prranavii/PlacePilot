@@ -79,7 +79,7 @@ export const LandingPage: React.FC = () => {
       <header className="sticky top-0 z-30 bg-sand/80 backdrop-blur-md border-b border-cocoa/10 transition-all">
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-cocoa flex items-center justify-center text-cocoa shadow-md shadow-vermilion/15 border border-cocoa/10">
+            <div className="w-8 h-8 rounded-lg bg-cocoa flex items-center justify-center text-white shadow-md shadow-vermilion/15 border border-white/5">
               <svg viewBox="0 0 24 24" className="w-5.5 h-5.5 fill-none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M 8.5,21 L 11.5,14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
                 <path d="M 12,13 L 15.5,5 L 17,7" stroke="#FF5B37" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -110,7 +110,7 @@ export const LandingPage: React.FC = () => {
             </button>
             <button 
               onClick={() => triggerAuth(true)}
-              className="bg-cocoa hover:bg-cocoa/90 text-cocoa font-bold text-[10px] px-5 py-2.5 rounded-full shadow-md transition-all active:scale-95 uppercase tracking-widest"
+              className="bg-cocoa hover:bg-cocoa/90 text-white font-bold text-[10px] px-5 py-2.5 rounded-full shadow-md transition-all active:scale-95 uppercase tracking-widest"
             >
               Get Started
             </button>
@@ -143,7 +143,7 @@ export const LandingPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
             <button 
               onClick={() => triggerAuth(true)}
-              className="w-full sm:w-auto bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-xs px-8 py-4 rounded-full shadow-lg shadow-vermilion/20 flex items-center justify-center gap-2 transition-all active:scale-95 uppercase tracking-widest"
+              className="w-full sm:w-auto bg-vermilion hover:bg-vermilion/90 text-white font-bold text-xs px-8 py-4 rounded-full shadow-lg shadow-vermilion/20 flex items-center justify-center gap-2 transition-all active:scale-95 uppercase tracking-widest"
             >
               <span>Explore Dashboard</span>
               <ArrowRight className="w-4 h-4" />
@@ -196,7 +196,7 @@ export const LandingPage: React.FC = () => {
             </div>
 
             {/* Bottom floating button inside mockup */}
-            <div className="bg-cocoa text-cocoa text-[9px] font-bold uppercase tracking-widest p-3 rounded-full text-center shadow-lg shadow-cocoa/10 flex items-center justify-center gap-1.5 mt-auto">
+            <div className="bg-cocoa text-white text-[9px] font-bold uppercase tracking-widest p-3 rounded-full text-center shadow-lg shadow-cocoa/10 flex items-center justify-center gap-1.5 mt-auto">
               <span>Enter Workspace</span>
               <ArrowRight className="w-3 h-3 text-vermilion" />
             </div>
@@ -246,17 +246,17 @@ export const LandingPage: React.FC = () => {
                 <span className="text-[10px] text-vermilion font-bold tracking-widest uppercase">
                   {steps[activeStep].no} / {steps[activeStep].title}
                 </span>
-                <h3 className="text-2xl font-serif font-bold text-cocoa">
+                <h3 className="text-2xl font-serif font-bold text-white">
                   {steps[activeStep].short}
                 </h3>
-                <p className="text-xs text-cocoa/60 leading-relaxed font-semibold uppercase tracking-wider">
+                <p className="text-xs text-white/60 leading-relaxed font-semibold uppercase tracking-wider">
                   The design process maps key candidate workflows:
                 </p>
               </div>
 
               <div className="space-y-3.5 mt-8 border-t border-cocoa/10 pt-6">
                 {steps[activeStep].details.map((detail, index) => (
-                  <div key={index} className="flex items-center gap-3 text-cocoa text-xs font-semibold">
+                  <div key={index} className="flex items-center gap-3 text-white text-xs font-semibold">
                     <span className="w-1.5 h-1.5 rounded-full bg-vermilion" />
                     <span>{detail}</span>
                   </div>
@@ -409,8 +409,8 @@ export const LandingPage: React.FC = () => {
           <div className="absolute top-[-30%] right-[-10%] w-[300px] h-[300px] bg-vermilion/10 rounded-full blur-[80px]" />
           
           <Flame className="w-8 h-8 text-vermilion fill-vermilion/10 mx-auto animate-bounce relative z-10" />
-          <h2 className="text-3xl font-serif font-bold text-cocoa relative z-10">Ready to take control?</h2>
-          <p className="text-xs text-cocoa/60 max-w-md mx-auto font-bold uppercase tracking-wider leading-relaxed relative z-10">
+          <h2 className="text-3xl font-serif font-bold text-white relative z-10">Ready to take control?</h2>
+          <p className="text-xs text-white/60 max-w-md mx-auto font-bold uppercase tracking-wider leading-relaxed relative z-10">
             Log your interviews, solve DSA gap topics, and matching your resume vectors with PlacePilot today.
           </p>
           <button 

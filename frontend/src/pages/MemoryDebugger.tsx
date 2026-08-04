@@ -140,7 +140,7 @@ export const MemoryDebugger: React.FC = () => {
         <button
           type="submit"
           disabled={searching}
-          className="bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-xs px-5 py-3 rounded-[1.2rem] shadow-lg shadow-vermilion/10 shrink-0 transition-all active:scale-95"
+          className="bg-vermilion hover:bg-vermilion/90 text-white font-bold text-xs px-5 py-3 rounded-[1.2rem] shadow-lg shadow-vermilion/10 shrink-0 transition-all active:scale-95"
         >
           {searching ? 'Querying...' : 'Semantic Query'}
         </button>

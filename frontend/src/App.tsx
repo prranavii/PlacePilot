@@ -129,7 +129,7 @@ const MainLayout: React.FC = () => {
               </div>
               <button
                 onClick={() => setVerifyStatus('idle')}
-                className="w-full bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-xs py-3.5 rounded-[1.2rem] shadow-lg shadow-vermilion/15 hover:shadow-vermilion/25 transition-all uppercase tracking-widest"
+                className="w-full bg-vermilion hover:bg-vermilion/90 text-white font-bold text-xs py-3.5 rounded-[1.2rem] shadow-lg shadow-vermilion/15 hover:shadow-vermilion/25 transition-all uppercase tracking-widest"
               >
                 Sign In Now
               </button>
@@ -212,7 +212,7 @@ const MainLayout: React.FC = () => {
                   setResetStatus('idle');
                   setNewPassword('');
                 }}
-                className="w-full bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-xs py-3.5 rounded-[1.2rem] shadow-lg shadow-vermilion/15 hover:shadow-vermilion/25 transition-all uppercase tracking-widest"
+                className="w-full bg-vermilion hover:bg-vermilion/90 text-white font-bold text-xs py-3.5 rounded-[1.2rem] shadow-lg shadow-vermilion/15 hover:shadow-vermilion/25 transition-all uppercase tracking-widest"
               >
                 Sign In
               </button>
@@ -245,7 +245,7 @@ const MainLayout: React.FC = () => {
                     placeholder="Enter at least 6 characters"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    className="w-full bg-sand border border-cocoa/10 text-cocoa placeholder-white/20 text-sm rounded-[1.2rem] pl-10 pr-4 py-2.5 focus:border-vermilion focus:ring-1 focus:ring-vermilion outline-none transition-all"
+                    className="w-full bg-sand border border-cocoa/10 text-cocoa placeholder-cocoa/30 text-sm rounded-[1.2rem] pl-10 pr-4 py-2.5 focus:border-vermilion focus:ring-1 focus:ring-vermilion outline-none transition-all"
                   />
                 </div>
               </div>
@@ -253,7 +253,7 @@ const MainLayout: React.FC = () => {
               <button
                 type="submit"
                 disabled={resetStatus === 'loading'}
-                className="w-full bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-xs py-3.5 rounded-[1.2rem] shadow-lg shadow-vermilion/15 hover:shadow-vermilion/25 transition-all flex items-center justify-center gap-2 mt-6 disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest"
+                className="w-full bg-vermilion hover:bg-vermilion/90 text-white font-bold text-xs py-3.5 rounded-[1.2rem] shadow-lg shadow-vermilion/15 hover:shadow-vermilion/25 transition-all flex items-center justify-center gap-2 mt-6 disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest"
               >
                 {resetStatus === 'loading' ? (
                   <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

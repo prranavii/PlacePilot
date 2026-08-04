@@ -179,7 +179,7 @@ export const Questions: React.FC = () => {
         </div>
         <button
           onClick={() => setShowAddModal(true)}
-          className="bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-xs px-5 py-3 rounded-[1.2rem] shadow-lg shadow-vermilion/15 flex items-center gap-2 max-w-max transition-all active:scale-95"
+          className="bg-vermilion hover:bg-vermilion/90 text-white font-bold text-xs px-5 py-3 rounded-[1.2rem] shadow-lg shadow-vermilion/15 flex items-center gap-2 max-w-max transition-all active:scale-95"
         >
           <Plus className="w-4 h-4" />
           Log Question
@@ -303,7 +303,7 @@ export const Questions: React.FC = () => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-y-0 right-0 w-full max-w-md bg-cocoa border-l border-cocoa/10 shadow-2xl z-45 flex flex-col justify-between"
+            className="fixed inset-y-0 right-0 w-full max-w-md bg-white border-l border-cocoa/10 shadow-2xl z-45 flex flex-col justify-between"
           >
             
             <div className="p-6 bg-sand border-b border-cocoa/10 flex items-start justify-between dark:bg-cocoa/20 dark:border-cocoa/10">
@@ -398,7 +398,7 @@ export const Questions: React.FC = () => {
       <AnimatePresence>
         {showAddModal && (
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="w-full max-w-lg bg-cocoa border border-cocoa/10 rounded-[2rem] max-h-[90vh] overflow-y-auto shadow-2xl relative font-sans">
+            <div className="w-full max-w-lg bg-white border border-cocoa/10 rounded-[2rem] max-h-[90vh] overflow-y-auto shadow-2xl relative font-sans pb-6">
               
               <div className="p-6 bg-sand text-cocoa border-b border-cocoa/10 flex items-center justify-between dark:bg-cocoa/20 dark:border-cocoa/10">
                 <h3 className="font-bold text-cocoa text-sm uppercase tracking-wider dark:text-cocoa font-serif">
@@ -421,7 +421,7 @@ export const Questions: React.FC = () => {
                       placeholder="e.g. Meta (Optional)"
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
-                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-cocoa/30 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     />
                   </div>
                   <div>
@@ -431,7 +431,7 @@ export const Questions: React.FC = () => {
                       placeholder="e.g. SDE Backend"
                       value={role}
                       onChange={(e) => setRole(e.target.value)}
-                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-cocoa/30 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     />
                   </div>
                 </div>
@@ -445,7 +445,7 @@ export const Questions: React.FC = () => {
                       placeholder="e.g. Graphs"
                       value={topic}
                       onChange={(e) => setTopic(e.target.value)}
-                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-cocoa/30 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     />
                   </div>
                   <div>
@@ -455,7 +455,7 @@ export const Questions: React.FC = () => {
                       placeholder="e.g. DFS Cycle"
                       value={subtopic}
                       onChange={(e) => setSubtopic(e.target.value)}
-                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-cocoa/30 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     />
                   </div>
                   <div>
@@ -507,7 +507,7 @@ export const Questions: React.FC = () => {
                           type="radio"
                           checked={solved === true}
                           onChange={() => setSolved(true)}
-                          className="accent-crimson"
+                          className="accent-vermilion"
                         />
                         Yes
                       </label>
@@ -516,7 +516,7 @@ export const Questions: React.FC = () => {
                           type="radio"
                           checked={solved === false}
                           onChange={() => setSolved(false)}
-                          className="accent-crimson"
+                          className="accent-vermilion"
                         />
                         No
                       </label>
@@ -532,7 +532,7 @@ export const Questions: React.FC = () => {
                     rows={4}
                     value={text}
                     onChange={(e) => setText(e.target.value)}
-                    className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
+                    className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-cocoa/30 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                   />
                 </div>
 
@@ -543,7 +543,7 @@ export const Questions: React.FC = () => {
                     rows={2}
                     value={userNotes}
                     onChange={(e) => setUserNotes(e.target.value)}
-                    className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
+                    className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-cocoa/30 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                   />
                 </div>
 
@@ -557,7 +557,7 @@ export const Questions: React.FC = () => {
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-vermilion hover:bg-vermilion/90 text-cocoa rounded-[1.2rem] text-xs font-bold shadow-lg shadow-vermilion/15"
+                    className="px-4 py-2 bg-vermilion hover:bg-vermilion/90 text-white rounded-[1.2rem] text-xs font-bold shadow-lg shadow-vermilion/15"
                   >
                     Log Entry
                   </button>

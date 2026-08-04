@@ -197,7 +197,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
                 localStorage.setItem('autoSelectCompany', nextInterviewCompany);
                 setCurrentTab('applications');
               }}
-              className="h-10 px-4 bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-[10px] rounded-[1.2rem] shadow-md flex items-center gap-1.5 transition-all active:scale-95 uppercase tracking-wider"
+              className="h-10 px-4 bg-vermilion hover:bg-vermilion/90 text-white font-bold text-[10px] rounded-[1.2rem] shadow-md flex items-center gap-1.5 transition-all active:scale-95 uppercase tracking-wider"
             >
               <span>Prepare</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -279,16 +279,16 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
         </div>
 
         {/* Average Readiness */}
-        <div className="bento-panel-dark flex flex-col justify-between text-cocoa">
+        <div className="bento-panel-dark flex flex-col justify-between text-white">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-cocoa/50 font-bold uppercase tracking-wider">Readiness</span>
-            <span className="p-2 rounded-[1.2rem] bg-cocoa/10 text-cocoa">
+            <span className="text-[10px] text-white/50 font-bold uppercase tracking-wider">Readiness</span>
+            <span className="p-2 rounded-[1.2rem] bg-white/10 text-white">
               <TrendingUp className="w-4 h-4" />
             </span>
           </div>
           <div className="mt-6">
-            <span className="text-3xl font-bold text-cocoa font-serif">{avgReadiness}%</span>
-            <p className="text-[10px] text-cocoa/40 mt-1 uppercase tracking-wider font-bold">Vector match</p>
+            <span className="text-3xl font-bold text-white font-serif">{avgReadiness}%</span>
+            <p className="text-[10px] text-white/40 mt-1 uppercase tracking-wider font-bold">Vector match</p>
           </div>
         </div>
       </div>

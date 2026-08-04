@@ -146,7 +146,7 @@ export const Pipeline: React.FC = () => {
               key={stage}
               onDragOver={handleDragOver}
               onDrop={(e) => handleDrop(e, stage)}
-              className="bg-cocoa/45 border border-cocoa/10 rounded-[1.5rem] p-4 min-h-[70vh] flex flex-col gap-4 shadow-md backdrop-blur-sm"
+              className="bg-white/60 border border-cocoa/10 rounded-[1.5rem] p-4 min-h-[70vh] flex flex-col gap-4 shadow-md backdrop-blur-sm"
             >
               {/* Column Header */}
               <div className="flex items-center justify-between pb-3 border-b border-cocoa/10 mb-1 shrink-0">
@@ -217,7 +217,7 @@ export const Pipeline: React.FC = () => {
                   ) : (
                     <div className="border border-dashed border-cocoa/10 rounded-[1.5rem] py-12 text-center px-4 dark:border-cocoa/10">
                       <span className="text-[10px] text-cocoa/40 font-bold uppercase tracking-wider block dark:text-cocoa/40">Column Empty</span>
-                      <span className="text-[9px] text-zinc-700 block mt-1 dark:text-zinc-600">Drag applications here</span>
+                      <span className="text-[9px] text-cocoa/40 block mt-1 dark:text-cocoa/40">Drag applications here</span>
                     </div>
                   )}
                 </AnimatePresence>

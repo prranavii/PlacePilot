@@ -167,14 +167,14 @@ export const Journal: React.FC = () => {
                     placeholder="Paste anything. E.g. 'They asked two graph questions. I solved DFS but stumbled on B+ Trees. Communication went well, but need indexing practice...'"
                     value={messyText}
                     onChange={(e) => setMessyText(e.target.value)}
-                    className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-4 py-3 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 leading-relaxed dark:bg-sand dark:text-cocoa/80 dark:border-cocoa/10"
+                    className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-4 py-3 text-cocoa focus:outline-none focus:border-vermilion placeholder-cocoa/30 leading-relaxed dark:bg-sand dark:text-cocoa/80 dark:border-cocoa/10"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={analyzing}
-                  className="w-full bg-vermilion hover:bg-vermilion/90 text-cocoa text-xs font-bold py-3.5 rounded-[1.2rem] shadow-lg shadow-vermilion/10 flex items-center justify-center gap-2 mt-4 disabled:opacity-50 transition-all active:scale-[0.98]"
+                  className="w-full bg-vermilion hover:bg-vermilion/90 text-white text-xs font-bold py-3.5 rounded-[1.2rem] shadow-lg shadow-vermilion/10 flex items-center justify-center gap-2 mt-4 disabled:opacity-50 transition-all active:scale-[0.98]"
                 >
                   {analyzing ? (
                     <>

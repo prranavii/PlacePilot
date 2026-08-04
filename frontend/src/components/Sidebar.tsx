@@ -47,7 +47,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <header className="sticky top-0 w-full z-45 bg-sand/80 backdrop-blur-md border-b border-cocoa/10 px-8 py-4 flex items-center justify-between transition-colors">
         {/* Brand Logo */}
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-cocoa flex items-center justify-center text-cocoa shadow-md shadow-vermilion/15 border border-cocoa/10">
+          <div className="w-8 h-8 rounded-lg bg-cocoa flex items-center justify-center text-white shadow-md shadow-vermilion/15 border border-white/5">
             <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none" xmlns="http://www.w3.org/2000/svg">
               {/* Upward Trajectory Arrow Stem */}
               <path d="M 8.5,21 L 11.5,14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
@@ -122,7 +122,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 whileTap={{ scale: 0.95 }}
                 className={`relative p-3 rounded-full transition-all duration-155 group ${
                   isActive 
-                    ? 'bg-vermilion text-cocoa shadow-lg shadow-vermilion/25' 
+                    ? 'bg-vermilion text-white shadow-lg shadow-vermilion/25' 
                     : 'text-cocoa/60 hover:bg-cocoa/10 hover:text-cocoa'
                 }`}
                 title={item.label}
@@ -130,7 +130,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <Icon className="w-4 h-4" />
                 
                 {/* Custom Tooltip */}
-                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 bg-cocoa text-cocoa text-[9px] font-bold px-2.5 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl">
+                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 bg-cocoa text-white text-[9px] font-bold px-2.5 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl">
                   {item.label}
                 </span>
               </motion.button>
