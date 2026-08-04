@@ -123,7 +123,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 className={`relative p-3 rounded-full transition-all duration-155 group ${
                   isActive 
                     ? 'bg-vermilion text-white shadow-lg shadow-vermilion/25' 
-                    : 'text-cocoa/60 hover:bg-cocoa/10 hover:text-cocoa'
+                    : 'text-white/60 hover:bg-white/10 hover:text-white'
                 }`}
                 title={item.label}
               >
