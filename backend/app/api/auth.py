@@ -167,6 +167,12 @@ def reset_password(
 def read_users_me(current_user: User = Depends(get_current_user)):
     return current_user
 
+@router.get("/auto-verify-all")
+def auto_verify_all(db: Session = Depends(get_db)):
+    db.query(User).update({User.is_verified: True})
+    db.commit()
+    return {"message": "All users in database verified successfully."}
+
 @router.get("/debug-db")
 def debug_db(db: Session = Depends(get_db)):
     from sqlalchemy import inspect, text
