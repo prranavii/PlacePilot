@@ -165,21 +165,21 @@ export const Questions: React.FC = () => {
   return (
     <div className="space-y-8 pb-12 font-sans relative min-h-[80vh]">
       {/* 3D Ambient backdrop Blob */}
-      <div className="absolute -top-12 right-1/4 w-96 h-96 bg-crimson/5 rounded-full blur-3xl pointer-events-none animate-blob"></div>
+      <div className="absolute -top-12 right-1/4 w-96 h-96 bg-vermilion/5 rounded-full blur-3xl pointer-events-none animate-blob"></div>
 
       {/* Header section */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold tracking-widest text-white font-geom uppercase">
+          <h2 className="text-xl font-bold tracking-widest text-cocoa font-serif uppercase">
             Personal Question Bank
           </h2>
-          <p className="text-xs text-zinc-400 mt-2 max-w-lg leading-relaxed font-semibold uppercase tracking-wider">
+          <p className="text-xs text-cocoa/60 mt-2 max-w-lg leading-relaxed font-semibold uppercase tracking-wider">
             Log, categorize, and revise coding questions and system design scenarios encountered in interviews.
           </p>
         </div>
         <button
           onClick={() => setShowAddModal(true)}
-          className="bg-crimson hover:bg-crimson/90 text-white font-bold text-xs px-5 py-3 rounded-xl shadow-lg shadow-crimson/15 flex items-center gap-2 max-w-max transition-all active:scale-95"
+          className="bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-xs px-5 py-3 rounded-[1.2rem] shadow-lg shadow-vermilion/15 flex items-center gap-2 max-w-max transition-all active:scale-95"
         >
           <Plus className="w-4 h-4" />
           Log Question
@@ -187,9 +187,9 @@ export const Questions: React.FC = () => {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col md:flex-row gap-4 bg-zinc-950/60 border border-white/5 p-4 rounded-2xl shadow-md backdrop-blur-md">
+      <div className="flex flex-col md:flex-row gap-4 bg-white border border-cocoa/10 p-4 rounded-[1.5rem] shadow-md backdrop-blur-md">
         <div className="relative flex-1">
-          <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-zinc-500">
+          <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-cocoa/40">
             <Search className="w-4 h-4" />
           </span>
           <input
@@ -197,14 +197,14 @@ export const Questions: React.FC = () => {
             placeholder="Search questions by topic, text, or company..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-zinc-900 text-xs pl-10 pr-4 py-3 rounded-xl outline-none border border-white/5 text-white placeholder-life-cocoa/40 transition-all focus:border-crimson dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
+            className="w-full bg-sand text-xs pl-10 pr-4 py-3 rounded-[1.2rem] outline-none border border-cocoa/10 text-cocoa placeholder-life-cocoa/40 transition-all focus:border-vermilion dark:bg-sand dark:text-cocoa/80 dark:border-cocoa/10"
           />
         </div>
         <div className="flex gap-2 shrink-0">
           <select
             value={difficultyFilter}
             onChange={(e) => setDifficultyFilter(e.target.value)}
-            className="bg-zinc-900 text-xs px-4 py-3 rounded-xl outline-none border border-white/5 text-white transition-all focus:border-crimson dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
+            className="bg-sand text-xs px-4 py-3 rounded-[1.2rem] outline-none border border-cocoa/10 text-cocoa transition-all focus:border-vermilion dark:bg-sand dark:text-cocoa/80 dark:border-cocoa/10"
           >
             <option value="">All Difficulties</option>
             <option value="Easy">Easy</option>
@@ -214,7 +214,7 @@ export const Questions: React.FC = () => {
           <select
             value={solvedFilter}
             onChange={(e) => setSolvedFilter(e.target.value)}
-            className="bg-zinc-900 text-xs px-4 py-3 rounded-xl outline-none border border-white/5 text-white transition-all focus:border-crimson dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5"
+            className="bg-sand text-xs px-4 py-3 rounded-[1.2rem] outline-none border border-cocoa/10 text-cocoa transition-all focus:border-vermilion dark:bg-sand dark:text-cocoa/80 dark:border-cocoa/10"
           >
             <option value="">All Statuses</option>
             <option value="Solved">Solved</option>
@@ -227,16 +227,16 @@ export const Questions: React.FC = () => {
       {loading ? (
         <div className="flex items-center justify-center min-h-[40vh]">
           <div className="relative w-8 h-8">
-            <div className="absolute inset-0 rounded-full border-3 border-crimson/25 animate-pulse"></div>
-            <div className="absolute inset-0 rounded-full border-3 border-crimson border-t-transparent animate-spin"></div>
+            <div className="absolute inset-0 rounded-full border-3 border-vermilion/25 animate-pulse"></div>
+            <div className="absolute inset-0 rounded-full border-3 border-vermilion border-t-transparent animate-spin"></div>
           </div>
         </div>
       ) : filteredQuestions.length > 0 ? (
-        <div className="bg-zinc-950/60 border border-white/5 rounded-2xl overflow-hidden shadow-lg">
+        <div className="bg-white border border-cocoa/10 rounded-[1.5rem] overflow-hidden shadow-lg">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-zinc-900 text-zinc-450 border-b border-white/5 dark:bg-zinc-800/50 dark:border-zinc-800">
+                <tr className="bg-sand text-cocoa/50 border-b border-cocoa/10 dark:bg-zinc-800/50 dark:border-zinc-800">
                   <th className="p-4 text-xs font-bold uppercase tracking-wider">Question Description</th>
                   <th className="p-4 text-xs font-bold uppercase tracking-wider">Company</th>
                   <th className="p-4 text-xs font-bold uppercase tracking-wider">Topic</th>
@@ -249,20 +249,20 @@ export const Questions: React.FC = () => {
                   <tr
                     key={q.id}
                     onClick={() => setSelectedQuestion(q)}
-                    className="hover:bg-zinc-900/40 dark:hover:bg-zinc-800/20 cursor-pointer transition-colors"
+                    className="hover:bg-sand dark:hover:bg-zinc-800/20 cursor-pointer transition-colors"
                   >
                     <td className="p-4">
-                      <span className="text-xs font-semibold text-white dark:text-slate-200 block truncate max-w-sm">
+                      <span className="text-xs font-semibold text-cocoa dark:text-slate-200 block truncate max-w-sm">
                         {q.question_text}
                       </span>
                       {q.subtopic && (
-                        <span className="text-[10px] text-zinc-500 font-medium block mt-0.5">{q.subtopic}</span>
+                        <span className="text-[10px] text-cocoa/40 font-medium block mt-0.5">{q.subtopic}</span>
                       )}
                     </td>
-                    <td className="p-4 text-xs font-bold text-white dark:text-slate-300">
+                    <td className="p-4 text-xs font-bold text-cocoa dark:text-slate-300">
                       {q.company_name || 'General'}
                     </td>
-                    <td className="p-4 text-xs font-medium text-zinc-400 dark:text-slate-400">
+                    <td className="p-4 text-xs font-medium text-cocoa/60 dark:text-slate-400">
                       {q.topic}
                     </td>
                     <td className="p-4">
@@ -276,7 +276,7 @@ export const Questions: React.FC = () => {
                           <Check className="w-3.5 h-3.5" />
                         </span>
                       ) : (
-                        <span className="p-1 rounded-full bg-crimson/10 text-crimson inline-block">
+                        <span className="p-1 rounded-full bg-vermilion/10 text-vermilion inline-block">
                           <AlertCircle className="w-3.5 h-3.5" />
                         </span>
                       )}
@@ -288,10 +288,10 @@ export const Questions: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="bg-zinc-950/60 border border-white/5 text-center py-20 rounded-2xl shadow-lg">
-          <BookOpen className="w-10 h-10 text-zinc-650 mx-auto mb-4" />
-          <h4 className="font-bold text-white text-sm uppercase tracking-wider font-geom">No questions logged</h4>
-          <p className="text-[11px] text-zinc-450 mt-2 font-semibold uppercase tracking-wider">Start building your placement bank by logging a question.</p>
+        <div className="bg-white border border-cocoa/10 text-center py-20 rounded-[1.5rem] shadow-lg">
+          <BookOpen className="w-10 h-10 text-cocoa/30 mx-auto mb-4" />
+          <h4 className="font-bold text-cocoa text-sm uppercase tracking-wider font-serif">No questions logged</h4>
+          <p className="text-[11px] text-cocoa/50 mt-2 font-semibold uppercase tracking-wider">Start building your placement bank by logging a question.</p>
         </div>
       )}
 
@@ -303,19 +303,19 @@ export const Questions: React.FC = () => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-y-0 right-0 w-full max-w-md bg-zinc-950 border-l border-white/5 shadow-2xl z-45 flex flex-col justify-between"
+            className="fixed inset-y-0 right-0 w-full max-w-md bg-cocoa border-l border-cocoa/10 shadow-2xl z-45 flex flex-col justify-between"
           >
             
-            <div className="p-6 bg-zinc-900 border-b border-white/5 flex items-start justify-between dark:bg-zinc-950/20 dark:border-white/5">
+            <div className="p-6 bg-sand border-b border-cocoa/10 flex items-start justify-between dark:bg-cocoa/20 dark:border-cocoa/10">
               <div>
-                <span className="text-[9px] uppercase font-bold tracking-wider text-zinc-450 block">Question Details</span>
-                <h3 className="font-extrabold text-white dark:text-slate-100 text-base mt-0.5 font-geom">
+                <span className="text-[9px] uppercase font-bold tracking-wider text-cocoa/50 block">Question Details</span>
+                <h3 className="font-bold text-cocoa dark:text-slate-100 text-base mt-0.5 font-serif">
                   {selectedQuestion.company_name || 'General'} | {selectedQuestion.topic}
                 </h3>
               </div>
               <button
                 onClick={() => setSelectedQuestion(null)}
-                className="p-1.5 rounded-lg text-zinc-400 hover:bg-white/5 dark:hover:bg-zinc-800"
+                className="p-1.5 rounded-lg text-cocoa/60 hover:bg-cocoa/5 dark:hover:bg-zinc-800"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -325,31 +325,31 @@ export const Questions: React.FC = () => {
               
               {/* Question Text */}
               <div className="space-y-1.5">
-                <h4 className="text-xs font-bold text-zinc-450 uppercase tracking-wider flex items-center gap-1.5">
-                  <HelpCircle className="w-4 h-4 text-crimson" /> Question Statement
+                <h4 className="text-xs font-bold text-cocoa/50 uppercase tracking-wider flex items-center gap-1.5">
+                  <HelpCircle className="w-4 h-4 text-vermilion" /> Question Statement
                 </h4>
-                <p className="text-xs text-zinc-350 font-medium whitespace-pre-wrap bg-zinc-900/40 p-4 border border-white/5 rounded-2xl dark:bg-zinc-900/40 dark:border-white/5">
+                <p className="text-xs text-cocoa/70 font-medium whitespace-pre-wrap bg-sand p-4 border border-cocoa/10 rounded-[1.5rem] dark:bg-sand dark:border-cocoa/10">
                   {selectedQuestion.question_text}
                 </p>
               </div>
 
               {/* Revision metadata */}
               <div className="grid grid-cols-3 gap-3">
-                <div className="p-3 bg-zinc-900 border border-white/5 rounded-xl text-center dark:bg-zinc-950/20 dark:border-white/5">
-                  <span className="text-[9px] text-zinc-450 block font-semibold uppercase">Difficulty</span>
-                  <span className="text-xs font-bold text-white mt-1 block dark:text-zinc-200">
+                <div className="p-3 bg-sand border border-cocoa/10 rounded-[1.2rem] text-center dark:bg-cocoa/20 dark:border-cocoa/10">
+                  <span className="text-[9px] text-cocoa/50 block font-semibold uppercase">Difficulty</span>
+                  <span className="text-xs font-bold text-cocoa mt-1 block dark:text-zinc-200">
                     {selectedQuestion.difficulty}
                   </span>
                 </div>
-                <div className="p-3 bg-zinc-900 border border-white/5 rounded-xl text-center dark:bg-zinc-900/20 dark:border-white/5">
-                  <span className="text-[9px] text-zinc-450 block font-semibold uppercase">Solved?</span>
-                  <span className="text-xs font-bold text-white mt-1 block dark:text-zinc-200">
+                <div className="p-3 bg-sand border border-cocoa/10 rounded-[1.2rem] text-center dark:bg-sand/30 dark:border-cocoa/10">
+                  <span className="text-[9px] text-cocoa/50 block font-semibold uppercase">Solved?</span>
+                  <span className="text-xs font-bold text-cocoa mt-1 block dark:text-zinc-200">
                     {selectedQuestion.solved ? 'Yes' : 'No'}
                   </span>
                 </div>
-                <div className="p-3 bg-zinc-900 border border-white/5 rounded-xl text-center dark:bg-zinc-900/20 dark:border-white/5">
-                  <span className="text-[9px] text-zinc-450 block font-semibold uppercase">Confidence</span>
-                  <span className="text-xs font-bold text-white mt-1 block dark:text-zinc-200">
+                <div className="p-3 bg-sand border border-cocoa/10 rounded-[1.2rem] text-center dark:bg-sand/30 dark:border-cocoa/10">
+                  <span className="text-[9px] text-cocoa/50 block font-semibold uppercase">Confidence</span>
+                  <span className="text-xs font-bold text-cocoa mt-1 block dark:text-zinc-200">
                     {selectedQuestion.confidence_level}/5
                   </span>
                 </div>
@@ -358,10 +358,10 @@ export const Questions: React.FC = () => {
               {/* User Notes */}
               {selectedQuestion.user_notes && (
                 <div className="space-y-1.5">
-                  <h4 className="text-xs font-bold text-zinc-450 uppercase tracking-wider flex items-center gap-1.5">
-                    <FileText className="w-4 h-4 text-crimson" /> Student Notes
+                  <h4 className="text-xs font-bold text-cocoa/50 uppercase tracking-wider flex items-center gap-1.5">
+                    <FileText className="w-4 h-4 text-vermilion" /> Student Notes
                   </h4>
-                  <div className="bg-zinc-900/40 border border-white/5 rounded-xl p-3.5 text-xs text-zinc-350 dark:bg-zinc-950/20 dark:border-white/5 dark:text-zinc-400 whitespace-pre-wrap">
+                  <div className="bg-sand border border-cocoa/10 rounded-[1.2rem] p-3.5 text-xs text-cocoa/70 dark:bg-cocoa/20 dark:border-cocoa/10 dark:text-cocoa/60 whitespace-pre-wrap">
                     {selectedQuestion.user_notes}
                   </div>
                 </div>
@@ -370,10 +370,10 @@ export const Questions: React.FC = () => {
               {/* AI Explanation */}
               {selectedQuestion.ai_explanation && (
                 <div className="space-y-2">
-                  <h4 className="text-xs font-bold text-zinc-450 uppercase tracking-wider flex items-center gap-1.5">
-                    <Sparkles className="w-4 h-4 text-crimson fill-crimson/10" /> AI Explanation & Optimal Derivation
+                  <h4 className="text-xs font-bold text-cocoa/50 uppercase tracking-wider flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4 text-vermilion fill-vermilion/10" /> AI Explanation & Optimal Derivation
                   </h4>
-                  <div className="bg-crimson/5 border border-crimson/10 rounded-xl p-3.5 text-xs text-white dark:bg-zinc-900 dark:border-white/5 dark:text-zinc-300 whitespace-pre-wrap">
+                  <div className="bg-vermilion/5 border border-vermilion/10 rounded-[1.2rem] p-3.5 text-xs text-cocoa dark:bg-sand dark:border-cocoa/10 dark:text-cocoa/80 whitespace-pre-wrap">
                     {selectedQuestion.ai_explanation}
                   </div>
                 </div>
@@ -381,10 +381,10 @@ export const Questions: React.FC = () => {
 
             </div>
 
-            <div className="p-6 border-t border-white/5 flex justify-end bg-zinc-900 dark:bg-zinc-905/20 dark:border-white/5">
+            <div className="p-6 border-t border-cocoa/10 flex justify-end bg-sand dark:bg-zinc-905/20 dark:border-cocoa/10">
               <button
                 onClick={() => setSelectedQuestion(null)}
-                className="px-4 py-2 border border-white/5 bg-zinc-900 text-xs font-bold text-zinc-350 rounded-xl hover:bg-white/5 dark:border-white/5 dark:bg-zinc-950/40 dark:text-zinc-400 dark:hover:bg-zinc-900 transition-all"
+                className="px-4 py-2 border border-cocoa/10 bg-sand text-xs font-bold text-cocoa/70 rounded-[1.2rem] hover:bg-cocoa/5 dark:border-cocoa/10 dark:bg-cocoa/40 dark:text-cocoa/60 dark:hover:bg-sand transition-all"
               >
                 Close Panel
               </button>
@@ -398,15 +398,15 @@ export const Questions: React.FC = () => {
       <AnimatePresence>
         {showAddModal && (
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-            <div className="w-full max-w-lg bg-zinc-950 border border-white/5 rounded-3xl max-h-[90vh] overflow-y-auto shadow-2xl relative font-sans">
+            <div className="w-full max-w-lg bg-cocoa border border-cocoa/10 rounded-[2rem] max-h-[90vh] overflow-y-auto shadow-2xl relative font-sans">
               
-              <div className="p-6 bg-zinc-900 text-white border-b border-white/5 flex items-center justify-between dark:bg-zinc-950/20 dark:border-white/5">
-                <h3 className="font-extrabold text-white text-sm uppercase tracking-wider dark:text-white font-geom">
+              <div className="p-6 bg-sand text-cocoa border-b border-cocoa/10 flex items-center justify-between dark:bg-cocoa/20 dark:border-cocoa/10">
+                <h3 className="font-bold text-cocoa text-sm uppercase tracking-wider dark:text-cocoa font-serif">
                   Log New Placement Question
                 </h3>
                 <button 
                   onClick={() => setShowAddModal(false)}
-                  className="p-1.5 rounded-lg text-zinc-400 hover:bg-white/5 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                  className="p-1.5 rounded-lg text-cocoa/60 hover:bg-cocoa/5 dark:text-cocoa/60 dark:hover:bg-zinc-800"
                 >
                   <X className="w-4.5 h-4.5" />
                 </button>
@@ -415,55 +415,55 @@ export const Questions: React.FC = () => {
               <form onSubmit={handleAddQuestion} className="p-6 space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[10px] font-bold text-zinc-450 mb-1 uppercase dark:text-zinc-400">Company name</label>
+                    <label className="block text-[10px] font-bold text-cocoa/50 mb-1 uppercase dark:text-cocoa/60">Company name</label>
                     <input
                       type="text"
                       placeholder="e.g. Meta (Optional)"
                       value={company}
                       onChange={(e) => setCompany(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-bold text-zinc-450 mb-1 uppercase dark:text-zinc-400">Role / Job Title</label>
+                    <label className="block text-[10px] font-bold text-cocoa/50 mb-1 uppercase dark:text-cocoa/60">Role / Job Title</label>
                     <input
                       type="text"
                       placeholder="e.g. SDE Backend"
                       value={role}
                       onChange={(e) => setRole(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-3 gap-3">
                   <div>
-                    <label className="block text-[10px] font-bold text-zinc-450 mb-1 uppercase dark:text-zinc-400">Topic *</label>
+                    <label className="block text-[10px] font-bold text-cocoa/50 mb-1 uppercase dark:text-cocoa/60">Topic *</label>
                     <input
                       type="text"
                       required
                       placeholder="e.g. Graphs"
                       value={topic}
                       onChange={(e) => setTopic(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-bold text-zinc-450 mb-1 uppercase dark:text-zinc-400">Subtopic</label>
+                    <label className="block text-[10px] font-bold text-cocoa/50 mb-1 uppercase dark:text-cocoa/60">Subtopic</label>
                     <input
                       type="text"
                       placeholder="e.g. DFS Cycle"
                       value={subtopic}
                       onChange={(e) => setSubtopic(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] font-bold text-zinc-450 mb-1 uppercase dark:text-zinc-400">Round</label>
+                    <label className="block text-[10px] font-bold text-cocoa/50 mb-1 uppercase dark:text-cocoa/60">Round</label>
                     <select
                       value={roundType}
                       onChange={(e) => setRoundType(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-crimson dark:bg-zinc-900/60 dark:text-zinc-400 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3 py-2.5 text-cocoa focus:outline-none focus:border-vermilion dark:bg-sand dark:text-cocoa/60 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     >
                       <option value="OA">Online Assessment</option>
                       <option value="Technical">Technical Round</option>
@@ -474,11 +474,11 @@ export const Questions: React.FC = () => {
 
                 <div className="grid grid-cols-3 gap-3">
                   <div>
-                    <label className="block text-[10px] font-bold text-zinc-450 mb-1 uppercase dark:text-zinc-400">Difficulty</label>
+                    <label className="block text-[10px] font-bold text-cocoa/50 mb-1 uppercase dark:text-cocoa/60">Difficulty</label>
                     <select
                       value={difficulty}
                       onChange={(e) => setDifficulty(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-crimson dark:bg-zinc-900/60 dark:text-zinc-400 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3 py-2.5 text-cocoa focus:outline-none focus:border-vermilion dark:bg-sand dark:text-cocoa/60 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     >
                       <option value="Easy">Easy</option>
                       <option value="Medium">Medium</option>
@@ -486,11 +486,11 @@ export const Questions: React.FC = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-[10px] font-bold text-zinc-450 mb-1 uppercase dark:text-zinc-400">Confidence ({confidence}/5)</label>
+                    <label className="block text-[10px] font-bold text-cocoa/50 mb-1 uppercase dark:text-cocoa/60">Confidence ({confidence}/5)</label>
                     <select
                       value={confidence}
                       onChange={(e) => setConfidence(parseInt(e.target.value))}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-crimson dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3 py-2.5 text-cocoa focus:outline-none focus:border-vermilion dark:bg-sand dark:text-cocoa/80 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     >
                       <option value="1">1 - Extremely Weak</option>
                       <option value="2">2 - Weak</option>
@@ -500,9 +500,9 @@ export const Questions: React.FC = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-[10px] font-bold text-zinc-450 mb-1 uppercase dark:text-zinc-400">Solved?</label>
+                    <label className="block text-[10px] font-bold text-cocoa/50 mb-1 uppercase dark:text-cocoa/60">Solved?</label>
                     <div className="flex gap-4 mt-2">
-                      <label className="inline-flex items-center gap-1.5 text-xs text-white dark:text-slate-300">
+                      <label className="inline-flex items-center gap-1.5 text-xs text-cocoa dark:text-slate-300">
                         <input
                           type="radio"
                           checked={solved === true}
@@ -511,7 +511,7 @@ export const Questions: React.FC = () => {
                         />
                         Yes
                       </label>
-                      <label className="inline-flex items-center gap-1.5 text-xs text-white dark:text-slate-300">
+                      <label className="inline-flex items-center gap-1.5 text-xs text-cocoa dark:text-slate-300">
                         <input
                           type="radio"
                           checked={solved === false}
@@ -525,39 +525,39 @@ export const Questions: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold text-zinc-450 mb-1 uppercase dark:text-zinc-400">Question Statement *</label>
+                  <label className="block text-[10px] font-bold text-cocoa/50 mb-1 uppercase dark:text-cocoa/60">Question Statement *</label>
                   <textarea
                     required
                     placeholder="Paste question statement text details..."
                     rows={4}
                     value={text}
                     onChange={(e) => setText(e.target.value)}
-                    className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                    className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-bold text-zinc-450 mb-1 uppercase dark:text-zinc-400">Personal Notes</label>
+                  <label className="block text-[10px] font-bold text-cocoa/50 mb-1 uppercase dark:text-cocoa/60">Personal Notes</label>
                   <textarea
                     placeholder="Add your notes or code snippet link..."
                     rows={2}
                     value={userNotes}
                     onChange={(e) => setUserNotes(e.target.value)}
-                    className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                    className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                   />
                 </div>
 
-                <div className="flex justify-end gap-3 pt-4 border-t border-white/5 dark:border-slate-850">
+                <div className="flex justify-end gap-3 pt-4 border-t border-cocoa/10 dark:border-slate-850">
                   <button
                     type="button"
                     onClick={() => setShowAddModal(false)}
-                    className="px-4 py-2 border border-white/5 bg-zinc-900 text-xs font-bold text-zinc-400 rounded-xl hover:bg-white/5 dark:border-white/5 dark:bg-zinc-950/40 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                    className="px-4 py-2 border border-cocoa/10 bg-sand text-xs font-bold text-cocoa/60 rounded-[1.2rem] hover:bg-cocoa/5 dark:border-cocoa/10 dark:bg-cocoa/40 dark:text-cocoa/60 dark:hover:bg-zinc-800"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-crimson hover:bg-crimson/90 text-white rounded-xl text-xs font-bold shadow-lg shadow-crimson/15"
+                    className="px-4 py-2 bg-vermilion hover:bg-vermilion/90 text-cocoa rounded-[1.2rem] text-xs font-bold shadow-lg shadow-vermilion/15"
                   >
                     Log Entry
                   </button>

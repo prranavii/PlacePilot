@@ -279,13 +279,13 @@ export const Applications: React.FC = () => {
 
   const getStageColor = (s: string) => {
     switch (s) {
-      case 'Wishlist': return 'bg-white/5 text-zinc-300 border-white/5 border';
-      case 'Applied': return 'bg-crimson/10 text-crimson border-crimson/20 border';
-      case 'Online Assessment': return 'bg-teal-500/10 text-teal-600 border-teal-500/20 border';
-      case 'Technical Interview': return 'bg-amber-500/10 text-amber-600 border-amber-550/20 border';
+      case 'Wishlist': return 'bg-cocoa/5 text-cocoa/80 border-cocoa/10 border';
+      case 'Applied': return 'bg-vermilion/10 text-vermilion border-vermilion/20 border';
+      case 'Online Assessment': return 'bg-[#E2F5D7] text-[#335A21] border-[#CDEEB7] border';
+      case 'Technical Interview': return 'bg-[#FFE5CE] text-[#7A3C09] border-[#FFD2AE] border';
       case 'Offer': return 'bg-emerald-500/10 text-emerald-600 border-emerald-555/20 border';
       case 'Rejected': return 'bg-rose-500/10 text-rose-500 border-rose-500/20 border';
-      default: return 'bg-white/5 text-zinc-450 border';
+      default: return 'bg-cocoa/5 text-cocoa/50 border';
     }
   };
 
@@ -314,16 +314,16 @@ export const Applications: React.FC = () => {
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-bold tracking-widest text-white font-geom uppercase">
+          <h2 className="text-xl font-bold tracking-widest text-cocoa font-serif uppercase">
             Job Applications Tracker
           </h2>
-          <p className="text-xs text-zinc-400 mt-2 max-w-lg leading-relaxed font-semibold uppercase tracking-wider">
+          <p className="text-xs text-cocoa/60 mt-2 max-w-lg leading-relaxed font-semibold uppercase tracking-wider">
             Manage stage pipelines, check match percentages, and open dedicated AI company preparation workspaces.
           </p>
         </div>
         <button
           onClick={() => setShowAddModal(true)}
-          className="bg-crimson hover:bg-crimson/90 text-white font-bold text-[10px] px-5 py-3.5 rounded-full shadow-lg shadow-crimson/15 flex items-center gap-2 max-w-max transition-all active:scale-95 uppercase tracking-wider"
+          className="bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-[10px] px-5 py-3.5 rounded-full shadow-lg shadow-vermilion/15 flex items-center gap-2 max-w-max transition-all active:scale-95 uppercase tracking-wider"
         >
           <Plus className="w-4 h-4" />
           Add Application
@@ -331,9 +331,9 @@ export const Applications: React.FC = () => {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col md:flex-row gap-4 bg-zinc-950/60 border border-white/5 p-4 rounded-2xl shadow-md backdrop-blur-md">
+      <div className="flex flex-col md:flex-row gap-4 bg-white border border-cocoa/10 p-4 rounded-[1.5rem] shadow-md backdrop-blur-md">
         <div className="relative flex-1">
-          <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-zinc-500">
+          <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-cocoa/40">
             <Search className="w-4 h-4" />
           </span>
           <input
@@ -341,14 +341,14 @@ export const Applications: React.FC = () => {
             placeholder="Search company or role..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-zinc-900 text-xs pl-10 pr-4 py-3 rounded-xl outline-none border border-white/5 text-white placeholder-white/20 transition-all focus:border-crimson"
+            className="w-full bg-sand text-xs pl-10 pr-4 py-3 rounded-[1.2rem] outline-none border border-cocoa/10 text-cocoa placeholder-white/20 transition-all focus:border-vermilion"
           />
         </div>
         <div className="flex gap-2 shrink-0">
           <select
             value={stageFilter}
             onChange={(e) => setStageFilter(e.target.value)}
-            className="bg-zinc-900 text-xs px-4 py-3 rounded-xl outline-none border border-white/5 text-white transition-all focus:border-crimson"
+            className="bg-sand text-xs px-4 py-3 rounded-[1.2rem] outline-none border border-cocoa/10 text-cocoa transition-all focus:border-vermilion"
           >
             <option value="">All Stages</option>
             <option value="Wishlist">Wishlist</option>
@@ -365,8 +365,8 @@ export const Applications: React.FC = () => {
       {loading ? (
         <div className="flex items-center justify-center min-h-[40vh]">
           <div className="relative w-10 h-10">
-            <div className="absolute inset-0 rounded-full border-3 border-crimson/25"></div>
-            <div className="absolute inset-0 rounded-full border-3 border-crimson border-t-transparent animate-spin"></div>
+            <div className="absolute inset-0 rounded-full border-3 border-vermilion/25"></div>
+            <div className="absolute inset-0 rounded-full border-3 border-vermilion border-t-transparent animate-spin"></div>
           </div>
         </div>
       ) : filteredApps.length > 0 ? (
@@ -383,52 +383,52 @@ export const Applications: React.FC = () => {
               onClick={() => handleSelectApp(app)}
               whileHover={{ y: -4, scale: 1.01 }}
               whileTap={{ scale: 0.99 }}
-              className={`premium-card cursor-pointer flex flex-col justify-between ${
+              className={`bento-panel cursor-pointer flex flex-col justify-between ${
                 selectedApp?.id === app.id 
-                  ? 'border-crimson/50 ring-1 ring-crimson/25' 
+                  ? 'border-vermilion/50 ring-1 ring-vermilion/25' 
                   : ''
               }`}
             >
               <div>
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <h4 className="font-extrabold text-white text-sm tracking-tight dark:text-zinc-200">
+                    <h4 className="font-bold text-cocoa text-sm tracking-tight dark:text-zinc-200">
                       {app.company_name}
                     </h4>
-                    <p className="text-xs text-zinc-400 font-medium mt-1 dark:text-zinc-400">{app.role}</p>
+                    <p className="text-xs text-cocoa/60 font-medium mt-1 dark:text-cocoa/60">{app.role}</p>
                   </div>
                   <span className={`text-[9px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider ${getStageColor(app.current_stage)}`}>
                     {app.current_stage}
                   </span>
                 </div>
 
-                <div className="mt-5 space-y-2 border-t border-white/5 pt-4 dark:border-white/5">
+                <div className="mt-5 space-y-2 border-t border-cocoa/10 pt-4 dark:border-cocoa/10">
                   {app.location && (
-                    <div className="flex items-center gap-2 text-[10px] text-zinc-450 font-semibold dark:text-zinc-500">
-                      <MapPin className="w-3.5 h-3.5 text-zinc-500 shrink-0 dark:text-zinc-500" />
+                    <div className="flex items-center gap-2 text-[10px] text-cocoa/50 font-semibold dark:text-cocoa/40">
+                      <MapPin className="w-3.5 h-3.5 text-cocoa/40 shrink-0 dark:text-cocoa/40" />
                       {app.location}
                     </div>
                   )}
                   {app.package_ctc && (
-                    <div className="flex items-center gap-2 text-[10px] text-zinc-450 font-semibold dark:text-zinc-500">
-                      <IndianRupee className="w-3.5 h-3.5 text-zinc-500 shrink-0 dark:text-zinc-500" />
+                    <div className="flex items-center gap-2 text-[10px] text-cocoa/50 font-semibold dark:text-cocoa/40">
+                      <IndianRupee className="w-3.5 h-3.5 text-cocoa/40 shrink-0 dark:text-cocoa/40" />
                       {app.package_ctc}
                     </div>
                   )}
                   {app.deadline && (
-                    <div className="flex items-center gap-2 text-[10px] text-zinc-450 font-semibold dark:text-zinc-500">
-                      <Calendar className="w-3.5 h-3.5 text-zinc-500 shrink-0 dark:text-zinc-500" />
+                    <div className="flex items-center gap-2 text-[10px] text-cocoa/50 font-semibold dark:text-cocoa/40">
+                      <Calendar className="w-3.5 h-3.5 text-cocoa/40 shrink-0 dark:text-cocoa/40" />
                       Deadline: {new Date(app.deadline).toLocaleDateString()}
                     </div>
                   )}
                 </div>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between dark:border-white/5">
-                <span className="text-[10px] text-zinc-450 font-bold uppercase tracking-wider dark:text-zinc-400">
-                  Readiness: <strong className="text-crimson font-extrabold text-xs ml-1 font-geom">{app.personal_readiness}%</strong>
+              <div className="mt-6 pt-4 border-t border-cocoa/10 flex items-center justify-between dark:border-cocoa/10">
+                <span className="text-[10px] text-cocoa/50 font-bold uppercase tracking-wider dark:text-cocoa/60">
+                  Readiness: <strong className="text-vermilion font-bold text-xs ml-1 font-serif">{app.personal_readiness}%</strong>
                 </span>
-                <span className="text-crimson font-bold text-xs flex items-center gap-1 transition-all hover:translate-x-1">
+                <span className="text-vermilion font-bold text-xs flex items-center gap-1 transition-all hover:translate-x-1">
                   <span>Workspace</span>
                   <ChevronRight className="w-3.5 h-3.5" />
                 </span>
@@ -437,10 +437,10 @@ export const Applications: React.FC = () => {
           ))}
         </motion.div>
       ) : (
-        <div className="bg-zinc-950/60 border border-white/5 text-center py-20 rounded-2xl shadow-lg">
-          <Briefcase className="w-10 h-10 text-zinc-650 mx-auto mb-4" />
-          <h4 className="font-bold text-white text-sm uppercase tracking-wider font-geom">No applications found</h4>
-          <p className="text-[11px] text-zinc-450 mt-2 font-semibold uppercase tracking-wider">Submit your first placement entry using the button above.</p>
+        <div className="bg-white border border-cocoa/10 text-center py-20 rounded-[1.5rem] shadow-lg">
+          <Briefcase className="w-10 h-10 text-cocoa/30 mx-auto mb-4" />
+          <h4 className="font-bold text-cocoa text-sm uppercase tracking-wider font-serif">No applications found</h4>
+          <p className="text-[11px] text-cocoa/50 mt-2 font-semibold uppercase tracking-wider">Submit your first placement entry using the button above.</p>
         </div>
       )}
 
@@ -452,28 +452,28 @@ export const Applications: React.FC = () => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-y-0 right-0 w-full max-w-md bg-zinc-950 border-l border-white/5 shadow-2xl z-40 flex flex-col justify-between"
+            className="fixed inset-y-0 right-0 w-full max-w-md bg-cocoa border-l border-cocoa/10 shadow-2xl z-40 flex flex-col justify-between"
           >
             {/* Workspace Header */}
-            <div className="p-6 border-b border-white/5 flex items-start justify-between bg-zinc-900 dark:bg-zinc-950/20">
+            <div className="p-6 border-b border-cocoa/10 flex items-start justify-between bg-sand dark:bg-cocoa/20">
               <div>
-                <span className="text-[9px] uppercase font-bold tracking-widest text-zinc-450 block dark:text-zinc-500">Company Workspace</span>
-                <h3 className="font-extrabold text-white text-base mt-1 dark:text-white font-geom">
+                <span className="text-[9px] uppercase font-bold tracking-widest text-cocoa/50 block dark:text-cocoa/40">Company Workspace</span>
+                <h3 className="font-bold text-cocoa text-base mt-1 dark:text-cocoa font-serif">
                   {selectedApp.company_name}
                 </h3>
-                <p className="text-xs text-zinc-400 font-medium dark:text-zinc-400">{selectedApp.role}</p>
+                <p className="text-xs text-cocoa/60 font-medium dark:text-cocoa/60">{selectedApp.role}</p>
               </div>
               <div className="flex items-center gap-1">
                 <button 
                   onClick={() => handleDeleteApplication(selectedApp.id)}
-                  className="p-2 rounded-lg text-zinc-400 hover:text-rose-500 hover:bg-white/5 dark:hover:text-rose-450 dark:hover:bg-zinc-800"
+                  className="p-2 rounded-lg text-cocoa/60 hover:text-rose-500 hover:bg-cocoa/5 dark:hover:text-rose-450 dark:hover:bg-zinc-800"
                   title="Delete Application"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setSelectedApp(null)}
-                  className="p-2 rounded-lg text-zinc-400 hover:bg-white/5 dark:hover:bg-zinc-800"
+                  className="p-2 rounded-lg text-cocoa/60 hover:bg-cocoa/5 dark:hover:bg-zinc-800"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -484,20 +484,20 @@ export const Applications: React.FC = () => {
             <div className="flex-1 overflow-y-auto p-6 space-y-6">
               
               {/* Prepare Me Flags Button */}
-              <div className="bg-zinc-900/60 border border-white/5 p-5 rounded-2xl flex flex-col gap-3 shadow-inner dark:bg-zinc-950/40 dark:border-white/5">
+              <div className="bg-sand border border-cocoa/10 p-5 rounded-[1.5rem] flex flex-col gap-3 shadow-inner dark:bg-cocoa/40 dark:border-cocoa/10">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-zinc-200">Prepare Me AI Copilot</span>
-                  <span className="text-[9px] text-crimson bg-crimson/10 border border-crimson/20 px-2 py-0.5 rounded-full font-bold flex items-center gap-0.5 uppercase tracking-wider">
-                    <Sparkles className="w-3 h-3 fill-crimson/10" /> Active
+                  <span className="text-[9px] text-vermilion bg-vermilion/10 border border-vermilion/20 px-2 py-0.5 rounded-full font-bold flex items-center gap-0.5 uppercase tracking-wider">
+                    <Sparkles className="w-3 h-3 fill-vermilion/10" /> Active
                   </span>
                 </div>
-                <p className="text-[11px] text-zinc-400 leading-relaxed dark:text-zinc-500">
+                <p className="text-[11px] text-cocoa/60 leading-relaxed dark:text-cocoa/40">
                   Let the AI Copilot analyze the job description, check your DSA topic weaknesses, and compile today's study priorities.
                 </p>
                 <button
                   onClick={handlePrepareMe}
                   disabled={preparing}
-                  className="w-full bg-crimson hover:bg-crimson/90 text-white font-bold text-xs py-3 rounded-xl shadow-lg shadow-crimson/15 flex items-center justify-center gap-2 mt-1.5 transition-all disabled:opacity-50 active:scale-95"
+                  className="w-full bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-xs py-3 rounded-[1.2rem] shadow-lg shadow-vermilion/15 flex items-center justify-center gap-2 mt-1.5 transition-all disabled:opacity-50 active:scale-95"
                 >
                   {preparing ? (
                     <>
@@ -513,31 +513,31 @@ export const Applications: React.FC = () => {
                 
                 <button
                   onClick={handleStartMock}
-                  className="w-full bg-white/5 hover:bg-white/10 text-white border border-white/5 font-bold text-xs py-3 rounded-xl shadow-md flex items-center justify-center gap-2 mt-1 transition-all active:scale-95 dark:bg-zinc-800 dark:hover:bg-zinc-800 dark:text-zinc-200 dark:border-white/5"
+                  className="w-full bg-cocoa/5 hover:bg-cocoa/10 text-cocoa border border-cocoa/10 font-bold text-xs py-3 rounded-[1.2rem] shadow-md flex items-center justify-center gap-2 mt-1 transition-all active:scale-95 dark:bg-zinc-800 dark:hover:bg-zinc-800 dark:text-zinc-200 dark:border-cocoa/10"
                 >
                   <span>🎙️ Start AI Mock Interview</span>
                 </button>
 
                 {/* Structured Multi-Phase Study Plan display */}
                 {studyPlan.length > 0 && (
-                  <div className="mt-5 pt-5 border-t border-white/5 space-y-4 dark:border-white/5">
-                    <h4 className="text-[10px] font-bold text-zinc-450 uppercase tracking-widest flex items-center gap-1.5 dark:text-zinc-400">
-                      <Sparkles className="w-3.5 h-3.5 text-crimson animate-pulse" />
+                  <div className="mt-5 pt-5 border-t border-cocoa/10 space-y-4 dark:border-cocoa/10">
+                    <h4 className="text-[10px] font-bold text-cocoa/50 uppercase tracking-widest flex items-center gap-1.5 dark:text-cocoa/60">
+                      <Sparkles className="w-3.5 h-3.5 text-vermilion animate-pulse" />
                       Structured Prep Strategy
                     </h4>
                     
-                    <div className="space-y-4 relative pl-3.5 before:absolute before:inset-y-1.5 before:left-1 before:w-[1px] before:bg-crimson/20 dark:before:bg-white/10">
+                    <div className="space-y-4 relative pl-3.5 before:absolute before:inset-y-1.5 before:left-1 before:w-[1px] before:bg-vermilion/20 dark:before:bg-cocoa/10">
                       {studyPlan.map((phase: any, pIdx: number) => (
                         <div key={pIdx} className="relative space-y-2">
                           {/* Chronological bullet dot */}
-                          <div className="absolute -left-[17.5px] top-1.5 w-2 h-2 rounded-full bg-crimson border-2 border-zinc-950" />
+                          <div className="absolute -left-[17.5px] top-1.5 w-2 h-2 rounded-full bg-vermilion border-2 border-zinc-950" />
                           
-                          <div className="bg-zinc-900/60 border border-white/5 rounded-xl p-4 shadow-sm">
+                          <div className="bg-sand border border-cocoa/10 rounded-[1.2rem] p-4 shadow-sm">
                             <div className="flex items-center justify-between">
-                              <span className="text-xs font-extrabold text-zinc-200 block">
+                              <span className="text-xs font-bold text-zinc-200 block">
                                 {phase.phase_name}
                               </span>
-                              <span className="text-[9px] bg-crimson/10 text-crimson font-bold px-2 py-0.5 rounded-full">
+                              <span className="text-[9px] bg-vermilion/10 text-vermilion font-bold px-2 py-0.5 rounded-full">
                                 {phase.duration_days} {phase.duration_days === 1 ? 'day' : 'days'}
                               </span>
                             </div>
@@ -546,7 +546,7 @@ export const Applications: React.FC = () => {
                             {phase.focus_areas && phase.focus_areas.length > 0 && (
                               <div className="flex flex-wrap gap-1 mt-2">
                                 {phase.focus_areas.map((tag: string, tIdx: number) => (
-                                  <span key={tIdx} className="text-[9px] bg-white/5 text-zinc-400 font-semibold px-2 py-0.5 rounded dark:bg-zinc-800 dark:text-zinc-400">
+                                  <span key={tIdx} className="text-[9px] bg-cocoa/5 text-cocoa/60 font-semibold px-2 py-0.5 rounded dark:bg-zinc-800 dark:text-cocoa/60">
                                     {tag}
                                   </span>
                                 ))}
@@ -554,10 +554,10 @@ export const Applications: React.FC = () => {
                             )}
 
                             {/* Concrete Tasks checklist */}
-                            <ul className="mt-3 space-y-2 border-t border-white/5 pt-3 dark:border-white/5">
+                            <ul className="mt-3 space-y-2 border-t border-cocoa/10 pt-3 dark:border-cocoa/10">
                               {phase.concrete_tasks.map((task: string, tIdx: number) => (
-                                <li key={tIdx} className="text-xs text-zinc-300 flex items-start gap-2 dark:text-zinc-300">
-                                  <span className="w-1.5 h-1.5 rounded-full bg-crimson/55 mt-1.5 shrink-0" />
+                                <li key={tIdx} className="text-xs text-cocoa/80 flex items-start gap-2 dark:text-cocoa/80">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-vermilion/55 mt-1.5 shrink-0" />
                                   <span className="leading-relaxed">{task}</span>
                                 </li>
                               ))}
@@ -571,13 +571,13 @@ export const Applications: React.FC = () => {
 
                 {/* Flat fallback tasks display if old plan schema is returned */}
                 {studyPlan.length === 0 && prepTasks.length > 0 && (
-                  <div className="mt-4 pt-4 border-t border-white/5 space-y-3 dark:border-white/5">
-                    <h4 className="text-xs font-bold text-zinc-450 uppercase tracking-widest text-[9px] dark:text-zinc-400">Generated Study Plan</h4>
+                  <div className="mt-4 pt-4 border-t border-cocoa/10 space-y-3 dark:border-cocoa/10">
+                    <h4 className="text-xs font-bold text-cocoa/50 uppercase tracking-widest text-[9px] dark:text-cocoa/60">Generated Study Plan</h4>
                     {prepTasks.map((t, i) => (
-                      <div key={i} className="p-3 bg-zinc-900/60 border border-white/5 rounded-xl">
-                        <span className="text-[9px] font-bold text-crimson block uppercase tracking-wider">{t.type}</span>
-                        <p className="text-xs text-white font-bold mt-1 leading-normal dark:text-zinc-100">{t.title}</p>
-                        <span className="text-[9px] text-zinc-500 mt-2 block">Estimate: {t.duration}</span>
+                      <div key={i} className="p-3 bg-sand border border-cocoa/10 rounded-[1.2rem]">
+                        <span className="text-[9px] font-bold text-vermilion block uppercase tracking-wider">{t.type}</span>
+                        <p className="text-xs text-cocoa font-bold mt-1 leading-normal dark:text-zinc-100">{t.title}</p>
+                        <span className="text-[9px] text-cocoa/40 mt-2 block">Estimate: {t.duration}</span>
                       </div>
                     ))}
                   </div>
@@ -586,15 +586,15 @@ export const Applications: React.FC = () => {
 
               {/* Stage Info and Readiness */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="p-3 bg-zinc-900 border border-white/5 rounded-xl text-center dark:bg-zinc-900/20 dark:border-white/5">
-                  <span className="text-[9px] text-zinc-450 font-bold block uppercase tracking-wider dark:text-zinc-500">Stage</span>
-                  <span className="text-xs font-extrabold text-white mt-1 block dark:text-zinc-200">
+                <div className="p-3 bg-sand border border-cocoa/10 rounded-[1.2rem] text-center dark:bg-sand/30 dark:border-cocoa/10">
+                  <span className="text-[9px] text-cocoa/50 font-bold block uppercase tracking-wider dark:text-cocoa/40">Stage</span>
+                  <span className="text-xs font-bold text-cocoa mt-1 block dark:text-zinc-200">
                     {selectedApp.current_stage}
                   </span>
                 </div>
-                <div className="p-3 bg-zinc-900 border border-white/5 rounded-xl text-center dark:bg-zinc-900/20 dark:border-white/5">
-                  <span className="text-[9px] text-zinc-450 font-bold block uppercase tracking-wider dark:text-zinc-500">Readiness</span>
-                  <span className="text-xs font-extrabold text-white mt-1 block dark:text-zinc-200">
+                <div className="p-3 bg-sand border border-cocoa/10 rounded-[1.2rem] text-center dark:bg-sand/30 dark:border-cocoa/10">
+                  <span className="text-[9px] text-cocoa/50 font-bold block uppercase tracking-wider dark:text-cocoa/40">Readiness</span>
+                  <span className="text-xs font-bold text-cocoa mt-1 block dark:text-zinc-200">
                     {selectedApp.personal_readiness}%
                   </span>
                 </div>
@@ -603,8 +603,8 @@ export const Applications: React.FC = () => {
               {/* Notes Section */}
               {selectedApp.notes && (
                 <div className="space-y-2">
-                  <h4 className="text-[9px] font-bold text-zinc-450 uppercase tracking-widest dark:text-zinc-400">Notes</h4>
-                  <div className="bg-zinc-900/40 border border-white/5 rounded-xl p-4 text-xs text-zinc-350 whitespace-pre-wrap leading-relaxed dark:bg-zinc-900/20 dark:border-white/5 dark:text-zinc-400">
+                  <h4 className="text-[9px] font-bold text-cocoa/50 uppercase tracking-widest dark:text-cocoa/60">Notes</h4>
+                  <div className="bg-sand border border-cocoa/10 rounded-[1.2rem] p-4 text-xs text-cocoa/70 whitespace-pre-wrap leading-relaxed dark:bg-sand/30 dark:border-cocoa/10 dark:text-cocoa/60">
                     {selectedApp.notes}
                   </div>
                 </div>
@@ -613,8 +613,8 @@ export const Applications: React.FC = () => {
               {/* Job Description */}
               {selectedApp.job_description && (
                 <div className="space-y-2">
-                  <h4 className="text-[9px] font-bold text-zinc-450 uppercase tracking-widest dark:text-zinc-400">Job Description</h4>
-                  <div className="bg-zinc-900/40 border border-white/5 rounded-xl p-4 text-xs text-zinc-350 whitespace-pre-wrap leading-relaxed max-h-48 overflow-y-auto dark:bg-zinc-900/20 dark:border-white/5 dark:text-zinc-400">
+                  <h4 className="text-[9px] font-bold text-cocoa/50 uppercase tracking-widest dark:text-cocoa/60">Job Description</h4>
+                  <div className="bg-sand border border-cocoa/10 rounded-[1.2rem] p-4 text-xs text-cocoa/70 whitespace-pre-wrap leading-relaxed max-h-48 overflow-y-auto dark:bg-sand/30 dark:border-cocoa/10 dark:text-cocoa/60">
                     {selectedApp.job_description}
                   </div>
                 </div>
@@ -622,28 +622,28 @@ export const Applications: React.FC = () => {
 
               {/* Activity Timeline */}
               <div className="space-y-4">
-                <h4 className="text-[9px] font-bold text-zinc-450 uppercase tracking-widest dark:text-zinc-400">Hiring Timeline</h4>
+                <h4 className="text-[9px] font-bold text-cocoa/50 uppercase tracking-widest dark:text-cocoa/60">Hiring Timeline</h4>
                 
                 {loadingEvents ? (
                   <div className="py-4 text-center">
-                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-crimson border-t-transparent mx-auto" />
+                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-vermilion border-t-transparent mx-auto" />
                   </div>
                 ) : appEvents.length > 0 ? (
-                  <div className="border-l border-white/5 ml-2.5 pl-4 space-y-5 dark:border-white/5">
+                  <div className="border-l border-cocoa/10 ml-2.5 pl-4 space-y-5 dark:border-cocoa/10">
                     {appEvents.map((evt) => (
                       <div key={evt.id} className="relative">
                         {/* Timeline dot marker */}
-                        <span className="absolute -left-[22px] top-1 w-2.5 h-2.5 rounded-full bg-crimson border border-zinc-950 ring-4 ring-crimson/10" />
+                        <span className="absolute -left-[22px] top-1 w-2.5 h-2.5 rounded-full bg-vermilion border border-zinc-950 ring-4 ring-vermilion/10" />
                         
                         <div className="text-xs">
-                          <span className="font-extrabold text-white block dark:text-zinc-200">
+                          <span className="font-bold text-cocoa block dark:text-zinc-200">
                             {evt.event_type}
                           </span>
-                          <span className="text-[9px] text-zinc-450 mt-0.5 block dark:text-zinc-500">
+                          <span className="text-[9px] text-cocoa/50 mt-0.5 block dark:text-cocoa/40">
                             {new Date(evt.event_date).toLocaleDateString()}
                           </span>
                           {evt.details && (
-                            <p className="text-[11px] text-zinc-350 mt-2 bg-zinc-900/40 border border-white/5 p-3 rounded-lg leading-relaxed dark:bg-zinc-900/40 dark:border-white/5 dark:text-zinc-400">
+                            <p className="text-[11px] text-cocoa/70 mt-2 bg-sand border border-cocoa/10 p-3 rounded-lg leading-relaxed dark:bg-sand dark:border-cocoa/10 dark:text-cocoa/60">
                               {evt.details}
                             </p>
                           )}
@@ -652,17 +652,17 @@ export const Applications: React.FC = () => {
                     ))}
                   </div>
                 ) : (
-                  <p className="text-xs text-zinc-500">No events logged yet.</p>
+                  <p className="text-xs text-cocoa/40">No events logged yet.</p>
                 )}
               </div>
 
             </div>
             
             {/* Footer action */}
-            <div className="p-6 border-t border-white/5 flex justify-end gap-3 bg-zinc-900 dark:border-white/5 dark:bg-zinc-950/20 shrink-0">
+            <div className="p-6 border-t border-cocoa/10 flex justify-end gap-3 bg-sand dark:border-cocoa/10 dark:bg-cocoa/20 shrink-0">
               <button
                 onClick={() => setSelectedApp(null)}
-                className="px-4 py-2 border border-white/5 bg-zinc-900 text-xs font-bold text-zinc-350 rounded-xl hover:bg-white/5 dark:border-white/5 dark:bg-zinc-950/40 dark:hover:bg-zinc-800 dark:text-zinc-400 transition-all"
+                className="px-4 py-2 border border-cocoa/10 bg-sand text-xs font-bold text-cocoa/70 rounded-[1.2rem] hover:bg-cocoa/5 dark:border-cocoa/10 dark:bg-cocoa/40 dark:hover:bg-zinc-800 dark:text-cocoa/60 transition-all"
               >
                 Close Workspace
               </button>
@@ -685,16 +685,16 @@ export const Applications: React.FC = () => {
               initial={{ scale: 0.95, y: 15 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 15 }}
-              className="w-full max-w-lg bg-zinc-950 border border-white/5 rounded-3xl max-h-[90vh] overflow-y-auto shadow-2xl relative font-sans"
+              className="w-full max-w-lg bg-cocoa border border-cocoa/10 rounded-[2rem] max-h-[90vh] overflow-y-auto shadow-2xl relative font-sans"
             >
               {/* Modal Header */}
-              <div className="p-6 border-b border-white/5 flex items-center justify-between bg-zinc-900 dark:bg-zinc-950/20 dark:border-white/5">
-                <h3 className="font-extrabold text-white text-sm uppercase tracking-widest dark:text-white font-geom">
+              <div className="p-6 border-b border-cocoa/10 flex items-center justify-between bg-sand dark:bg-cocoa/20 dark:border-cocoa/10">
+                <h3 className="font-bold text-cocoa text-sm uppercase tracking-widest dark:text-cocoa font-serif">
                   Add Job Application
                 </h3>
                 <button 
                   onClick={() => setShowAddModal(false)}
-                  className="p-1.5 rounded-lg text-zinc-400 hover:bg-white/5 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                  className="p-1.5 rounded-lg text-cocoa/60 hover:bg-cocoa/5 dark:text-cocoa/60 dark:hover:bg-zinc-800"
                 >
                   <X className="w-4.5 h-4.5" />
                 </button>
@@ -704,59 +704,59 @@ export const Applications: React.FC = () => {
               <form onSubmit={handleCreateApplication} className="p-6 space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[9px] font-bold text-zinc-450 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Company *</label>
+                    <label className="block text-[9px] font-bold text-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-cocoa/60">Company *</label>
                     <input
                       type="text"
                       required
                       placeholder="e.g. Google"
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     />
                   </div>
                   <div>
-                    <label className="block text-[9px] font-bold text-zinc-450 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Role / Job Title *</label>
+                    <label className="block text-[9px] font-bold text-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-cocoa/60">Role / Job Title *</label>
                     <input
                       type="text"
                       required
                       placeholder="e.g. Frontend Intern"
                       value={role}
                       onChange={(e) => setRole(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[9px] font-bold text-zinc-450 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Package (CTC / Wage)</label>
+                    <label className="block text-[9px] font-bold text-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-cocoa/60">Package (CTC / Wage)</label>
                     <input
                       type="text"
                       placeholder="e.g. ₹12,00,000 / yr"
                       value={ctc}
                       onChange={(e) => setCtc(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     />
                   </div>
                   <div>
-                    <label className="block text-[9px] font-bold text-zinc-450 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Location</label>
+                    <label className="block text-[9px] font-bold text-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-cocoa/60">Location</label>
                     <input
                       type="text"
                       placeholder="e.g. Seattle, WA"
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-3 gap-3">
                   <div>
-                    <label className="block text-[9px] font-bold text-zinc-450 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Job Type</label>
+                    <label className="block text-[9px] font-bold text-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-cocoa/60">Job Type</label>
                     <select
                       value={jobType}
                       onChange={(e) => setJobType(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-crimson dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3 py-2.5 text-cocoa focus:outline-none focus:border-vermilion dark:bg-sand dark:text-cocoa/80 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     >
                       <option value="Full-time">Full-time</option>
                       <option value="Internship">Internship</option>
@@ -764,11 +764,11 @@ export const Applications: React.FC = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-[9px] font-bold text-zinc-450 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Source</label>
+                    <label className="block text-[9px] font-bold text-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-cocoa/60">Source</label>
                     <select
                       value={source}
                       onChange={(e) => setSource(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-crimson dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3 py-2.5 text-cocoa focus:outline-none focus:border-vermilion dark:bg-sand dark:text-cocoa/80 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     >
                       <option value="LinkedIn">LinkedIn</option>
                       <option value="Referral">Referral</option>
@@ -777,23 +777,23 @@ export const Applications: React.FC = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-[9px] font-bold text-zinc-450 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Deadline</label>
+                    <label className="block text-[9px] font-bold text-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-cocoa/60">Deadline</label>
                     <input
                       type="date"
                       value={deadline}
                       onChange={(e) => setDeadline(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-2 py-2.5 text-white focus:outline-none focus:border-crimson dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-2 py-2.5 text-cocoa focus:outline-none focus:border-vermilion dark:bg-sand dark:text-cocoa/80 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-3 gap-3">
                   <div>
-                    <label className="block text-[9px] font-bold text-zinc-450 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Stage</label>
+                    <label className="block text-[9px] font-bold text-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-cocoa/60">Stage</label>
                     <select
                       value={stage}
                       onChange={(e) => setStage(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-crimson dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3 py-2.5 text-cocoa focus:outline-none focus:border-vermilion dark:bg-sand dark:text-cocoa/80 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     >
                       <option value="Wishlist">Wishlist</option>
                       <option value="Applied">Applied</option>
@@ -802,11 +802,11 @@ export const Applications: React.FC = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-[9px] font-bold text-zinc-450 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Priority</label>
+                    <label className="block text-[9px] font-bold text-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-cocoa/60">Priority</label>
                     <select
                       value={priority}
                       onChange={(e) => setPriority(e.target.value)}
-                      className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-crimson dark:bg-zinc-900/60 dark:text-zinc-300 dark:border-white/5 dark:focus:border-indigo-500"
+                      className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3 py-2.5 text-cocoa focus:outline-none focus:border-vermilion dark:bg-sand dark:text-cocoa/80 dark:border-cocoa/10 dark:focus:border-indigo-500"
                     >
                       <option value="Low">Low</option>
                       <option value="Medium">Medium</option>
@@ -814,7 +814,7 @@ export const Applications: React.FC = () => {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-[9px] font-bold text-zinc-450 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Readiness ({readiness}%)</label>
+                    <label className="block text-[9px] font-bold text-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-cocoa/60">Readiness ({readiness}%)</label>
                     <input
                       type="range"
                       min="0"
@@ -827,38 +827,38 @@ export const Applications: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-[9px] font-bold text-zinc-450 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Job Description</label>
+                  <label className="block text-[9px] font-bold text-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-cocoa/60">Job Description</label>
                   <textarea
                     placeholder="Paste job requirements..."
                     rows={3}
                     value={jd}
                     onChange={(e) => setJd(e.target.value)}
-                    className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                    className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[9px] font-bold text-zinc-450 mb-1.5 uppercase tracking-wider dark:text-zinc-400">Personal Notes</label>
+                  <label className="block text-[9px] font-bold text-cocoa/50 mb-1.5 uppercase tracking-wider dark:text-cocoa/60">Personal Notes</label>
                   <textarea
                     placeholder="Enter custom interview details..."
                     rows={2}
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
-                    className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-crimson placeholder-white/20 dark:bg-zinc-900/60 dark:text-zinc-200 dark:border-white/5 dark:focus:border-indigo-500"
+                    className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-3.5 py-2.5 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 dark:bg-sand dark:text-zinc-200 dark:border-cocoa/10 dark:focus:border-indigo-500"
                   />
                 </div>
 
-                <div className="flex justify-end gap-3 pt-5 border-t border-white/5 dark:border-white/5">
+                <div className="flex justify-end gap-3 pt-5 border-t border-cocoa/10 dark:border-cocoa/10">
                   <button
                     type="button"
                     onClick={() => setShowAddModal(false)}
-                    className="px-5 py-2.5 border border-white/5 bg-zinc-900 text-xs font-bold text-zinc-400 rounded-xl hover:bg-white/5 dark:border-white/5 dark:bg-zinc-950/40 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                    className="px-5 py-2.5 border border-cocoa/10 bg-sand text-xs font-bold text-cocoa/60 rounded-[1.2rem] hover:bg-cocoa/5 dark:border-cocoa/10 dark:bg-cocoa/40 dark:text-cocoa/60 dark:hover:bg-zinc-800"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-5 py-2.5 bg-crimson hover:bg-crimson/90 text-white rounded-xl text-xs font-bold shadow-lg shadow-crimson/15"
+                    className="px-5 py-2.5 bg-vermilion hover:bg-vermilion/90 text-cocoa rounded-[1.2rem] text-xs font-bold shadow-lg shadow-vermilion/15"
                   >
                     Save Entry
                   </button>
@@ -882,17 +882,17 @@ export const Applications: React.FC = () => {
               initial={{ scale: 0.95, y: 15 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 15 }}
-              className="w-full max-w-xl bg-zinc-950 border border-white/5 rounded-3xl max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col font-sans"
+              className="w-full max-w-xl bg-cocoa border border-cocoa/10 rounded-[2rem] max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col font-sans"
             >
-              <div className="p-6 border-b border-white/5 flex items-center justify-between bg-zinc-900 shrink-0 dark:bg-zinc-950/20 dark:border-white/5">
-                <h3 className="font-extrabold text-white text-xs uppercase tracking-widest flex items-center gap-2 dark:text-white font-geom">
-                  <Sparkles className="w-4 h-4 text-crimson fill-crimson/10 animate-pulse" />
+              <div className="p-6 border-b border-cocoa/10 flex items-center justify-between bg-sand shrink-0 dark:bg-cocoa/20 dark:border-cocoa/10">
+                <h3 className="font-bold text-cocoa text-xs uppercase tracking-widest flex items-center gap-2 dark:text-cocoa font-serif">
+                  <Sparkles className="w-4 h-4 text-vermilion fill-vermilion/10 animate-pulse" />
                   AI Interview Studio: {selectedApp?.company_name}
                 </h3>
                 {!mockSubmittingAnswer && !mockLoadingStart && (
                   <button 
                     onClick={() => setShowMockModal(false)}
-                    className="p-1.5 rounded-lg text-zinc-400 hover:bg-white/5 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                    className="p-1.5 rounded-lg text-cocoa/60 hover:bg-cocoa/5 dark:text-cocoa/60 dark:hover:bg-zinc-800"
                   >
                     <X className="w-4.5 h-4.5" />
                   </button>
@@ -903,39 +903,39 @@ export const Applications: React.FC = () => {
                 {mockLoadingStart ? (
                   <div className="py-16 text-center space-y-4">
                     <div className="relative w-10 h-10 mx-auto">
-                      <div className="absolute inset-0 rounded-full border-3 border-crimson/25 animate-pulse"></div>
-                      <div className="absolute inset-0 rounded-full border-3 border-crimson border-t-transparent animate-spin"></div>
+                      <div className="absolute inset-0 rounded-full border-3 border-vermilion/25 animate-pulse"></div>
+                      <div className="absolute inset-0 rounded-full border-3 border-vermilion border-t-transparent animate-spin"></div>
                     </div>
-                    <p className="text-xs text-zinc-450 font-bold uppercase tracking-wider">Assembling Adaptive Studio Context...</p>
+                    <p className="text-xs text-cocoa/50 font-bold uppercase tracking-wider">Assembling Adaptive Studio Context...</p>
                   </div>
                 ) : mockScorecard ? (
                   // Evaluation Scorecard Display
                   <div className="space-y-6">
-                    <div className="text-center pb-4 border-b border-white/5 dark:border-white/5">
+                    <div className="text-center pb-4 border-b border-cocoa/10 dark:border-cocoa/10">
                       <span className="text-[9px] font-bold text-emerald-700 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full uppercase tracking-wider">Session Evaluation Completed</span>
-                      <h4 className="font-extrabold text-white text-lg mt-2 dark:text-white font-geom">Scorecard Report</h4>
+                      <h4 className="font-bold text-cocoa text-lg mt-2 dark:text-cocoa font-serif">Scorecard Report</h4>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                      <div className="p-4 bg-zinc-900 border border-white/5 rounded-2xl text-center shadow-inner dark:bg-zinc-950/40 dark:border-white/5">
-                        <span className="text-[10px] text-zinc-450 font-bold uppercase block dark:text-zinc-500">Technical Depth</span>
-                        <span className="text-2xl font-black text-crimson block mt-1 font-geom">{mockScorecard.technical_score}/10</span>
+                      <div className="p-4 bg-sand border border-cocoa/10 rounded-[1.5rem] text-center shadow-inner dark:bg-cocoa/40 dark:border-cocoa/10">
+                        <span className="text-[10px] text-cocoa/50 font-bold uppercase block dark:text-cocoa/40">Technical Depth</span>
+                        <span className="text-2xl font-bold text-vermilion block mt-1 font-serif">{mockScorecard.technical_score}/10</span>
                       </div>
-                      <div className="p-4 bg-zinc-900 border border-white/5 rounded-2xl text-center shadow-inner dark:bg-zinc-900/40 dark:border-white/5">
-                        <span className="text-[10px] text-zinc-450 font-bold uppercase block dark:text-zinc-500">Communication</span>
-                        <span className="text-2xl font-black text-emerald-600 block mt-1 font-geom">{mockScorecard.communication_score}/10</span>
+                      <div className="p-4 bg-sand border border-cocoa/10 rounded-[1.5rem] text-center shadow-inner dark:bg-sand dark:border-cocoa/10">
+                        <span className="text-[10px] text-cocoa/50 font-bold uppercase block dark:text-cocoa/40">Communication</span>
+                        <span className="text-2xl font-bold text-emerald-600 block mt-1 font-serif">{mockScorecard.communication_score}/10</span>
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <span className="text-[9px] text-zinc-450 font-bold uppercase tracking-wider block dark:text-zinc-500">Recruiter Recommendations</span>
-                      <p className="text-xs text-zinc-350 leading-relaxed bg-zinc-900/40 p-4 rounded-xl border border-white/5 dark:bg-zinc-950/30 dark:border-white/5 dark:text-zinc-400">
+                      <span className="text-[9px] text-cocoa/50 font-bold uppercase tracking-wider block dark:text-cocoa/40">Recruiter Recommendations</span>
+                      <p className="text-xs text-cocoa/70 leading-relaxed bg-sand p-4 rounded-[1.2rem] border border-cocoa/10 dark:bg-cocoa/30 dark:border-cocoa/10 dark:text-cocoa/60">
                         {mockScorecard.recommendations}
                       </p>
                     </div>
 
                     <div className="space-y-2.5">
-                      <span className="text-[9px] text-zinc-450 font-bold uppercase tracking-wider block dark:text-zinc-500">Strengths Demonstrated</span>
+                      <span className="text-[9px] text-cocoa/50 font-bold uppercase tracking-wider block dark:text-cocoa/40">Strengths Demonstrated</span>
                       <div className="flex flex-wrap gap-2">
                         {mockScorecard.strengths.map((s: string, i: number) => (
                           <span key={i} className="text-[10px] font-bold bg-emerald-500/10 text-emerald-700 px-3 py-1 rounded-full border border-emerald-500/20 dark:text-emerald-450">{s}</span>
@@ -944,10 +944,10 @@ export const Applications: React.FC = () => {
                     </div>
 
                     <div className="space-y-2.5">
-                      <span className="text-[9px] text-zinc-450 font-bold uppercase tracking-wider block dark:text-zinc-500">Identified Gaps</span>
+                      <span className="text-[9px] text-cocoa/50 font-bold uppercase tracking-wider block dark:text-cocoa/40">Identified Gaps</span>
                       <div className="flex flex-wrap gap-2">
                         {mockScorecard.weaknesses.map((w: string, i: number) => (
-                          <span key={i} className="text-[10px] font-bold bg-crimson/10 text-crimson px-3 py-1 rounded-full border border-crimson/20">{w}</span>
+                          <span key={i} className="text-[10px] font-bold bg-vermilion/10 text-vermilion px-3 py-1 rounded-full border border-vermilion/20">{w}</span>
                         ))}
                       </div>
                     </div>
@@ -957,51 +957,51 @@ export const Applications: React.FC = () => {
                   <form onSubmit={handleSubmitMockAnswer} className="space-y-6">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <span className="text-[9px] bg-zinc-900 border border-white/5 text-zinc-300 font-bold px-2.5 py-1 rounded-lg uppercase tracking-wider dark:bg-zinc-950/60 dark:border-white/5 dark:text-zinc-400">
+                        <span className="text-[9px] bg-sand border border-cocoa/10 text-cocoa/80 font-bold px-2.5 py-1 rounded-lg uppercase tracking-wider dark:bg-white dark:border-cocoa/10 dark:text-cocoa/60">
                           Question {mockQuestionNumber} of {mockTotalQuestions}
                         </span>
-                        <span className="text-[9px] text-crimson font-bold uppercase tracking-widest flex items-center gap-1">
-                          <span className="w-1.5 h-1.5 rounded-full bg-crimson animate-ping" />
+                        <span className="text-[9px] text-vermilion font-bold uppercase tracking-widest flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-vermilion animate-ping" />
                           🎙️ Active Session
                         </span>
                       </div>
                       
-                      <div className="bg-zinc-900/40 p-5 border border-white/5 rounded-2xl shadow-inner relative overflow-hidden dark:bg-zinc-950/40 dark:border-white/5">
-                        <p className="text-sm font-semibold text-white leading-relaxed relative z-10 dark:text-zinc-100">
+                      <div className="bg-sand p-5 border border-cocoa/10 rounded-[1.5rem] shadow-inner relative overflow-hidden dark:bg-cocoa/40 dark:border-cocoa/10">
+                        <p className="text-sm font-semibold text-cocoa leading-relaxed relative z-10 dark:text-zinc-100">
                           {mockQuestion}
                         </p>
                         
                         {/* Audio Waveform Decoration */}
                         <div className="flex items-center gap-1 justify-center h-16 py-2">
-                          <span className="w-1.5 bg-crimson rounded-full h-8 waveform-bar"></span>
-                          <span className="w-1.5 bg-crimson rounded-full h-12 waveform-bar"></span>
-                          <span className="w-1.5 bg-crimson rounded-full h-6 waveform-bar"></span>
-                          <span className="w-1.5 bg-crimson rounded-full h-10 waveform-bar"></span>
-                          <span className="w-1.5 bg-crimson rounded-full h-14 waveform-bar"></span>
-                          <span className="w-1.5 bg-crimson rounded-full h-8 waveform-bar"></span>
-                          <span className="w-1.5 bg-crimson rounded-full h-12 waveform-bar"></span>
-                          <span className="w-1.5 bg-crimson rounded-full h-5 waveform-bar"></span>
+                          <span className="w-1.5 bg-vermilion rounded-full h-8 waveform-bar"></span>
+                          <span className="w-1.5 bg-vermilion rounded-full h-12 waveform-bar"></span>
+                          <span className="w-1.5 bg-vermilion rounded-full h-6 waveform-bar"></span>
+                          <span className="w-1.5 bg-vermilion rounded-full h-10 waveform-bar"></span>
+                          <span className="w-1.5 bg-vermilion rounded-full h-14 waveform-bar"></span>
+                          <span className="w-1.5 bg-vermilion rounded-full h-8 waveform-bar"></span>
+                          <span className="w-1.5 bg-vermilion rounded-full h-12 waveform-bar"></span>
+                          <span className="w-1.5 bg-vermilion rounded-full h-5 waveform-bar"></span>
                         </div>
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <label className="block text-[9px] font-bold text-zinc-450 uppercase tracking-wider dark:text-zinc-400">Your Response *</label>
+                      <label className="block text-[9px] font-bold text-cocoa/50 uppercase tracking-wider dark:text-cocoa/60">Your Response *</label>
                       <textarea
                         required
                         rows={5}
                         placeholder="Type your structured response details (mention caching, algorithms, complexity where relevant)..."
                         value={mockAnswerText}
                         onChange={(e) => setMockAnswerText(e.target.value)}
-                        className="w-full bg-zinc-900 text-xs border border-white/5 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-crimson placeholder-white/20 leading-relaxed dark:bg-zinc-950/60 dark:text-zinc-300 dark:border-white/5"
+                        className="w-full bg-sand text-xs border border-cocoa/10 rounded-[1.2rem] px-4 py-3 text-cocoa focus:outline-none focus:border-vermilion placeholder-white/20 leading-relaxed dark:bg-white dark:text-cocoa/80 dark:border-cocoa/10"
                       />
                     </div>
 
-                    <div className="flex justify-end pt-5 border-t border-white/5 dark:border-white/5">
+                    <div className="flex justify-end pt-5 border-t border-cocoa/10 dark:border-cocoa/10">
                       <button
                         type="submit"
                         disabled={mockSubmittingAnswer || !mockAnswerText.trim()}
-                        className="bg-crimson hover:bg-crimson/90 text-white font-bold text-xs px-5 py-3 rounded-xl shadow-lg shadow-crimson/20 flex items-center gap-1.5 disabled:opacity-50 transition-all active:scale-95"
+                        className="bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-xs px-5 py-3 rounded-[1.2rem] shadow-lg shadow-vermilion/20 flex items-center gap-1.5 disabled:opacity-50 transition-all active:scale-95"
                       >
                         {mockSubmittingAnswer ? (
                           <>
@@ -1021,10 +1021,10 @@ export const Applications: React.FC = () => {
               </div>
 
               {mockScorecard && (
-                <div className="p-6 border-t border-white/5 bg-zinc-900 flex justify-end shrink-0 dark:border-white/5 dark:bg-zinc-950/20">
+                <div className="p-6 border-t border-cocoa/10 bg-sand flex justify-end shrink-0 dark:border-cocoa/10 dark:bg-cocoa/20">
                   <button
                     onClick={() => setShowMockModal(false)}
-                    className="px-5 py-2.5 bg-crimson hover:bg-crimson/90 text-white font-bold text-xs rounded-xl shadow-lg shadow-crimson/10 active:scale-95 transition-all"
+                    className="px-5 py-2.5 bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-xs rounded-[1.2rem] shadow-lg shadow-vermilion/10 active:scale-95 transition-all"
                   >
                     Close Session
                   </button>

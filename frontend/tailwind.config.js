@@ -29,11 +29,15 @@ export default {
           cocoa: '#2E1A16',
           vermilion: '#FF5B37',
         },
+        sand: '#FAF6F0',
+        cocoa: '#2E1A16',
+        vermilion: '#FF5B37',
         obsidian: '#050507',
         crimson: '#FF1E27',
       },
       fontFamily: {
         sans: ['Onest', 'Outfit', 'Inter', 'system-ui', 'sans-serif'],
+        serif: ['Playfair Display', 'Georgia', 'serif'],
         geom: ['Space Grotesk', 'Chacra Petch', 'sans-serif'],
         wide: ['Syncopate', 'sans-serif'],
       }

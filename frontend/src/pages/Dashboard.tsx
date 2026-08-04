@@ -12,7 +12,8 @@ import {
   ShieldAlert,
   CalendarDays,
   Target,
-  Flame
+  Flame,
+  MessageSquare
 } from 'lucide-react';
 import { 
   AreaChart, 
@@ -106,7 +107,6 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
     { name: 'Sun', apps: 7, prepMinutes: 150 },
   ];
 
-  // Hardcoded dashboard elements to demonstrate Phase 1 completion beautifully
   const weakTopics = [
     { topic: 'Graph Implementations', status: 'Requires Timed Practice', score: 58 },
     { topic: 'DBMS Indexing', status: 'Revise B+ Tree structures', score: 64 },
@@ -114,9 +114,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
   ];
 
   const missionTasks = [
-    { id: 1, title: 'Solve 2 Graph traversal cycle detection questions', duration: '45m', priority: 'High', completed: false },
-    { id: 2, title: 'Revise B+ Tree index layouts', duration: '30m', priority: 'Medium', completed: false },
-    { id: 3, title: 'Mock Interview practice (Meta backend focus)', duration: '20m', priority: 'High', completed: false }
+    { id: 1, title: 'Solve 2 Graph traversal cycle detection questions', duration: '45m', priority: 'High', completed: false, type: 'orange' },
+    { id: 2, title: 'Revise B+ Tree index layouts', duration: '30m', priority: 'Medium', completed: false, type: 'yellow' },
+    { id: 3, title: 'Mock Interview practice (Meta backend focus)', duration: '20m', priority: 'High', completed: false, type: 'green' }
   ];
 
   const [tasks, setTasks] = useState(missionTasks);
@@ -129,8 +129,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
     return (
       <div className="flex items-center justify-center min-h-[70vh]">
         <div className="relative w-12 h-12">
-          <div className="absolute inset-0 rounded-full border-4 border-crimson/25"></div>
-          <div className="absolute inset-0 rounded-full border-4 border-crimson border-t-transparent animate-spin"></div>
+          <div className="absolute inset-0 rounded-full border-4 border-vermilion/25"></div>
+          <div className="absolute inset-0 rounded-full border-4 border-vermilion border-t-transparent animate-spin"></div>
         </div>
       </div>
     );
@@ -159,39 +159,35 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
       transition={{ duration: 0.4 }}
       className="space-y-8 pb-12 font-sans relative"
     >
-      {/* 3D Ambient Glowing backdrop Blobs */}
-      <div className="absolute -top-12 -left-12 w-96 h-96 bg-crimson/5 rounded-full blur-3xl pointer-events-none animate-blob"></div>
-      <div className="absolute top-1/2 right-12 w-80 h-80 bg-crimson/3 rounded-full blur-3xl pointer-events-none animate-blob animation-delay-2000"></div>
-
-      {/* Top Welcome Title & Premium Glass Banner */}
-      <div className="relative glass-banner p-8 rounded-3xl border border-white/5 bg-zinc-950/60 backdrop-blur-xl flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 overflow-hidden">
-        <div className="relative z-10 flex-1">
+      {/* 1. Welcome Glass Banner (revamped with warm minimalist branding) */}
+      <div className="bg-[#FFE5CE] border border-[#FFD2AE] p-8 rounded-[2rem] flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 overflow-hidden">
+        <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-[9px] font-bold text-crimson uppercase tracking-widest bg-crimson/10 px-2.5 py-1 rounded-full">
-              AI Workspace
+            <span className="text-[9px] font-bold text-[#7A3C09] uppercase tracking-widest bg-white/40 px-2.5 py-1 rounded-full">
+              AI Workspace Active
             </span>
-            <span className="text-[9px] font-bold text-zinc-300 uppercase tracking-widest bg-white/5 px-2.5 py-1 rounded-full flex items-center gap-1">
-              <Flame className="w-3 h-3 fill-zinc-300 text-crimson" /> 5 Day Streak
+            <span className="text-[9px] font-bold text-[#7A3C09] uppercase tracking-widest bg-white/40 px-2.5 py-1 rounded-full flex items-center gap-1">
+              <Flame className="w-3 h-3 fill-[#7A3C09] text-vermilion" /> 5 Day Streak
             </span>
           </div>
-          <h2 className="text-xl md:text-2xl font-bold tracking-widest text-white font-geom uppercase">
+          <h2 className="text-xl md:text-2xl font-bold tracking-tight text-[#7A3C09] font-serif">
             Command Center Dashboard
           </h2>
-          <p className="text-xs text-zinc-400 mt-2 max-w-xl leading-relaxed font-semibold uppercase tracking-wider">
-            Welcome back! Monitor real-time placement pipeline progress, review automated study schedules, and access personalized AI interview guides.
+          <p className="text-xs text-[#7A3C09]/75 mt-2 max-w-xl leading-relaxed font-semibold uppercase tracking-wider">
+            Review your automated study schedules, track real-time placement pipeline progress, and analyze interview profiles.
           </p>
         </div>
         
         {/* Quick prepare shortcut banner */}
         {nextInterview && (
-          <div className="relative z-10 w-full lg:w-auto bg-zinc-950 border border-white/5 rounded-2xl px-6 py-4 flex items-center justify-between lg:justify-start gap-4 shadow-sm">
+          <div className="w-full lg:w-auto bg-white border border-[#FFD2AE] rounded-[1.5rem] px-6 py-4 flex items-center justify-between lg:justify-start gap-4 shadow-sm">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-crimson/10 flex items-center justify-center text-crimson">
-                <Sparkles className="w-5 h-5 fill-crimson/20 animate-pulse" />
+              <div className="w-10 h-10 rounded-[1.2rem] bg-vermilion/10 flex items-center justify-center text-vermilion">
+                <Sparkles className="w-5 h-5 fill-vermilion/20 animate-pulse" />
               </div>
               <div>
-                <span className="font-bold text-xs text-white block uppercase tracking-wide">Upcoming {nextInterviewCompany} Interview</span>
-                <span className="text-[10px] text-zinc-400 font-medium">
+                <span className="font-bold text-xs text-cocoa block uppercase tracking-wide">Upcoming {nextInterviewCompany} Interview</span>
+                <span className="text-[10px] text-cocoa/50 font-medium">
                   {nextInterview.event_date ? getDaysRemainingText(nextInterview.event_date) : 'Scheduled'}
                 </span>
               </div>
@@ -201,7 +197,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
                 localStorage.setItem('autoSelectCompany', nextInterviewCompany);
                 setCurrentTab('applications');
               }}
-              className="h-10 px-4 bg-crimson hover:bg-crimson/90 text-white font-bold text-[10px] rounded-xl shadow-md flex items-center gap-1.5 transition-all active:scale-95 animate-pulse-subtle uppercase tracking-wider"
+              className="h-10 px-4 bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-[10px] rounded-[1.2rem] shadow-md flex items-center gap-1.5 transition-all active:scale-95 uppercase tracking-wider"
             >
               <span>Prepare</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -210,121 +206,103 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
         )}
       </div>
 
-      {/* Metric Cards grid */}
+      {/* 2. Metric Bento Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {/* Total applications */}
-        <motion.div 
-          whileHover={{ y: -4 }}
-          className="premium-card flex flex-col justify-between"
-        >
+        <div className="bento-panel flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-zinc-450 font-bold uppercase tracking-wider dark:text-zinc-400">Total Apps</span>
-            <span className="p-2 rounded-xl bg-white/5 text-white dark:bg-zinc-800/60 dark:text-zinc-300">
+            <span className="text-[10px] text-cocoa/50 font-bold uppercase tracking-wider">Total Apps</span>
+            <span className="p-2 rounded-[1.2rem] bg-cocoa/5 text-cocoa">
               <Briefcase className="w-4 h-4" />
             </span>
           </div>
           <div className="mt-6">
-            <span className="text-3xl font-extrabold text-white">{totalApps}</span>
-            <p className="text-[10px] text-zinc-500 mt-1 dark:text-zinc-500">Submitted roles</p>
+            <span className="text-3xl font-bold text-cocoa font-serif">{totalApps}</span>
+            <p className="text-[10px] text-cocoa/40 mt-1 uppercase tracking-wider font-bold">Roles logged</p>
           </div>
-        </motion.div>
+        </div>
 
         {/* Active applications */}
-        <motion.div 
-          whileHover={{ y: -4 }}
-          className="premium-card flex flex-col justify-between"
-        >
+        <div className="bento-panel flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-zinc-450 font-bold uppercase tracking-wider dark:text-zinc-400">Active</span>
-            <span className="p-2 rounded-xl bg-crimson/10 text-crimson">
+            <span className="text-[10px] text-cocoa/50 font-bold uppercase tracking-wider">Active</span>
+            <span className="p-2 rounded-[1.2rem] bg-vermilion/10 text-vermilion">
               <Clock className="w-4 h-4" />
             </span>
           </div>
           <div className="mt-6">
-            <span className="text-3xl font-extrabold text-white">{activeApps}</span>
-            <p className="text-[10px] text-zinc-500 mt-1 dark:text-zinc-500">In progress</p>
+            <span className="text-3xl font-bold text-cocoa font-serif">{activeApps}</span>
+            <p className="text-[10px] text-cocoa/40 mt-1 uppercase tracking-wider font-bold">In progress</p>
           </div>
-        </motion.div>
+        </div>
 
         {/* Online assessments */}
-        <motion.div 
-          whileHover={{ y: -4 }}
-          className="premium-card flex flex-col justify-between"
-        >
+        <div className="bento-panel flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-zinc-450 font-bold uppercase tracking-wider dark:text-zinc-400">Assessments</span>
-            <span className="p-2 rounded-xl bg-teal-500/10 text-teal-650 dark:text-teal-400">
+            <span className="text-[10px] text-cocoa/50 font-bold uppercase tracking-wider">Assessments</span>
+            <span className="p-2 rounded-[1.2rem] bg-[#E2F5D7] text-[#335A21]">
               <GraduationCap className="w-4 h-4" />
             </span>
           </div>
           <div className="mt-6">
-            <span className="text-3xl font-extrabold text-white">{oaCount}</span>
-            <p className="text-[10px] text-zinc-500 mt-1 dark:text-zinc-500">Active tests</p>
+            <span className="text-3xl font-bold text-cocoa font-serif">{oaCount}</span>
+            <p className="text-[10px] text-cocoa/40 mt-1 uppercase tracking-wider font-bold">Active tests</p>
           </div>
-        </motion.div>
+        </div>
 
         {/* Interviews */}
-        <motion.div 
-          whileHover={{ y: -4 }}
-          className="premium-card flex flex-col justify-between"
-        >
+        <div className="bento-panel flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-zinc-450 font-bold uppercase tracking-wider dark:text-zinc-400">Interviews</span>
-            <span className="p-2 rounded-xl bg-crimson/10 text-crimson">
+            <span className="text-[10px] text-cocoa/50 font-bold uppercase tracking-wider">Interviews</span>
+            <span className="p-2 rounded-[1.2rem] bg-[#FFE5CE] text-[#7A3C09]">
               <CalendarDays className="w-4 h-4" />
             </span>
           </div>
           <div className="mt-6">
-            <span className="text-3xl font-extrabold text-white">{interviewCount}</span>
-            <p className="text-[10px] text-zinc-500 mt-1 dark:text-zinc-500">Live rounds</p>
+            <span className="text-3xl font-bold text-cocoa font-serif">{interviewCount}</span>
+            <p className="text-[10px] text-cocoa/40 mt-1 uppercase tracking-wider font-bold">Live rounds</p>
           </div>
-        </motion.div>
+        </div>
 
         {/* Offers */}
-        <motion.div 
-          whileHover={{ y: -4 }}
-          className="premium-card flex flex-col justify-between"
-        >
+        <div className="bento-panel flex flex-col justify-between">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-zinc-450 font-bold uppercase tracking-wider dark:text-zinc-400">Offers</span>
-            <span className="p-2 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-450">
+            <span className="text-[10px] text-cocoa/50 font-bold uppercase tracking-wider">Offers</span>
+            <span className="p-2 rounded-[1.2rem] bg-emerald-500/10 text-emerald-600">
               <CheckCircle className="w-4 h-4" />
             </span>
           </div>
           <div className="mt-6">
-            <span className="text-3xl font-extrabold text-white">{offerCount}</span>
-            <p className="text-[10px] text-zinc-500 mt-1 dark:text-zinc-500">Job letters</p>
+            <span className="text-3xl font-bold text-cocoa font-serif">{offerCount}</span>
+            <p className="text-[10px] text-cocoa/40 mt-1 uppercase tracking-wider font-bold">Job letters</p>
           </div>
-        </motion.div>
+        </div>
 
         {/* Average Readiness */}
-        <motion.div 
-          whileHover={{ y: -4, scale: 1.02 }}
-          className="bg-gradient-to-br from-life-cocoa to-[#452721] p-5 rounded-2xl flex flex-col justify-between text-white shadow-lg shadow-crimson/10 transition-all duration-300 border border-white/5"
-        >
+        <div className="bento-panel-dark flex flex-col justify-between text-cocoa">
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-life-sand/70 font-bold uppercase tracking-wider">Readiness</span>
-            <span className="p-2 rounded-xl bg-white/10 text-white">
+            <span className="text-[10px] text-cocoa/50 font-bold uppercase tracking-wider">Readiness</span>
+            <span className="p-2 rounded-[1.2rem] bg-cocoa/10 text-cocoa">
               <TrendingUp className="w-4 h-4" />
             </span>
           </div>
           <div className="mt-6">
-            <span className="text-3xl font-black font-geom">{avgReadiness}%</span>
-            <p className="text-[10px] text-life-sand/70 mt-1">ATS & interview score</p>
+            <span className="text-3xl font-bold text-cocoa font-serif">{avgReadiness}%</span>
+            <p className="text-[10px] text-cocoa/40 mt-1 uppercase tracking-wider font-bold">Vector match</p>
           </div>
-        </motion.div>
+        </div>
       </div>
 
-      {/* Main Charts & Bento grids */}
+      {/* 3. Main Charts & Bento Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        {/* Left Columns - Performance & Funnel chart */}
+        {/* Left Column - Performance Graph & Funnel chart */}
         <div className="lg:col-span-2 space-y-6">
           
           {/* Active Prep timeline */}
-          <div className="premium-card p-6">
-            <h3 className="text-[10px] font-bold text-white uppercase tracking-widest mb-6 flex items-center gap-2">
-              <Target className="w-4 h-4 text-crimson" />
+          <div className="bento-panel p-6">
+            <h3 className="text-[10px] font-bold text-cocoa uppercase tracking-widest mb-6 flex items-center gap-2">
+              <Target className="w-4 h-4 text-vermilion" />
               Preparation Intensity (Minutes Revision)
             </h3>
             <div className="h-64">
@@ -332,51 +310,53 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
                 <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                   <defs>
                     <linearGradient id="colorPrep" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#FF1E27" stopOpacity={0.25}/>
-                      <stop offset="95%" stopColor="#FF1E27" stopOpacity={0}/>
+                      <stop offset="5%" stopColor="#FF5B37" stopOpacity={0.2}/>
+                      <stop offset="95%" stopColor="#FF5B37" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.05)" />
-                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#9CA3AF', opacity: 0.6 }} stroke="rgba(255,255,255,0.05)" />
-                  <YAxis tick={{ fontSize: 10, fill: '#9CA3AF', opacity: 0.6 }} stroke="rgba(255,255,255,0.05)" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(46,26,22,0.06)" />
+                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#2E1A16', opacity: 0.6 }} stroke="rgba(46,26,22,0.06)" />
+                  <YAxis tick={{ fontSize: 10, fill: '#2E1A16', opacity: 0.6 }} stroke="rgba(46,26,22,0.06)" />
                   <Tooltip 
                     contentStyle={{ 
-                      backgroundColor: '#09090b', 
-                      borderColor: '#FF1E27', 
-                      color: '#ffffff',
-                      borderRadius: '12px',
+                      backgroundColor: '#ffffff', 
+                      borderColor: '#FF5B37', 
+                      color: '#2E1A16',
+                      borderRadius: '16px',
                       fontSize: '11px',
-                      fontFamily: 'sans-serif'
+                      fontFamily: 'sans-serif',
+                      boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
                     }} 
                   />
-                  <Area type="monotone" dataKey="prepMinutes" name="Revision (Mins)" stroke="#FF1E27" strokeWidth={2} fillOpacity={1} fill="url(#colorPrep)" />
+                  <Area type="monotone" dataKey="prepMinutes" name="Revision (Mins)" stroke="#FF5B37" strokeWidth={2.5} fillOpacity={1} fill="url(#colorPrep)" />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
           </div>
 
           {/* Funnel distribution bar chart */}
-          <div className="premium-card p-6">
-            <h3 className="text-[10px] font-bold text-white uppercase tracking-widest mb-6 flex items-center gap-2">
-              <Briefcase className="w-4 h-4 text-crimson" />
+          <div className="bento-panel p-6">
+            <h3 className="text-[10px] font-bold text-cocoa uppercase tracking-widest mb-6 flex items-center gap-2">
+              <Briefcase className="w-4 h-4 text-vermilion" />
               Pipeline Distribution Stages
             </h3>
             <div className="h-56">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={stageStats} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.05)" />
-                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#9CA3AF', opacity: 0.6 }} stroke="rgba(255,255,255,0.05)" />
-                  <YAxis allowDecimals={false} tick={{ fontSize: 10, fill: '#9CA3AF', opacity: 0.6 }} stroke="rgba(255,255,255,0.05)" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(46,26,22,0.06)" />
+                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#2E1A16', opacity: 0.6 }} stroke="rgba(46,26,22,0.06)" />
+                  <YAxis allowDecimals={false} tick={{ fontSize: 10, fill: '#2E1A16', opacity: 0.6 }} stroke="rgba(46,26,22,0.06)" />
                   <Tooltip 
                     contentStyle={{ 
-                      backgroundColor: '#09090b', 
-                      borderColor: '#FF1E27', 
-                      color: '#ffffff',
-                      borderRadius: '12px',
-                      fontSize: '11px'
+                      backgroundColor: '#ffffff', 
+                      borderColor: '#FF5B37', 
+                      color: '#2E1A16',
+                      borderRadius: '16px',
+                      fontSize: '11px',
+                      boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
                     }} 
                   />
-                  <Bar dataKey="value" name="Applications" fill="#FF1E27" radius={[6, 6, 0, 0]} />
+                  <Bar dataKey="value" name="Applications" fill="#FF5B37" radius={[6, 6, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -384,78 +364,94 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
 
         </div>
 
-        {/* Right Column - Mission & Weaknesses */}
+        {/* Right Column - Mission, Gaps, & AI Quotes */}
         <div className="space-y-6">
           
-          {/* Today's Prep Mission */}
-          <div className="premium-card p-6">
-            <h3 className="text-xs font-bold text-white uppercase tracking-widest mb-5 flex items-center justify-between dark:text-white">
+          {/* AI Career Coach Quote Card (mimicking quote panel from image 4) */}
+          <div className="bento-panel p-6 flex flex-col justify-between border-l-4 border-l-vermilion bg-white">
+            <h3 className="text-[10px] font-bold text-cocoa uppercase tracking-widest mb-4 flex items-center gap-2">
+              <MessageSquare className="w-4 h-4 text-vermilion" />
+              AI Recruiter Narrative
+            </h3>
+            <p className="text-xs text-cocoa/75 italic leading-relaxed">
+              "We noticed graph cycles and DBMS B+ Tree indices are showing lower preparation scores. Prioritize completing cycle traversal mock questions before your upcoming event assessments."
+            </p>
+            <div className="flex items-center gap-3 mt-5 border-t border-cocoa/5 pt-4">
+              <span className="w-8 h-8 rounded-full bg-sand flex items-center justify-center text-sm shadow-sm">🤖</span>
+              <div>
+                <h4 className="text-xs font-bold text-cocoa">PlacePilot Copilot</h4>
+                <p className="text-[8px] text-cocoa/40 font-bold uppercase tracking-wider">Placement Mentor</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Today's Prep Mission (Styled as colorful sticky notes from user persona image) */}
+          <div className="bento-panel p-6">
+            <h3 className="text-xs font-bold text-cocoa uppercase tracking-widest mb-5 flex items-center justify-between">
               <span className="flex items-center gap-2">
-                <Target className="w-4 h-4 text-crimson" />
+                <Target className="w-4 h-4 text-vermilion" />
                 Today's Focus
               </span>
-              <span className="text-[9px] bg-crimson/10 text-crimson font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                Copilot Suggestions
+              <span className="text-[8px] bg-cocoa/5 text-cocoa/50 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                Active Checklist
               </span>
             </h3>
             
-            <div className="space-y-3">
-              {tasks.map((t) => (
-                <div 
-                  key={t.id} 
-                  onClick={() => toggleTask(t.id)}
-                  className={`p-3.5 border transition-all rounded-xl flex items-start gap-3 cursor-pointer ${
-                    t.completed 
-                      ? 'bg-zinc-900/20 border-white/5 opacity-55' 
-                      : 'bg-zinc-900/65 border-white/5 hover:border-white/10 hover:bg-zinc-900 dark:bg-zinc-950/40 dark:border-white/5'
-                  }`}
-                >
-                  <div className="mt-0.5">
-                    <div className={`w-3.5 h-3.5 rounded-md border flex items-center justify-center transition-all ${
-                      t.completed ? 'bg-crimson border-crimson' : 'border-life-cocoa/20'
-                    }`}>
-                      {t.completed && <CheckCircle className="w-2.5 h-2.5 text-white" />}
+            <div className="space-y-4">
+              {tasks.map((t) => {
+                const noteClass = t.type === 'orange' 
+                  ? 'sticky-note-orange' 
+                  : t.type === 'yellow' 
+                    ? 'sticky-note-yellow' 
+                    : 'sticky-note-green';
+                return (
+                  <div 
+                    key={t.id} 
+                    onClick={() => toggleTask(t.id)}
+                    className={`${noteClass} cursor-pointer relative overflow-hidden transition-all group ${
+                      t.completed ? 'opacity-55 scale-98 translate-y-0.5' : 'hover:scale-[1.02] hover:-rotate-1'
+                    }`}
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="mt-0.5">
+                        <div className="w-3.5 h-3.5 rounded-md border border-current flex items-center justify-center">
+                          {t.completed && <div className="w-2 h-2 rounded bg-current" />}
+                        </div>
+                      </div>
+                      <div className="flex-1">
+                        <span className={`font-bold text-xs leading-normal block ${t.completed ? 'line-through' : ''}`}>
+                          {t.title}
+                        </span>
+                        <div className="flex items-center gap-2 mt-2 text-[9px] opacity-75 font-semibold">
+                          <span>Duration: {t.duration}</span>
+                          <span>•</span>
+                          <span className="uppercase tracking-wider">{t.priority} priority</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div className="flex-1">
-                    <span className={`font-semibold text-xs leading-tight block ${
-                      t.completed ? 'line-through text-zinc-500' : 'text-zinc-200'
-                    }`}>
-                      {t.title}
-                    </span>
-                    <div className="flex items-center gap-2 mt-2">
-                      <span className="text-[9px] text-zinc-500">Duration: {t.duration}</span>
-                      <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded ${
-                        t.priority === 'High' 
-                          ? 'bg-rose-500/10 text-rose-500' 
-                          : 'bg-amber-500/10 text-amber-600'
-                      }`}>
-                        {t.priority}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
           {/* Weak Topics */}
-          <div className="premium-card p-6">
-            <h3 className="text-xs font-bold text-white uppercase tracking-widest mb-5 flex items-center gap-2 dark:text-white">
-              <ShieldAlert className="w-4 h-4 text-rose-550" />
-              Struggling Topics (Gaps)
+          <div className="bento-panel p-6">
+            <h3 className="text-xs font-bold text-cocoa uppercase tracking-widest mb-5 flex items-center gap-2">
+              <ShieldAlert className="w-4 h-4 text-vermilion" />
+              Struggling Gaps
             </h3>
             
             <div className="space-y-4">
               {weakTopics.map((item, idx) => (
-                <div key={idx} className="flex items-center justify-between border-b border-white/5 pb-3.5 last:border-b-0 last:pb-0">
+                <div key={idx} className="flex items-center justify-between border-b border-cocoa/5 pb-3.5 last:border-b-0 last:pb-0">
                   <div>
-                    <span className="text-xs font-semibold text-white block dark:text-zinc-200">{item.topic}</span>
-                    <span className="text-[10px] text-zinc-400 block mt-1">{item.status}</span>
+                    <span className="text-xs font-bold text-cocoa block">{item.topic}</span>
+                    <span className="text-[10px] text-cocoa/55 block mt-1">{item.status}</span>
                   </div>
                   <div className="text-right">
-                    <span className="text-xs font-bold text-rose-500 block">{item.score}%</span>
-                    <span className="text-[8px] text-zinc-500 uppercase tracking-wider block">Readiness</span>
+                    <span className="text-xs font-bold text-vermilion block">{item.score}%</span>
+                    <span className="text-[8px] text-cocoa/40 uppercase tracking-wider block">Readiness</span>
                   </div>
                 </div>
               ))}
@@ -463,26 +459,26 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
           </div>
 
           {/* Upcoming Event Schedule */}
-          <div className="premium-card p-6">
-            <h3 className="text-xs font-bold text-white uppercase tracking-widest mb-5 flex items-center gap-2 dark:text-white">
-              <CalendarDays className="w-4 h-4 text-crimson" />
+          <div className="bento-panel p-6">
+            <h3 className="text-xs font-bold text-cocoa uppercase tracking-widest mb-5 flex items-center gap-2">
+              <CalendarDays className="w-4 h-4 text-vermilion" />
               Upcoming Schedules
             </h3>
 
             {recentEvents.length > 0 ? (
               <div className="space-y-3.5">
                 {recentEvents.map((evt) => (
-                  <div key={evt.id} className="p-3.5 border border-white/5 bg-zinc-900/40 rounded-xl hover:border-white/10 transition-all dark:bg-zinc-950/40">
+                  <div key={evt.id} className="p-3.5 border border-cocoa/10 bg-sand/50 rounded-[1.2rem] hover:border-cocoa/20 transition-all">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-zinc-200">
+                      <span className="text-xs font-bold text-cocoa">
                         {evt.company_name}
                       </span>
-                      <span className="text-[9px] bg-crimson/10 text-crimson font-bold px-2 py-0.5 rounded-full uppercase">
+                      <span className="text-[9px] bg-vermilion/10 text-vermilion font-bold px-2 py-0.5 rounded-full uppercase">
                         {evt.event_type}
                       </span>
                     </div>
-                    <p className="text-[10px] text-zinc-450 mt-1">{evt.role}</p>
-                    <div className="text-[10px] text-crimson font-bold mt-3 flex items-center gap-1.5">
+                    <p className="text-[10px] text-cocoa/60 mt-1">{evt.role}</p>
+                    <div className="text-[10px] text-vermilion font-bold mt-3 flex items-center gap-1.5">
                       <Clock className="w-3.5 h-3.5" />
                       {new Date(evt.event_date).toLocaleDateString(undefined, { 
                         weekday: 'short', 
@@ -496,7 +492,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
                 ))}
               </div>
             ) : (
-              <p className="text-xs text-zinc-450 py-4 text-center">No upcoming assessments or interviews scheduled.</p>
+              <p className="text-xs text-cocoa/40 py-4 text-center">No upcoming assessments or interviews scheduled.</p>
             )}
           </div>
 

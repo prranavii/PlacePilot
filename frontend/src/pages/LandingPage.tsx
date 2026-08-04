@@ -7,67 +7,110 @@ import {
    Brain, 
    Flame, 
    FileText, 
-   GraduationCap 
+   GraduationCap,
+   ChevronRight
 } from 'lucide-react';
 import { Login } from './Login';
 
 export const LandingPage: React.FC = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [isRegisterMode, setIsRegisterMode] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
 
   const triggerAuth = (register: boolean) => {
     setIsRegisterMode(register);
     setShowAuthModal(true);
   };
 
-  return (
-    <div className="min-h-screen bg-obsidian text-white font-sans relative overflow-x-hidden transition-colors duration-200 bg-dot-grid-dark">
-      
-      {/* Ambient background blur blobs */}
-      <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-crimson/5 blur-[120px] pointer-events-none z-0" />
-      <div className="absolute bottom-[20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-crimson/3 blur-[150px] pointer-events-none z-0" />
+  const steps = [
+    {
+      no: '01',
+      title: 'Discover',
+      short: 'Resume & Gap Analysis',
+      details: ['ATS Match Engine parsing', 'Evaluation against real descriptions', 'Gap areas identifying']
+    },
+    {
+      no: '02',
+      title: 'Define',
+      short: 'Preparation Blueprint',
+      details: ['Custom DSA checklists', 'Interview question banks', 'Structured streak targets']
+    },
+    {
+      no: '03',
+      title: 'Develop',
+      short: 'Adaptive Interviewing',
+      details: ['AI Voice Mock Interviews', 'Depth & tone evaluation', 'Active speech waveforms']
+    },
+    {
+      no: '04',
+      title: 'Deliver',
+      short: 'Career Tracking',
+      details: ['Bento applications board', 'Recruiter weekly logs', 'Progress narrative summaries']
+    }
+  ];
 
+  const quotes = [
+    {
+      text: "The mock interview studio analyzed my DFS graph cycle depth. I cleared the Amazon OA easily.",
+      author: "Yasswant",
+      avatar: "👨‍💻"
+    },
+    {
+      text: "Having a bento board made tracking 40+ active applications simple instead of chaotic.",
+      author: "Yash Rana",
+      avatar: "👨‍💼"
+    },
+    {
+      text: "I matched my resume against the Google L4 spec and filled 3 missing keyword tags.",
+      author: "Shaurya",
+      avatar: "🧑‍💻"
+    },
+    {
+      text: "The weekly AI recruiter report flagged my system design weakness. Saved me.",
+      author: "Parth",
+      avatar: "🤵"
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-sand text-cocoa font-sans relative overflow-x-hidden transition-colors duration-200">
+      
       {/* 1. Header/Navigation Bar */}
-      <header className="sticky top-0 z-30 bg-obsidian/80 backdrop-blur-md border-b border-white/5 transition-all">
+      <header className="sticky top-0 z-30 bg-sand/80 backdrop-blur-md border-b border-cocoa/10 transition-all">
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-zinc-950 flex items-center justify-center text-white shadow-md shadow-crimson/15 border border-white/5">
+            <div className="w-8 h-8 rounded-lg bg-cocoa flex items-center justify-center text-cocoa shadow-md shadow-vermilion/15 border border-cocoa/10">
               <svg viewBox="0 0 24 24" className="w-5.5 h-5.5 fill-none" xmlns="http://www.w3.org/2000/svg">
-                {/* Upward Trajectory Arrow Stem */}
                 <path d="M 8.5,21 L 11.5,14" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-                <path d="M 12,13 L 15.5,5 L 17,7" stroke="#FF1E27" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M 15.5,5 L 18.5,8" stroke="#FF1E27" strokeWidth="2.5" strokeLinecap="round" />
-                {/* Loop Compass Sweep */}
+                <path d="M 12,13 L 15.5,5 L 17,7" stroke="#FF5B37" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M 15.5,5 L 18.5,8" stroke="#FF5B37" strokeWidth="2.5" strokeLinecap="round" />
                 <path d="M 12,13 C 14.8,13 17,10.8 17,8 C 17,5.2 14.8,3 12,3" stroke="currentColor" strokeWidth="2" strokeDasharray="0.5 2.5" strokeLinecap="round" />
                 <path d="M 12,3 C 9.2,3 7,5.2 7,8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-                {/* AI Node Center */}
-                <circle cx="12" cy="8" r="1.5" fill="#FF1E27" />
+                <circle cx="12" cy="8" r="1.5" fill="#FF5B37" />
               </svg>
             </div>
             <div>
-              <span className="font-bold text-sm tracking-widest uppercase block font-wide text-white">PLACEPILOT</span>
-              <span className="text-[8px] text-crimson font-bold tracking-widest block uppercase mt-0.5">Placement AI</span>
+              <span className="font-bold text-sm tracking-widest uppercase block font-serif text-cocoa">PLACEPILOT</span>
+              <span className="text-[8px] text-vermilion font-bold tracking-widest block uppercase mt-0.5">Placement AI</span>
             </div>
           </div>
 
-          {/* Nav anchors */}
-          <nav className="hidden md:flex items-center gap-8 text-[10px] font-bold uppercase tracking-widest text-zinc-400">
-            <a href="#features" className="hover:text-crimson transition-colors">Features</a>
-            <a href="#copilot" className="hover:text-crimson transition-colors">AI Studio</a>
-            <a href="#matcher" className="hover:text-crimson transition-colors">ATS Revision</a>
-            <a href="#streak" className="hover:text-crimson transition-colors">Streak Logic</a>
+          <nav className="hidden md:flex items-center gap-8 text-[10px] font-bold uppercase tracking-widest text-cocoa/60">
+            <a href="#process" className="hover:text-vermilion transition-colors">Our Process</a>
+            <a href="#features" className="hover:text-vermilion transition-colors">Features</a>
+            <a href="#quotes" className="hover:text-vermilion transition-colors">Reviews</a>
           </nav>
 
           <div className="flex items-center gap-4">
             <button 
               onClick={() => triggerAuth(false)}
-              className="text-[10px] font-bold uppercase tracking-widest text-zinc-300 hover:text-crimson transition-colors"
+              className="text-[10px] font-bold uppercase tracking-widest text-cocoa/80 hover:text-vermilion transition-colors"
             >
               Sign In
             </button>
             <button 
               onClick={() => triggerAuth(true)}
-              className="bg-white hover:bg-white/90 text-obsidian font-bold text-[10px] px-5 py-2.5 rounded-full shadow-md transition-all active:scale-95 uppercase tracking-widest"
+              className="bg-cocoa hover:bg-cocoa/90 text-cocoa font-bold text-[10px] px-5 py-2.5 rounded-full shadow-md transition-all active:scale-95 uppercase tracking-widest"
             >
               Get Started
             </button>
@@ -77,182 +120,281 @@ export const LandingPage: React.FC = () => {
 
       {/* 2. Hero Section */}
       <section className="relative max-w-7xl mx-auto px-6 pt-16 pb-24 md:pt-28 md:pb-36 flex flex-col lg:flex-row items-center gap-16 z-10">
-        <div className="flex-1 space-y-6 text-center lg:text-left">
-          <div className="inline-flex items-center gap-2 bg-crimson/10 border border-crimson/25 px-3.5 py-1.5 rounded-full text-crimson text-[9px] font-bold uppercase tracking-widest">
-            <Sparkles className="w-3.5 h-3.5 fill-crimson/10 animate-pulse" />
-            AI-Powered Career Engine
+        
+        {/* Large Architectural Background Text Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 select-none">
+          <span className="text-[12rem] md:text-[22rem] font-serif font-bold text-cocoa/[0.03] leading-none select-none">
+            PILOT
+          </span>
+        </div>
+
+        <div className="flex-1 space-y-6 text-center lg:text-left relative z-10">
+          <div className="inline-flex items-center gap-2 bg-vermilion/10 border border-vermilion/25 px-3.5 py-1.5 rounded-full text-vermilion text-[9px] font-bold uppercase tracking-widest">
+            <Sparkles className="w-3.5 h-3.5 fill-vermilion/10 animate-pulse" />
+            AI Placement Command Center
           </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight font-geom tracking-widest uppercase">
-            PREPARATION.<br />
-            <span className="text-crimson">INTO PLACEMENT.</span>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-cocoa leading-none font-serif tracking-tight">
+            Preparation <br />
+            <span className="text-vermilion font-normal italic">into Placement.</span>
           </h1>
-          <p className="text-xs sm:text-sm text-zinc-450 max-w-xl mx-auto lg:mx-0 leading-relaxed font-semibold uppercase tracking-wider">
-            PlacePilot is a concept platform created for modern placement cycles. 
-            We analyze, prepare, and match experiences that capture attention and drive results.
+          <p className="text-xs sm:text-sm text-cocoa/60 max-w-xl mx-auto lg:mx-0 leading-relaxed font-semibold uppercase tracking-wider">
+            An adaptive preparation cockpit to track application processes, run smart vector resume parsing, and record mock feedback.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
             <button 
               onClick={() => triggerAuth(true)}
-              className="w-full sm:w-auto bg-crimson hover:bg-crimson/90 text-white font-bold text-xs px-8 py-4 rounded-full shadow-lg shadow-crimson/20 flex items-center justify-center gap-2 transition-all active:scale-95 uppercase tracking-widest"
+              className="w-full sm:w-auto bg-vermilion hover:bg-vermilion/90 text-cocoa font-bold text-xs px-8 py-4 rounded-full shadow-lg shadow-vermilion/20 flex items-center justify-center gap-2 transition-all active:scale-95 uppercase tracking-widest"
             >
-              <span>Explore Studio</span>
+              <span>Explore Dashboard</span>
               <ArrowRight className="w-4 h-4" />
             </button>
             <a 
-              href="#features"
-              className="w-full sm:w-auto px-8 py-4 border border-white/10 hover:bg-white/5 rounded-full text-xs font-bold text-zinc-300 text-center transition-all uppercase tracking-widest"
+              href="#process"
+              className="w-full sm:w-auto px-8 py-4 border border-cocoa/10 hover:bg-cocoa/5 rounded-full text-xs font-bold text-cocoa/80 text-center transition-all uppercase tracking-widest"
             >
-              Explore Features
+              Learn Design Process
             </a>
           </div>
         </div>
 
-        {/* Hero Preview Card Mockup - Editorial Portrait Shape */}
-        <div className="flex-1 w-full max-w-md relative">
-          <div className="absolute inset-0 bg-gradient-to-tr from-crimson/20 to-transparent blur-2xl rounded-full opacity-40 z-0"></div>
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="premium-card p-6 rounded-3xl relative z-10 flex flex-col justify-between shadow-2xl overflow-hidden aspect-[4/5] border border-white/10 bg-zinc-950/80"
-          >
-            {/* Background cinematic vignette shadow */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent pointer-events-none z-0"></div>
+        {/* Device mockup frame with bento widgets inside */}
+        <div className="flex-1 w-full max-w-md relative flex justify-center z-10">
+          <div className="w-[280px] h-[540px] border-[10px] border-cocoa rounded-[3rem] bg-sand shadow-2xl relative p-4 flex flex-col justify-between overflow-hidden">
+            {/* Speaker bar */}
+            <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-16 h-3 bg-cocoa rounded-full" />
+            
+            {/* Phone Screen Mock Content */}
+            <div className="flex items-center justify-between mt-4">
+              <span className="font-serif font-bold text-lg text-cocoa">℘</span>
+              <span className="text-[7px] font-bold tracking-widest uppercase text-cocoa/40">100% Prepared</span>
+            </div>
 
-            {/* Top info row */}
-            <div className="relative z-10 flex items-center justify-between pb-4 border-b border-white/5">
+            {/* Quote Bubble Mock */}
+            <div className="bg-white border border-cocoa/5 p-4 rounded-[1.5rem] shadow-sm space-y-2 mt-6">
               <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-crimson" />
-                <span className="w-2.5 h-2.5 rounded-full bg-zinc-700" />
-                <span className="w-2.5 h-2.5 rounded-full bg-zinc-800" />
+                <span className="w-6 h-6 rounded-full bg-vermilion/10 text-vermilion flex items-center justify-center text-[10px]">🧑‍💻</span>
+                <div>
+                  <h4 className="text-[9px] font-bold text-cocoa">Got an Assignment?</h4>
+                  <p className="text-[7px] text-cocoa/40">Group task review active</p>
+                </div>
               </div>
-              <span className="text-[8px] tracking-widest uppercase font-bold text-zinc-500">Live Preview</span>
+              <p className="text-[8px] leading-normal text-cocoa/60 italic">
+                "Make sure to evaluate system cycle paths before compiling."
+              </p>
             </div>
 
-            {/* Center abstract layout graphic representing the model portrait */}
-            <div className="relative z-10 my-8 flex-1 flex flex-col justify-center items-center">
-              <div className="w-32 h-32 rounded-full border border-crimson/30 flex items-center justify-center relative bg-gradient-to-br from-crimson/10 to-transparent">
-                <Sparkles className="w-8 h-8 text-crimson animate-pulse" />
-                {/* Orbit path lines */}
-                <div className="absolute inset-0 border border-dashed border-white/10 rounded-full animate-spin [animation-duration:15s]"></div>
+            {/* Dashboard stats bento card block */}
+            <div className="grid grid-cols-2 gap-2.5 my-auto">
+              <div className="p-3 bg-[#FFE5CE] border border-[#FFD2AE] rounded-[1.5rem]">
+                <span className="text-[7px] text-[#7A3C09] font-bold uppercase tracking-wider block">Streaks</span>
+                <span className="text-xl font-bold text-[#7A3C09] font-serif block mt-0.5">04 Days</span>
               </div>
-              <span className="text-[10px] font-geom font-bold tracking-widest text-white uppercase mt-5">Orchestrator Node</span>
-              <span className="text-[8px] font-bold tracking-wider text-crimson uppercase mt-1">Adaptive preparation Active</span>
+              <div className="p-3 bg-[#E2F5D7] border border-[#CDEEB7] rounded-[1.5rem]">
+                <span className="text-[7px] text-[#335A21] font-bold uppercase tracking-wider block">OAs Logged</span>
+                <span className="text-xl font-bold text-[#335A21] font-serif block mt-0.5">06 Active</span>
+              </div>
             </div>
 
-            {/* Bottom mini stats widgets */}
-            <div className="relative z-10 grid grid-cols-2 gap-3 mt-auto pt-4 border-t border-white/5">
-              <div className="p-3 bg-zinc-900/60 border border-white/5 rounded-xl text-center">
-                <span className="text-[8px] text-zinc-550 block uppercase font-bold tracking-wider">Active OAs</span>
-                <span className="text-base font-black text-crimson block mt-1 font-geom">3</span>
-              </div>
-              <div className="p-3 bg-zinc-900/60 border border-white/5 rounded-xl text-center">
-                <span className="text-[8px] text-zinc-550 block uppercase font-bold tracking-wider">Readiness</span>
-                <span className="text-base font-black text-white block mt-1 font-geom">85%</span>
-              </div>
+            {/* Bottom floating button inside mockup */}
+            <div className="bg-cocoa text-cocoa text-[9px] font-bold uppercase tracking-widest p-3 rounded-full text-center shadow-lg shadow-cocoa/10 flex items-center justify-center gap-1.5 mt-auto">
+              <span>Enter Workspace</span>
+              <ArrowRight className="w-3 h-3 text-vermilion" />
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* 3. Features Bento Grid */}
-      <section id="features" className="max-w-7xl mx-auto px-6 py-20 border-t border-white/5">
+      {/* 3. Design Process interactive Section (from images 2 & 3) */}
+      <section id="process" className="max-w-7xl mx-auto px-6 py-24 border-t border-cocoa/10">
+        <div className="max-w-xl mb-16">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-vermilion block mb-2">/ DESIGN PROCESS</span>
+          <h2 className="text-3xl font-serif font-bold text-cocoa">Transforming Chaos into Preparation</h2>
+        </div>
+
+        <div className="flex flex-col lg:flex-row gap-12 items-start">
+          {/* List items */}
+          <div className="flex-1 w-full space-y-4">
+            {steps.map((step, idx) => {
+              const isActive = activeStep === idx;
+              return (
+                <div 
+                  key={step.title}
+                  onMouseEnter={() => setActiveStep(idx)}
+                  className={`p-6 rounded-[2rem] border transition-all duration-300 cursor-pointer flex items-center justify-between ${
+                    isActive 
+                      ? 'bg-white border-cocoa/10 shadow-[0_4px_30px_rgba(46,26,22,0.02)] translate-x-2' 
+                      : 'bg-transparent border-transparent opacity-50 hover:opacity-80'
+                  }`}
+                >
+                  <div className="flex items-center gap-6">
+                    <span className="text-xs font-bold text-vermilion tracking-widest">{step.no}</span>
+                    <div>
+                      <h3 className="text-xl font-serif font-bold text-cocoa">{step.title}</h3>
+                      <p className="text-xs text-cocoa/60 mt-0.5">{step.short}</p>
+                    </div>
+                  </div>
+                  <ChevronRight className={`w-5 h-5 text-vermilion transition-transform duration-300 ${isActive ? 'rotate-90' : ''}`} />
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Details card right */}
+          <div className="flex-1 w-full lg:sticky lg:top-32">
+            <div className="bento-panel-dark p-8 min-h-[300px] flex flex-col justify-between">
+              <div className="space-y-4">
+                <span className="text-[10px] text-vermilion font-bold tracking-widest uppercase">
+                  {steps[activeStep].no} / {steps[activeStep].title}
+                </span>
+                <h3 className="text-2xl font-serif font-bold text-cocoa">
+                  {steps[activeStep].short}
+                </h3>
+                <p className="text-xs text-cocoa/60 leading-relaxed font-semibold uppercase tracking-wider">
+                  The design process maps key candidate workflows:
+                </p>
+              </div>
+
+              <div className="space-y-3.5 mt-8 border-t border-cocoa/10 pt-6">
+                {steps[activeStep].details.map((detail, index) => (
+                  <div key={index} className="flex items-center gap-3 text-cocoa text-xs font-semibold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-vermilion" />
+                    <span>{detail}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Affinity Mapping Grid (Candidate quotes from image 4) */}
+      <section id="quotes" className="bg-[#EFECE6]/50 py-24 border-t border-b border-cocoa/10">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-xl mx-auto mb-16 space-y-3">
+            <span className="text-[9px] text-vermilion font-bold tracking-widest block uppercase">/ CANDIDATE FEEDBACK</span>
+            <h2 className="text-3xl font-serif font-bold text-cocoa">Affinity Mapping & Reviews</h2>
+            <p className="text-xs text-cocoa/60 font-bold uppercase tracking-wider">
+              Feedback from students tracking OAs, assignments, and interviews.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {quotes.map((q, idx) => (
+              <div key={idx} className="bg-white border border-cocoa/5 rounded-[2rem] p-6 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+                <p className="text-xs text-cocoa/75 italic leading-relaxed">
+                  "{q.text}"
+                </p>
+                <div className="flex items-center gap-3 mt-6 border-t border-cocoa/5 pt-4">
+                  <span className="w-8 h-8 rounded-full bg-sand flex items-center justify-center text-sm shadow-sm">{q.avatar}</span>
+                  <div>
+                    <h4 className="text-xs font-bold text-cocoa">{q.author}</h4>
+                    <p className="text-[8px] text-cocoa/40 font-bold uppercase tracking-wider">Student Candidate</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Features Section */}
+      <section id="features" className="max-w-7xl mx-auto px-6 py-24">
         <div className="text-center max-w-xl mx-auto mb-20 space-y-4">
-          <h2 className="text-2xl md:text-3xl font-bold tracking-widest font-geom uppercase">Everything You Need to Land the Role</h2>
-          <p className="text-xs text-zinc-450 font-bold uppercase tracking-wider">
-            PlacePilot brings AI recruiter evaluation, semantic question logs, and layout analytics under one dark cinematic design.
+          <h2 className="text-3xl font-serif font-bold text-cocoa">Everything You Need to Match the Spec</h2>
+          <p className="text-xs text-cocoa/60 font-bold uppercase tracking-wider">
+            We bring evaluations, semantic question banks, and progress analytics under one beautiful workspace.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
           {/* Card 1: AI Mock Interview Studio */}
-          <div className="premium-card p-8 md:col-span-2 flex flex-col justify-between min-h-[300px]">
+          <div className="bento-panel md:col-span-2 flex flex-col justify-between min-h-[300px]">
             <div className="space-y-3">
-              <span className="p-2.5 rounded-xl bg-crimson/10 text-crimson inline-flex mb-2">
+              <span className="p-2.5 rounded-[1.2rem] bg-vermilion/10 text-vermilion inline-flex mb-2">
                 <Brain className="w-5 h-5" />
               </span>
-              <h3 className="font-bold text-sm font-geom tracking-widest uppercase text-white">Adaptive AI Interview Studio</h3>
-              <p className="text-xs text-zinc-400 leading-relaxed font-semibold">
-                Take simulated voice mock interviews based on custom job requirements. The system scores technical depth and communication with active audio waveforms.
+              <h3 className="font-serif font-bold text-xl text-cocoa">Adaptive AI Interview Studio</h3>
+              <p className="text-xs text-cocoa/60 leading-relaxed font-semibold">
+                Engage in simulated voice interview practice custom-scoped to job descriptions. Check technical depth grading and active communication waveforms.
               </p>
             </div>
             
             {/* Audio Waveform Simulator Widget */}
-            <div className="mt-8 bg-zinc-900/60 p-4 border border-white/5 rounded-2xl flex items-end justify-center gap-1.5 h-16">
-              <span className="w-1 bg-crimson rounded-full h-8 waveform-bar"></span>
-              <span className="w-1 bg-crimson rounded-full h-12 waveform-bar"></span>
-              <span className="w-1 bg-crimson rounded-full h-6 waveform-bar"></span>
-              <span className="w-1 bg-crimson rounded-full h-10 waveform-bar"></span>
-              <span className="w-1 bg-crimson rounded-full h-14 waveform-bar"></span>
-              <span className="w-1 bg-crimson rounded-full h-8 waveform-bar"></span>
-              <span className="w-1 bg-crimson rounded-full h-12 waveform-bar"></span>
-              <span className="w-1 bg-crimson rounded-full h-5 waveform-bar"></span>
+            <div className="mt-8 bg-cocoa/5 p-4 border border-cocoa/10 rounded-[1.5rem] flex items-end justify-center gap-1.5 h-16">
+              <span className="w-1 rounded-full h-8 waveform-bar"></span>
+              <span className="w-1 rounded-full h-12 waveform-bar"></span>
+              <span className="w-1 rounded-full h-6 waveform-bar"></span>
+              <span className="w-1 rounded-full h-10 waveform-bar"></span>
+              <span className="w-1 rounded-full h-14 waveform-bar"></span>
+              <span className="w-1 rounded-full h-8 waveform-bar"></span>
+              <span className="w-1 rounded-full h-12 waveform-bar"></span>
+              <span className="w-1 rounded-full h-5 waveform-bar"></span>
             </div>
           </div>
 
           {/* Card 2: Bento Progress Tracking */}
-          <div className="premium-card p-8 flex flex-col justify-between min-h-[300px]">
+          <div className="bento-panel flex flex-col justify-between min-h-[300px]">
             <div className="space-y-3">
-              <span className="p-2.5 rounded-xl bg-crimson/10 text-crimson inline-flex mb-2">
+              <span className="p-2.5 rounded-[1.2rem] bg-vermilion/10 text-vermilion inline-flex mb-2">
                 <Briefcase className="w-5 h-5" />
               </span>
-              <h3 className="font-bold text-sm font-geom tracking-widest uppercase text-white">Bento Progress Dashboard</h3>
-              <p className="text-xs text-zinc-400 leading-relaxed font-semibold">
-                Check active roles, interview schedules, OA assessments, and streaks at a glance.
+              <h3 className="font-serif font-bold text-xl text-cocoa">Bento Progress</h3>
+              <p className="text-xs text-cocoa/60 leading-relaxed font-semibold">
+                Overview active goals, schedules, OA processes, and streak statuses.
               </p>
             </div>
             
             <div className="grid grid-cols-2 gap-3 mt-8">
-              <div className="p-3 bg-zinc-900/60 border border-white/5 rounded-xl text-center">
-                <span className="text-[8px] text-zinc-550 uppercase block font-bold tracking-wider">Offers</span>
-                <span className="text-base font-black text-white block mt-1 font-geom">2</span>
+              <div className="p-3 bg-white border border-cocoa/10 rounded-[1.2rem] text-center">
+                <span className="text-[8px] text-cocoa/40 uppercase block font-bold tracking-wider">Offers</span>
+                <span className="text-base font-bold text-cocoa block mt-1 font-serif">02</span>
               </div>
-              <div className="p-3 bg-zinc-900/60 border border-white/5 rounded-xl text-center">
-                <span className="text-[8px] text-zinc-550 uppercase block font-bold tracking-wider">Active OAs</span>
-                <span className="text-base font-black text-crimson block mt-1 font-geom">3</span>
+              <div className="p-3 bg-white border border-cocoa/10 rounded-[1.2rem] text-center">
+                <span className="text-[8px] text-cocoa/40 uppercase block font-bold tracking-wider">Active OAs</span>
+                <span className="text-base font-bold text-vermilion block mt-1 font-serif">03</span>
               </div>
             </div>
           </div>
 
           {/* Card 3: ATS Resume Matcher */}
-          <div id="matcher" className="premium-card p-8 flex flex-col justify-between min-h-[300px]">
+          <div className="bento-panel flex flex-col justify-between min-h-[300px]">
             <div className="space-y-3">
-              <span className="p-2.5 rounded-xl bg-crimson/10 text-crimson inline-flex mb-2">
+              <span className="p-2.5 rounded-[1.2rem] bg-vermilion/10 text-vermilion inline-flex mb-2">
                 <FileText className="w-5 h-5" />
               </span>
-              <h3 className="font-bold text-sm font-geom tracking-widest uppercase text-white">ATS Match Engine</h3>
-              <p className="text-xs text-zinc-400 leading-relaxed font-semibold">
+              <h3 className="font-serif font-bold text-xl text-cocoa">ATS Match Engine</h3>
+              <p className="text-xs text-cocoa/60 leading-relaxed font-semibold">
                 Upload your resume and parse it against job descriptions instantly to find missing keyword tags.
               </p>
             </div>
             
-            <div className="mt-8 p-4 bg-zinc-900/60 border border-white/5 rounded-xl text-center flex items-center justify-between">
-              <span className="text-[9px] font-bold uppercase tracking-wider text-zinc-400">ATS Score:</span>
-              <span className="text-xs font-black text-crimson font-geom tracking-wider">85% Match</span>
+            <div className="mt-8 p-4 bg-cocoa/5 border border-cocoa/10 rounded-[1.2rem] text-center flex items-center justify-between">
+              <span className="text-[9px] font-bold uppercase tracking-wider text-cocoa/60">ATS Match score:</span>
+              <span className="text-xs font-bold text-vermilion font-serif tracking-wider">85% score</span>
             </div>
           </div>
 
-          {/* Card 4: Recruiter Narratives */}
-          <div id="copilot" className="premium-card p-8 md:col-span-2 flex flex-col justify-between min-h-[300px]">
+          {/* Card 4: Recruiter Reports */}
+          <div className="bento-panel md:col-span-2 flex flex-col justify-between min-h-[300px]">
             <div className="space-y-3">
-              <span className="p-2.5 rounded-xl bg-crimson/10 text-crimson inline-flex mb-2">
+              <span className="p-2.5 rounded-[1.2rem] bg-vermilion/10 text-vermilion inline-flex mb-2">
                 <GraduationCap className="w-5 h-5" />
               </span>
-              <h3 className="font-bold text-sm font-geom tracking-widest uppercase text-white">AI Recruiter Weekly Reports</h3>
-              <p className="text-xs text-zinc-400 leading-relaxed font-semibold">
-                Get an automated, compiled weekly checklist and text critique from our AI Recruiter summarizing gap areas and study task priority targets.
+              <h3 className="font-serif font-bold text-xl text-cocoa">Weekly Evaluation Reports</h3>
+              <p className="text-xs text-cocoa/60 leading-relaxed font-semibold">
+                Receive compiled checklists and textual critique summaries from our AI recruiter to target gap topics.
               </p>
             </div>
 
-            <div className="mt-8 space-y-2">
-              <div className="flex items-center gap-2.5 text-xs text-zinc-300 font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-crimson" />
+            <div className="mt-8 space-y-2 border-t border-cocoa/5 pt-6">
+              <div className="flex items-center gap-2.5 text-xs text-cocoa/80 font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-vermilion" />
                 <span>Fix graph cycles (DFS Cycle Detection) gap</span>
               </div>
-              <div className="flex items-center gap-2.5 text-xs text-zinc-300 font-semibold">
-                <span className="w-1.5 h-1.5 rounded-full bg-crimson" />
-                <span>Prep 2 mock rounds for Meta technicals</span>
+              <div className="flex items-center gap-2.5 text-xs text-cocoa/80 font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-vermilion" />
+                <span>Prepare 2 mock rounds for Meta systems depth</span>
               </div>
             </div>
           </div>
@@ -260,17 +402,20 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. Secondary CTA Callout */}
-      <section id="streak" className="max-w-7xl mx-auto px-6 py-20 text-center relative z-10">
-        <div className="bg-crimson/5 border border-white/5 rounded-3xl p-12 space-y-6 max-w-3xl mx-auto">
-          <Flame className="w-8 h-8 text-crimson fill-crimson/10 mx-auto animate-bounce" />
-          <h2 className="text-2xl md:text-3xl font-bold font-geom tracking-widest uppercase">Ready to Take Control?</h2>
-          <p className="text-xs text-zinc-450 max-w-md mx-auto font-bold uppercase tracking-wider leading-relaxed">
-            Begin logging your interviews, solving DSA gap topics, and matching your resume vectors with PlacePilot today.
+      {/* 6. Secondary CTA Callout */}
+      <section className="max-w-7xl mx-auto px-6 py-20 text-center relative z-10">
+        <div className="bg-cocoa border border-cocoa/10 rounded-[2.5rem] p-12 space-y-6 max-w-3xl mx-auto shadow-2xl relative overflow-hidden">
+          {/* Flame element inside */}
+          <div className="absolute top-[-30%] right-[-10%] w-[300px] h-[300px] bg-vermilion/10 rounded-full blur-[80px]" />
+          
+          <Flame className="w-8 h-8 text-vermilion fill-vermilion/10 mx-auto animate-bounce relative z-10" />
+          <h2 className="text-3xl font-serif font-bold text-cocoa relative z-10">Ready to take control?</h2>
+          <p className="text-xs text-cocoa/60 max-w-md mx-auto font-bold uppercase tracking-wider leading-relaxed relative z-10">
+            Log your interviews, solve DSA gap topics, and matching your resume vectors with PlacePilot today.
           </p>
           <button 
             onClick={() => triggerAuth(true)}
-            className="bg-white hover:bg-white/90 text-obsidian font-bold text-[10px] px-8 py-4 rounded-full shadow-lg transition-all active:scale-95 uppercase tracking-widest"
+            className="bg-white hover:bg-white/90 text-cocoa font-bold text-[10px] px-8 py-4 rounded-full shadow-lg transition-all active:scale-95 uppercase tracking-widest relative z-10"
           >
             <span>Create Free Account</span>
           </button>
@@ -278,15 +423,15 @@ export const LandingPage: React.FC = () => {
       </section>
 
       {/* Footer */}
-      <footer className="max-w-7xl mx-auto px-6 py-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 text-[9px] text-zinc-500 uppercase font-bold tracking-widest">
+      <footer className="max-w-7xl mx-auto px-6 py-12 border-t border-cocoa/10 flex flex-col md:flex-row items-center justify-between gap-6 text-[9px] text-cocoa/40 uppercase font-bold tracking-widest">
         <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-crimson" />
+          <span className="w-1.5 h-1.5 rounded-full bg-vermilion" />
           <span>PlacePilot AI Copilot © {new Date().getFullYear()}</span>
         </div>
         <div className="flex items-center gap-6">
-          <a href="#" className="hover:text-crimson">Privacy</a>
-          <a href="#" className="hover:text-crimson">Terms</a>
-          <a href="#" className="hover:text-crimson">API Console</a>
+          <a href="#" className="hover:text-vermilion">Privacy</a>
+          <a href="#" className="hover:text-vermilion">Terms</a>
+          <a href="#" className="hover:text-vermilion">API Console</a>
         </div>
       </footer>
 
@@ -297,7 +442,7 @@ export const LandingPage: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-cocoa/80 backdrop-blur-md z-50 flex items-center justify-center p-4"
           >
             <motion.div
               initial={{ scale: 0.95, y: 15 }}
