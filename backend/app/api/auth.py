@@ -190,6 +190,12 @@ def clear_db(db: Session = Depends(get_db)):
     
     return {"message": "Database wiped successfully. You can now register a fresh account or log in with the default test user."}
 
+@router.get("/list-users-prod")
+def list_users_prod(db: Session = Depends(get_db)):
+    from app.models.user import User
+    users = db.query(User).all()
+    return [{"email": u.email, "full_name": u.full_name, "is_verified": u.is_verified, "id": str(u.id)} for u in users]
+
 @router.get("/debug-db")
 def debug_db(db: Session = Depends(get_db)):
     from sqlalchemy import inspect, text
