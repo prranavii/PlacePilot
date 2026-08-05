@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply bg-sand text-cocoa font-sans antialiased selection:bg-vermilion selection:text-white transition-colors duration-200;
+    @apply bg-sand dark:bg-[#18110F] text-cocoa dark:text-[#FAF6F0] font-sans antialiased selection:bg-vermilion selection:text-white transition-colors duration-200;
   }
 }
 

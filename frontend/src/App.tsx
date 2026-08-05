@@ -16,7 +16,8 @@ const MainLayout: React.FC = () => {
   const { user, loading } = useAuth();
   const [currentTab, setCurrentTab] = useState('dashboard');
   const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem('theme') === 'dark';
+    const saved = localStorage.getItem('theme');
+    return saved === null ? true : saved === 'dark';
   });
 
   // Verification states
@@ -301,7 +302,7 @@ const MainLayout: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-sand bg-dot-grid-dark flex flex-col text-cocoa transition-colors duration-200 relative overflow-hidden font-sans">
+    <div className="min-h-screen bg-sand dark:bg-[#18110F] bg-dot-grid-dark flex flex-col text-cocoa dark:text-[#FAF6F0] transition-colors duration-200 relative overflow-hidden font-sans">
       {/* 3D Dissolving Ambient Blobs Background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         {/* Blob 1: Crimson Accent */}

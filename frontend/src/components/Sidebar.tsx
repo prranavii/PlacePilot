@@ -44,7 +44,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   return (
     <>
       {/* Premium Top Sticky Header */}
-      <header className="sticky top-0 w-full z-45 bg-sand/80 backdrop-blur-md border-b border-cocoa/10 px-8 py-4 flex items-center justify-between transition-colors">
+      <header className="sticky top-0 w-full z-45 bg-sand/80 dark:bg-[#18110F]/80 backdrop-blur-md border-b border-cocoa/10 dark:border-white/5 px-8 py-4 flex items-center justify-between transition-colors">
         {/* Brand Logo */}
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-lg bg-cocoa flex items-center justify-center text-white shadow-md shadow-vermilion/15 border border-white/5">
@@ -61,7 +61,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </svg>
           </div>
           <div>
-            <h1 className="font-bold text-cocoa tracking-widest text-sm font-serif uppercase">
+            <h1 className="font-bold text-cocoa dark:text-white tracking-widest text-sm font-serif uppercase">
               PLACEPILOT
             </h1>
             <span className="text-[8px] text-vermilion font-bold tracking-widest uppercase block mt-0.5">
@@ -75,26 +75,26 @@ export const Sidebar: React.FC<SidebarProps> = ({
           {/* Theme Toggle */}
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className="p-2 rounded-[1.2rem] border border-cocoa/10 text-cocoa/60 hover:bg-cocoa/5 hover:text-cocoa transition-all"
+            className="p-2 rounded-[1.2rem] border border-cocoa/10 dark:border-white/10 text-cocoa/60 dark:text-white/60 hover:bg-cocoa/5 dark:hover:bg-white/5 hover:text-cocoa dark:hover:text-white transition-all"
             title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
           >
             {darkMode ? <Sun className="w-4 h-4 text-amber-500" /> : <Moon className="w-4 h-4" />}
           </button>
 
           {/* Profile Card & Logout */}
-          <div className="flex items-center gap-3 bg-white border border-cocoa/10 rounded-[1.5rem] px-4 py-1.5 shadow-sm backdrop-blur-md">
+          <div className="flex items-center gap-3 bg-white dark:bg-cocoa/40 border border-cocoa/10 dark:border-white/5 rounded-[1.5rem] px-4 py-1.5 shadow-sm backdrop-blur-md">
             <div className="text-right">
-              <h4 className="text-xs font-bold text-cocoa truncate max-w-[120px]">
+              <h4 className="text-xs font-bold text-cocoa dark:text-white truncate max-w-[120px]">
                 {user?.full_name || 'Student'}
               </h4>
-              <p className="text-[9px] text-cocoa/60 truncate max-w-[120px]">
+              <p className="text-[9px] text-cocoa/60 dark:text-white/40 truncate max-w-[120px]">
                 {user?.email}
               </p>
             </div>
-            <div className="h-6 w-[1px] bg-cocoa/10" />
+            <div className="h-6 w-[1px] bg-cocoa/10 dark:bg-white/10" />
             <button
               onClick={logout}
-              className="p-1.5 rounded-lg text-cocoa/50 hover:text-rose-500 transition-colors"
+              className="p-1.5 rounded-lg text-cocoa/50 dark:text-white/50 hover:text-rose-500 transition-colors"
               title="Log Out"
             >
               <LogOut className="w-4 h-4" />
