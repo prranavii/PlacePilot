@@ -36,10 +36,10 @@ export default {
         crimson: '#FF1E27',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        serif: ['Plus Jakarta Sans', 'sans-serif'],
-        geom: ['Inter', 'sans-serif'],
-        wide: ['Plus Jakarta Sans', 'sans-serif'],
+        sans: ['Outfit', 'system-ui', 'sans-serif'],
+        serif: ['Playfair Display', 'Georgia', 'serif'],
+        geom: ['Space Grotesk', 'sans-serif'],
+        wide: ['Outfit', 'sans-serif'],
       }
     },
   },
