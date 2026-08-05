@@ -32,6 +32,7 @@ interface DashboardProps {
 }
 
 export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
+  const isDark = document.documentElement.classList.contains('dark');
   const [applications, setApplications] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [recentEvents, setRecentEvents] = useState<any[]>([]);
@@ -180,14 +181,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
         
         {/* Quick prepare shortcut banner */}
         {nextInterview && (
-          <div className="w-full lg:w-auto bg-white border border-[#FFD2AE] rounded-[1.5rem] px-6 py-4 flex items-center justify-between lg:justify-start gap-4 shadow-sm">
+          <div className="w-full lg:w-auto bg-white dark:bg-cocoa/30 border border-[#FFD2AE] dark:border-white/5 rounded-[1.5rem] px-6 py-4 flex items-center justify-between lg:justify-start gap-4 shadow-sm">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-[1.2rem] bg-vermilion/10 flex items-center justify-center text-vermilion">
                 <Sparkles className="w-5 h-5 fill-vermilion/20 animate-pulse" />
               </div>
               <div>
-                <span className="font-bold text-xs text-cocoa block uppercase tracking-wide">Upcoming {nextInterviewCompany} Interview</span>
-                <span className="text-[10px] text-cocoa/50 font-medium">
+                <span className="font-bold text-xs text-cocoa dark:text-white block uppercase tracking-wide">Upcoming {nextInterviewCompany} Interview</span>
+                <span className="text-[10px] text-cocoa/50 dark:text-white/40 font-medium">
                   {nextInterview.event_date ? getDaysRemainingText(nextInterview.event_date) : 'Scheduled'}
                 </span>
               </div>
@@ -314,18 +315,18 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
                       <stop offset="95%" stopColor="#FF5B37" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(46,26,22,0.06)" />
-                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#2E1A16', opacity: 0.6 }} stroke="rgba(46,26,22,0.06)" />
-                  <YAxis tick={{ fontSize: 10, fill: '#2E1A16', opacity: 0.6 }} stroke="rgba(46,26,22,0.06)" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={isDark ? "rgba(250,246,240,0.06)" : "rgba(46,26,22,0.06)"} />
+                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: isDark ? '#FAF6F0' : '#2E1A16', opacity: 0.6 }} stroke={isDark ? "rgba(250,246,240,0.06)" : "rgba(46,26,22,0.06)"} />
+                  <YAxis tick={{ fontSize: 10, fill: isDark ? '#FAF6F0' : '#2E1A16', opacity: 0.6 }} stroke={isDark ? "rgba(250,246,240,0.06)" : "rgba(46,26,22,0.06)"} />
                   <Tooltip 
                     contentStyle={{ 
-                      backgroundColor: '#ffffff', 
+                      backgroundColor: isDark ? '#2E1A16' : '#ffffff', 
                       borderColor: '#FF5B37', 
-                      color: '#2E1A16',
+                      color: isDark ? '#FAF6F0' : '#2E1A16',
                       borderRadius: '16px',
                       fontSize: '11px',
                       fontFamily: 'sans-serif',
-                      boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
+                      boxShadow: isDark ? '0 4px 20px rgba(0,0,0,0.4)' : '0 4px 20px rgba(0,0,0,0.05)'
                     }} 
                   />
                   <Area type="monotone" dataKey="prepMinutes" name="Revision (Mins)" stroke="#FF5B37" strokeWidth={2.5} fillOpacity={1} fill="url(#colorPrep)" />
@@ -343,17 +344,17 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
             <div className="h-56">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={stageStats} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(46,26,22,0.06)" />
-                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#2E1A16', opacity: 0.6 }} stroke="rgba(46,26,22,0.06)" />
-                  <YAxis allowDecimals={false} tick={{ fontSize: 10, fill: '#2E1A16', opacity: 0.6 }} stroke="rgba(46,26,22,0.06)" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={isDark ? "rgba(250,246,240,0.06)" : "rgba(46,26,22,0.06)"} />
+                  <XAxis dataKey="name" tick={{ fontSize: 10, fill: isDark ? '#FAF6F0' : '#2E1A16', opacity: 0.6 }} stroke={isDark ? "rgba(250,246,240,0.06)" : "rgba(46,26,22,0.06)"} />
+                  <YAxis allowDecimals={false} tick={{ fontSize: 10, fill: isDark ? '#FAF6F0' : '#2E1A16', opacity: 0.6 }} stroke={isDark ? "rgba(250,246,240,0.06)" : "rgba(46,26,22,0.06)"} />
                   <Tooltip 
                     contentStyle={{ 
-                      backgroundColor: '#ffffff', 
+                      backgroundColor: isDark ? '#2E1A16' : '#ffffff', 
                       borderColor: '#FF5B37', 
-                      color: '#2E1A16',
+                      color: isDark ? '#FAF6F0' : '#2E1A16',
                       borderRadius: '16px',
                       fontSize: '11px',
-                      boxShadow: '0 4px 20px rgba(0,0,0,0.05)'
+                      boxShadow: isDark ? '0 4px 20px rgba(0,0,0,0.4)' : '0 4px 20px rgba(0,0,0,0.05)'
                     }} 
                   />
                   <Bar dataKey="value" name="Applications" fill="#FF5B37" radius={[6, 6, 0, 0]} />
@@ -368,7 +369,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
         <div className="space-y-6">
           
           {/* AI Career Coach Quote Card (mimicking quote panel from image 4) */}
-          <div className="bento-panel p-6 flex flex-col justify-between border-l-4 border-l-vermilion bg-white">
+          <div className="bento-panel p-6 flex flex-col justify-between border-l-4 border-l-vermilion bg-white dark:bg-cocoa/30">
             <h3 className="text-[10px] font-bold text-cocoa uppercase tracking-widest mb-4 flex items-center gap-2">
               <MessageSquare className="w-4 h-4 text-vermilion" />
               AI Recruiter Narrative

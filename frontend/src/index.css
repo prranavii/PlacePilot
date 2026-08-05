@@ -88,3 +88,88 @@
 .sticky-note-green {
   @apply bg-[#E2F5D7] border border-[#CDEEB7] text-[#335A21] rounded-[1.5rem] p-5 shadow-[0_4px_15px_rgba(226,245,215,0.15)] transition-all duration-300;
 }
+
+/* Dot Grid Backgrounds */
+.bg-dot-grid-dark {
+  background-image: radial-gradient(rgba(46, 26, 22, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.dark .bg-dot-grid-dark {
+  background-image: radial-gradient(rgba(250, 246, 240, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* --- Global Dark Mode Color Mapping Overrides --- */
+.dark .bento-panel {
+  @apply bg-cocoa/30 border-white/5 shadow-2xl;
+}
+
+.dark .bg-white {
+  background-color: rgba(46, 26, 22, 0.35) !important;
+}
+
+.dark .bg-sand {
+  background-color: #201412 !important;
+}
+
+/* Remap cocoa text colors to sand text in dark mode */
+.dark .text-cocoa {
+  color: #FAF6F0 !important;
+}
+.dark .text-cocoa\/90 {
+  color: rgba(250, 246, 240, 0.9) !important;
+}
+.dark .text-cocoa\/85 {
+  color: rgba(250, 246, 240, 0.85) !important;
+}
+.dark .text-cocoa\/80 {
+  color: rgba(250, 246, 240, 0.8) !important;
+}
+.dark .text-cocoa\/75 {
+  color: rgba(250, 246, 240, 0.75) !important;
+}
+.dark .text-cocoa\/70 {
+  color: rgba(250, 246, 240, 0.7) !important;
+}
+.dark .text-cocoa\/60 {
+  color: rgba(250, 246, 240, 0.6) !important;
+}
+.dark .text-cocoa\/50 {
+  color: rgba(250, 246, 240, 0.5) !important;
+}
+.dark .text-cocoa\/40 {
+  color: rgba(250, 246, 240, 0.4) !important;
+}
+.dark .text-cocoa\/30 {
+  color: rgba(250, 246, 240, 0.3) !important;
+}
+.dark .text-cocoa\/20 {
+  color: rgba(250, 246, 240, 0.2) !important;
+}
+.dark .text-cocoa\/10 {
+  color: rgba(250, 246, 240, 0.1) !important;
+}
+
+/* Remap borders */
+.dark .border-cocoa\/10 {
+  border-color: rgba(250, 246, 240, 0.1) !important;
+}
+.dark .border-cocoa\/5 {
+  border-color: rgba(250, 246, 240, 0.05) !important;
+}
+
+/* Remap background grids/dividers */
+.dark .bg-cocoa\/10 {
+  background-color: rgba(250, 246, 240, 0.1) !important;
+}
+.dark .bg-cocoa\/5 {
+  background-color: rgba(250, 246, 240, 0.05) !important;
+}
+
+/* Remap hovers */
+.dark .hover\:bg-cocoa\/5:hover {
+  background-color: rgba(250, 246, 240, 0.05) !important;
+}
+.dark .hover\:bg-cocoa\/10:hover {
+  background-color: rgba(250, 246, 240, 0.1) !important;
+}
