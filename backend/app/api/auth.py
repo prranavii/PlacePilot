@@ -20,8 +20,11 @@ def register(
     background_tasks: BackgroundTasks,
     db: Session = Depends(get_db)
 ):
+    # Normalize email input to lowercase and strip whitespace
+    email_normalized = user_in.email.strip().lower()
+    
     # Check if user already exists
-    existing_user = db.query(User).filter(User.email == user_in.email).first()
+    existing_user = db.query(User).filter(User.email == email_normalized).first()
     if existing_user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -35,15 +38,23 @@ def register(
     # If SMTP is not configured, we auto-verify for developer testing convenience
     smtp_enabled = bool(settings.SMTP_PASSWORD)
     db_user = User(
-        email=user_in.email,
+        email=email_normalized,
         hashed_password=security.get_password_hash(user_in.password),
         full_name=user_in.full_name,
         is_verified=not smtp_enabled,
         verification_token=verification_token if smtp_enabled else None
     )
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
+    
+    try:
+        db.add(db_user)
+        db.commit()
+        db.refresh(db_user)
+    except Exception:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="A user with this email address already exists."
+        )
     
     # Send verification email asynchronously if SMTP is enabled
     if smtp_enabled:
@@ -61,7 +72,8 @@ def login_for_access_token(
     form_data: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db)
 ):
-    user = db.query(User).filter(User.email == form_data.username).first()
+    email_normalized = form_data.username.strip().lower()
+    user = db.query(User).filter(User.email == email_normalized).first()
     if not user or not security.verify_password(form_data.password, user.hashed_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -86,7 +98,8 @@ def login_json(
     credentials: UserLogin,
     db: Session = Depends(get_db)
 ):
-    user = db.query(User).filter(User.email == credentials.email).first()
+    email_normalized = credentials.email.strip().lower()
+    user = db.query(User).filter(User.email == email_normalized).first()
     if not user or not security.verify_password(credentials.password, user.hashed_password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -124,7 +137,8 @@ def forgot_password(
     background_tasks: BackgroundTasks,
     db: Session = Depends(get_db)
 ):
-    user = db.query(User).filter(User.email == payload.email).first()
+    email_normalized = payload.email.strip().lower()
+    user = db.query(User).filter(User.email == email_normalized).first()
     if user:
         reset_token = secrets.token_urlsafe(32)
         reset_expires = (datetime.now(timezone.utc) + timedelta(minutes=30)).replace(tzinfo=None)
