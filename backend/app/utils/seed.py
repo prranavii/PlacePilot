@@ -40,9 +40,11 @@ def seed_db():
 
         # 1. Create Student User
         student = User(
+            id=uuid.UUID("8bae3410-0000-0000-0000-000000000000"),
             email="student@placepilot.ai",
             hashed_password=get_password_hash("password123"),
-            full_name="Pranav Kumar"
+            full_name="Pranav Kumar",
+            is_verified=True
         )
         db.add(student)
         db.commit()

@@ -64,26 +64,13 @@ def init_db():
             except Exception as e:
                 logger.error(f"Failed to add reset_expires: {e}")
 
-        # Seed default student user if database is empty
-        from app.models.user import User
-        from app.core import security
-        from sqlalchemy.orm import Session
-        
+        # Seed default student user and all mock placement metrics if database is empty
         try:
-            with Session(engine) as session:
-                student_exists = session.query(User).filter(User.email == "student@placepilot.ai").first()
-                if not student_exists:
-                    default_student = User(
-                        email="student@placepilot.ai",
-                        hashed_password=security.get_password_hash("password123"),
-                        full_name="Student Pilot",
-                        is_verified=True
-                    )
-                    session.add(default_student)
-                    session.commit()
-                    logger.info("Seeded default student user: student@placepilot.ai")
+            from app.utils.seed import seed_db
+            seed_db()
+            logger.info("Database seeded successfully with default student data.")
         except Exception as seed_err:
-            logger.error(f"Could not auto-seed default user: {seed_err}")
+            logger.error(f"Could not auto-seed database: {seed_err}")
 
         # Ensure study_plan column exists in SQLite database
         if settings.DATABASE_URL.startswith("sqlite"):
