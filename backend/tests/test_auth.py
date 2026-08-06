@@ -112,3 +112,40 @@ def test_user_password_is_bcrypt_hashed(client, db):
     assert user is not None
     assert user.hashed_password != password
     assert user.hashed_password.startswith("$2b$")
+
+def test_email_case_insensitivity_and_duplicates(client):
+    # Register with mixed-case email
+    reg_response = client.post(
+        "/api/v1/auth/register",
+        json={
+            "email": "TestCase@PlacePilot.ai",
+            "password": "securepassword123",
+            "full_name": "Mixed Case Student"
+        }
+    )
+    assert reg_response.status_code == status.HTTP_201_CREATED
+    data = reg_response.json()
+    assert data["email"] == "testcase@placepilot.ai"  # Should be stored lowercase
+
+    # Attempt to register again with lowercase email
+    dup_response = client.post(
+        "/api/v1/auth/register",
+        json={
+            "email": "testcase@placepilot.ai",
+            "password": "anotherpassword123",
+            "full_name": "Duplicate Student"
+        }
+    )
+    assert dup_response.status_code == status.HTTP_400_BAD_REQUEST
+    assert dup_response.json()["detail"] == "A user with this email address already exists."
+
+    # Login with uppercase email should work
+    login_response = client.post(
+        "/api/v1/auth/login",
+        json={
+            "email": "TESTCASE@PLACEPILOT.AI",
+            "password": "securepassword123"
+        }
+    )
+    assert login_response.status_code == status.HTTP_200_OK
+    assert "access_token" in login_response.json()
