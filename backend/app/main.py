@@ -57,6 +57,6 @@ app.include_router(analytics.router, prefix="/api/v1")
 app.include_router(questions.router, prefix="/api/v1")
 
 
-@app.get("/health")
+@app.api_route("/health", methods=["GET", "HEAD"])
 def health_check():
     return {"status": "healthy", "service": "PlacePilot AI API"}
