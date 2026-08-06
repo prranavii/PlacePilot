@@ -10,7 +10,7 @@ PlacePilot was built to bring all of these moving parts into one clean, warm-bei
 
 ## 🤖 How the AI Features Work
 
-Instead of just tracking dates, PlacePilot acts as an active preparation partner using practical AI features:
+Instead of just tracking dates, PlacePilot acts as an active preparation partner using practical AI features: 
 
 * 🎙️ **Mock Interview Studio:** Practice live behavioral or technical loops tailored to specific companies. The AI generates relevant questions, simulates a voice round, and scores your answers on technical depth and communication style.
 * 📄 **ATS Resume Matcher:** Upload your resume (PDF/Word) and paste any job description. The parser identifies missing keyword tags and skill gaps, giving you a match score before you submit.
