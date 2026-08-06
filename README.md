@@ -9,7 +9,7 @@ PlacePilot was built to bring all of these moving parts into one clean, warm-bei
 ---
 
 ## 🤖 How the AI Features Work
-
+ 
 Instead of just tracking dates, PlacePilot acts as an active preparation partner using practical AI features: 
 
 * 🎙️ **Mock Interview Studio:** Practice live behavioral or technical loops tailored to specific companies. The AI generates relevant questions, simulates a voice round, and scores your answers on technical depth and communication style.
