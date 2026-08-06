@@ -13,6 +13,7 @@ class ApplicationEvent(Base):
     event_type: Mapped[str] = mapped_column(String(100), nullable=False) # e.g. "OA Scheduled", "Interview Scheduled", "Offer Received"
     event_date: Mapped[datetime] = mapped_column(DateTime, nullable=False)
     status: Mapped[str] = mapped_column(String(50), default="Scheduled") # Scheduled, Completed, Cancelled
+    reminder_sent: Mapped[bool] = mapped_column(default=False)
     details: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc))
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))

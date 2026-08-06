@@ -64,6 +64,16 @@ def init_db():
             except Exception as e:
                 logger.error(f"Failed to add reset_expires: {e}")
 
+        # 5. reminder_sent in application_events
+        try:
+            event_columns = [col["name"] for col in inspector.get_columns("application_events")]
+            if "reminder_sent" not in event_columns:
+                with engine.begin() as conn:
+                    conn.execute(text("ALTER TABLE application_events ADD COLUMN reminder_sent BOOLEAN DEFAULT FALSE;"))
+                logger.info("Migrated: Added reminder_sent column to application_events table.")
+        except Exception as e:
+            logger.error(f"Failed to migrate reminder_sent in application_events: {e}")
+
         # Seed default student user and all mock placement metrics if database is empty
         try:
             from app.utils.seed import seed_db

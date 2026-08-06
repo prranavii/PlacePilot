@@ -24,6 +24,13 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.error(f"Failed to pre-initialize embedding model on startup: {e}")
         
+    # Start the email reminder background thread scheduler
+    try:
+        from app.services.email import start_reminder_scheduler
+        start_reminder_scheduler()
+    except Exception as e:
+        logger.error(f"Failed to start email reminder background thread scheduler: {e}")
+
     yield
     logger.info("Shutting down application...")
 

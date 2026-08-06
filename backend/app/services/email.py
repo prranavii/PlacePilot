@@ -126,4 +126,104 @@ class EmailService:
         """
         self._send_email(email, subject, html)
 
+    def send_event_reminder_email(self, email: str, name: str, company: str, role: str, event_type: str, date_str: str, details: str):
+        subject = f"Reminder: Upcoming {event_type} with {company}!"
+        html = f"""
+        <html>
+          <body style="font-family: Arial, sans-serif; background-color: #0c0a09; color: #f4f4f5; padding: 24px; margin: 0;">
+            <div style="max-width: 500px; margin: 40px auto; background-color: #1c1917; border: 1px solid #2e2a24; border-radius: 16px; padding: 32px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);">
+              <span style="font-size: 10px; font-weight: bold; color: #ef4444; background-color: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); padding: 4px 10px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 1px;">Upcoming Event Reminder</span>
+              <h2 style="color: #ffffff; font-size: 18px; letter-spacing: 1px; text-transform: uppercase; margin-top: 16px; margin-bottom: 8px;">{event_type}</h2>
+              <p style="color: #a1a1aa; font-size: 14px; margin-top: 16px; line-height: 1.6;">
+                Hello {name or 'Pilot'},<br/><br/>
+                This is a quick reminder that you have an upcoming <strong>{event_type}</strong> for the <strong>{role}</strong> role at <strong>{company}</strong>.
+              </p>
+              
+              <div style="background-color: #0c0a09; border: 1px solid #2e2a24; padding: 16px; border-radius: 12px; margin-top: 20px; margin-bottom: 20px;">
+                <span style="font-size: 9px; color: #71717a; text-transform: uppercase; font-weight: bold; display: block;">Scheduled Time</span>
+                <span style="font-size: 14px; color: #ffffff; font-weight: bold; display: block; margin-top: 4px;">{date_str}</span>
+                {f'<span style="font-size: 9px; color: #71717a; text-transform: uppercase; font-weight: bold; display: block; margin-top: 12px;">Details</span><span style="font-size: 12px; color: #a1a1aa; display: block; margin-top: 4px;">{details}</span>' if details else ''}
+              </div>
+
+              <div style="text-align: center; margin-top: 24px;">
+                <a href="{settings.FRONTEND_URL}" style="display: inline-block; background-color: #ef4444; color: #ffffff; font-weight: bold; text-decoration: none; padding: 12px 24px; border-radius: 12px; font-size: 13px; text-transform: uppercase; letter-spacing: 1px;">Go to Dashboard</a>
+              </div>
+            </div>
+          </body>
+        </html>
+        """
+        self._send_email(email, subject, html)
+
 email_service = EmailService()
+
+
+def check_and_send_reminders():
+    from app.database.session import SessionLocal
+    from app.models.application_event import ApplicationEvent
+    from app.models.application import Application
+    from app.models.user import User
+    from datetime import datetime, timezone, timedelta
+    
+    db = SessionLocal()
+    try:
+        now = datetime.now(timezone.utc).replace(tzinfo=None)
+        limit = now + timedelta(hours=24)
+        
+        # Query scheduled events within the next 24 hours that haven't sent a reminder
+        upcoming_events = (
+            db.query(ApplicationEvent)
+            .join(Application)
+            .join(User)
+            .filter(ApplicationEvent.status == "Scheduled")
+            .filter(ApplicationEvent.reminder_sent == False)
+            .filter(ApplicationEvent.event_date >= now)
+            .filter(ApplicationEvent.event_date <= limit)
+            .all()
+        )
+        
+        for event in upcoming_events:
+            app = event.application
+            user = app.user
+            
+            # Format event date
+            date_str = event.event_date.strftime("%A, %b %d at %I:%M %p")
+            
+            # Send email
+            email_service.send_event_reminder_email(
+                email=user.email,
+                name=user.full_name,
+                company=app.company_name,
+                role=app.role,
+                event_type=event.event_type,
+                date_str=date_str,
+                details=event.details
+            )
+            
+            # Mark reminder as sent
+            event.reminder_sent = True
+            db.commit()
+            
+    except Exception as e:
+        logger.error(f"Error checking background reminders: {e}")
+    finally:
+        db.close()
+
+
+def start_reminder_scheduler():
+    import threading
+    import time
+    
+    def run_scheduler():
+        logger.info("Starting email reminder background scheduler loop...")
+        # Give the server a few seconds to boot up completely
+        time.sleep(10)
+        while True:
+            try:
+                check_and_send_reminders()
+            except Exception as e:
+                logger.error(f"Error in reminder scheduler thread: {e}")
+            # Sleep for 1 hour
+            time.sleep(3600)
+            
+    thread = threading.Thread(target=run_scheduler, daemon=True)
+    thread.start()
