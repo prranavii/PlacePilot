@@ -381,11 +381,11 @@ export const Applications: React.FC = () => {
               key={app.id}
               variants={itemVariants}
               onClick={() => handleSelectApp(app)}
-              whileHover={{ y: -4, scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
-              className={`bento-panel cursor-pointer flex flex-col justify-between ${
+              whileHover={{ y: -6, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className={`bento-panel cursor-pointer flex flex-col justify-between hover:shadow-xl hover:shadow-vermilion/5 transition-all duration-300 ${
                 selectedApp?.id === app.id 
-                  ? 'border-vermilion/50 ring-1 ring-vermilion/25' 
+                  ? 'border-vermilion/50 ring-2 ring-vermilion/10 shadow-lg shadow-vermilion/5' 
                   : ''
               }`}
             >
@@ -678,7 +678,7 @@ export const Applications: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-[#18110F]/40 dark:bg-[#18110F]/70 backdrop-blur-md z-50 flex items-center justify-center p-4"
           >
             {/* Modal Container */}
             <motion.div
@@ -876,7 +876,7 @@ export const Applications: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-[#18110F]/40 dark:bg-[#18110F]/70 backdrop-blur-md z-50 flex items-center justify-center p-4"
           >
             <motion.div
               initial={{ scale: 0.95, y: 15 }}

@@ -109,7 +109,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           initial={{ y: 80, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 260, damping: 20 }}
-          className="bg-cocoa/90 backdrop-blur-xl border border-cocoa/10 px-3 py-2 rounded-full shadow-2xl flex items-center gap-2 hover:shadow-vermilion/5 transition-shadow duration-300"
+          className="bg-[#2E1A16]/85 backdrop-blur-xl border border-white/10 dark:border-white/5 px-3.5 py-2.5 rounded-full shadow-2xl flex items-center gap-2.5 hover:shadow-vermilion/10 transition-shadow duration-300"
         >
           {navItems.map((item) => {
             const Icon = item.icon;
@@ -118,19 +118,26 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <motion.button
                 key={item.id}
                 onClick={() => setCurrentTab(item.id)}
-                whileHover={{ scale: 1.15, y: -4 }}
+                whileHover={{ scale: 1.15, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className={`relative p-3 rounded-full transition-all duration-155 group ${
-                  isActive 
-                    ? 'bg-vermilion text-white shadow-lg shadow-vermilion/25' 
-                    : 'text-white/60 hover:bg-white/10 hover:text-white'
+                className={`relative p-3 rounded-full transition-colors duration-250 group ${
+                  isActive ? 'text-white' : 'text-white/60 hover:text-white'
                 }`}
                 title={item.label}
               >
-                <Icon className="w-4 h-4" />
+                {isActive && (
+                  <motion.div
+                    layoutId="activeTabPill"
+                    className="absolute inset-0 bg-vermilion rounded-full shadow-lg shadow-vermilion/30 z-0"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10 block">
+                  <Icon className="w-4 h-4" />
+                </span>
                 
                 {/* Custom Tooltip */}
-                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 bg-cocoa text-white text-[9px] font-bold px-2.5 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl">
+                <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 bg-cocoa dark:bg-[#201412] text-white text-[9px] font-bold px-2.5 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl z-20 border border-white/5">
                   {item.label}
                 </span>
               </motion.button>

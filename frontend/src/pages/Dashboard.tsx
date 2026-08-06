@@ -161,20 +161,20 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
       className="space-y-8 pb-12 font-sans relative"
     >
       {/* 1. Welcome Glass Banner (revamped with warm minimalist branding) */}
-      <div className="bg-[#FFE5CE] border border-[#FFD2AE] p-8 rounded-[2rem] flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 overflow-hidden">
+      <div className="bg-[#FFE5CE] dark:bg-cocoa/40 border border-[#FFD2AE] dark:border-white/5 p-8 rounded-[2rem] flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 overflow-hidden relative shadow-inner">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-[9px] font-bold text-[#7A3C09] uppercase tracking-widest bg-white/40 px-2.5 py-1 rounded-full">
+            <span className="text-[9px] font-bold text-[#7A3C09] dark:text-vermilion uppercase tracking-widest bg-white/40 dark:bg-white/10 px-2.5 py-1 rounded-full">
               AI Workspace Active
             </span>
-            <span className="text-[9px] font-bold text-[#7A3C09] uppercase tracking-widest bg-white/40 px-2.5 py-1 rounded-full flex items-center gap-1">
-              <Flame className="w-3 h-3 fill-[#7A3C09] text-vermilion" /> 5 Day Streak
+            <span className="text-[9px] font-bold text-[#7A3C09] dark:text-[#FAF6F0] uppercase tracking-widest bg-white/40 dark:bg-white/10 px-2.5 py-1 rounded-full flex items-center gap-1">
+              <Flame className="w-3 h-3 fill-[#7A3C09] dark:fill-[#FAF6F0] text-vermilion" /> 5 Day Streak
             </span>
           </div>
-          <h2 className="text-xl md:text-2xl font-bold tracking-tight text-[#7A3C09] font-serif">
+          <h2 className="text-xl md:text-2xl font-bold tracking-tight text-[#7A3C09] dark:text-white dark:bg-gradient-to-r dark:from-white dark:to-white/80 dark:bg-clip-text dark:text-transparent font-serif">
             Command Center Dashboard
           </h2>
-          <p className="text-xs text-[#7A3C09]/75 mt-2 max-w-xl leading-relaxed font-semibold uppercase tracking-wider">
+          <p className="text-xs text-[#7A3C09]/75 dark:text-[#FAF6F0]/60 mt-2 max-w-xl leading-relaxed font-semibold uppercase tracking-wider">
             Review your automated study schedules, track real-time placement pipeline progress, and analyze interview profiles.
           </p>
         </div>
@@ -210,7 +210,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
       {/* 2. Metric Bento Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {/* Total applications */}
-        <div className="bento-panel flex flex-col justify-between">
+        <div className="bento-panel flex flex-col justify-between hover:-y-1 hover:scale-[1.02] hover:shadow-vermilion/5 transition-all duration-300">
           <div className="flex items-center justify-between">
             <span className="text-[10px] text-cocoa/50 font-bold uppercase tracking-wider">Total Apps</span>
             <span className="p-2 rounded-[1.2rem] bg-cocoa/5 text-cocoa">
@@ -224,7 +224,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
         </div>
 
         {/* Active applications */}
-        <div className="bento-panel flex flex-col justify-between">
+        <div className="bento-panel flex flex-col justify-between hover:-y-1 hover:scale-[1.02] hover:shadow-vermilion/5 transition-all duration-300">
           <div className="flex items-center justify-between">
             <span className="text-[10px] text-cocoa/50 font-bold uppercase tracking-wider">Active</span>
             <span className="p-2 rounded-[1.2rem] bg-vermilion/10 text-vermilion">
@@ -238,7 +238,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
         </div>
 
         {/* Online assessments */}
-        <div className="bento-panel flex flex-col justify-between">
+        <div className="bento-panel flex flex-col justify-between hover:-y-1 hover:scale-[1.02] hover:shadow-vermilion/5 transition-all duration-300">
           <div className="flex items-center justify-between">
             <span className="text-[10px] text-cocoa/50 font-bold uppercase tracking-wider">Assessments</span>
             <span className="p-2 rounded-[1.2rem] bg-[#E2F5D7] text-[#335A21]">
@@ -252,7 +252,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
         </div>
 
         {/* Interviews */}
-        <div className="bento-panel flex flex-col justify-between">
+        <div className="bento-panel flex flex-col justify-between hover:-y-1 hover:scale-[1.02] hover:shadow-vermilion/5 transition-all duration-300">
           <div className="flex items-center justify-between">
             <span className="text-[10px] text-cocoa/50 font-bold uppercase tracking-wider">Interviews</span>
             <span className="p-2 rounded-[1.2rem] bg-[#FFE5CE] text-[#7A3C09]">
@@ -266,7 +266,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
         </div>
 
         {/* Offers */}
-        <div className="bento-panel flex flex-col justify-between">
+        <div className="bento-panel flex flex-col justify-between hover:-y-1 hover:scale-[1.02] hover:shadow-vermilion/5 transition-all duration-300">
           <div className="flex items-center justify-between">
             <span className="text-[10px] text-cocoa/50 font-bold uppercase tracking-wider">Offers</span>
             <span className="p-2 rounded-[1.2rem] bg-emerald-500/10 text-emerald-600">
@@ -280,7 +280,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab }) => {
         </div>
 
         {/* Average Readiness */}
-        <div className="bento-panel-dark flex flex-col justify-between text-white">
+        <div className="bento-panel-dark flex flex-col justify-between text-white hover:-y-1 hover:scale-[1.02] hover:shadow-vermilion/15 transition-all duration-300">
           <div className="flex items-center justify-between">
             <span className="text-[10px] text-white/50 font-bold uppercase tracking-wider">Readiness</span>
             <span className="p-2 rounded-[1.2rem] bg-white/10 text-white">
