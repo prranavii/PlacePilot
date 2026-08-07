@@ -8,66 +8,10 @@ logger = logging.getLogger(__name__)
 
 class EmailService:
     def _send_email(self, recipient: str, subject: str, html_content: str, raise_on_error: bool = False):
-        # Fallback if SMTP password is not configured
-        if not settings.SMTP_PASSWORD:
-            msg = f"SMTP password is not configured. Skipping sending email to {recipient} with subject '{subject}'"
-            logger.warning(msg)
-            # Print it in logs for development verification
-            logger.info(f"EMAIL OUTPUT:\nTo: {recipient}\nSubject: {subject}\nBody: {html_content}")
-            if raise_on_error:
-                raise ValueError(msg)
-            return
+        # Email feature disabled globally by user request
+        logger.info(f"EMAIL DISABLED: Skipping email to {recipient} with subject '{subject}'")
+        return
 
-        # If using Resend, send via their HTTPS API (Port 443) to bypass Render firewall SMTP blocks
-        if "resend" in settings.SMTP_HOST.lower():
-            try:
-                import requests
-                headers = {
-                    "Authorization": f"Bearer {settings.SMTP_PASSWORD}",
-                    "Content-Type": "application/json"
-                }
-                payload = {
-                    "from": settings.EMAIL_FROM,
-                    "to": [recipient],
-                    "subject": subject,
-                    "html": html_content
-                }
-                logger.info(f"Attempting email dispatch via Resend HTTPS API to {recipient}...")
-                response = requests.post("https://api.resend.com/emails", json=payload, headers=headers, timeout=15)
-                if response.status_code in (200, 201, 202):
-                    logger.info(f"Email sent successfully via Resend API to {recipient} with subject '{subject}'")
-                    return
-                else:
-                    raise ValueError(f"Resend API returned {response.status_code}: {response.text}")
-            except Exception as api_err:
-                logger.warning(f"Resend HTTP API failed: {api_err}. Falling back to standard SMTP...")
-                if raise_on_error:
-                    raise api_err
-
-        try:
-            msg = MIMEMultipart('alternative')
-            msg['Subject'] = subject
-            msg['From'] = settings.EMAIL_FROM
-            msg['To'] = recipient
-
-            part = MIMEText(html_content, 'html')
-            msg.attach(part)
-
-            # Connect to SMTP server with a 15-second timeout to prevent hanging
-            if settings.SMTP_PORT == 465:
-                server = smtplib.SMTP_SSL(settings.SMTP_HOST, settings.SMTP_PORT, timeout=15)
-            else:
-                server = smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT, timeout=15)
-                server.starttls()
-
-            server.login(settings.SMTP_USER, settings.SMTP_PASSWORD)
-            server.sendmail(settings.EMAIL_FROM, recipient, msg.as_string())
-            server.quit()
-            logger.info(f"Email sent successfully to {recipient} with subject '{subject}'")
-        except Exception as e:
-            logger.error(f"Failed to send email to {recipient}: {e}")
-            if raise_on_error:
-                raise e
 
     def send_verification_email(self, email: str, name: str, token: str):
         verify_url = f"{settings.FRONTEND_URL}?verify_token={token}"
@@ -257,20 +201,5 @@ def check_and_send_reminders():
 
 
 def start_reminder_scheduler():
-    import threading
-    import time
-    
-    def run_scheduler():
-        logger.info("Starting email reminder background scheduler loop...")
-        # Give the server a few seconds to boot up completely
-        time.sleep(10)
-        while True:
-            try:
-                check_and_send_reminders()
-            except Exception as e:
-                logger.error(f"Error in reminder scheduler thread: {e}")
-            # Sleep for 1 hour
-            time.sleep(3600)
-            
-    thread = threading.Thread(target=run_scheduler, daemon=True)
-    thread.start()
+    logger.info("Email reminders background scheduler is disabled by user request.")
+    return
