@@ -18,6 +18,32 @@ class EmailService:
                 raise ValueError(msg)
             return
 
+        # If using Resend, send via their HTTPS API (Port 443) to bypass Render firewall SMTP blocks
+        if "resend" in settings.SMTP_HOST.lower():
+            try:
+                import requests
+                headers = {
+                    "Authorization": f"Bearer {settings.SMTP_PASSWORD}",
+                    "Content-Type": "application/json"
+                }
+                payload = {
+                    "from": settings.EMAIL_FROM,
+                    "to": [recipient],
+                    "subject": subject,
+                    "html": html_content
+                }
+                logger.info(f"Attempting email dispatch via Resend HTTPS API to {recipient}...")
+                response = requests.post("https://api.resend.com/emails", json=payload, headers=headers, timeout=15)
+                if response.status_code in (200, 201, 202):
+                    logger.info(f"Email sent successfully via Resend API to {recipient} with subject '{subject}'")
+                    return
+                else:
+                    raise ValueError(f"Resend API returned {response.status_code}: {response.text}")
+            except Exception as api_err:
+                logger.warning(f"Resend HTTP API failed: {api_err}. Falling back to standard SMTP...")
+                if raise_on_error:
+                    raise api_err
+
         try:
             msg = MIMEMultipart('alternative')
             msg['Subject'] = subject
