@@ -31,7 +31,7 @@ export const Login: React.FC<LoginProps> = ({ onClose, initialIsRegister = false
         setSuccessMessage('If this email is registered, a password reset link has been sent. Please check your inbox.');
       } else if (isRegister) {
         await register({ email, password, full_name: fullName });
-        setSuccessMessage('Account created successfully! A verification link has been sent to your email address.');
+        if (onClose) onClose();
       } else {
         await login({ email, password });
       }

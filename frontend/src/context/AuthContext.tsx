@@ -64,14 +64,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const register = async (data: any) => {
     setLoading(true);
     try {
-      const registerRes = await api.auth.register(data);
-      // Only attempt automatic login if the user is already verified (auto-verification mode)
-      if (registerRes && registerRes.is_verified) {
-        const loginRes = await api.auth.login({ email: data.email, password: data.password });
-        localStorage.setItem('token', loginRes.access_token);
-        const userData = await api.auth.me();
-        setUser(userData);
-      }
+      await api.auth.register(data);
+      // Automatically log in the user upon registration to direct them straight to the dashboard
+      const loginRes = await api.auth.login({ email: data.email, password: data.password });
+      localStorage.setItem('token', loginRes.access_token);
+      const userData = await api.auth.me();
+      setUser(userData);
     } catch (err) {
       localStorage.removeItem('token');
       setUser(null);
