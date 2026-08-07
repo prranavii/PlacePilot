@@ -7,12 +7,15 @@ from app.core.config import settings
 logger = logging.getLogger(__name__)
 
 class EmailService:
-    def _send_email(self, recipient: str, subject: str, html_content: str):
+    def _send_email(self, recipient: str, subject: str, html_content: str, raise_on_error: bool = False):
         # Fallback if SMTP password is not configured
         if not settings.SMTP_PASSWORD:
-            logger.warning(f"SMTP password is not configured. Skipping sending email to {recipient} with subject '{subject}'")
+            msg = f"SMTP password is not configured. Skipping sending email to {recipient} with subject '{subject}'"
+            logger.warning(msg)
             # Print it in logs for development verification
             logger.info(f"EMAIL OUTPUT:\nTo: {recipient}\nSubject: {subject}\nBody: {html_content}")
+            if raise_on_error:
+                raise ValueError(msg)
             return
 
         try:
@@ -24,11 +27,11 @@ class EmailService:
             part = MIMEText(html_content, 'html')
             msg.attach(part)
 
-            # Connect to SMTP server
+            # Connect to SMTP server with a 15-second timeout to prevent hanging
             if settings.SMTP_PORT == 465:
-                server = smtplib.SMTP_SSL(settings.SMTP_HOST, settings.SMTP_PORT)
+                server = smtplib.SMTP_SSL(settings.SMTP_HOST, settings.SMTP_PORT, timeout=15)
             else:
-                server = smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT)
+                server = smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT, timeout=15)
                 server.starttls()
 
             server.login(settings.SMTP_USER, settings.SMTP_PASSWORD)
@@ -37,6 +40,8 @@ class EmailService:
             logger.info(f"Email sent successfully to {recipient} with subject '{subject}'")
         except Exception as e:
             logger.error(f"Failed to send email to {recipient}: {e}")
+            if raise_on_error:
+                raise e
 
     def send_verification_email(self, email: str, name: str, token: str):
         verify_url = f"{settings.FRONTEND_URL}?verify_token={token}"
@@ -153,6 +158,22 @@ class EmailService:
         </html>
         """
         self._send_email(email, subject, html)
+
+    def send_test_email(self, email: str, raise_on_error: bool = False):
+        subject = "PlacePilot AI SMTP Connection Test"
+        html = """
+        <html>
+          <body style="font-family: Arial, sans-serif; background-color: #0c0a09; color: #f4f4f5; padding: 24px; text-align: center; margin: 0;">
+            <div style="max-width: 500px; margin: 40px auto; background-color: #1c1917; border: 1px solid #2e2a24; border-radius: 16px; padding: 32px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);">
+              <h2 style="color: #ffffff; font-size: 20px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px;">Connection Test Successful</h2>
+              <p style="color: #a1a1aa; font-size: 14px; margin-top: 16px; line-height: 1.6;">
+                Your PlacePilot AI SMTP configurations are fully functional! You will now receive automated event reminders, registration tokens, and password reset requests.
+              </p>
+            </div>
+          </body>
+        </html>
+        """
+        self._send_email(email, subject, html, raise_on_error=raise_on_error)
 
 email_service = EmailService()
 

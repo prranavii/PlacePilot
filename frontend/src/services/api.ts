@@ -50,6 +50,7 @@ export const api = {
     verifyEmail: (token: string) => request(`/auth/verify?token=${token}`, { method: 'GET' }),
     forgotPassword: (email: string) => request('/auth/forgot-password', { method: 'POST', body: JSON.stringify({ email }) }),
     resetPassword: (data: any) => request('/auth/reset-password', { method: 'POST', body: JSON.stringify(data) }),
+    testEmail: (email: string) => request(`/auth/test-email?email=${encodeURIComponent(email)}`, { method: 'POST' }),
   },
   applications: {
     list: () => request('/applications'),

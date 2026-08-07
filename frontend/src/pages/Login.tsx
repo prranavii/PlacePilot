@@ -206,6 +206,58 @@ export const Login: React.FC<LoginProps> = ({ onClose, initialIsRegister = false
               : "Don't have an account? Sign up")}
         </button>
       </div>
+
+      {/* Dev / SMTP Diagnostics Utilities */}
+      <div className="mt-8 pt-4 border-t border-dashed border-cocoa/10 flex flex-col gap-2">
+        <span className="text-[9px] font-bold text-cocoa/40 uppercase tracking-widest text-center">SMTP Diagnostics</span>
+        <div className="flex gap-2 justify-center">
+          <button
+            type="button"
+            onClick={async () => {
+              if (!email) {
+                setError("Please enter your email in the field above first to send a test message.");
+                return;
+              }
+              setSubmitting(true);
+              setError(null);
+              setSuccessMessage(null);
+              try {
+                const res = await api.auth.testEmail(email);
+                setSuccessMessage(res.message);
+              } catch (err: any) {
+                setError(err.message || "Failed to trigger email test.");
+              } finally {
+                setSubmitting(false);
+              }
+            }}
+            disabled={submitting}
+            className="text-[9px] bg-cocoa/5 dark:bg-white/5 hover:bg-cocoa/10 px-3 py-1.5 rounded-full font-bold uppercase tracking-wider text-cocoa dark:text-white transition-all disabled:opacity-50"
+          >
+            Test SMTP
+          </button>
+          <button
+            type="button"
+            onClick={async () => {
+              setSubmitting(true);
+              setError(null);
+              setSuccessMessage(null);
+              try {
+                const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1'}/auth/auto-verify-all`);
+                const data = await res.json();
+                setSuccessMessage(data.message || "All users verified!");
+              } catch (err: any) {
+                setError(err.message || "Failed to auto-verify users.");
+              } finally {
+                setSubmitting(false);
+              }
+            }}
+            disabled={submitting}
+            className="text-[9px] bg-cocoa/5 dark:bg-white/5 hover:bg-cocoa/10 px-3 py-1.5 rounded-full font-bold uppercase tracking-wider text-cocoa dark:text-white transition-all disabled:opacity-50"
+          >
+            Auto-Verify Accounts
+          </button>
+        </div>
+      </div>
     </div>
   );
 

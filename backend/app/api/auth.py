@@ -247,3 +247,17 @@ def debug_db(db: Session = Depends(get_db)):
             "error": str(e),
             "traceback": traceback.format_exc()
         }
+
+@router.post("/test-email")
+def test_email_endpoint(email: str):
+    try:
+        email_service.send_test_email(email=email, raise_on_error=True)
+        return {
+            "status": "success",
+            "message": f"Test email successfully dispatched to {email}. Connection established!"
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"SMTP Connection Failed: {str(e)}"
+        )
