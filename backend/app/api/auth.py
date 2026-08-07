@@ -35,14 +35,12 @@ def register(
     verification_token = secrets.token_urlsafe(32)
     
     # Create new user
-    # If SMTP is not configured, we auto-verify for developer testing convenience
-    smtp_enabled = bool(settings.SMTP_PASSWORD)
     db_user = User(
         email=email_normalized,
         hashed_password=security.get_password_hash(user_in.password),
         full_name=user_in.full_name,
-        is_verified=not smtp_enabled,
-        verification_token=verification_token if smtp_enabled else None
+        is_verified=True,  # Verified by default to prevent email verification lockout
+        verification_token=verification_token
     )
     
     try:
@@ -57,7 +55,7 @@ def register(
         )
     
     # Send verification email asynchronously if SMTP is enabled
-    if smtp_enabled:
+    if settings.SMTP_PASSWORD:
         background_tasks.add_task(
             email_service.send_verification_email,
             db_user.email,
